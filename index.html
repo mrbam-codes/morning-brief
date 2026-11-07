@@ -108,6 +108,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .term{padding:12px 0;border-bottom:1px solid var(--line)}.term b{display:block;font-size:17px}.term span{font-size:15px;color:var(--lilac);line-height:1.4}
 .upd{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;padding:14px;border-radius:14px;background:var(--tech);color:#000;font-weight:700;text-align:center}
 #fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
+.trust{display:inline-block;margin-left:8px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;border:1px solid var(--lilac);color:var(--lilac)}
+.trust.Confirmed{border-color:#3ddc97;color:#3ddc97}.trust.Unverified{border-color:var(--ai);color:#ff7aa5}
+.card.chat{border-style:dashed}
 .err{padding:40px 18px;font-size:18px}
 footer{padding:0 16px 40px;font-size:14px;color:var(--lilac)}
 footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
@@ -174,6 +177,13 @@ function openStory(st){
   if(r.take){const t=el('div','take');t.append(el('h3',null,'Claude’s take'),el('p',null,r.take));bd.append(t)}
   const o=el('a','orig','Read the original at '+st.source.name+' ↗');o.href=safe(st.source.url);o.target='_blank';o.rel='noopener';bd.append(o)}
 const open=(n,st)=>{n.tabIndex=0;n.setAttribute('role','button');n.onclick=e=>{if(e.target.closest('a'))return;openStory(st)};n.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openStory(st)}};n.append(el('span','cue','Read the short version →'))};
+function openChatter(c){
+  const{bd}=sheet(c.tag);bd.append(el('h2',null,c.headline),el('div','meta','Forum: '+c.thread.name+', '+c.thread.date+'. This is opinion, not reporting.'));
+  bd.append(el('h3',null,'What people are discussing'),el('p',null,c.summary),el('h3',null,'The best insight'),el('p',null,c.insight),el('h3',null,'The other side'),el('p',null,c.dissent));
+  const t=el('div','take');t.append(el('h3',null,'How far to trust it: '+c.trust),el('p',null,c.trustNote));bd.append(t);
+  const a=el('a','orig','Read the discussion at '+c.thread.name+' ↗');a.href=safe(c.thread.url);a.target='_blank';a.rel='noopener';bd.append(a);
+  if(c.original){const o=el('a','orig','Read the original: '+c.original.name+' ↗');o.href=safe(c.original.url);o.target='_blank';o.rel='noopener';bd.append(o)}}
+const openC=(n,c)=>{n.tabIndex=0;n.setAttribute('role','button');n.onclick=e=>{if(e.target.closest('a'))return;openChatter(c)};n.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openChatter(c)}};n.append(el('span','cue','Read the short version →'))};
 /* ---------- quiz engine ---------- */
 const pointsFor=run=>10+Math.min(run-1,4)*2;
 const maxPoints=n=>{let t=0;for(let i=1;i<=n;i++)t+=pointsFor(i);return t+(n>=5?20:0)};
@@ -301,6 +311,7 @@ function render(b,list){
   const add=(st,box)=>{const k=el('article','card');k.append(el('span','pill '+st.tag,st.tag),el('h3',null,st.headline),el('p',null,st.summary),el('p','sw',st.soWhat),src(st.source));open(k,st);box.append(k)};
   if(b.themes)b.themes.forEach(t=>{m.append(el('div','sect',t.title));t.stories.forEach(s=>add(s,m))});
   else{if(b.stories.length)m.append(el('div','sect','Also today'));b.stories.forEach(s=>add(s,m))}
+  if((b.chatter||[]).length){m.append(el('div','sect','What people are saying'));b.chatter.forEach(c=>{const k=el('article','card chat'),p=el('span','pill '+c.tag,c.tag),tr=el('span','trust '+c.trust,c.trust);k.append(p,tr,el('h3',null,c.headline),el('p',null,c.summary),el('p','sw','Source: '+c.thread.name+', '+c.thread.date));openC(k,c);m.append(k)})}
   const l=b.lesson,k=el('section','lesson');
   k.append(el('small',null,'Lesson '+l.n+' of 90 · '+l.tag),el('h2',null,l.title),el('p',null,l.idea));
   (l.diagrams||[]).forEach(d=>{const i=document.createElement('img');i.className='diagram';i.alt=d.alt;i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(d.svg);k.append(i)});

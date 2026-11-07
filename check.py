@@ -126,6 +126,24 @@ def check(date):
     text("build title", bd.get("title"), 50)
     text("build idea", bd.get("idea"), 230)
     text("build first", bd.get("first"), 230)
+    chatter = b.get("chatter") or []
+    need(len(chatter) <= 3, "chatter: at most 3 forum items")
+    for i, x in enumerate(chatter):
+        w = f"chatter {i + 1}"
+        need(x.get("tag") in TAGS, f"{w}: tag")
+        text(f"{w} headline", x.get("headline"), 70)
+        text(f"{w} summary", x.get("summary"), 190)
+        text(f"{w} insight", x.get("insight"), 260)
+        text(f"{w} dissent", x.get("dissent"), 260)
+        need(x.get("trust") in {"Confirmed", "Plausible", "Unverified"}, f"{w}: trust must be Confirmed, Plausible or Unverified")
+        text(f"{w} trustNote", x.get("trustNote"), 260)
+        th = x.get("thread") or {}
+        text(f"{w} thread name", th.get("name"))
+        text(f"{w} thread date", th.get("date"))
+        need(str(th.get("url", "")).startswith("https://"), f"{w}: thread url must be https")
+        need("reddit.com" not in str(th.get("url", "")), f"{w}: Reddit cannot be opened here, so cite only threads you read")
+        if x.get("original"):
+            need(str(x["original"].get("url", "")).startswith("https://"), f"{w}: original url must be https")
     iv = b.get("interview")
     need(bool(iv) or b.get("type") != "sunday", "Sunday needs an interview question")
     if iv:

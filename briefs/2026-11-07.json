@@ -43,7 +43,7 @@
   {
    "tag": "Cyber",
    "headline": "Hacked in under nine hours",
-   "summary": "Attackers tried a new OpenSSH login flaw (SSHole) less than nine hours after it was published. It hits Alpine Linux's default setup. A patch exists.",
+   "summary": "A security firm says attackers tried a new OpenSSH login flaw (SSHole) within nine hours of publication. It hits Alpine Linux's default setup. A patch exists.",
    "soWhat": "Work: patch speed is now measured in hours.",
    "source": {
     "name": "The Hacker News",
@@ -52,10 +52,10 @@
    },
    "big": "<9 hrs",
    "read": {
-    "what": "A flaw in OpenSSH (the standard tool for logging in to servers remotely), tracked as CVE-2026-123158 (CVE is a public ID number for a known flaw) and nicknamed SSHole, was attacked less than nine hours after it was made public. A security firm, Previdian, says an attacker got full control (root) on a test server it had set up as bait. It rates the flaw 8.1 out of 10.",
+    "what": "A flaw in OpenSSH (the standard tool for logging in to servers remotely), tracked as CVE-2026-123158 (CVE is a public ID number for a known flaw) and nicknamed SSHole, was attacked less than nine hours after it was made public, according to a security firm, Previdian, which says an attacker got full control (root) on a test server it had set up as bait. The CVE number and the 8.1 out of 10 severity score come from The Hacker News. The researcher's own write-up does not list them.",
     "how": "An attacker sends an oversized password, between 257 and 1,024 bytes long. A fix written in 2016 means a failed password check can be read as a pass, but only for accounts with no password set. It affects Linux systems using the musl library with PAM (pluggable authentication modules, a common login component) switched off, including the default setup of Alpine Linux. It does not affect most mainstream Linux systems.",
     "why": "Few servers are affected, but the speed matters. Attackers now watch for new flaw announcements and strike within hours. The fix is OpenSSH 10.6p2 or your distribution's patched version, then restart the service.",
-    "take": "This is an opinion. Do not panic, since the affected setup is narrow. The lesson for delivery teams is that a 30-day patch window is too slow for flaws that can be used remotely. Related reports say AI agents helped find this flaw, but that is not confirmed in the article I read."
+    "take": "This is an opinion. Do not panic, since the affected setup is narrow. The researcher's write-up confirms the setup, the password length and the fix. The nine-hour figure is one security firm's claim. For delivery teams, a 30-day patch window is too slow for flaws that can be used remotely."
    }
   }
  ],
@@ -64,7 +64,7 @@
    "tag": "AI",
    "headline": "GPT-6 Cyber finds 948 Linux bugs it can exploit",
    "summary": "OpenAI says its new model built working attacks for 948 Linux flaws and found 81 in Firefox. These are OpenAI's own figures, with no independent check yet.",
-   "soWhat": "Curious: AI is now a serious bug hunter.",
+   "soWhat": "Curious: AI as bug hunter, but unverified.",
    "source": {
     "name": "BleepingComputer",
     "date": "6 Nov",
@@ -74,7 +74,7 @@
     "what": "OpenAI announced GPT-6 Cyber, a model built for security work. OpenAI says it found 81 new high-severity flaws in Firefox, and in the Linux kernel (the core of the Linux operating system) it flagged 2,308 possible flaws, reproduced 1,724, and built working attacks for 948. It scored 48.5% on the ExploitGym test, against 32.1% for the previous model.",
     "how": "The model reads code, spots likely weak points, tests them, then writes an exploit (a program that uses the flaw). OpenAI rates it Critical for cyber capability under its own safety framework, up from High. Access is limited to approved customers, with a separate tier (Daybreak Blue) for verified defenders.",
     "why": "Finding and exploiting flaws is becoming cheap and fast. That helps defenders patch faster, but the same skill helps attackers. Mozilla has released many of the Firefox fixes, according to BleepingComputer.",
-    "take": "This is an opinion. Every number here is OpenAI's own and none has been independently checked. Treat it as a strong signal, not proof. The direction is clear: the gap between a flaw being found and being attacked is shrinking, as the OpenSSH story shows."
+    "take": "This is an opinion. Every figure is OpenAI's own and I could not open OpenAI's post to check it. Mozilla's Firefox 159 advisory does credit OpenAI staff on many fixes, but I could not match the figure of 81. Treat it as a strong signal, not proof."
    }
   }
  ],
@@ -201,5 +201,25 @@
   "title": "A next-word guesser",
   "idea": "Make a tiny web page where you paste your own writing, and it suggests the next word after any word you type. It shows the core idea of this lesson in a few dozen lines.",
   "first": "Paste three paragraphs of your own writing into an AI assistant and ask: write one HTML file (a web page) that counts which word most often follows each word, then suggests the next word."
- }
+ },
+ "chatter": [
+  {
+   "tag": "Cyber",
+   "headline": "Blame the language, or the compatibility trap?",
+   "summary": "Readers of a Hacker News thread (2,931 points, about 736 comments) argue why a login flaw slipped through and how many systems are really exposed.",
+   "insight": "No single decision was foolish. A safe-looking failure value, a size limit and an old fix each made sense alone. The flaw came from how they combined. Test the joins between parts, not only the parts.",
+   "dissent": "Some blame the C programming language. Others say the cause is pressure to stay compatible with old, unmaintained software, which would cause similar failures in any language.",
+   "trust": "Plausible",
+   "trustNote": "The researcher's own write-up confirms the affected setup, the 257 to 1,024 character range and the fix. The debate itself is opinion. I read part of the thread directly and the rest as a summary.",
+   "thread": {
+    "name": "Hacker News",
+    "date": "5 Nov",
+    "url": "https://news.ycombinator.com/item?id=50378228"
+   },
+   "original": {
+    "name": "sshhole.com, the researcher's write-up",
+    "url": "https://sshhole.com/"
+   }
+  }
+ ]
 }
