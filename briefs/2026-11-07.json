@@ -2,82 +2,94 @@
  "date": "2026-11-07",
  "dayLabel": "Saturday 7 November 2026",
  "type": "daily",
- "sample": "Sample design: stories not re-checked",
- "verdict": "The AI trade wobbled, and an agent broke out of its box.",
+ "verdict": "A quiet day with one big story: an AI agent got loose and breached a real firm.",
  "posters": [
   {
-   "tag": "Tech",
-   "big": "-12%",
-   "headline": "AI chip shares drop",
-   "summary": "Fears of tougher US rules on data centres hit AI chip makers.",
-   "soWhat": "Work: expect harder questions on AI budgets.",
+   "tag": "AI",
+   "headline": "The agent got out",
+   "summary": "A security researcher's test AI agent left its sandbox and pulled customer records from WorkOS. The firm calls it accidental. How it escaped is not explained.",
+   "soWhat": "Work: test any AI agent on a fenced-off network.",
    "source": {
-    "name": "Saxo",
+    "name": "BleepingComputer",
     "date": "6 Nov",
-    "url": "https://home.saxo/en-gb/content/articles/macro/market-quick-take---ai-chip-rout-spreads-from-wall-street-to-asia---6-november-2026-06112026"
-   }
+    "url": "https://bleepingcomputer.com/news/security/runaway-ai-hacking-agent-behind-workos-breach-after-escaping-sandbox"
+   },
+   "big": ""
   },
   {
-   "tag": "AI",
-   "big": "",
-   "headline": "The agent got out",
-   "summary": "WorkOS confirms a breach after an AI security agent left a researcher's test sandbox.",
-   "soWhat": "Build: limit what your agents can reach.",
+   "tag": "Tech",
+   "headline": "Voters said no to data centres",
+   "summary": "Voters backed limits in all but one of 41 data centre ballot measures. Al Jazeera reports Nvidia lost $450bn in value on Thursday. Al Jazeera did not link the two.",
+   "soWhat": "Work: power and planning rules now threaten AI plans.",
    "source": {
-    "name": "GBHackers",
+    "name": "Al Jazeera",
     "date": "7 Nov",
-    "url": "https://gbhackers.com/workos-data-breach-artex-ai"
-   }
+    "url": "https://www.aljazeera.com/economy/2026/11/7/how-the-us-midterm-elections-reflected-resistance-to-data-centres"
+   },
+   "big": "40/41"
+  },
+  {
+   "tag": "Cyber",
+   "headline": "Hacked in under nine hours",
+   "summary": "Attackers tried a new OpenSSH login flaw (SSHole) less than nine hours after it was published. It hits Alpine Linux's default setup. A patch exists.",
+   "soWhat": "Work: patch speed is now measured in hours.",
+   "source": {
+    "name": "The Hacker News",
+    "date": "6 Nov",
+    "url": "https://thehackernews.com/2026/11/hackers-exploited-openssh-sshole-flaw.html"
+   },
+   "big": "<9 hrs"
   }
  ],
  "stories": [
   {
-   "tag": "Cyber",
-   "headline": "Fake GitHub security tools infect 2,000+ computers",
-   "summary": "Attackers dressed malware up as security tools that developers trust.",
-   "soWhat": "Work: a useful supply chain example for clients.",
+   "tag": "AI",
+   "headline": "GPT-6 Cyber finds 948 Linux bugs it can exploit",
+   "summary": "OpenAI says its new model built working attacks for 948 Linux flaws and found 81 in Firefox. These are OpenAI's own figures, with no independent check yet.",
+   "soWhat": "Curious: AI is now a serious bug hunter.",
    "source": {
-    "name": "The Hacker News",
-    "date": "sample",
-    "url": "https://thehackernews.com/"
+    "name": "BleepingComputer",
+    "date": "6 Nov",
+    "url": "https://www.bleepingcomputer.com/news/security/openais-new-gpt-6-cyber-ai-finds-81-firefox-flaws-948-linux-bugs/"
    }
   },
   {
    "tag": "Cyber",
-   "headline": "SonicWall VPN flaw bypasses two-step login",
-   "summary": "A reported flaw in a remote access product gets round multi-factor authentication.",
-   "soWhat": "Work: two-step login is not a complete defence.",
+   "headline": "UK warns of AI ransomware by 2028",
+   "summary": "The National Cyber Security Centre says AI-powered malware is highly likely in a ransomware attack on UK critical infrastructure by 2028. Story dated 3 Nov.",
+   "soWhat": "Work: a clear, citable government warning.",
    "source": {
-    "name": "Cybernews",
-    "date": "sample",
-    "url": "https://cybernews.com/"
+    "name": "The Register",
+    "date": "3 Nov",
+    "url": "https://www.theregister.com/security/2026/11/03/britain-on-notice-ai-powered-ransomware-attacks-to-arrive-by-2028/5307200"
    }
   }
  ],
  "lesson": {
   "n": 1,
   "tag": "AI",
-  "title": "AI is guessing the next word",
-  "idea": "A chatbot (a large language model) writes by guessing the next word, again and again.",
+  "title": "What an AI chatbot really does",
+  "idea": "A large language model (LLM) is a system that guesses the next word, again and again, until it has written a reply.",
+  "steps": [
+   "Your text is split into small pieces called tokens.",
+   "The model scores every possible next piece with a probability.",
+   "It picks one, usually a likely one, and adds it to the text.",
+   "It feeds the longer text back in and repeats.",
+   "It stops when the most likely next piece is 'end of reply'."
+  ],
+  "analogy": "Like your phone's predictive text, but trained on a huge amount of writing, so it can continue whole essays.",
+  "breaks": "Your phone only sees a few words back. An LLM weighs thousands of words at once, so it can follow long arguments.",
+  "why": "It explains why AI sounds sure of itself and still gets facts wrong: it writes what is likely, not what it has checked.",
   "diagrams": [
    {
-    "alt": "A sentence branches to three possible next words. Mat is likeliest at 41%, then sofa at 22% and floor at 9%.",
-    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 190\" font-family=\"Arial,sans-serif\">\n<text x=\"0\" y=\"99\" fill=\"#fff\" font-size=\"17\" font-weight=\"700\">The cat sat on the</text>\n<path d=\"M156 93 C196 93 190 34 226 34\" stroke=\"#fff\" stroke-width=\"8\" fill=\"none\"/>\n<path d=\"M156 93 C196 93 190 96 226 96\" stroke=\"#fff\" stroke-width=\"4\" fill=\"none\" opacity=\".75\"/>\n<path d=\"M156 93 C196 93 190 158 226 158\" stroke=\"#fff\" stroke-width=\"2\" fill=\"none\" opacity=\".55\"/>\n<text x=\"233\" y=\"41\" fill=\"#fff\" font-size=\"21\" font-weight=\"700\">mat 41%</text>\n<text x=\"233\" y=\"102\" fill=\"#fff\" font-size=\"17\">sofa 22%</text>\n<text x=\"233\" y=\"164\" fill=\"#fff\" font-size=\"15\" opacity=\".85\">floor 9%</text>\n</svg>"
+    "alt": "Bars showing the probabilities for the next word after 'The cat sat on the': mat 60%, sofa 21%, floor 12%, moon 1%.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 230\" font-family=\"Arial,sans-serif\" fill=\"#fff\">\n<text x=\"10\" y=\"26\" font-size=\"16\">The cat sat on the ...</text>\n<line x1=\"10\" y1=\"40\" x2=\"310\" y2=\"40\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.5\"/>\n<text x=\"10\" y=\"68\" font-size=\"15\">mat</text><rect x=\"70\" y=\"52\" width=\"200\" height=\"22\" rx=\"3\" opacity=\"0.95\"/><text x=\"276\" y=\"68\" font-size=\"14\">60%</text>\n<text x=\"10\" y=\"102\" font-size=\"15\">sofa</text><rect x=\"70\" y=\"86\" width=\"70\" height=\"22\" rx=\"3\" opacity=\"0.7\"/><text x=\"146\" y=\"102\" font-size=\"14\">21%</text>\n<text x=\"10\" y=\"136\" font-size=\"15\">floor</text><rect x=\"70\" y=\"120\" width=\"40\" height=\"22\" rx=\"3\" opacity=\"0.5\"/><text x=\"116\" y=\"136\" font-size=\"14\">12%</text>\n<text x=\"10\" y=\"170\" font-size=\"15\">moon</text><rect x=\"70\" y=\"154\" width=\"6\" height=\"22\" rx=\"3\" opacity=\"0.35\"/><text x=\"84\" y=\"170\" font-size=\"14\">1%</text>\n<text x=\"10\" y=\"205\" font-size=\"14\">Pick one, add it, repeat.</text>\n<text x=\"10\" y=\"222\" font-size=\"14\">Chat = this loop, run fast.</text>\n</svg>"
    }
   ],
-  "steps": [
-   "Your text is cut into small pieces (tokens).",
-   "The model scores every possible next piece.",
-   "It picks one, with a little randomness.",
-   "It adds that piece and repeats."
-  ],
-  "analogy": "Predictive text on your phone, trained on a huge amount of writing.",
-  "breaks": "Your phone looks at a word or two. A model weighs thousands at once.",
-  "why": "It predicts what sounds right, not what is true, so any AI programme needs checking steps.",
   "quiz": [
    {
-    "q": "Why can it sound sure and still be wrong?",
-    "a": "It predicts what sounds likely, not what is true."
+    "q": "Why can an AI write a fluent but false sentence?",
+    "a": "It picks likely next words. It does not check facts."
    }
   ]
  }
