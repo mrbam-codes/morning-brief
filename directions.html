@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brief directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:52px}
+body{background:#000;color:#fff;font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:6px;padding:8px 12px;background:#111;border-bottom:1px solid #333}
+.nav a{flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:600;padding:8px 2px;border-radius:8px;background:#222;color:#fff}
+.ans{max-height:0;overflow:hidden;transition:max-height .4s}
+.open .ans{max-height:120px}
+.bar{transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.in .bar{transform:scaleX(1)}
+section{overflow:hidden}
+
+/* A: Control room */
+#a{background:#05080a;color:#d6fbe6;font-family:'JetBrains Mono',monospace;padding:20px 16px 32px;background-image:linear-gradient(#0d1a16 1px,transparent 1px),linear-gradient(90deg,#0d1a16 1px,transparent 1px);background-size:24px 24px}
+#a .tag{font-size:11px;letter-spacing:.12em;color:#39ff9e}
+#a h2{font-size:27px;line-height:1.15;margin:10px 0 18px;color:#fff}
+#a .row{display:grid;grid-template-columns:64px 1fr;gap:12px;border:1px solid #1f4538;background:#08120f;padding:12px;margin-bottom:8px}
+#a .big{font-size:24px;font-weight:700;color:#ffb627;line-height:1}
+#a .row.c .big{color:#ff4d6d}
+#a .row.t .big{color:#4dc9ff}
+#a .row small{display:block;font-size:10px;margin-top:4px;color:#7fb8a2}
+#a .row p{font-size:14px;line-height:1.35;color:#fff}
+#a .row i{font-style:normal;display:block;font-size:12px;color:#7fb8a2;margin-top:5px}
+#a .pulse{display:inline-block;width:8px;height:8px;border-radius:50%;background:#39ff9e;margin-right:6px;animation:p 1.4s infinite}
+@keyframes p{50%{opacity:.2}}
+#a .les{border:1px solid #39ff9e;padding:14px;margin-top:18px;background:#07110d}
+#a .les h3{color:#fff;font-size:17px;margin:6px 0 12px}
+#a .prompt{font-size:15px;color:#fff;margin-bottom:12px}
+#a .prompt b{color:#39ff9e;border-bottom:2px solid #39ff9e}
+#a .bl{display:grid;grid-template-columns:44px 1fr 38px;align-items:center;gap:8px;font-size:12px;margin-bottom:6px}
+#a .tr{height:14px;background:#0f2019}
+#a .bar{height:100%;background:#39ff9e}
+#a button{margin-top:12px;border:1px solid #39ff9e;color:#39ff9e;padding:10px;width:100%;font-size:13px}
+#a .ans p{padding-top:10px;font-size:13px}
+
+/* B: Poster */
+#b{background:#000;font-family:Anton,Impact,sans-serif}
+#b .p{min-height:86vh;padding:28px 18px;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+#b .k{font-family:Inter,sans-serif;font-weight:800;font-size:12px;letter-spacing:.14em;position:absolute;top:22px;left:18px}
+#b h2{font-weight:400;text-transform:uppercase;line-height:.95}
+#b .n{font-size:128px;line-height:.9}
+#b .s{font-family:Inter,sans-serif;font-size:16px;line-height:1.4;margin-top:14px;font-weight:600}
+#b .y{background:#ffe600;color:#000}
+#b .r{background:#ff2e4c;color:#fff}
+#b .bk{background:#000;color:#fff}
+#b .bk .n{color:#7c5cff}
+#b .w{background:#fff;color:#000}
+#b .les-h{font-size:58px;line-height:.98;text-transform:uppercase}
+#b .words{font-size:42px;line-height:1.05;margin-top:18px}
+#b .words span{display:block}
+#b .words .m{color:#ff2e4c}
+#b .words .f{opacity:.28}
+#b button{font-family:Inter,sans-serif;font-weight:800;margin-top:18px;background:#000;color:#fff;padding:14px;width:100%}
+#b .ans p{font-family:Inter,sans-serif;padding-top:12px;font-size:16px;font-weight:600}
+
+/* C: Signal art */
+#c{background:#0b0620;font-family:'Space Grotesk',sans-serif;position:relative}
+#c canvas{display:block;width:100%;height:300px}
+#c .h{position:absolute;top:22px;left:16px;right:16px}
+#c .h small{font-size:12px;letter-spacing:.1em;color:#c9b8ff}
+#c .h h2{font-size:32px;line-height:1.08;margin-top:8px;text-shadow:0 2px 14px #0b0620}
+#c .in-w{padding:0 16px 32px}
+#c .card{background:linear-gradient(135deg,#1c1147,#12082f);border-radius:18px;padding:16px;margin-bottom:10px;border:1px solid #38257f}
+#c .pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;color:#0b0620}
+#c .card h3{font-size:18px;line-height:1.22;margin:9px 0 5px}
+#c .card p{font-size:14px;color:#c9b8ff;line-height:1.4}
+#c .les{background:linear-gradient(160deg,#ff5e9c,#7c4dff 60%,#23c9ff);border-radius:22px;padding:18px;margin-top:18px}
+#c .les h3{font-size:24px;line-height:1.12;margin-bottom:12px}
+#c svg{width:100%;height:auto;display:block}
+#c button{margin-top:12px;background:#fff;color:#2a1570;font-weight:700;padding:12px;border-radius:12px;width:100%}
+#c .ans p{padding-top:10px;font-size:15px}
+
+/* D: Comic */
+#d{background:#fff3d6;color:#141414;font-family:Inter,sans-serif;padding:20px 14px 32px;background-image:radial-gradient(#f4c56a 1.5px,transparent 1.6px);background-size:12px 12px}
+#d h2{font-family:Bangers,cursive;font-weight:400;font-size:44px;line-height:1;letter-spacing:.02em;color:#e6232e;-webkit-text-stroke:1px #141414;margin-bottom:14px}
+#d .pan{background:#fff;border:3px solid #141414;box-shadow:5px 5px 0 #141414;padding:13px;margin-bottom:14px}
+#d .pan b{font-family:Bangers,cursive;font-weight:400;font-size:22px;letter-spacing:.03em}
+#d .pan p{font-size:14px;line-height:1.4;margin-top:4px}
+#d .t1{background:#7be0ff}
+#d .t2{background:#ffd23f}
+#d .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#d .grid .pan{margin:0;font-size:14px;font-weight:600;min-height:112px;position:relative}
+#d .grid .num{display:inline-block;background:#141414;color:#fff;font-family:Bangers,cursive;padding:0 7px;margin-bottom:6px}
+#d .wide{grid-column:span 2;background:#ff8fab}
+#d button{font-family:Bangers,cursive;font-size:21px;background:#e6232e;color:#fff;border:3px solid #141414;box-shadow:3px 3px 0 #141414;padding:8px;width:100%;margin-top:14px}
+#d .ans p{padding-top:12px;font-size:15px;font-weight:600}
+.lbl{display:block;background:#fff;color:#000;font:800 12px Inter,sans-serif;padding:8px 16px;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<nav class="nav"><a href="#a">A Control</a><a href="#b">B Poster</a><a href="#c">C Signal</a><a href="#d">D Comic</a></nav>
+
+<span class="lbl">A. CONTROL ROOM (sample stories, layout only)</span>
+<section id="a">
+  <div class="tag"><span class="pulse"></span>SAT 07 NOV 2026 / 5 SIGNALS</div>
+  <h2>The AI trade wobbled, and an agent broke out of its box.</h2>
+  <div class="row t"><div><div class="big">-12%</div><small>AI CHIPS</small></div><div><p>Chip shares fall on fears of US data centre curbs</p><i>WORK: AI budgets may face harder questions</i></div></div>
+  <div class="row"><div><div class="big">1</div><small>ESCAPE</small></div><div><p>WorkOS confirms breach after an AI agent left a test sandbox</p><i>BUILD: contain what your agents can reach</i></div></div>
+  <div class="row c"><div><div class="big">2,000+</div><small>INFECTED</small></div><div><p>Fake GitHub security tools spread malware</p><i>WORK: a supply chain story for clients</i></div></div>
+  <div class="les js-b">
+    <div class="tag">LESSON 001 OF 090 / AI</div>
+    <h3>A chatbot guesses the next word</h3>
+    <div class="prompt">The cat sat on the <b>mat</b></div>
+    <div class="bl"><span>mat</span><div class="tr"><div class="bar" style="width:100%"></div></div><span>41%</span></div>
+    <div class="bl"><span>sofa</span><div class="tr"><div class="bar" style="width:54%;opacity:.7"></div></div><span>22%</span></div>
+    <div class="bl"><span>floor</span><div class="tr"><div class="bar" style="width:22%;opacity:.45"></div></div><span>9%</span></div>
+    <button class="q">REVEAL: WHY CAN IT SOUND SURE AND BE WRONG?</button>
+    <div class="ans"><p>It predicts what sounds likely, not what is true.</p></div>
+  </div>
+</section>
+
+<span class="lbl">B. POSTER (one giant idea per screen, scroll down)</span>
+<section id="b">
+  <div class="p y"><span class="k">SAT 7 NOV / TECH</span><div class="n">-12%</div><h2 style="font-size:46px">AI chip shares drop</h2><p class="s">Fears of US data centre curbs hit the AI trade.</p></div>
+  <div class="p r"><span class="k">AI</span><h2 style="font-size:82px">The agent got out.</h2><p class="s">WorkOS confirms a breach after an AI agent left a test sandbox.</p></div>
+  <div class="p bk"><span class="k">CYBER</span><div class="n">2,000+</div><h2 style="font-size:40px">Computers infected</h2><p class="s">Fake GitHub security tools spread malware.</p></div>
+  <div class="p w"><span class="k">LESSON 1 OF 90</span>
+    <div class="les-h">AI is just guessing the next word.</div>
+    <div class="words"><span>The cat sat on the</span><span class="m">mat 41%</span><span class="f">sofa 22%</span><span class="f">floor 9%</span></div>
+    <button class="q">Why can it sound sure and be wrong?</button>
+    <div class="ans"><p>It predicts what sounds likely, not what is true.</p></div>
+  </div>
+</section>
+
+<span class="lbl">C. SIGNAL ART (a new generated artwork each day)</span>
+<section id="c">
+  <canvas id="art" width="760" height="600"></canvas>
+  <div class="h"><small>SATURDAY 7 NOVEMBER</small><h2>The AI trade wobbled, and an agent broke out of its box.</h2></div>
+  <div class="in-w">
+    <div class="card"><span class="pill" style="background:#23c9ff">Tech</span><h3>AI chip shares fall 12% on data centre fears</h3><p>Work: AI budgets may face harder questions.</p></div>
+    <div class="card"><span class="pill" style="background:#ff5e9c">AI</span><h3>An AI agent left its test sandbox at WorkOS</h3><p>Build: contain what your agents can reach.</p></div>
+    <div class="card"><span class="pill" style="background:#ffd23f">Cyber</span><h3>Fake GitHub tools infect 2,000+ computers</h3><p>Work: a supply chain story for clients.</p></div>
+    <div class="les js-b">
+      <small>Lesson 1 of 90</small>
+      <h3>How a chatbot guesses the next word</h3>
+      <svg viewBox="0 0 320 170" role="img" aria-label="Three possible next words branch from a sentence, with mat the likeliest">
+        <text x="0" y="90" fill="#fff" font-size="17" font-weight="700">The cat sat on the</text>
+        <path d="M152 84 C190 84 190 30 226 30" stroke="#fff" stroke-width="7" fill="none"/>
+        <path d="M152 84 C190 84 190 88 226 88" stroke="#fff" stroke-width="4" fill="none" opacity=".7"/>
+        <path d="M152 84 C190 84 190 142 226 142" stroke="#fff" stroke-width="2" fill="none" opacity=".5"/>
+        <text x="232" y="36" fill="#fff" font-size="20" font-weight="700">mat 41%</text>
+        <text x="232" y="94" fill="#fff" font-size="16">sofa 22%</text>
+        <text x="232" y="148" fill="#fff" font-size="14" opacity=".8">floor 9%</text>
+      </svg>
+      <button class="q">Why can it sound sure and be wrong?</button>
+      <div class="ans"><p>It predicts what sounds likely, not what is true.</p></div>
+    </div>
+  </div>
+</section>
+
+<span class="lbl">D. COMIC (lessons drawn as a strip)</span>
+<section id="d">
+  <h2>Saturday's big three!</h2>
+  <div class="pan t1"><b>TECH: CRASH!</b><p>AI chip shares fall 12% on fears of US data centre curbs.</p></div>
+  <div class="pan t2"><b>AI: BREAKOUT!</b><p>WorkOS confirms a breach after an AI agent left its test sandbox.</p></div>
+  <div class="pan"><b>CYBER: GOTCHA!</b><p>Fake GitHub security tools infect 2,000+ computers.</p></div>
+  <h2 style="font-size:34px;color:#1b6fff">Lesson 1: the next-word machine</h2>
+  <div class="grid">
+    <div class="pan"><span class="num">1</span><br>Your words go in: "The cat sat on the..."</div>
+    <div class="pan"><span class="num">2</span><br>It scores every word: mat 41%, sofa 22%.</div>
+    <div class="pan"><span class="num">3</span><br>It picks one and adds it to the text.</div>
+    <div class="pan"><span class="num">4</span><br>Back to step 1, until the answer is done.</div>
+    <div class="pan wide" style="min-height:0"><b>WATCH OUT!</b><p>Likely is not the same as true.</p></div>
+  </div>
+  <button class="q">Quiz: why can it sound sure and be wrong?</button>
+  <div class="ans"><p>It predicts what sounds likely, not what is true.</p></div>
+</section>
+
+<script>
+document.querySelectorAll('.q').forEach(b=>b.onclick=()=>b.parentElement.classList.toggle('open'));
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.3});
+document.querySelectorAll('.js-b').forEach(n=>io.observe(n));
+const c=document.getElementById('art'),x=c.getContext('2d');
+const col=['#23c9ff','#ff5e9c','#ffd23f','#7c4dff'];let s=20261107;
+const r=()=>(s=(s*16807)%2147483647)/2147483647;
+const L=[...Array(42)].map(()=>({y:r()*600,a:r()*70+18,f:r()*.012+.004,p:r()*6.3,c:col[Math.floor(r()*4)],w:r()*2+.6}));
+function d(t){x.fillStyle='#0b0620';x.fillRect(0,0,760,600);L.forEach(l=>{x.beginPath();x.strokeStyle=l.c;x.lineWidth=l.w;x.globalAlpha=.55;for(let i=0;i<=760;i+=10){const y=l.y+Math.sin(i*l.f+l.p+t/1400)*l.a;i?x.lineTo(i,y):x.moveTo(i,y)}x.stroke()});x.globalAlpha=1;const g=x.createLinearGradient(0,380,0,600);g.addColorStop(0,'rgba(11,6,32,0)');g.addColorStop(1,'#0b0620');x.fillStyle=g;x.fillRect(0,380,760,220);requestAnimationFrame(d)}
+d(0);
+</script>
+</body>
+</html>
