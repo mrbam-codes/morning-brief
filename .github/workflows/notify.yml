@@ -1,0 +1,14 @@
+# Runs when the morning routine pushes to a briefs branch. It does nothing
+# itself: its only job is to wake "Publish site", whose code always comes
+# from main, so nothing pushed to a briefs branch can change how the site
+# is built or checked.
+name: Brief pushed
+on:
+  push:
+    branches: [briefs, briefs-rehearsal]
+permissions: {}
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Brief pushed to ${{ github.ref_name }}"

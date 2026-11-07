@@ -1,0 +1,80 @@
+# Builds and publishes the site. Page code always comes from main.
+# From the briefs branch it takes ONLY briefs/YYYY-MM-DD.json files, and only
+# after each new or changed one passes main's check.py. Everything else on
+# that branch is ignored. A push to briefs-rehearsal builds but never deploys.
+name: Publish site
+on:
+  push:
+    branches: [main]
+  workflow_run:
+    workflows: ["Brief pushed"]
+    types: [completed]
+  workflow_dispatch:
+  schedule:
+    - cron: "15,45 6-9 * * *"
+permissions:
+  contents: read
+concurrency:
+  group: publish
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      deploy: ${{ steps.mode.outputs.deploy }}
+    steps:
+      - name: Check out main (trusted code)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Decide source and mode
+        id: mode
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          RUN_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          RUN_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [ "$EVENT" = "workflow_run" ]; then
+            case "$RUN_BRANCH" in
+              briefs|briefs-rehearsal) SRC="$RUN_BRANCH"; SHA="$RUN_SHA" ;;
+              *) echo "Ignoring branch $RUN_BRANCH"; echo "deploy=false" >> "$GITHUB_OUTPUT"; echo "src=" >> "$GITHUB_OUTPUT"; exit 0 ;;
+            esac
+          else
+            SRC=briefs; SHA=""
+          fi
+          TYPE=$(gh api "repos/${{ github.repository }}/pages" --jq .build_type 2>/dev/null || echo unknown)
+          DEPLOY=false
+          if [ "$SRC" = "briefs" ] && [ "$TYPE" = "workflow" ]; then DEPLOY=true; fi
+          echo "Source branch: $SRC  sha: ${SHA:-tip}  Pages build type: $TYPE  deploy: $DEPLOY"
+          echo "src=$SRC" >> "$GITHUB_OUTPUT"; echo "sha=$SHA" >> "$GITHUB_OUTPUT"; echo "deploy=$DEPLOY" >> "$GITHUB_OUTPUT"
+      - name: Fetch brief files
+        if: steps.mode.outputs.src != ''
+        run: |
+          git fetch --no-tags --depth=1 origin "+refs/heads/${{ steps.mode.outputs.src }}:refs/remotes/origin/src" || echo "no ${{ steps.mode.outputs.src }} branch yet"
+          if [ -n "${{ steps.mode.outputs.sha }}" ]; then git fetch --no-tags --depth=1 origin "${{ steps.mode.outputs.sha }}" && git update-ref refs/remotes/origin/src "${{ steps.mode.outputs.sha }}"; fi
+      - name: Assemble and check
+        if: steps.mode.outputs.src != ''
+        run: python3 -I .github/assemble.py refs/remotes/origin/src _site
+      - name: Upload site
+        if: steps.mode.outputs.src != ''
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: build
+    if: needs.build.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
