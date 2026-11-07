@@ -2,6 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-mr7Cc4OmXIYElXvpmwADVUC1Apx1VnDLp9AvcLfUFHo='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -141,7 +142,7 @@ const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=nu
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
 const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
-const BUILD='2026-11-07.5';
+const BUILD='2026-11-07.6';
 /* ---------- saved progress (this phone only) ---------- */
 const KEY='mb-v1',DAY=/^\d{4}-\d{2}-\d{2}$/;
 const fresh=()=>({days:{},tags:{AI:[0,0],Tech:[0,0],Cyber:[0,0]},lessons:{},points:0,badges:{},review:[],prog:{},sound:true});
@@ -207,7 +208,8 @@ const pointsFor=run=>10+Math.min(run-1,4)*2;
 const maxPoints=n=>{let t=0;for(let i=1;i<=n;i++)t+=pointsFor(i);return t+(n>=5?20:0)};
 function play(items,o){
   const{bd,pill}=sheet(null,o.title);let i=0,run=0,gained=0,right=0,picks=[],missed=[];
-  const resume=(o.resume||[]);
+  const resume=(o.resume||[]).slice(0,items.length);
+  resume.forEach((k,j)=>{const it=items[j];picks[j]=k;if(k===it.answer){run++;right++;gained+=o.review?5:(it.kind==='interview'?15:pointsFor(run))}else{run=0;missed.push(it)}});i=resume.length;
   const q=()=>{
     bd.textContent='';if(i>=items.length)return finish();
     const it=items[i],card=el('div','qcard'),dots=el('div','dots');
@@ -253,7 +255,7 @@ function finishDay(b,key,items,r,practice){
 function startQuiz(b,items,key){
   const done=S.days[key],prog=S.prog[key]||[];
   if(done){return play(items,{title:'Practice',practice:true,done:()=>({badges:[]})})}
-  play(items,{title:'Today’s quiz',each:(it,ok,i,picks)=>{S.prog[key]=picks.slice();save()},done:r=>finishDay(b,key,items,r),after:()=>refreshNav()})}
+  play(items,{title:'Today’s quiz',resume:prog.filter(k=>Number.isInteger(k)&&k>=0&&k<4),each:(it,ok,i,picks)=>{S.prog[key]=picks.slice();save()},done:r=>finishDay(b,key,items,r),after:()=>refreshNav()})}
 function startInterview(b){const x=b.interview,it={q:x.scenario,options:x.options,answer:x.answer,why:x.why,tag:x.tag,kind:'interview',id:b.date+'-i'};
   const key=b.date+'-interview';
   play([it],{title:'Interview round',practice:!!S.days[key],done:r=>finishDay(b,key,[it],r,!!S.days[key]),after:()=>refreshNav()})}
@@ -345,7 +347,7 @@ function render(b,list){
   const items=dayItems(b),qkey=b.date,qc=el('section','gcard quiz');
   const drawQuiz=()=>{qc.textContent='';const dn=S.days[qkey],pr=(S.prog[qkey]||[]).length;
     qc.append(el('span','lab','Today’s quiz'),el('h2',null,dn?'You scored '+dn.score+' out of '+dn.total:items.length+' questions'),el('p',null,dn?'+'+dn.points+' points earned. Replays are for practice and do not change your score.':pr?'You are '+pr+' questions in. Pick up where you left off.':'Pick the right answer. Points, streaks and badges for every day you play. Up to '+maxPoints(items.length)+' points today.'));
-    const bt=el('button','btn',dn?'Practise again':pr?'Resume quiz':'Start quiz');bt.onclick=()=>{if(!dn&&pr){S.prog[qkey]=[]}startQuiz(b,items,qkey)};qc.append(bt)};
+    const bt=el('button','btn',dn?'Practise again':pr?'Resume quiz':'Start quiz');bt.onclick=()=>startQuiz(b,items,qkey);qc.append(bt)};
   drawQuiz();m.append(qc);
   if(b.interview){const ic=el('section','gcard'),idn=S.days[b.date+'-interview'];ic.append(el('span','lab','Interview round'),el('h2',null,'A question you might be asked'),el('p',null,idn?'Done. Replay for practice.':'One scenario, in a consultant’s voice. +15 points if you get it right.'));const bt=el('button','btn',idn?'Practise again':'Take the interview question');bt.onclick=()=>startInterview(b);ic.append(bt);m.append(ic)}
   if(b.build){const bc=el('section','gcard');bc.append(el('span','lab','You could build this'),el('h2',null,b.build.title),el('p',null,b.build.idea),el('span','lab','First step'),el('p',null,b.build.first));m.append(bc)}

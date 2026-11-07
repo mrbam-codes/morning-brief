@@ -97,6 +97,7 @@ Grok saves a daily sweep of X to the private repository at `/home/claude/Inbox-/
 
 ## Finding stories (order of work)
 
+0. Run `python3 recent.py YYYY-MM-DD` with today's date. It prints the headlines of the last 3 briefs. Do not repeat any of them. A story may come back only when there is a real new development, and then the headline and summary must say what is new. It prints no links on purpose: never fetch an address you did not get from your own search.
 1. Discover: search at least three times each for AI, tech and cyber, and more if results are old or thin. Open only addresses your search returns.
 2. Read the article for each candidate.
 3. Open the original it rests on (company post, paper, advisory, regulator page) and compare the numbers. Record any mismatch in the story's `take`.
