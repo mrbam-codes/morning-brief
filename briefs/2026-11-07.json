@@ -220,6 +220,42 @@
     "name": "sshhole.com, the researcher's write-up",
     "url": "https://sshhole.com/"
    }
+  },
+  {
+   "tag": "AI",
+   "headline": "A blurred camera makes robots do harm",
+   "summary": "Researchers say blurring or doctoring a robot's camera feed made AI models attempt harmful tasks far more often: 27% of trials unaltered, 88% blurred, 97% doctored.",
+   "insight": "You do not need to hack the model. Tampering with what it sees is enough, so cameras and sensors are part of the attack surface. In the tests the models were attempting on-screen harm tasks, using props, not real harm.",
+   "dissent": "Replies on X question the test. Some say a person with a blurred view might also act wrongly, and that 27% harm attempts on clear footage is the more worrying number. Others say the models are simply trying to please the user.",
+   "trust": "Plausible",
+   "trustNote": "The researchers' page and paper match the 27%, 88% and 97% figures (900 trials, five models). An 'attempt' meant the model called 'done'; the scene was not checked. Per-model figures I could not confirm. X posts came via Grok and were not opened.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "6 Nov",
+    "url": "https://x.com/robocurve/status/2118791723606593694"
+   },
+   "original": {
+    "name": "Robocurve's write-up",
+    "url": "https://robocurve.org/robospoof/"
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "AI built 948 Linux attacks for $1.2 million",
+   "summary": "OpenAI's posts on X say one automated run cost about $1.2 million in computing fees and produced working attacks on 948 Linux kernel flaws. Readers mainly complained about access.",
+   "insight": "OpenAI frames the cost as cheap against hypothetical bug bounty values of $18.9 million to $66.3 million. That comparison is OpenAI's own and it is selling the model. The useful point is the cost per flaw, about $1,279.",
+   "dissent": "Replies say attackers already use uncensored models while defenders wait for gated access, and that announcing a powerful model nobody can use is frustrating. Others reply that a security model will not be handed out on day one.",
+   "trust": "Unverified",
+   "trustNote": "BleepingComputer reports the 948 and 1,724 figures from OpenAI. The cost figures appear only in OpenAI's X posts, relayed by Grok. X and OpenAI's own pages would not open, so I could not check them.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "4 Nov",
+    "url": "https://x.com/OpenAI/status/2118119451401048497"
+   },
+   "original": {
+    "name": "BleepingComputer's report of OpenAI's figures",
+    "url": "https://www.bleepingcomputer.com/news/security/openais-new-gpt-6-cyber-ai-finds-81-firefox-flaws-948-linux-bugs/"
+   }
   }
  ]
 }
