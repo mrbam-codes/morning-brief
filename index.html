@@ -111,7 +111,18 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .trust{display:inline-block;margin-left:8px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;border:1px solid var(--lilac);color:var(--lilac)}
 .trust.Confirmed{border-color:#3ddc97;color:#3ddc97}.trust.Unverified{border-color:var(--ai);color:#ff7aa5}
 .card.chat{border-style:dashed}
-.card.onx{border-style:solid;border-color:#16b8f0}
+.xfeed{background:#000;border:1px solid #2f3336;border-radius:18px;overflow:hidden;margin:22px 0 10px;box-shadow:0 0 26px -12px #a98bff}
+.xhead{display:flex;justify-content:space-between;align-items:center;padding:13px 15px;border-bottom:1px solid #2f3336;font-weight:700;font-size:16px}
+.xlogo{display:block;width:20px;height:20px;color:#fff}.xlogo svg{display:block;width:100%;height:100%}
+.xitem{position:relative;padding:14px 15px 14px 50px;border-bottom:1px solid #2f3336;cursor:pointer}
+.xdot{position:absolute;left:18px;top:19px;width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+.xline{position:absolute;left:24px;top:35px;bottom:-20px;width:2px;background:linear-gradient(var(--c),#2f3336)}
+.xitem:last-of-type{border-bottom:0}.xitem:last-of-type .xline{display:none}
+.xwho{font-family:'Space Grotesk',monospace;font-size:13px;font-weight:700;color:var(--c);overflow-wrap:anywhere}
+.xitem h3{font-size:18px;line-height:1.22;margin:5px 0}.xitem p{font-size:15px;line-height:1.4;color:#d8d2ee}
+.xmeta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}.xmeta .trust,.xmeta .grp{margin-left:0}
+.xitem .cue{color:var(--c)}
+.xnote{padding:10px 15px;border-top:1px solid #2f3336;font-size:12px;color:#8b8fa0}
 .grp{display:inline-block;margin-left:8px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:#16b8f022;color:#7fdcff}
 .hero::before{content:'';position:absolute;left:0;right:0;bottom:0;height:52%;background:linear-gradient(rgba(11,6,32,0),rgba(11,6,32,.94) 62%);z-index:1;pointer-events:none}
 .hero>canvas{z-index:0}.hero>*:not(canvas){z-index:2}
@@ -130,7 +141,7 @@ const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=nu
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
 const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
-const BUILD='2026-11-07.3-motion';
+const BUILD='2026-11-07.4';
 /* ---------- saved progress (this phone only) ---------- */
 const KEY='mb-v1',DAY=/^\d{4}-\d{2}-\d{2}$/;
 const fresh=()=>({days:{},tags:{AI:[0,0],Tech:[0,0],Cyber:[0,0]},lessons:{},points:0,badges:{},review:[],prog:{},sound:true});
@@ -290,6 +301,7 @@ async function openGlossary(list){
     if(!L.length)box.append(el('p','meta','No terms yet.'));L.forEach(t=>{const d=el('div','term');d.append(el('b',null,t.term),el('span',null,t.plain));box.append(d)})};
   inp.oninput=draw;draw()}
 let refreshNav=()=>{};
+const X_LOGO='<svg viewBox="0 0 24 24" aria-label="X"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>';
 function art(
 c,seed){
   const x=c.getContext('2d'),d=Math.min(devicePixelRatio||1,2),col=['#ff2e6e','#ffe600','#7c4dff','#16b8f0'];
@@ -320,7 +332,9 @@ function render(b,list){
   else{if(b.stories.length)m.append(el('div','sect','Also today'));b.stories.forEach(s=>add(s,m))}
   const chat=b.chatter||[],xs=chat.filter(c=>c.via==='X'),fs=chat.filter(c=>c.via!=='X');
   const chatCard=c=>{const k=el('article','card chat'+(c.via==='X'?' onx':'')),p=el('span','pill '+c.tag,c.tag),tr=el('span','trust '+c.trust,c.trust);k.append(p,tr);if(c.group)k.append(el('span','grp',c.group));k.append(el('h3',null,c.headline),el('p',null,c.summary),el('p','sw',c.via==='X'?(c.handle+' on X, '+c.thread.date):('Source: '+c.thread.name+', '+c.thread.date)));openC(k,c);m.append(k)};
-  if(xs.length){m.append(el('div','sect','On X today'));xs.forEach(chatCard)}
+  if(xs.length){const fd=el('section','xfeed'),fh=el('div','xhead');fh.append(el('span',null,'On X today'));const lg=el('span','xlogo');lg.innerHTML=X_LOGO;fh.append(lg);fd.append(fh);
+    xs.forEach(c=>{const col={AI:'#ff2e6e',Tech:'#ffe600',Cyber:'#a98bff'}[c.tag]||'#c9b8ff',k=el('article','xitem');k.style.setProperty('--c',col);k.append(el('span','xdot'),el('span','xline'),el('div','xwho',c.handle+' · '+c.thread.date));const mt=el('div','xmeta');mt.append(el('span','pill '+c.tag,c.tag),el('span','trust '+c.trust,c.trust));if(c.group)mt.append(el('span','grp',c.group));k.append(el('h3',null,c.headline),el('p',null,c.summary),mt);openC(k,c);fd.append(k)});
+    fd.append(el('div','xnote','Summaries, not the original posts'));m.append(fd)}
   if(fs.length){m.append(el('div','sect','What people are saying'));fs.forEach(chatCard)}
   const l=b.lesson,k=el('section','lesson');
   k.append(el('small',null,'Lesson '+l.n+' of 90 · '+l.tag),el('h2',null,l.title),el('p',null,l.idea));
