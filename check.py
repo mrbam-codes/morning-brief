@@ -51,6 +51,7 @@ def story(where, s, poster):
     for k in ("what", "how", "why", "take"):
         text(f"{where} read.{k}", r.get(k), 700)
     if poster and s.get("big"):
+        need(s["big"].replace("/", " of ") not in s.get("headline", "")[:len(s["big"]) + 4] or len(s.get("headline", "")) > 12, f"{where}: headline must say what happened, not repeat the big number")
         text(f"{where} big", s["big"], LIMITS["big"])
 
 
@@ -127,7 +128,12 @@ def check(date):
     text("build idea", bd.get("idea"), 230)
     text("build first", bd.get("first"), 230)
     chatter = b.get("chatter") or []
-    need(len(chatter) <= 3, "chatter: at most 3 forum items")
+    need(len(chatter) <= 8, "chatter: at most 8 items")
+    need(sum(1 for x in chatter if x.get("via") != "X") <= 3, "chatter: at most 3 forum items")
+    for x in chatter:
+        if x.get("via") == "X":
+            need(x.get("group") in {"Company", "Independent"}, "X item: group must be Company or Independent")
+            need(str(x.get("handle", "")).startswith("@"), "X item: handle must start with @")
     for i, x in enumerate(chatter):
         w = f"chatter {i + 1}"
         need(x.get("tag") in TAGS, f"{w}: tag")

@@ -111,10 +111,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .trust{display:inline-block;margin-left:8px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;border:1px solid var(--lilac);color:var(--lilac)}
 .trust.Confirmed{border-color:#3ddc97;color:#3ddc97}.trust.Unverified{border-color:var(--ai);color:#ff7aa5}
 .card.chat{border-style:dashed}
+.card.onx{border-style:solid;border-color:#16b8f0}
+.grp{display:inline-block;margin-left:8px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:#16b8f022;color:#7fdcff}
+.hero::before{content:'';position:absolute;left:0;right:0;bottom:0;height:52%;background:linear-gradient(rgba(11,6,32,0),rgba(11,6,32,.94) 62%);z-index:1;pointer-events:none}
+.hero>canvas{z-index:0}.hero>*:not(canvas){z-index:2}
+.pv{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;font-size:13px;font-weight:700}
+.pv button{width:40px;height:40px;border-radius:99px;border:1px solid var(--line);background:#160c3acc;font-size:21px;line-height:1}
 .err{padding:40px 18px;font-size:18px}
 footer{padding:0 16px 40px;font-size:14px;color:var(--lilac)}
 footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 </style>
+<script src="motion.js"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -123,7 +130,7 @@ const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=nu
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
 const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
-const BUILD='2026-11-07.3';
+const BUILD='2026-11-07.3-motion';
 /* ---------- saved progress (this phone only) ---------- */
 const KEY='mb-v1',DAY=/^\d{4}-\d{2}-\d{2}$/;
 const fresh=()=>({days:{},tags:{AI:[0,0],Tech:[0,0],Cyber:[0,0]},lessons:{},points:0,badges:{},review:[],prog:{},sound:true});
@@ -311,7 +318,10 @@ function render(b,list){
   const add=(st,box)=>{const k=el('article','card');k.append(el('span','pill '+st.tag,st.tag),el('h3',null,st.headline),el('p',null,st.summary),el('p','sw',st.soWhat),src(st.source));open(k,st);box.append(k)};
   if(b.themes)b.themes.forEach(t=>{m.append(el('div','sect',t.title));t.stories.forEach(s=>add(s,m))});
   else{if(b.stories.length)m.append(el('div','sect','Also today'));b.stories.forEach(s=>add(s,m))}
-  if((b.chatter||[]).length){m.append(el('div','sect','What people are saying'));b.chatter.forEach(c=>{const k=el('article','card chat'),p=el('span','pill '+c.tag,c.tag),tr=el('span','trust '+c.trust,c.trust);k.append(p,tr,el('h3',null,c.headline),el('p',null,c.summary),el('p','sw','Source: '+c.thread.name+', '+c.thread.date));openC(k,c);m.append(k)})}
+  const chat=b.chatter||[],xs=chat.filter(c=>c.via==='X'),fs=chat.filter(c=>c.via!=='X');
+  const chatCard=c=>{const k=el('article','card chat'+(c.via==='X'?' onx':'')),p=el('span','pill '+c.tag,c.tag),tr=el('span','trust '+c.trust,c.trust);k.append(p,tr);if(c.group)k.append(el('span','grp',c.group));k.append(el('h3',null,c.headline),el('p',null,c.summary),el('p','sw',c.via==='X'?(c.handle+' on X, '+c.thread.date):('Source: '+c.thread.name+', '+c.thread.date)));openC(k,c);m.append(k)};
+  if(xs.length){m.append(el('div','sect','On X today'));xs.forEach(chatCard)}
+  if(fs.length){m.append(el('div','sect','What people are saying'));fs.forEach(chatCard)}
   const l=b.lesson,k=el('section','lesson');
   k.append(el('small',null,'Lesson '+l.n+' of 90 · '+l.tag),el('h2',null,l.title),el('p',null,l.idea));
   (l.diagrams||[]).forEach(d=>{const i=document.createElement('img');i.className='diagram';i.alt=d.alt;i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(d.svg);k.append(i)});
@@ -335,7 +345,10 @@ function render(b,list){
     const sk=streak(),lv=level(S.points);nav.append(pb,rb,gb,sb,el('span','lv','Streak '+sk+' · '+lv.name+' · '+S.points+' pts'));drawQuiz()};
   refreshNav();
   const f=el('footer');f.append(el('div',null,'Earlier briefs'));(list||[]).slice(0,14).forEach(d=>{const a=el('a',null,d);a.href='?d='+d;f.append(a)});f.append(el('div',null,'Version '+BUILD));app.append(f);
-  art(c,parseInt(b.date.replace(/-/g,''),10))}
+  const seed=parseInt(b.date.replace(/-/g,''),10);
+  if(window.startHero){let hi=heroForDate(b.date);startHero(c,b,hi);
+    if(window.PREVIEW){const pv=el('div','pv'),pr=el('button',null,'‹'),nm=el('span',null,''),nx=el('button',null,'›');const go=n=>{hi=(n+HERO_NAMES.length)%HERO_NAMES.length;nm.textContent=(hi+1)+' of '+HERO_NAMES.length+': '+HERO_NAMES[hi];startHero(c,b,hi)};pr.onclick=()=>go(hi-1);nx.onclick=()=>go(hi+1);pv.append(pr,nm,nx);h.append(pv);nm.textContent=(hi+1)+' of '+HERO_NAMES.length+': '+HERO_NAMES[hi]}}
+  else art(c,seed)}
 (async()=>{try{
   const list=await fetch('briefs/index.json',{cache:'no-store'}).then(r=>r.json());
   const q=new URLSearchParams(location.search).get('d'),d=/^\d{4}-\d{2}-\d{2}$/.test(q||'')?q:list[0];
