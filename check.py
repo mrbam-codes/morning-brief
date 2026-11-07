@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import sys
 import threading
+from xml.etree import ElementTree
 
 ROOT = pathlib.Path(__file__).parent.resolve()
 TAGS = {"AI", "Tech", "Cyber"}
@@ -51,7 +52,7 @@ def story(where, s, poster):
     for k in ("what", "how", "why", "take"):
         text(f"{where} read.{k}", r.get(k), 700)
     if poster and s.get("big"):
-        need(s["big"].replace("/", " of ") not in s.get("headline", "")[:len(s["big"]) + 4] or len(s.get("headline", "")) > 12, f"{where}: headline must say what happened, not repeat the big number")
+        need(len(str(s.get("headline", "")).split()) >= 3, f"{where}: headline must say what happened in at least 3 words")
         text(f"{where} big", s["big"], LIMITS["big"])
 
 
@@ -60,6 +61,11 @@ def check(date):
     need(b.get("date") == date, "date does not match the filename")
     need("sample" not in b, "remove the sample flag")
     text("dayLabel", b.get("dayLabel"))
+    day = datetime.date.fromisoformat(date)
+    need(b.get("dayLabel") == f"{day:%A} {day.day} {day:%B %Y}", "dayLabel does not match the date")
+    sunday = day.weekday() == 6
+    need(b.get("type") == ("sunday" if sunday else "daily"), "type must match the day of the week")
+    need(bool(b.get("themes")) == sunday, "themes are required on Sunday and only on Sunday")
     text("verdict", b.get("verdict"), LIMITS["verdict"])
     posters, stories = b.get("posters") or [], list(b.get("stories") or [])
     need(1 <= len(posters) <= 3, "use 1 to 3 posters")
@@ -74,10 +80,14 @@ def check(date):
     for i, s in enumerate(stories):
         story(f"story {i + 1}", s, False)
     tags = {s.get("tag") for s in posters + stories}
-    if len(posters) + len(stories) >= 3:
-        need(tags == TAGS, f"need all of AI, Tech and Cyber, found {sorted(map(str, tags))}")
+    if tags != TAGS:
+        print(f"NOTE: no story today for {sorted(TAGS - tags)}. Say so in the verdict.")
+    total = len(posters) + len(stories)
+    need(total <= (12 if sunday else 7), f"{total} stories is too many for this day")
+    heads = [str(s.get("headline", "")).strip().lower() for s in posters + stories]
+    need(len(heads) == len(set(heads)), "two stories have the same headline")
     l = b.get("lesson") or {}
-    need(1 <= int(l.get("n") or 0) <= 90, "lesson number must be 1 to 90")
+    need(l.get("n") == (day - datetime.date(2026, 11, 7)).days % 90 + 1, "lesson number is wrong for this date")
     need(l.get("tag") in TAGS, "lesson tag")
     text("lesson title", l.get("title"), LIMITS["title"])
     text("lesson idea", l.get("idea"), LIMITS["idea"])
@@ -93,6 +103,13 @@ def check(date):
         need(svg.lstrip().startswith("<svg") and 'xmlns="http://www.w3.org/2000/svg"' in svg
              and "viewBox" in svg, "diagram must be an svg with xmlns and viewBox")
         need("<script" not in svg.lower(), "diagram must not contain script")
+        try:
+            root = ElementTree.fromstring(svg)
+            need(len(list(root)) >= 3, "diagram looks empty")
+            need(not any(k.endswith("href") for e in root.iter() for k in e.attrib)
+                 and not any(e.tag.endswith("image") for e in root.iter()), "diagram must not load anything from outside")
+        except ElementTree.ParseError:
+            need(False, "diagram is not valid SVG")
     quiz = l.get("quiz") or []
     need(len(quiz) == 5, "lesson needs exactly 5 quiz questions")
     kinds = [q.get("kind") for q in quiz]
@@ -134,6 +151,7 @@ def check(date):
         if x.get("via") == "X":
             need(x.get("group") in {"Company", "Independent"}, "X item: group must be Company or Independent")
             need(str(x.get("handle", "")).startswith("@"), "X item: handle must start with @")
+            need(str((x.get("thread") or {}).get("url", "")).startswith("https://x.com/"), "X item: thread url must be on x.com")
     for i, x in enumerate(chatter):
         w = f"chatter {i + 1}"
         need(x.get("tag") in TAGS, f"{w}: tag")
@@ -150,6 +168,7 @@ def check(date):
         need("reddit.com" not in str(th.get("url", "")), f"{w}: Reddit cannot be opened here, so cite only threads you read")
         if x.get("original"):
             need(str(x["original"].get("url", "")).startswith("https://"), f"{w}: original url must be https")
+            text(f"{w} original name", x["original"].get("name"))
     iv = b.get("interview")
     need(bool(iv) or b.get("type") != "sunday", "Sunday needs an interview question")
     if iv:
@@ -196,7 +215,10 @@ def main():
     dates = sorted(set(dates) | {date}, reverse=True)
     original = index_path.read_text()
     index_path.write_text(json.dumps(dates))
-    check(date)
+    try:
+        check(date)
+    except Exception as e:
+        need(False, f"brief could not be read: {e}")
     if not problems:
         render(date)
     if problems:

@@ -107,7 +107,7 @@ const DESIGNS=[
       x.fillStyle=rgb(b.c,.28+b.g*.72);x.beginPath();x.arc(X,Y,4+b.g*3,0,TAU);x.fill();
       x.strokeStyle=rgb(b.c,b.g*.75);x.lineWidth=1.3;x.beginPath();x.arc(X,Y,7+(1-b.g)*22,0,TAU);x.stroke();
       x.fillStyle=`rgba(255,255,255,${.3+b.g*.7})`;x.font='700 10px "Space Mono",monospace';x.fillText(b.t.toUpperCase()+' 0'+b.n,X+11,Y+3)});
-    x.fillStyle='#16b8f0';x.font='700 11px "Space Mono",monospace';x.fillText('SCAN '+DAY,14,22);x.textAlign='right';x.fillText(STORIES.length+' CONTACTS',W-14,22);x.textAlign='left'}}},
+    x.fillStyle='#16b8f0';x.font='700 11px "Space Mono",monospace';x.fillText('SCAN '+DAY,14,22);x.textAlign='right';x.fillText(STORIES.length+(STORIES.length===1?' CONTACT':' CONTACTS'),W-14,22);x.textAlign='left'}}},
 {name:'Pixel Quest',world:'Retro game',note:'A small robot plays itself through a world built from the day. Each treasure is a story, in its topic colour.',make(x,W,H){
   const w=108,h=135,o=document.createElement('canvas');o.width=w;o.height=h;const c=o.getContext('2d');
   const BOT=['..1..1..','..1221..','.222222.','.2c22c2.','.222222.','..3333..','.333333.','.3.33.3.','..3..3..'];
@@ -158,7 +158,7 @@ const NEW=[
   const M=['#############','#.....#.....#','#.###.#.###.#','#.#.......#.#','#.#.##.##.#.#','#.....#.....#','###.#.#.#.###','#...#...#...#','#.###.#.###.#','#.....#.....#','#.##.###.##.#','#...........#','#############'];
   const w=120,h=150,T=8,ox=8,oy=8,o=document.createElement('canvas');o.width=w;o.height=h;const c=o.getContext('2d');x.imageSmoothingEnabled=false;
   const path=(a,b)=>{const k=p=>p[0]+','+p[1],q=[a],pr={[k(a)]:null};while(q.length){const p=q.shift();if(p[0]===b[0]&&p[1]===b[1])break;[[1,0],[-1,0],[0,1],[0,-1]].forEach(d=>{const n=[p[0]+d[0],p[1]+d[1]];if(M[n[1]][n[0]]==='.'&&!(k(n) in pr)){pr[k(n)]=p;q.push(n)}})}const r=[];let p=b;while(p){r.unshift(p);p=pr[k(p)]}return r};
-  const V=[[1,1],[11,1],[5,3],[11,5],[1,7],[11,9],[6,11]].slice(0,N()).map((p,i)=>({p,c:col(i),open:0}));
+  const V=[[1,1],[11,1],[5,3],[11,5],[1,7],[11,9],[6,11],[9,7]].slice(0,N()).map((p,i)=>({p,c:col(i),open:0}));
   const G=[{a:[1,5],b:[5,5]},{a:[7,5],b:[11,5]},{a:[1,11],b:[11,11]}].map(g=>({...g,r:path(g.a,g.b),u:0,d:1}));
   const hero={r:path([3,9],V[0].p),u:0,v:0,score:0};
   const at=(r,u)=>{const i=Math.min(Math.floor(u),r.length-1),j=Math.min(i+1,r.length-1),f=u-i;return[r[i][0]+(r[j][0]-r[i][0])*f,r[i][1]+(r[j][1]-r[i][1])*f,r[j][0]-r[i][0],r[j][1]-r[i][1]]};
@@ -206,7 +206,7 @@ const NEW=[
     const g=x.createRadialGradient(pl.x-pl.r*.4,pl.y-pl.r*.4,pl.r*.1,pl.x,pl.y,pl.r);g.addColorStop(0,'#5fd4ff');g.addColorStop(.45,'#1f5fd0');g.addColorStop(1,'#0d0a33');x.fillStyle=g;x.beginPath();x.arc(pl.x,pl.y,pl.r,0,TAU);x.fill();
     x.save();x.beginPath();x.arc(pl.x,pl.y,pl.r,0,TAU);x.clip();x.strokeStyle='rgba(255,255,255,.2)';x.lineWidth=2;for(let i=0;i<7;i++){x.beginPath();for(let a=0;a<=30;a++){const X=pl.x-pl.r+a/30*pl.r*2,Y=pl.y-pl.r+i*pl.r*.33+Math.sin(a*.5+t*.3+i)*5;a?x.lineTo(X,Y):x.moveTo(X,Y)}x.stroke()}x.restore();
     S.forEach(s=>orbit(s,true));S.filter(s=>pos(s)[2]>=0).forEach(sat);
-    x.fillStyle='#16b8f0';x.font='700 11px "Space Mono",monospace';x.fillText('MISSION '+DAY,12,20);x.textAlign='right';x.fillStyle='#ff3b3b';x.fillText(TAGC('Cyber')?TAGC('Cyber')+' THREATS':'ALL CLEAR',W-12,20);x.textAlign='left'}}},
+    x.fillStyle='#16b8f0';x.font='700 11px "Space Mono",monospace';x.fillText('MISSION '+DAY,12,20);x.textAlign='right';x.fillStyle='#ff3b3b';x.fillText(TAGC('Cyber')?TAGC('Cyber')+(TAGC('Cyber')===1?' THREAT':' THREATS'):'ALL CLEAR',W-12,20);x.textAlign='left'}}},
 {name:'Rain City',world:'Cyberpunk street',note:'Neon billboards scroll the day\'s real headlines through the rain, one sign per story.',make(x,W,H){
   const L=W*2,layer=(top,tone,win)=>{const o=document.createElement('canvas');o.width=L;o.height=H;const c=o.getContext('2d');let px=0;while(px<L){const bw=34+rnd()*62,bh=H*(top+rnd()*.3);c.fillStyle=tone;c.fillRect(px,H-bh,bw,bh);for(let yy=H-bh+6;yy<H;yy+=9)for(let xx=px+5;xx<px+bw-5;xx+=8)if(rnd()<win){c.fillStyle=['#ffe600','#16b8f0','#ff2e6e','#c9b8ff'][Math.floor(rnd()*4)];c.globalAlpha=.32+rnd()*.5;c.fillRect(xx,yy,3,4);c.globalAlpha=1}px+=bw+rnd()*7}return o};
   const A=layer(.5,'#1a1050',.22),C=layer(.34,'#0e0830',.34);const R=[...Array(170)].map(()=>[rnd()*W,rnd()*H,7+rnd()*11]);

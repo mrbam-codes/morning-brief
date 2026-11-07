@@ -32,7 +32,7 @@ Each diagram is `{ "alt", "svg" }`. It shows the real mechanism, not decorative 
 
 ## Daily and Sunday
 
-- Daily: up to 7 stories in all, about a 1-minute lesson, one diagram, five quiz questions. Aim for 5, but never add a story from outside the time window to reach a number. Three fresh stories beat five padded ones.
+- Daily: up to 7 stories in all, about a 3-minute lesson, one diagram, five quiz questions. Aim for 5, but never add a story from outside the time window to reach a number. Three fresh stories beat five padded ones.
 - Sunday: 10 stories in all, under 3 themes, about a 4-minute lesson, two diagrams, five quiz questions, and an `interview` question.
 
 ## Check it
@@ -69,13 +69,15 @@ The page keeps scores, streaks, badges and the review queue on the reader's phon
 
 Open the original source for every claim before using it: the company's own post, the research paper, the advisory, the court filing or the regulator's page, not only the news article about it. Where the claim comes from a company, say so and look for independent confirmation. If the original cannot be opened, say that in the story's `take` and do not state the claim as fact.
 
+Never force a topic. If AI, Tech or Cyber has no real story that day, leave it out and say so in the verdict. Never give a story the wrong tag to fill a gap. Little-known sites are leads only, so never rest a poster story on one.
+
 A poster headline always says what happened in words. Never make it just the `big` number.
 
 ## What people are saying (forums)
 
 `chatter`: 0 to 3 items, each `{ "tag", "headline", "summary", "insight", "dissent", "trust", "trustNote", "thread": { "name", "date", "url" }, "original": { "name", "url" } }`. Use 0 if nothing credible turned up, and say so in the verdict. Never pad.
 
-- Reddit is blocked from this environment. Do not cite a Reddit thread you could not open. Hacker News works through its search service: `https://hn.algolia.com/api/v1/search?query=TERM&tags=story` finds threads and `https://hn.algolia.com/api/v1/items/ID` returns the comments. Link to the normal page, `https://news.ycombinator.com/item?id=ID`. If other forums load (GitHub discussions, Stack Exchange), they count too.
+- Reddit is blocked from this environment. Do not cite a Reddit thread you could not open. To find Hacker News threads, search the web for the story with "Hacker News" and open only addresses your search returns. If other forums load (GitHub discussions, Stack Exchange), they count too.
 - Forum material is opinion and a lead, never proof. Open the original behind any claim first, as in the verification rule. Paraphrase. Do not name commenters or quote at length.
 - `summary`: what people are debating, plain English. `insight`: the sharpest point or idea. `dissent`: the strongest objection. `trust`: `Confirmed` (the original backs it), `Plausible` (reasonable, not fully checked) or `Unverified`. `trustNote`: what you checked and what you could not.
 - Forum ideas may feed `build` and `terms`. Do not use them for quiz questions unless the fact is `Confirmed`.
@@ -95,7 +97,7 @@ Grok saves a daily sweep of X to the private repository at `/home/claude/Inbox-/
 
 ## Finding stories (order of work)
 
-1. Discover: fetch the news pages of the listed sources and search at least three times each for AI, tech and cyber.
+1. Discover: search at least three times each for AI, tech and cyber, and more if results are old or thin. Open only addresses your search returns.
 2. Read the article for each candidate.
 3. Open the original it rests on (company post, paper, advisory, regulator page) and compare the numbers. Record any mismatch in the story's `take`.
 4. Check forums for the best discussion of the biggest stories.

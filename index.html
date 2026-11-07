@@ -141,7 +141,7 @@ const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=nu
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
 const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
-const BUILD='2026-11-07.4';
+const BUILD='2026-11-07.5';
 /* ---------- saved progress (this phone only) ---------- */
 const KEY='mb-v1',DAY=/^\d{4}-\d{2}-\d{2}$/;
 const fresh=()=>({days:{},tags:{AI:[0,0],Tech:[0,0],Cyber:[0,0]},lessons:{},points:0,badges:{},review:[],prog:{},sound:true});
@@ -320,7 +320,7 @@ c,seed){
 function render(b,list){
   const app=document.getElementById('app');document.title='Brief: '+b.dayLabel;
   if(b.sample)app.append(el('div','sample',b.sample));
-  const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(b.posters.length+b.stories.length)+' stories and today’s lesson ↓'));app.append(h);
+  const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(b.posters.length+(b.stories||[]).length+(b.themes||[]).reduce((n,t)=>n+(t.stories||[]).length,0))+' stories and today’s lesson ↓'));app.append(h);
   b.posters.forEach(p=>{
     const s=el('section','poster p-'+p.tag);s.append(el('span','k',p.tag));
     const w=el('div',p.big?'':'noBig');
@@ -329,7 +329,7 @@ function render(b,list){
   const m=el('main','wrap');
   const add=(st,box)=>{const k=el('article','card');k.append(el('span','pill '+st.tag,st.tag),el('h3',null,st.headline),el('p',null,st.summary),el('p','sw',st.soWhat),src(st.source));open(k,st);box.append(k)};
   if(b.themes)b.themes.forEach(t=>{m.append(el('div','sect',t.title));t.stories.forEach(s=>add(s,m))});
-  else{if(b.stories.length)m.append(el('div','sect','Also today'));b.stories.forEach(s=>add(s,m))}
+  else{const more=b.stories||[];if(more.length)m.append(el('div','sect','Also today'));more.forEach(s=>add(s,m))}
   const chat=b.chatter||[],xs=chat.filter(c=>c.via==='X'),fs=chat.filter(c=>c.via!=='X');
   const chatCard=c=>{const k=el('article','card chat'+(c.via==='X'?' onx':'')),p=el('span','pill '+c.tag,c.tag),tr=el('span','trust '+c.trust,c.trust);k.append(p,tr);if(c.group)k.append(el('span','grp',c.group));k.append(el('h3',null,c.headline),el('p',null,c.summary),el('p','sw',c.via==='X'?(c.handle+' on X, '+c.thread.date):('Source: '+c.thread.name+', '+c.thread.date)));openC(k,c);m.append(k)};
   if(xs.length){const fd=el('section','xfeed'),fh=el('div','xhead');fh.append(el('span',null,'On X today'));const lg=el('span','xlogo');lg.innerHTML=X_LOGO;fh.append(lg);fd.append(fh);
