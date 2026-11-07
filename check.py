@@ -92,10 +92,51 @@ def check(date):
         need(svg.lstrip().startswith("<svg") and 'xmlns="http://www.w3.org/2000/svg"' in svg
              and "viewBox" in svg, "diagram must be an svg with xmlns and viewBox")
         need("<script" not in svg.lower(), "diagram must not contain script")
-    need(l.get("quiz"), "lesson needs a quiz")
-    for q in l.get("quiz") or []:
-        text("quiz question", q.get("q"))
-        text("quiz answer", q.get("a"))
+    quiz = l.get("quiz") or []
+    need(len(quiz) == 5, "lesson needs exactly 5 quiz questions")
+    kinds = [q.get("kind") for q in quiz]
+    need(kinds.count("news") == 1, "quiz needs exactly 1 news question")
+    need(kinds.count("lesson") == (1 if b.get("type") == "sunday" else (2 if "recap" in kinds else 4)),
+         "quiz lesson questions: Sunday 1, daily 2 (4 on the first day, with no recap)")
+    for i, q in enumerate(quiz):
+        w = f"quiz {i + 1}"
+        need(q.get("kind") in {"lesson", "recap", "news"}, f"{w}: kind must be lesson, recap or news")
+        need(q.get("tag") in TAGS, f"{w}: tag")
+        text(f"{w} question", q.get("q"), 150)
+        opts = q.get("options") or []
+        need(len(opts) == 4 and len(set(opts)) == 4, f"{w}: needs 4 different options")
+        for o in opts:
+            text(f"{w} option", o, 80)
+        need(isinstance(q.get("answer"), int) and 0 <= q["answer"] <= 3, f"{w}: answer must be 0 to 3")
+        text(f"{w} why", q.get("why"), 190)
+        if q.get("kind") in {"lesson", "recap"}:
+            need(isinstance(q.get("n"), int) and 1 <= q["n"] <= 90, f"{w}: n must be a lesson number")
+        if q.get("kind") == "lesson":
+            need(q.get("n") == l.get("n"), f"{w}: lesson question n must be today's lesson")
+        if q.get("kind") == "recap":
+            need(q.get("n") != l.get("n"), f"{w}: recap must be an earlier lesson")
+    answers = [q.get("answer") for q in quiz]
+    need(len(set(answers)) > 1, "quiz answers must not all be the same position")
+    terms = b.get("terms") or []
+    need(3 <= len(terms) <= 6, "terms: 3 to 6 glossary terms")
+    for t in terms:
+        text("term", t.get("term"), 40)
+        text("term meaning", t.get("plain"), 150)
+    bd = b.get("build") or {}
+    text("build title", bd.get("title"), 50)
+    text("build idea", bd.get("idea"), 230)
+    text("build first", bd.get("first"), 230)
+    iv = b.get("interview")
+    need(bool(iv) or b.get("type") != "sunday", "Sunday needs an interview question")
+    if iv:
+        need(iv.get("tag") in TAGS, "interview tag")
+        text("interview scenario", iv.get("scenario"), 260)
+        opts = iv.get("options") or []
+        need(3 <= len(opts) <= 4, "interview needs 3 or 4 options")
+        for o in opts:
+            text("interview option", o, 120)
+        need(isinstance(iv.get("answer"), int) and 0 <= iv["answer"] < len(opts), "interview answer index")
+        text("interview why", iv.get("why"), 220)
 
 
 def render(date):
@@ -113,6 +154,7 @@ def render(date):
     finally:
         server.shutdown()
     need('class="verdict"' in out, "page did not render the verdict")
+    need('class="gcard quiz"' in out, "page did not render the quiz card")
     need('class="lesson"' in out, "page did not render the lesson")
     need('class="err"' not in out, "page showed its error message")
 

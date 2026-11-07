@@ -118,9 +118,105 @@
   ],
   "quiz": [
    {
+    "kind": "lesson",
+    "tag": "AI",
+    "q": "At its core, what does a large language model do?",
+    "options": [
+     "Looks up the answer in a database",
+     "Predicts the most likely next piece of text",
+     "Searches the web for facts",
+     "Follows a fixed script of replies"
+    ],
+    "answer": 1,
+    "why": "It scores possible next pieces of text and picks a likely one. Everything else it does is built on that loop.",
+    "n": 1
+   },
+   {
+    "kind": "lesson",
+    "tag": "AI",
+    "q": "A model has picked the word 'mat'. What happens next?",
+    "options": [
+     "It stops and sends the reply",
+     "It checks the word against a fact list",
+     "It adds the word and predicts again from the longer text",
+     "It restarts from the first word"
+    ],
+    "answer": 2,
+    "why": "The longer text is fed back in and the model predicts again. Repeating this loop writes a whole reply.",
+    "n": 1
+   },
+   {
+    "kind": "lesson",
+    "tag": "AI",
     "q": "Why can an AI write a fluent but false sentence?",
-    "a": "It picks likely next words. It does not check facts."
+    "options": [
+     "It picks likely wording and does not check facts",
+     "It copies text straight from one website",
+     "It was told to lie",
+     "It always runs out of memory"
+    ],
+    "answer": 0,
+    "why": "Likely-sounding and true are different things. That is why AI work needs checking steps.",
+    "n": 1
+   },
+   {
+    "kind": "lesson",
+    "tag": "AI",
+    "q": "What is a token?",
+    "options": [
+     "A password for an AI tool",
+     "A small piece of text, such as a word or part of one",
+     "A type of computer chip",
+     "A payment made to an AI firm"
+    ],
+    "answer": 1,
+    "why": "Models read and write in tokens, not whole sentences. Prices and limits are counted in them later in the course.",
+    "n": 1
+   },
+   {
+    "kind": "news",
+    "tag": "AI",
+    "q": "Which weakness did WorkOS say let the agent pull records so quickly?",
+    "options": [
+     "No rate limiting, so there was no cap on how fast records could be pulled",
+     "An unpatched web browser",
+     "A stolen employee laptop",
+     "A phishing email to staff"
+    ],
+    "answer": 0,
+    "why": "WorkOS listed four weaknesses, including no rate limiting and a predictable test password that was live in production."
    }
   ]
+ },
+ "terms": [
+  {
+   "term": "Large language model (LLM)",
+   "plain": "A system that writes by predicting the most likely next piece of text, over and over."
+  },
+  {
+   "term": "Token",
+   "plain": "A small piece of text, such as a word or part of a word, that a model reads and writes."
+  },
+  {
+   "term": "Sandbox",
+   "plain": "A fenced-off test area where software can run without touching real systems."
+  },
+  {
+   "term": "Penetration testing",
+   "plain": "Attacking your own systems on purpose, with permission, to find weak spots before criminals do."
+  },
+  {
+   "term": "Rate limiting",
+   "plain": "A cap on how many requests can be made in a set time, which slows down automated attacks."
+  },
+  {
+   "term": "Exploit",
+   "plain": "A program or trick that uses a flaw to break into a system."
+  }
+ ],
+ "build": {
+  "title": "A next-word guesser",
+  "idea": "Make a tiny web page where you paste your own writing, and it suggests the next word after any word you type. It shows the core idea of this lesson in a few dozen lines.",
+  "first": "Paste three paragraphs of your own writing into an AI assistant and ask: write one HTML file that counts which word most often follows each word, then suggests the next word."
  }
 }

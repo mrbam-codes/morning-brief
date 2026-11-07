@@ -21,7 +21,7 @@ A poster also has `big`: a short number of up to 7 characters, such as `-12%` or
 
 ## The lesson
 
-`n`, `tag`, `title` (up to 42 characters), `idea` (one sentence), `steps` (3 to 6), `analogy`, `breaks` (where the analogy fails), `why`, `diagrams`, and `quiz` as a list of `{ "q", "a" }`.
+`n`, `tag`, `title` (up to 42 characters), `idea` (one sentence), `steps` (3 to 6), `analogy`, `breaks` (where the analogy fails), `why`, `diagrams`, and `quiz` (see below).
 
 Each diagram is `{ "alt", "svg" }`. It shows the real mechanism, not decorative boxes.
 
@@ -33,7 +33,7 @@ Each diagram is `{ "alt", "svg" }`. It shows the real mechanism, not decorative 
 ## Daily and Sunday
 
 - Daily: up to 7 stories in all, about a 1-minute lesson, one diagram, one quiz question. Aim for 5, but never add a story from outside the time window to reach a number. Three fresh stories beat five padded ones.
-- Sunday: 10 stories in all, under 3 themes, about a 4-minute lesson, two diagrams, and five quiz questions: one on today's lesson and four on the previous 6 lessons.
+- Sunday: 10 stories in all, under 3 themes, about a 4-minute lesson, two diagrams, five quiz questions, and an `interview` question.
 
 ## Check it
 
@@ -47,3 +47,20 @@ Every story, poster or card, also has `read`: `{ "what", "how", "why", "take" }`
 - `how`: how it works or happened, plain English first, technical term in brackets.
 - `why`: why it matters and who is affected.
 - `take`: Claude's own view, marked as opinion. Separate fact from vendor claims, say what is unproven, and say what to watch next.
+
+## The quiz, glossary, build idea and interview round
+
+Always five quiz questions, multiple choice, each `{ "kind", "tag", "n", "q", "options", "answer", "why" }`.
+
+- `kind`: `lesson` (today's lesson), `recap` (an earlier lesson from course.md, for spaced revision) or `news` (one of today's stories).
+- Daily: 2 lesson, 2 recap, 1 news. On lesson 1 there is nothing earlier, so use 4 lesson and 1 news. Sunday: 1 lesson, 3 recap, 1 news.
+- `n` is the lesson number (lesson and recap questions only). `tag` is AI, Tech or Cyber. `answer` is the position 0 to 3 of the right option. Vary the positions. Options up to 80 characters, `q` up to 150, `why` up to 190 and it must teach, not just repeat the answer.
+- Recap questions must be true to the lesson title in course.md. Make them test understanding, not recall of a phrase. News questions must be answerable from the short read.
+
+`terms`: 3 to 6 of `{ "term", "plain" }`, new terms met today, plain English first. They feed the Glossary page.
+
+`build`: `{ "title", "idea", "first" }`. One real thing a non-coder could build with an AI assistant, tied to the lesson, with the first step to take.
+
+`interview` (required on Sunday, optional other days): `{ "tag", "scenario", "options", "answer", "why" }` with 3 or 4 options. A scenario in a consultant's voice, such as a client asking something. Right answer is the one a calibrated expert would give.
+
+The page keeps scores, streaks, badges and the review queue on the reader's phone, so none of that is stored in this repository.

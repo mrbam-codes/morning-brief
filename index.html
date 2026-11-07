@@ -69,6 +69,45 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .q{display:block;width:100%;background:#fff;color:#2a1570;font-weight:700;padding:13px;border-radius:12px;margin-top:10px;font-size:15px;text-align:left}
 .a{display:none;background:#0b0620cc;border-radius:12px;padding:12px;margin-top:6px;font-size:15px;line-height:1.4}
 .a.on{display:block}
+.nav{position:absolute!important;top:calc(14px + env(safe-area-inset-top));left:14px;right:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;z-index:2}
+.nav button{font-size:13px;font-weight:700;padding:8px 13px;border:1px solid var(--line);border-radius:99px;background:#160c3acc;backdrop-filter:blur(6px)}
+.nav .lv{margin-left:auto;font-size:12px;font-weight:700;color:var(--lilac)}
+.nav .n{display:inline-block;min-width:18px;padding:0 5px;margin-left:5px;border-radius:99px;background:var(--ai);color:#fff;font-size:11px;line-height:18px;text-align:center}
+.gcard{border-radius:22px;padding:18px;margin-top:16px;background:#160c3a;border:1px solid var(--line)}
+.gcard h2{font-size:24px;line-height:1.1;margin:6px 0 8px}
+.gcard p{font-size:15px;line-height:1.45;color:var(--lilac)}
+.gcard .lab{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tech)}
+.gcard.quiz{background:linear-gradient(160deg,#ff2e6e,#7c4dff);border:0}
+.gcard.quiz p,.gcard.quiz .lab{color:#fff}
+.btn{display:block;width:100%;margin-top:14px;padding:15px;border-radius:14px;background:#fff;color:#2a1570;font-weight:700;font-size:16px;text-align:center}
+.btn.alt{background:transparent;color:#fff;border:1px solid #ffffff88;margin-top:8px}
+.dots{display:flex;gap:6px;flex:1;margin:0 12px}
+.dots i{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.dots i.on{background:var(--lilac)}.dots i.ok{background:#3ddc97}.dots i.no{background:var(--ai)}
+.qcard h2{font-size:24px;line-height:1.2;margin:8px 0 18px}
+.opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:14px;margin-bottom:10px;border-radius:14px;border:2px solid var(--line);background:#160c3a;font-size:16px;line-height:1.35}
+.opt b{flex:none;width:26px;height:26px;border-radius:50%;background:var(--line);text-align:center;line-height:26px;font-size:13px}
+.opt.ok{border-color:#3ddc97;background:#0f3a2e}.opt.ok b{background:#3ddc97;color:#000}
+.opt.no{border-color:var(--ai);background:#40122a}.opt.no b{background:var(--ai)}
+.opt:disabled{cursor:default}.opt.dim{opacity:.45}
+.why{margin:14px 0;padding:14px;border-radius:14px;background:#ffffff14;font-size:15px;line-height:1.45}
+.score{font-family:Anton,Impact,sans-serif;font-size:96px;line-height:1;text-align:center;margin:10px 0 0}
+.pts{text-align:center;font-size:20px;font-weight:700;color:var(--tech);margin:4px 0 14px}
+.bar2{height:10px;border-radius:5px;background:var(--line);overflow:hidden;margin:6px 0 4px}
+.bar2 i{display:block;height:100%;background:linear-gradient(90deg,var(--ai),var(--tech));border-radius:5px}
+.row{display:flex;justify-content:space-between;font-size:14px;color:var(--lilac)}
+.grid{display:grid;grid-template-columns:repeat(15,1fr);gap:4px;margin:8px 0}
+.grid i{aspect-ratio:1;border-radius:4px;background:#ffffff14}
+.grid i.AI{background:#ff2e6e55}.grid i.Tech{background:#ffe60055}.grid i.Cyber{background:#7c4dff77}
+.grid i.m{outline:2px solid #fff}.grid i.AI.t{background:var(--ai)}.grid i.Tech.t{background:var(--tech)}.grid i.Cyber.t{background:var(--cyber)}
+.badges{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bd{padding:10px;border-radius:12px;background:#160c3a;border:1px solid var(--line);font-size:13px;line-height:1.3}
+.bd b{display:block;font-size:14px}.bd.lock{opacity:.4}.bd.new{border-color:var(--tech)}
+.sheet input,.sheet textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:#160c3a;color:#fff;font:inherit;font-size:16px;margin:6px 0}
+.sheet textarea{height:90px}
+.term{padding:12px 0;border-bottom:1px solid var(--line)}.term b{display:block;font-size:17px}.term span{font-size:15px;color:var(--lilac);line-height:1.4}
+.upd{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;padding:14px;border-radius:14px;background:var(--tech);color:#000;font-weight:700;text-align:center}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
 .err{padding:40px 18px;font-size:18px}
 footer{padding:0 16px 40px;font-size:14px;color:var(--lilac)}
 footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
@@ -81,24 +120,161 @@ const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=nu
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
 const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
+const BUILD='2026-11-07.3';
+/* ---------- saved progress (this phone only) ---------- */
+const KEY='mb-v1',DAY=/^\d{4}-\d{2}-\d{2}$/;
+const fresh=()=>({days:{},tags:{AI:[0,0],Tech:[0,0],Cyber:[0,0]},lessons:{},points:0,badges:{},review:[],prog:{},sound:true});
+let S=(()=>{try{const s=JSON.parse(localStorage.getItem(KEY));return s&&s.days?Object.assign(fresh(),s):fresh()}catch(e){return fresh()}})();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const LEVELS=[[0,'Curious'],[100,'Learner'],[300,'Practitioner'],[600,'Analyst'],[1000,'Specialist'],[1600,'Expert'],[2500,'Master']];
+const level=p=>{let i=0;LEVELS.forEach((l,j)=>{if(p>=l[0])i=j});const nx=LEVELS[i+1];return{name:LEVELS[i][1],i:i,from:LEVELS[i][0],next:nx?nx[0]:null}};
+const ds=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const addDays=(s,n)=>{const[y,m,d]=s.split('-').map(Number);return ds(new Date(y,m-1,d+n))};
+const todayStr=()=>ds(new Date());
+const doneDays=()=>Object.keys(S.days).filter(k=>DAY.test(k)).sort();
+function streak(){const set=new Set(doneDays());let d=todayStr();if(!set.has(d))d=addDays(d,-1);let n=0;while(set.has(d)){n++;d=addDays(d,-1)}return n}
+const totalCorrect=()=>Object.values(S.tags).reduce((a,t)=>a+t[0],0);
+const BADGES=[
+ ['first','First quiz','Finish your first quiz',()=>doneDays().length>=1],
+ ['perfect','Perfect day','Score 5 out of 5',()=>Object.values(S.days).some(d=>d.total>=5&&d.score===d.total)],
+ ['s3','3-day streak','Quiz three days running',()=>streak()>=3],
+ ['s7','7-day streak','Quiz seven days running',()=>streak()>=7],
+ ['s30','30-day streak','Quiz thirty days running',()=>streak()>=30],
+ ['c100','100 correct','Get 100 answers right',()=>totalCorrect()>=100],
+ ['ai','AI scholar','25 correct AI answers',()=>S.tags.AI[0]>=25],
+ ['tech','Tech scholar','25 correct Tech answers',()=>S.tags.Tech[0]>=25],
+ ['cyber','Cyber scholar','25 correct Cyber answers',()=>S.tags.Cyber[0]>=25],
+ ['back','Comeback','Clear a question you got wrong',()=>!!S.cleared],
+ ['int','Interview ace','Get an interview question right',()=>!!S.interviewWin],
+ ['lv3','Practitioner','Reach level Practitioner',()=>level(S.points).i>=2]];
+function award(){const got=[];BADGES.forEach(([id,n,d,t])=>{if(!S.badges[id]&&t()){S.badges[id]=todayStr();got.push(n)}});return got}
+/* ---------- sound and confetti ---------- */
+let AC;const tone=(f,t,d,v)=>{if(!S.sound)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(v||.12,AC.currentTime+t);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+t+d);o.connect(g);g.connect(AC.destination);o.start(AC.currentTime+t);o.stop(AC.currentTime+t+d)}catch(e){}};
+const sfx={ok:()=>{tone(660,0,.12);tone(880,.1,.18)},no:()=>{tone(180,0,.25,.1)},win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,i*.11,.25))};
+function confetti(n,big){const c=document.getElementById('fx');if(!c||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const d=Math.min(devicePixelRatio||1,2);c.width=innerWidth*d;c.height=innerHeight*d;const x=c.getContext('2d'),col=['#ff2e6e','#ffe600','#7c4dff','#16b8f0','#3ddc97'];
+  const P=[...Array(n)].map(()=>({x:innerWidth/2,y:big?innerHeight*.35:innerHeight*.6,vx:(Math.random()-.5)*(big?16:9),vy:-Math.random()*(big?15:10)-3,r:Math.random()*5+3,c:col[Math.floor(Math.random()*5)],life:1}));
+  let last=performance.now();(function f(t){const dt=Math.min((t-last)/16,2);last=t;x.clearRect(0,0,c.width,c.height);let alive=0;P.forEach(p=>{p.vy+=.35*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=.008*dt;if(p.life>0&&p.y<innerHeight+20){alive++;x.globalAlpha=Math.max(p.life,0);x.fillStyle=p.c;x.fillRect(p.x*d,p.y*d,p.r*d,p.r*d*.6)}});if(alive)requestAnimationFrame(f);else x.clearRect(0,0,c.width,c.height)})(last)}
+/* ---------- sheets (full-screen panels with a working Back button) ---------- */
+const stack=[];
+addEventListener('popstate',()=>{const t=stack.pop();if(t){t.sh.remove();t.prev&&t.prev.focus&&t.prev.focus();if(!stack.length)document.body.style.overflow=''}});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&stack.length)history.back()});
+function sheet(tag,label){
+  const prev=document.activeElement,sh=el('div','sheet');sh.setAttribute('role','dialog');sh.setAttribute('aria-modal','true');
+  const bar=el('div','bar'),cl=el('button','close','← Back');cl.onclick=()=>history.back();
+  const pill=tag?el('span','pill '+tag,tag):el('strong',null,label||'');bar.append(pill,cl);
+  const bd=el('div','body');sh.append(bar,bd);document.body.append(sh);document.body.style.overflow='hidden';cl.focus();history.pushState({s:1},'');stack.push({sh,prev});
+  return{sh,bd,bar,pill,close:()=>history.back()}}
 const SECTIONS=[['What happened','what'],['How it works','how'],['Why it matters','why']];
 function openStory(st){
-  const prev=document.activeElement,sh=el('div','sheet');sh.setAttribute('role','dialog');sh.setAttribute('aria-modal','true');
-  const bar=el('div','bar'),cl=el('button','close','← Back');bar.append(el('span','pill '+st.tag,st.tag),cl);
-  const bd=el('div','body'),r=st.read||{};
+  const{bd}=sheet(st.tag),r=st.read||{};
   bd.append(el('h2',null,st.headline),el('div','meta','Source: '+st.source.name+', '+st.source.date));
   if(!st.read)bd.append(el('h3',null,'In short'),el('p',null,st.summary));
   SECTIONS.forEach(([t,k])=>{if(r[k])bd.append(el('h3',null,t),el('p',null,r[k]))});
   bd.append(el('h3',null,'So what'),el('p',null,st.soWhat.replace(/^[A-Za-z]+:\s*/,'')));
   if(r.take){const t=el('div','take');t.append(el('h3',null,'Claude’s take'),el('p',null,r.take));bd.append(t)}
-  const o=el('a','orig','Read the original at '+st.source.name+' ↗');o.href=safe(st.source.url);o.target='_blank';o.rel='noopener';bd.append(o);
-  sh.append(bar,bd);document.body.append(sh);document.body.style.overflow='hidden';cl.focus();
-  history.pushState({sheet:1},'');
-  let done=false;const shut=()=>{if(done)return;done=true;sh.remove();document.body.style.overflow='';removeEventListener('popstate',shut);removeEventListener('keydown',key);prev&&prev.focus&&prev.focus()};
-  const key=e=>{if(e.key==='Escape')history.back()};
-  cl.onclick=()=>history.back();addEventListener('popstate',shut);addEventListener('keydown',key)}
+  const o=el('a','orig','Read the original at '+st.source.name+' ↗');o.href=safe(st.source.url);o.target='_blank';o.rel='noopener';bd.append(o)}
 const open=(n,st)=>{n.tabIndex=0;n.setAttribute('role','button');n.onclick=e=>{if(e.target.closest('a'))return;openStory(st)};n.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openStory(st)}};n.append(el('span','cue','Read the short version →'))};
-function art(c,seed){
+/* ---------- quiz engine ---------- */
+const pointsFor=run=>10+Math.min(run-1,4)*2;
+const maxPoints=n=>{let t=0;for(let i=1;i<=n;i++)t+=pointsFor(i);return t+(n>=5?20:0)};
+function play(items,o){
+  const{bd,pill}=sheet(null,o.title);let i=0,run=0,gained=0,right=0,picks=[],missed=[];
+  const resume=(o.resume||[]);
+  const q=()=>{
+    bd.textContent='';if(i>=items.length)return finish();
+    const it=items[i],card=el('div','qcard'),dots=el('div','dots');
+    items.forEach((_,j)=>dots.append(el('i',j<i?(picks[j]===items[j].answer?'ok':'no'):j===i?'on':'')));
+    bd.append(el('div','meta',(o.title||'Quiz')+' · question '+(i+1)+' of '+items.length+(it.kind==='recap'?' · revision':it.kind==='news'?' · news':'')),dots,el('h3',null,it.tag+(it.n?' · lesson '+it.n:'')));
+    card.append(el('h2',null,it.q));
+    const btns=it.options.map((t,k)=>{const b=el('button','opt');b.append(el('b',null,'ABCD'[k]),el('span',null,t));card.append(b);return b});
+    const fb=el('div');card.append(fb);bd.append(card);
+    btns.forEach((b,k)=>b.onclick=()=>{
+      btns.forEach(x=>x.disabled=true);const ok=k===it.answer;picks[i]=k;
+      btns[it.answer].classList.add('ok');if(!ok){b.classList.add('no');missed.push(it)}btns.forEach((x,j)=>{if(j!==it.answer&&j!==k)x.classList.add('dim')});
+      let p=0;if(ok){run++;right++;p=o.review?5:(it.kind==='interview'?15:pointsFor(run));gained+=p;sfx.ok();confetti(36)}else{run=0;sfx.no()}
+      o.each&&o.each(it,ok,i,picks);
+      fb.append(el('div','why',(ok?'Correct'+(p?' +'+p+' points':'')+'. ':'Not quite. ')+it.why));
+      const nx=el('button','btn',i+1<items.length?'Next question →':'See my score');nx.onclick=()=>{i++;q()};fb.append(nx);nx.scrollIntoView({block:'nearest',behavior:'smooth'})})};
+  const finish=()=>{
+    const perfect=right===items.length&&items.length>=3&&!o.review;if(perfect)gained+=20;
+    const res=o.done?o.done({right,total:items.length,gained,missed,picks,perfect}):{badges:[],lv:null};
+    perfect?(sfx.win(),confetti(160,true)):right>=items.length/2&&sfx.ok();
+    bd.append(el('div','meta',(o.title||'Quiz')+' complete'),el('div','score',right+'/'+items.length),el('div','pts','+'+gained+' points'+(perfect?' (includes perfect bonus)':'')));
+    if(o.practice)bd.append(el('p','meta','Practice run: not scored.'));
+    const L=level(S.points);const w=L.next?Math.round(100*(S.points-L.from)/(L.next-L.from)):100;
+    const bx=el('div','gcard');bx.append(el('span','lab','Level '+(L.i+1)+' · '+L.name),(()=>{const b=el('div','bar2');b.append(el('i'));b.firstChild.style.width=w+'%';return b})(),el('div','row',null));
+    bx.lastChild.append(el('span',null,S.points+' points'),el('span',null,L.next?(L.next-S.points)+' to next level':'Top level'));
+    const sk=streak();bx.append(el('p',null,sk?'Streak: '+sk+' day'+(sk>1?'s':'')+' in a row.':'Come back tomorrow to start a streak.'));bd.append(bx);
+    (res.badges||[]).forEach(n=>bd.append((()=>{const g=el('div','bd new');g.append(el('b',null,'New badge: '+n));return g})()));
+    if(res.lvUp)bd.append(el('p','pts','Level up: '+res.lvUp+'!'));
+    if(missed.length){bd.append(el('h3',null,'To revise'));missed.forEach(m=>{const g=el('div','why');g.append(el('b',null,m.q),el('br'),'Answer: '+m.options[m.answer]+'. '+m.why);bd.append(g)});bd.append(el('p','meta','Missed questions come back in Review over the next days.'))}
+    const pr=el('button','btn','See my progress');pr.onclick=()=>{history.back();setTimeout(openProgress,60)};const dn=el('button','btn alt','Done');dn.onclick=()=>history.back();bd.append(pr,dn);
+    o.after&&o.after()};
+  q()}
+const mkItem=(it,extra)=>Object.assign({},it,extra);
+function dayItems(b){return(b.lesson.quiz||[]).map((it,i)=>mkItem(it,{id:b.date+'-'+i}))}
+function finishDay(b,key,items,r,practice){
+  if(practice)return{badges:[]};
+  S.days[key]={score:r.right,total:r.total,points:r.gained,at:Date.now()};
+  items.forEach((it,i)=>{const ok=r.picks[i]===it.answer;S.tags[it.tag]=S.tags[it.tag]||[0,0];S.tags[it.tag][1]++;if(ok)S.tags[it.tag][0]++;
+    if(it.n){const L=S.lessons[it.n]=S.lessons[it.n]||{tag:it.tag,c:0,t:0};L.t++;if(ok)L.c++}
+    if(ok&&key.endsWith('interview'))S.interviewWin=true;
+    if(!ok&&!S.review.some(x=>x.id===it.id)){S.review.push(Object.assign({},it,{box:0,due:addDays(todayStr(),1)}))}});
+  const before=level(S.points);S.points+=r.gained;const after=level(S.points);delete S.prog[key];save();
+  const badges=award();save();return{badges,lvUp:after.i>before.i?after.name:null}}
+function startQuiz(b,items,key){
+  const done=S.days[key],prog=S.prog[key]||[];
+  if(done){return play(items,{title:'Practice',practice:true,done:()=>({badges:[]})})}
+  play(items,{title:'Today’s quiz',each:(it,ok,i,picks)=>{S.prog[key]=picks.slice();save()},done:r=>finishDay(b,key,items,r),after:()=>refreshNav()})}
+function startInterview(b){const x=b.interview,it={q:x.scenario,options:x.options,answer:x.answer,why:x.why,tag:x.tag,kind:'interview',id:b.date+'-i'};
+  const key=b.date+'-interview';
+  play([it],{title:'Interview round',practice:!!S.days[key],done:r=>finishDay(b,key,[it],r,!!S.days[key]),after:()=>refreshNav()})}
+function startReview(){
+  const t=todayStr(),due=S.review.filter(x=>x.due<=t).slice(0,5);
+  if(!due.length)return;const steps=[1,3,7,14,30];
+  play(due,{title:'Review',review:true,each:(it,ok)=>{const r=S.review.find(x=>x.id===it.id);if(!r)return;
+      if(ok){r.box++;if(r.box>=steps.length){S.review=S.review.filter(x=>x!==r);S.cleared=true}else r.due=addDays(t,steps[r.box])}else{r.box=0;r.due=addDays(t,1)}save()},
+    done:r=>{S.points+=r.gained;const badges=award();save();return{badges}},after:()=>refreshNav()})}
+/* ---------- progress, glossary, backup ---------- */
+function openProgress(){
+  const{bd}=sheet(null,'Progress');const L=level(S.points),days=doneDays(),w=L.next?Math.round(100*(S.points-L.from)/(L.next-L.from)):100;
+  bd.append(el('h2',null,'Level '+(L.i+1)+': '+L.name));
+  const b=el('div','bar2');b.append(el('i'));b.firstChild.style.width=w+'%';bd.append(b);
+  const r=el('div','row');r.append(el('span',null,S.points+' points'),el('span',null,L.next?(L.next-S.points)+' to '+LEVELS[L.i+1][1]:'Top level'));bd.append(r);
+  const t=S.days[todayStr()],tc=totalCorrect(),tt=Object.values(S.tags).reduce((a,x)=>a+x[1],0);
+  const stat=(a,b2)=>{const c=el('div','bd');c.append(el('b',null,a),b2);return c};
+  const g=el('div','badges');g.style.marginTop='16px';
+  g.append(stat(streak()+(streak()===1?' day':' days'),'Current streak'),stat(days.length+(days.length===1?' day':' days'),'Quizzes completed'),stat(t?t.score+'/'+t.total:'Not yet','Today'),stat(tt?Math.round(100*tc/tt)+'%':'None yet','Overall accuracy ('+tc+' of '+tt+')'));bd.append(g);
+  bd.append(el('h3',null,'By topic'));
+  ['AI','Tech','Cyber'].forEach(k=>{const[c,n]=S.tags[k],p=n?Math.round(100*c/n):0;const row=el('div');row.style.margin='10px 0';const r2=el('div','row');r2.append(el('span','pill '+k,k),el('span',null,n?c+' of '+n+' right ('+p+'%)':'No answers yet'));const br=el('div','bar2');br.append(el('i'));br.firstChild.style.width=p+'%';row.append(r2,br);bd.append(row)});
+  bd.append(el('h3',null,'Today by topic'));
+  bd.append(el('p','meta',t?'Today: '+t.score+' of '+t.total+' right, +'+t.points+' points.':'Take today’s quiz to see this.'));
+  bd.append(el('h3',null,'The 90-lesson map'));
+  const gr=el('div','grid');const tags=['AI','Tech','Cyber'];
+  for(let n=1;n<=90;n++){const L2=S.lessons[n],i=el('i',tags[(n-1)%3]+(L2&&L2.t&&L2.c/L2.t>=.8?' t':''));i.title='Lesson '+n;gr.append(i)}
+  bd.append(gr,el('p','meta','Bright squares are lessons you have mastered (80% or more right). Dim ones are still to come or need revising. Colours: pink AI, yellow Tech, purple Cyber.'));
+  bd.append(el('h3',null,'Badges'));const bg=el('div','badges');
+  BADGES.forEach(([id,n,d])=>{const c=el('div','bd'+(S.badges[id]?'':' lock'));c.append(el('b',null,n),S.badges[id]?'Earned '+S.badges[id]:d);bg.append(c)});bd.append(bg);
+  bd.append(el('h3',null,'Back up your scores'));
+  bd.append(el('p','meta','Scores live only on this phone. Copy a backup code to keep or move them.'));
+  const ex=el('button','btn','Copy backup code'),ta=el('textarea');ta.placeholder='Paste a backup code here to restore';
+  ex.onclick=()=>{const code=btoa(unescape(encodeURIComponent(JSON.stringify(S))));try{navigator.clipboard.writeText(code).then(()=>ex.textContent='Copied')}catch(e){ta.value=code;ta.select();ex.textContent='Code shown below, copy it'}};
+  const im=el('button','btn alt','Restore from code');
+  im.onclick=()=>{try{const o=JSON.parse(decodeURIComponent(escape(atob(ta.value.trim()))));if(!o.days||!o.tags)throw 0;if(!confirm('Replace the scores on this phone with the backup?'))return;S=Object.assign(fresh(),o);save();history.back();setTimeout(openProgress,60);refreshNav()}catch(e){im.textContent='That code did not work'}};
+  bd.append(ex,ta,im)}
+let TERMS=null;
+async function openGlossary(list){
+  const{bd}=sheet(null,'Glossary');bd.append(el('h2',null,'Glossary'),el('p','meta','Every term from your briefs, in plain English.'));
+  const inp=el('input');inp.placeholder='Search terms';bd.append(inp);const box=el('div');bd.append(box);
+  if(!TERMS){box.append(el('p','meta','Loading…'));const m=new Map();
+    await Promise.all((list||[]).map(d=>fetch('briefs/'+d+'.json',{cache:'no-store'}).then(r=>r.json()).then(b=>(b.terms||[]).forEach(t=>{const k=t.term.toLowerCase();if(!m.has(k))m.set(k,Object.assign({date:d},t))})).catch(()=>0)));
+    TERMS=[...m.values()].sort((a,b)=>a.term.localeCompare(b.term))}
+  const draw=()=>{box.textContent='';const f=inp.value.toLowerCase();const L=TERMS.filter(t=>!f||t.term.toLowerCase().includes(f)||t.plain.toLowerCase().includes(f));
+    if(!L.length)box.append(el('p','meta','No terms yet.'));L.forEach(t=>{const d=el('div','term');d.append(el('b',null,t.term),el('span',null,t.plain));box.append(d)})};
+  inp.oninput=draw;draw()}
+let refreshNav=()=>{};
+function art(
+c,seed){
   const x=c.getContext('2d'),d=Math.min(devicePixelRatio||1,2),col=['#ff2e6e','#ffe600','#7c4dff','#16b8f0'];
   let s=seed;const r=()=>(s=(s*16807)%2147483647)/2147483647;
   const L=[...Array(46)].map(()=>({y:r(),a:r()*.13+.03,f:r()*.012+.003,p:r()*6.3,c:col[Math.floor(r()*4)],w:r()*2.4+.5}));
@@ -115,7 +291,7 @@ function art(c,seed){
 function render(b,list){
   const app=document.getElementById('app');document.title='Brief: '+b.dayLabel;
   if(b.sample)app.append(el('div','sample',b.sample));
-  const h=el('header','hero'),c=document.createElement('canvas');h.append(c,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(b.posters.length+b.stories.length)+' stories and today’s lesson ↓'));app.append(h);
+  const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(b.posters.length+b.stories.length)+' stories and today’s lesson ↓'));app.append(h);
   b.posters.forEach(p=>{
     const s=el('section','poster p-'+p.tag);s.append(el('span','k',p.tag));
     const w=el('div',p.big?'':'noBig');
@@ -130,14 +306,30 @@ function render(b,list){
   (l.diagrams||[]).forEach(d=>{const i=document.createElement('img');i.className='diagram';i.alt=d.alt;i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(d.svg);k.append(i)});
   const ol=el('ol');l.steps.forEach(t=>ol.append(el('li',null,t)));k.append(ol);
   [['Think of it like',l.analogy],['Where that breaks',l.breaks],['Why it matters',l.why]].forEach(([a,t])=>{if(!t)return;const p=el('p');p.append(el('span','lab',a),t);k.append(p)});
-  l.quiz.forEach(q=>{const bt=el('button','q',q.q),a=el('div','a',q.a);bt.onclick=()=>a.classList.toggle('on');k.append(bt,a)});
-  m.append(k);app.append(m);
-  const f=el('footer');f.append(el('div',null,'Earlier briefs'));(list||[]).slice(0,14).forEach(d=>{const a=el('a',null,d);a.href='?d='+d;f.append(a)});app.append(f);
+  m.append(k);
+  const items=dayItems(b),qkey=b.date,qc=el('section','gcard quiz');
+  const drawQuiz=()=>{qc.textContent='';const dn=S.days[qkey],pr=(S.prog[qkey]||[]).length;
+    qc.append(el('span','lab','Today’s quiz'),el('h2',null,dn?'You scored '+dn.score+' out of '+dn.total:items.length+' questions'),el('p',null,dn?'+'+dn.points+' points earned. Replays are for practice and do not change your score.':pr?'You are '+pr+' questions in. Pick up where you left off.':'Pick the right answer. Points, streaks and badges for every day you play. Up to '+maxPoints(items.length)+' points today.'));
+    const bt=el('button','btn',dn?'Practise again':pr?'Resume quiz':'Start quiz');bt.onclick=()=>{if(!dn&&pr){S.prog[qkey]=[]}startQuiz(b,items,qkey)};qc.append(bt)};
+  drawQuiz();m.append(qc);
+  if(b.interview){const ic=el('section','gcard'),idn=S.days[b.date+'-interview'];ic.append(el('span','lab','Interview round'),el('h2',null,'A question you might be asked'),el('p',null,idn?'Done. Replay for practice.':'One scenario, in a consultant’s voice. +15 points if you get it right.'));const bt=el('button','btn',idn?'Practise again':'Take the interview question');bt.onclick=()=>startInterview(b);ic.append(bt);m.append(ic)}
+  if(b.build){const bc=el('section','gcard');bc.append(el('span','lab','You could build this'),el('h2',null,b.build.title),el('p',null,b.build.idea),el('span','lab','First step'),el('p',null,b.build.first));m.append(bc)}
+  app.append(m);
+  document.body.append(Object.assign(document.createElement('canvas'),{id:'fx'}));
+  refreshNav=()=>{nav.textContent='';const due=S.review.filter(x=>x.due<=todayStr()).length;
+    const pb=el('button',null,'Progress');pb.onclick=openProgress;
+    const rb=el('button',null,'Review');if(due)rb.append(el('span','n',due));rb.onclick=()=>due?startReview():alert('Nothing to review today. Questions you miss come back here.');
+    const gb=el('button',null,'Glossary');gb.onclick=()=>openGlossary(list);
+    const sb=el('button',null,S.sound?'Sound on':'Sound off');sb.onclick=()=>{S.sound=!S.sound;save();refreshNav()};
+    const sk=streak(),lv=level(S.points);nav.append(pb,rb,gb,sb,el('span','lv','Streak '+sk+' · '+lv.name+' · '+S.points+' pts'));drawQuiz()};
+  refreshNav();
+  const f=el('footer');f.append(el('div',null,'Earlier briefs'));(list||[]).slice(0,14).forEach(d=>{const a=el('a',null,d);a.href='?d='+d;f.append(a)});f.append(el('div',null,'Version '+BUILD));app.append(f);
   art(c,parseInt(b.date.replace(/-/g,''),10))}
 (async()=>{try{
   const list=await fetch('briefs/index.json',{cache:'no-store'}).then(r=>r.json());
   const q=new URLSearchParams(location.search).get('d'),d=/^\d{4}-\d{2}-\d{2}$/.test(q||'')?q:list[0];
   render(await fetch('briefs/'+d+'.json',{cache:'no-store'}).then(r=>r.json()),list);
+  fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/BUILD\s*=\s*'([^']+)'/);if(m&&m[1]!==BUILD){const u=el('button','upd','A newer version is ready. Tap to update.');u.onclick=()=>{location.href=location.pathname+'?d='+d+'&v='+Date.now()};document.body.append(u)}}).catch(()=>0);
 }catch(e){document.getElementById('app').append(el('p','err','This brief could not be loaded.'))}})();
 </script>
 </body>
