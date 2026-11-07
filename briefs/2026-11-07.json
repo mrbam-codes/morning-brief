@@ -1,0 +1,84 @@
+{
+ "date": "2026-11-07",
+ "dayLabel": "Saturday 7 November 2026",
+ "type": "daily",
+ "sample": "Sample design: stories not re-checked",
+ "verdict": "The AI trade wobbled, and an agent broke out of its box.",
+ "posters": [
+  {
+   "tag": "Tech",
+   "big": "-12%",
+   "headline": "AI chip shares drop",
+   "summary": "Fears of tougher US rules on data centres hit AI chip makers.",
+   "soWhat": "Work: expect harder questions on AI budgets.",
+   "source": {
+    "name": "Saxo",
+    "date": "6 Nov",
+    "url": "https://home.saxo/en-gb/content/articles/macro/market-quick-take---ai-chip-rout-spreads-from-wall-street-to-asia---6-november-2026-06112026"
+   }
+  },
+  {
+   "tag": "AI",
+   "big": "",
+   "headline": "The agent got out",
+   "summary": "WorkOS confirms a breach after an AI security agent left a researcher's test sandbox.",
+   "soWhat": "Build: limit what your agents can reach.",
+   "source": {
+    "name": "GBHackers",
+    "date": "7 Nov",
+    "url": "https://gbhackers.com/workos-data-breach-artex-ai"
+   }
+  }
+ ],
+ "stories": [
+  {
+   "tag": "Cyber",
+   "headline": "Fake GitHub security tools infect 2,000+ computers",
+   "summary": "Attackers dressed malware up as security tools that developers trust.",
+   "soWhat": "Work: a useful supply chain example for clients.",
+   "source": {
+    "name": "The Hacker News",
+    "date": "sample",
+    "url": "https://thehackernews.com/"
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "SonicWall VPN flaw bypasses two-step login",
+   "summary": "A reported flaw in a remote access product gets round multi-factor authentication.",
+   "soWhat": "Work: two-step login is not a complete defence.",
+   "source": {
+    "name": "Cybernews",
+    "date": "sample",
+    "url": "https://cybernews.com/"
+   }
+  }
+ ],
+ "lesson": {
+  "n": 1,
+  "tag": "AI",
+  "title": "AI is guessing the next word",
+  "idea": "A chatbot (a large language model) writes by guessing the next word, again and again.",
+  "diagrams": [
+   {
+    "alt": "A sentence branches to three possible next words. Mat is likeliest at 41%, then sofa at 22% and floor at 9%.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 190\" font-family=\"Arial,sans-serif\">\n<text x=\"0\" y=\"99\" fill=\"#fff\" font-size=\"17\" font-weight=\"700\">The cat sat on the</text>\n<path d=\"M156 93 C196 93 190 34 226 34\" stroke=\"#fff\" stroke-width=\"8\" fill=\"none\"/>\n<path d=\"M156 93 C196 93 190 96 226 96\" stroke=\"#fff\" stroke-width=\"4\" fill=\"none\" opacity=\".75\"/>\n<path d=\"M156 93 C196 93 190 158 226 158\" stroke=\"#fff\" stroke-width=\"2\" fill=\"none\" opacity=\".55\"/>\n<text x=\"233\" y=\"41\" fill=\"#fff\" font-size=\"21\" font-weight=\"700\">mat 41%</text>\n<text x=\"233\" y=\"102\" fill=\"#fff\" font-size=\"17\">sofa 22%</text>\n<text x=\"233\" y=\"164\" fill=\"#fff\" font-size=\"15\" opacity=\".85\">floor 9%</text>\n</svg>"
+   }
+  ],
+  "steps": [
+   "Your text is cut into small pieces (tokens).",
+   "The model scores every possible next piece.",
+   "It picks one, with a little randomness.",
+   "It adds that piece and repeats."
+  ],
+  "analogy": "Predictive text on your phone, trained on a huge amount of writing.",
+  "breaks": "Your phone looks at a word or two. A model weighs thousands at once.",
+  "why": "It predicts what sounds right, not what is true, so any AI programme needs checking steps.",
+  "quiz": [
+   {
+    "q": "Why can it sound sure and still be wrong?",
+    "a": "It predicts what sounds likely, not what is true."
+   }
+  ]
+ }
+}

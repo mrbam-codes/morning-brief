@@ -1,1 +1,111 @@
-<!doctype html><meta charset="utf-8"><title>Morning brief</title><p>First brief coming soon.</p>
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0620">
+<title>Morning brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0b0620;--lilac:#c9b8ff;--ai:#ff2e6e;--tech:#ffe600;--cyber:#7c4dff;--line:#38257f}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:#fff;font-family:'Space Grotesk',system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.hero{position:relative;min-height:88svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 18px 34px;overflow:hidden}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero>*:not(canvas){position:relative}
+.date{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--lilac);text-transform:uppercase}
+.verdict{font-size:38px;line-height:1.05;font-weight:700;margin-top:10px}
+.more{margin-top:18px;font-size:14px;color:var(--lilac)}
+.sample{background:#fff;color:#000;font-size:12px;font-weight:700;padding:7px 16px}
+.poster{min-height:84svh;padding:26px 18px;display:flex;flex-direction:column;justify-content:flex-end;position:relative}
+.poster .k{position:absolute;top:24px;left:18px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.big{font-family:Anton,Impact,sans-serif;font-size:130px;line-height:1;white-space:nowrap}
+.poster h2{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:44px;line-height:1.02;text-transform:uppercase;margin-top:8px}
+.poster .noBig h2{font-size:64px}
+.poster p{font-size:16px;line-height:1.38;font-weight:500;margin-top:12px}
+.poster .sw{font-weight:700}
+.poster a{display:inline-block;font-size:13px;margin-top:12px;font-weight:700;padding:6px 0}
+.p-Tech{background:var(--tech);color:#000}
+.p-AI{background:var(--ai);color:#fff}
+.p-Cyber{background:var(--cyber);color:#fff}
+.wrap{padding:26px 16px 36px}
+.sect{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lilac);margin:6px 2px 12px}
+.card{background:#160c3a;border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:10px}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;color:var(--ink)}
+.pill.AI{background:#ff7aa5}.pill.Tech{background:var(--tech)}.pill.Cyber{background:#b49cff}
+.card h3{font-size:19px;line-height:1.22;margin:9px 0 6px}
+.card p{font-size:15px;line-height:1.4;color:var(--lilac)}
+.card .sw{color:#fff;margin-top:6px}
+.card a{display:inline-block;font-size:13px;font-weight:700;color:#fff;margin-top:8px;padding:4px 0}
+.lesson{background:linear-gradient(160deg,#ff2e6e,#7c4dff 58%,#16b8f0);border-radius:24px;padding:20px 18px;margin-top:22px}
+.lesson small{font-size:13px;font-weight:700}
+.lesson h2{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:40px;line-height:1.05;text-transform:uppercase;margin:6px 0 12px}
+.lesson p{font-size:16px;line-height:1.42;margin-bottom:10px}
+.lesson .lab{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.diagram{display:block;width:100%;height:auto;margin:12px 0 14px}
+.lesson ol{margin:0 0 12px 20px;font-size:15px;line-height:1.4}
+.lesson li{margin-bottom:5px}
+.q{display:block;width:100%;background:#fff;color:#2a1570;font-weight:700;padding:13px;border-radius:12px;margin-top:10px;font-size:15px;text-align:left}
+.a{display:none;background:#0b0620cc;border-radius:12px;padding:12px;margin-top:6px;font-size:15px;line-height:1.4}
+.a.on{display:block}
+.err{padding:40px 18px;font-size:18px}
+footer{padding:0 16px 40px;font-size:14px;color:var(--lilac)}
+footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n};
+const safe=u=>/^https:\/\//.test(u||'')?u:'#';
+const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener';return a};
+const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
+function art(c,seed){
+  const x=c.getContext('2d'),d=Math.min(devicePixelRatio||1,2),col=['#ff2e6e','#ffe600','#7c4dff','#16b8f0'];
+  let s=seed;const r=()=>(s=(s*16807)%2147483647)/2147483647;
+  const L=[...Array(46)].map(()=>({y:r(),a:r()*.13+.03,f:r()*.012+.003,p:r()*6.3,c:col[Math.floor(r()*4)],w:r()*2.4+.5}));
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){c.width=c.clientWidth*d;c.height=c.clientHeight*d}
+  size();addEventListener('resize',size);
+  function draw(t){
+    const W=c.width,H=c.height;x.fillStyle='#0b0620';x.fillRect(0,0,W,H);
+    L.forEach(l=>{x.beginPath();x.strokeStyle=l.c;x.lineWidth=l.w*d;x.globalAlpha=.6;
+      for(let i=0;i<=W;i+=8*d){const y=H*.62*l.y+H*.04+Math.sin(i/d*l.f+l.p+t/1500)*H*l.a;i?x.lineTo(i,y):x.moveTo(i,y)}x.stroke()});
+    x.globalAlpha=1;const g=x.createLinearGradient(0,H*.42,0,H);g.addColorStop(0,'rgba(11,6,32,0)');g.addColorStop(.72,'#0b0620');x.fillStyle=g;x.fillRect(0,0,W,H);
+    if(!still)requestAnimationFrame(draw)}
+  draw(0)}
+function render(b,list){
+  const app=document.getElementById('app');document.title='Brief: '+b.dayLabel;
+  if(b.sample)app.append(el('div','sample',b.sample));
+  const h=el('header','hero'),c=document.createElement('canvas');h.append(c,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(b.posters.length+b.stories.length)+' stories and today’s lesson ↓'));app.append(h);
+  b.posters.forEach(p=>{
+    const s=el('section','poster p-'+p.tag);s.append(el('span','k',p.tag));
+    const w=el('div',p.big?'':'noBig');
+    if(p.big){const n=el('div','big',p.big);w.append(n);setTimeout(()=>fit(n,130))}
+    w.append(el('h2',null,p.headline),el('p',null,p.summary),el('p','sw',p.soWhat),src(p.source));s.append(w);app.append(s)});
+  const m=el('main','wrap');
+  const add=(st,box)=>{const k=el('article','card');k.append(el('span','pill '+st.tag,st.tag),el('h3',null,st.headline),el('p',null,st.summary),el('p','sw',st.soWhat),src(st.source));box.append(k)};
+  if(b.themes)b.themes.forEach(t=>{m.append(el('div','sect',t.title));t.stories.forEach(s=>add(s,m))});
+  else{if(b.stories.length)m.append(el('div','sect','Also today'));b.stories.forEach(s=>add(s,m))}
+  const l=b.lesson,k=el('section','lesson');
+  k.append(el('small',null,'Lesson '+l.n+' of 90 · '+l.tag),el('h2',null,l.title),el('p',null,l.idea));
+  (l.diagrams||[]).forEach(d=>{const i=document.createElement('img');i.className='diagram';i.alt=d.alt;i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(d.svg);k.append(i)});
+  const ol=el('ol');l.steps.forEach(t=>ol.append(el('li',null,t)));k.append(ol);
+  [['Think of it like',l.analogy],['Where that breaks',l.breaks],['Why it matters',l.why]].forEach(([a,t])=>{if(!t)return;const p=el('p');p.append(el('span','lab',a),t);k.append(p)});
+  l.quiz.forEach(q=>{const bt=el('button','q',q.q),a=el('div','a',q.a);bt.onclick=()=>a.classList.toggle('on');k.append(bt,a)});
+  m.append(k);app.append(m);
+  const f=el('footer');f.append(el('div',null,'Earlier briefs'));(list||[]).slice(0,14).forEach(d=>{const a=el('a',null,d);a.href='?d='+d;f.append(a)});app.append(f);
+  art(c,parseInt(b.date.replace(/-/g,''),10))}
+(async()=>{try{
+  const list=await fetch('briefs/index.json',{cache:'no-store'}).then(r=>r.json());
+  const q=new URLSearchParams(location.search).get('d'),d=/^\d{4}-\d{2}-\d{2}$/.test(q||'')?q:list[0];
+  render(await fetch('briefs/'+d+'.json',{cache:'no-store'}).then(r=>r.json()),list);
+}catch(e){document.getElementById('app').append(el('p','err','This brief could not be loaded.'))}})();
+</script>
+</body>
+</html>
