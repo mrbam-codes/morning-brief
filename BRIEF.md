@@ -64,3 +64,7 @@ Always five quiz questions, multiple choice, each `{ "kind", "tag", "n", "q", "o
 `interview` (required on Sunday, optional other days): `{ "tag", "scenario", "options", "answer", "why" }` with 3 or 4 options. A scenario in a consultant's voice, such as a client asking something. Right answer is the one a calibrated expert would give.
 
 The page keeps scores, streaks, badges and the review queue on the reader's phone, so none of that is stored in this repository.
+
+## Verification rule (standing)
+
+Open the original source for every claim before using it: the company's own post, the research paper, the advisory, the court filing or the regulator's page, not only the news article about it. Where the claim comes from a company, say so and look for independent confirmation. If the original cannot be opened, say that in the story's `take` and do not state the claim as fact.
