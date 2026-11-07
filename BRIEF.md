@@ -38,3 +38,12 @@ Each diagram is `{ "alt", "svg" }`. It shows the real mechanism, not decorative 
 ## Check it
 
 Run `python3 check.py YYYY-MM-DD`. It must print `PASSED`. It also adds the date to `briefs/index.json`.
+
+## The short read (tap a card to open it)
+
+Every story, poster or card, also has `read`: `{ "what", "how", "why", "take" }`, each up to 700 characters, so the reader never has to open the source site.
+
+- `what`: what happened, with the key numbers copied from the source.
+- `how`: how it works or happened, plain English first, technical term in brackets.
+- `why`: why it matters and who is affected.
+- `take`: Claude's own view, marked as opinion. Separate fact from vendor claims, say what is unproven, and say what to watch next.

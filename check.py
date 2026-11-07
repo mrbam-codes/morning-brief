@@ -46,6 +46,10 @@ def story(where, s, poster):
     text(f"{where} source name", src.get("name"))
     text(f"{where} source date", src.get("date"))
     need(str(src.get("url", "")).startswith("https://"), f"{where}: source url must be https")
+    r = s.get("read") or {}
+    need(isinstance(r, dict) and r, f"{where}: needs a read with what, how, why and take")
+    for k in ("what", "how", "why", "take"):
+        text(f"{where} read.{k}", r.get(k), 700)
     if poster and s.get("big"):
         text(f"{where} big", s["big"], LIMITS["big"])
 

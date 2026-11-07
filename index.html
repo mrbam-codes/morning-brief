@@ -42,6 +42,22 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .card p{font-size:15px;line-height:1.4;color:var(--lilac)}
 .card .sw{color:#fff;margin-top:6px}
 .card a{display:inline-block;font-size:13px;font-weight:700;color:#fff;margin-top:8px;padding:4px 0}
+.card{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.card:active{transform:scale(.99)}
+.cue{display:block;margin-top:10px;font-size:13px;font-weight:700;color:var(--tech)}
+.poster{cursor:pointer}
+.poster .cue{color:inherit;margin-top:14px;font-size:14px;text-decoration:underline}
+.sheet{position:fixed;inset:0;z-index:20;background:var(--ink);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.sheet .bar{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:calc(12px + env(safe-area-inset-top)) 16px 12px;background:var(--ink);border-bottom:1px solid var(--line)}
+.sheet .close{font-size:15px;font-weight:700;padding:8px 14px;border:1px solid var(--line);border-radius:99px}
+.sheet .body{padding:20px 18px 60px;max-width:680px;margin:0 auto}
+.sheet h2{font-size:30px;line-height:1.1;margin:12px 0 8px}
+.sheet .meta{font-size:13px;color:var(--lilac)}
+.sheet h3{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lilac);margin:22px 0 6px}
+.sheet p{font-size:17px;line-height:1.5}
+.sheet .take{background:linear-gradient(160deg,#ff2e6e,#7c4dff);border-radius:18px;padding:16px;margin-top:24px}
+.sheet .take h3{color:#fff;margin-top:0;opacity:.9}
+.sheet .orig{display:block;margin-top:26px;font-size:14px;color:var(--lilac);padding:8px 0}
 .lesson{background:linear-gradient(160deg,#ff2e6e,#7c4dff 58%,#16b8f0);border-radius:24px;padding:20px 18px;margin-top:22px}
 .lesson small{font-size:13px;font-weight:700}
 .lesson h2{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:40px;line-height:1.05;text-transform:uppercase;margin:6px 0 12px}
@@ -65,6 +81,23 @@ const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=nu
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
 const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
+const SECTIONS=[['What happened','what'],['How it works','how'],['Why it matters','why']];
+function openStory(st){
+  const prev=document.activeElement,sh=el('div','sheet');sh.setAttribute('role','dialog');sh.setAttribute('aria-modal','true');
+  const bar=el('div','bar'),cl=el('button','close','← Back');bar.append(el('span','pill '+st.tag,st.tag),cl);
+  const bd=el('div','body'),r=st.read||{};
+  bd.append(el('h2',null,st.headline),el('div','meta','Source: '+st.source.name+', '+st.source.date));
+  if(!st.read)bd.append(el('h3',null,'In short'),el('p',null,st.summary));
+  SECTIONS.forEach(([t,k])=>{if(r[k])bd.append(el('h3',null,t),el('p',null,r[k]))});
+  bd.append(el('h3',null,'So what'),el('p',null,st.soWhat.replace(/^[A-Za-z]+:\s*/,'')));
+  if(r.take){const t=el('div','take');t.append(el('h3',null,'Claude’s take'),el('p',null,r.take));bd.append(t)}
+  const o=el('a','orig','Read the original at '+st.source.name+' ↗');o.href=safe(st.source.url);o.target='_blank';o.rel='noopener';bd.append(o);
+  sh.append(bar,bd);document.body.append(sh);document.body.style.overflow='hidden';cl.focus();
+  history.pushState({sheet:1},'');
+  let done=false;const shut=()=>{if(done)return;done=true;sh.remove();document.body.style.overflow='';removeEventListener('popstate',shut);removeEventListener('keydown',key);prev&&prev.focus&&prev.focus()};
+  const key=e=>{if(e.key==='Escape')history.back()};
+  cl.onclick=()=>history.back();addEventListener('popstate',shut);addEventListener('keydown',key)}
+const open=(n,st)=>{n.tabIndex=0;n.setAttribute('role','button');n.onclick=e=>{if(e.target.closest('a'))return;openStory(st)};n.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openStory(st)}};n.append(el('span','cue','Read the short version →'))};
 function art(c,seed){
   const x=c.getContext('2d'),d=Math.min(devicePixelRatio||1,2),col=['#ff2e6e','#ffe600','#7c4dff','#16b8f0'];
   let s=seed;const r=()=>(s=(s*16807)%2147483647)/2147483647;
@@ -87,9 +120,9 @@ function render(b,list){
     const s=el('section','poster p-'+p.tag);s.append(el('span','k',p.tag));
     const w=el('div',p.big?'':'noBig');
     if(p.big){const n=el('div','big',p.big);w.append(n);setTimeout(()=>fit(n,130))}
-    w.append(el('h2',null,p.headline),el('p',null,p.summary),el('p','sw',p.soWhat),src(p.source));s.append(w);app.append(s)});
+    w.append(el('h2',null,p.headline),el('p',null,p.summary),el('p','sw',p.soWhat),src(p.source));open(s,p);s.append(w);app.append(s)});
   const m=el('main','wrap');
-  const add=(st,box)=>{const k=el('article','card');k.append(el('span','pill '+st.tag,st.tag),el('h3',null,st.headline),el('p',null,st.summary),el('p','sw',st.soWhat),src(st.source));box.append(k)};
+  const add=(st,box)=>{const k=el('article','card');k.append(el('span','pill '+st.tag,st.tag),el('h3',null,st.headline),el('p',null,st.summary),el('p','sw',st.soWhat),src(st.source));open(k,st);box.append(k)};
   if(b.themes)b.themes.forEach(t=>{m.append(el('div','sect',t.title));t.stories.forEach(s=>add(s,m))});
   else{if(b.stories.length)m.append(el('div','sect','Also today'));b.stories.forEach(s=>add(s,m))}
   const l=b.lesson,k=el('section','lesson');
