@@ -32,7 +32,7 @@ Each diagram is `{ "alt", "svg" }`. It shows the real mechanism, not decorative 
 
 ## Daily and Sunday
 
-- Daily: 5 to 7 stories in all, about a 1-minute lesson, one diagram, one quiz question.
+- Daily: up to 7 stories in all, about a 1-minute lesson, one diagram, one quiz question. Aim for 5, but never add a story from outside the time window to reach a number. Three fresh stories beat five padded ones.
 - Sunday: 10 stories in all, under 3 themes, about a 4-minute lesson, two diagrams, and five quiz questions: one on today's lesson and four on the previous 6 lessons.
 
 ## Check it
