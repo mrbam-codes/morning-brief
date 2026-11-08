@@ -52,6 +52,90 @@ def published(date):
     except Exception:
         return None
 
+# ---------- news photos ----------
+# The routine cannot download images, so this trusted step does. It accepts
+# only JPEGs from Wikimedia Commons or Unsplash (checked by their bytes),
+# 1.5MB at most, and saves them beside the edition. A photo that fails is
+# skipped: the story shows without it and the edition still publishes.
+import concurrent.futures, urllib.parse
+PHOTO_HOSTS = {"upload.wikimedia.org", "thumb.wikimedia.org", "images.unsplash.com"}
+UA = {"User-Agent": "MiseEnPlacePublisher/1.0 (https://mrbam-codes.github.io/mise-en-place/)"}
+MAX_PHOTO = 1_500_000
+
+
+class SameHost(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        if urllib.parse.urlparse(newurl).hostname not in PHOTO_HOSTS:
+            raise urllib.error.HTTPError(newurl, code, "redirect to another host refused", headers, fp)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+def grab(url, hosts):
+    u = urllib.parse.urlparse(url)
+    if u.scheme != "https" or u.hostname not in hosts:
+        return None
+    opener = urllib.request.build_opener(SameHost)
+    with opener.open(urllib.request.Request(url, headers=UA), timeout=25) as r:
+        data = r.read(MAX_PHOTO + 1)
+    if len(data) > MAX_PHOTO or not data.startswith(b"\xff\xd8\xff"):
+        return None
+    return data
+
+
+def photo_jobs(out_dir, keep_days=120):
+    jobs = []
+    for f in sorted(os.listdir(os.path.join(out_dir, "briefs")), reverse=True)[: keep_days + 2]:
+        m = DATED.match("briefs/" + f)
+        if not m:
+            continue
+        try:
+            b = json.load(open(os.path.join(out_dir, "briefs", f), encoding="utf-8"))
+        except ValueError:
+            continue
+        found = []
+
+        def walk(o):
+            if isinstance(o, list):
+                for x in o:
+                    walk(x)
+            elif isinstance(o, dict):
+                ph = o.get("photo")
+                if isinstance(ph, dict) and isinstance(ph.get("src"), str):
+                    found.append(ph["src"])
+                for k, v in o.items():
+                    if k != "photo":
+                        walk(v)
+        walk(b)
+        jobs += [(m.group(1), k, u) for k, u in enumerate(found)]
+    return jobs
+
+
+def fetch_photo(out_dir, job):
+    date, k, src = job
+    name = f"briefs/img/{date}-{k}.jpg"
+    site_host = urllib.parse.urlparse(SITE).hostname
+    for url, hosts in ((SITE + name, {site_host}), (src, PHOTO_HOSTS)):
+        try:
+            data = grab(url, hosts)
+        except Exception:
+            data = None
+        if data:
+            dest = os.path.join(out_dir, name)
+            os.makedirs(os.path.dirname(dest), exist_ok=True)
+            open(dest, "wb").write(data)
+            return name, "kept" if url.startswith(SITE) else "fetched"
+    return name, "skipped"
+
+
+def add_photos(out_dir):
+    jobs = photo_jobs(out_dir)
+    with concurrent.futures.ThreadPoolExecutor(6) as ex:
+        res = list(ex.map(lambda j: fetch_photo(out_dir, j), jobs))
+    for kind in ("fetched", "kept", "skipped"):
+        names = [n for n, r in res if r == kind]
+        if names:
+            say(f"Photos {kind}: {len(names)}" + (" (" + ", ".join(names[:6]) + ")" if kind != "kept" else ""))
+
 dates = sorted({m.group(1) for p in src_files if (m := DATED.match(p))}, reverse=True)
 work = tempfile.mkdtemp()
 for p in tracked:
@@ -80,6 +164,7 @@ for n, d in enumerate(dates):
         if n == 0:
             failed_newest = True
 
+add_photos(OUT)
 final = sorted((m.group(1) for f in os.listdir(os.path.join(OUT, "briefs")) if (m := DATED.match("briefs/" + f))), reverse=True)
 open(os.path.join(OUT, "briefs", "index.json"), "w").write(json.dumps(final))
 say("Dates published: " + ", ".join(final[:5]) + (" ..." if len(final) > 5 else ""))

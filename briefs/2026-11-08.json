@@ -78,6 +78,13 @@
       "how": "Claude checks notes against the original transcripts and rewrites errors, then builds linked pages (a small wiki). On a database task (CL-Bench), Opus 5.5 scored 0.655 with no memory and 0.838 with memory. In a Pokémon game test, one corrected note let Claude reach Cerulean City at action 1,935. Without it, it never got there.",
       "why": "Agents forget between sessions, and one wrong note can carry into every later session. Anthropic admits that dreaming costs compute, can bloat notes (one wiki was 1.77 times the size of its source), and helps little on simple single-document search.",
       "take": "Opinion: this is the company's own evidence, on a limited set of tests, and the Pokémon comparison used one run per model. A sceptic could call it tidy housekeeping with a fancy name. The practical lesson is sound: store notes, then check and prune them. Watch for outside tests."
+     },
+     "photo": {
+      "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Datacenter_Server_Racks_%2822370909788%29.jpg/960px-Datacenter_Server_Racks_%2822370909788%29.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg",
+      "credit": "Carl Lender, Wikimedia Commons",
+      "licence": "CC BY 2.0",
+      "alt": "Rows of server racks in a data centre"
      }
     },
     {
