@@ -75,6 +75,7 @@
       '<div class="lbl">' + (rk.next ? fmt(rk.toNext) + ' pts to ' + rk.next.toUpperCase() : 'TOP RANK: ' + rk.name.toUpperCase()) + '</div>' +
       '<div class="row"><span>STREAK</span><span>' + m.run + (m.run === 1 ? ' DAY' : ' DAYS') + ' 🔥</span></div>' +
       '<div class="row"><span>QUIZZES</span><span>' + Object.keys(m.R.day).length + '</span></div>' +
+      '<div class="ship" aria-hidden="true"><div class="ship-in">' +'<svg class="ship-svg" viewBox="0 0 200 120"><defs><linearGradient id="shipb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1a5e"/><stop offset="1" stop-color="#120a33"/></linearGradient>' +'<linearGradient id="shipf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff3df2" stop-opacity="0"/><stop offset=".5" stop-color="#ff3df2"/><stop offset="1" stop-color="#ffe66d"/></linearGradient></defs>' +'<g class="flame"><path d="M14 66 L46 58 L46 78 Z" fill="url(#shipf)"/><path d="M24 68 L46 63 L46 73 Z" fill="#fff" opacity=".8"/></g>' +'<path d="M46 52 Q90 30 150 52 Q182 64 150 80 Q90 98 46 84 Z" fill="url(#shipb)" stroke="#3de6ff" stroke-width="2.5"/>' +'<path d="M70 84 L58 104 L84 92 Z M110 88 L118 108 L128 90 Z" fill="#120a33" stroke="#ff3df2" stroke-width="2"/>' +'<circle cx="60" cy="68" r="4" fill="#ffe66d"/><circle cx="162" cy="68" r="3" fill="#3de6ff"/>' +'<path d="M58 76 L150 76" stroke="#3de6ff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="4 5"/></svg>' +'<div class="dome"><div class="kpod"></div></div><div class="tag">KIMCHI // CO-PILOT</div></div></div>' +
       '<div class="foot"><span>&gt; _<span class="cur"></span></span><span>' + esc(cfg.foot) + '</span></div></div>';
   }
   function net(cv) {
@@ -92,14 +93,20 @@
       if (!reduce) requestAnimationFrame(draw);
     })();
   }
+  /* Kimchi flies the ship: the pixel-art style suits the terminal; one Kimchi at a time */
+  function pilot(root) {
+    var pod = root.querySelector('.kpod'), dome = root.querySelector('.dome');
+    if (!pod || !window.KIMCHI) { if (dome) dome.classList.add('empty'); return; }
+    requestAnimationFrame(function () { var w = Math.round(dome.getBoundingClientRect().width * 1.25) || 90; KIMCHI.cameo(pod, 's08', w); });
+  }
   function share() {
     var m = stats();
     var sheet = el('<div class="cc-sheet" style="max-width:400px" aria-labelledby="ccShareH"><div class="cc-top"><h3 id="ccShareH">Your share card</h3><button class="cc-x" data-close aria-label="Close">×</button></div>' +
       '<label class="cc-name">First name on the card (kept on this device only)<input id="ccName" maxlength="16" autocomplete="given-name" value="' + esc(m.S.name || '') + '" placeholder="Leave blank for anonymous"></label>' +
       '<div data-card>' + cardHTML(m) + '</div><p class="cc-note">Take a screenshot to share it. It shows your first name, rank, score and streak, and nothing else.</p></div>');
     overlay(sheet, function () {
-      net(sheet.querySelector('canvas'));
-      sheet.querySelector('#ccName').addEventListener('input', function (e) { var S = cfg.state(); S.name = e.target.value.trim().slice(0, 16); cfg.save(); sheet.querySelector('[data-card]').innerHTML = cardHTML(stats()); net(sheet.querySelector('canvas')); });
+      net(sheet.querySelector('canvas'));pilot(sheet);
+      sheet.querySelector('#ccName').addEventListener('input', function (e) { var S = cfg.state(); S.name = e.target.value.trim().slice(0, 16); cfg.save(); sheet.querySelector('[data-card]').innerHTML = cardHTML(stats()); net(sheet.querySelector('canvas')); pilot(sheet); });
     });
   }
   window.MBScores = { init: function (c) { cfg = c; paint(false); }, paint: paint, panel: panel, share: share };

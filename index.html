@@ -232,6 +232,18 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 .kov{position:absolute;left:0;right:0;bottom:0;z-index:5;padding:40px 18px 16px;display:grid;gap:4px;pointer-events:none;background:linear-gradient(180deg,rgba(252,249,242,0),rgba(252,249,242,.85) 55%)}
 .kov b{font:700 30px/1 'Space Grotesk',sans-serif;color:#2b2417}.kov span{font:500 14px/1.35 'Space Grotesk',sans-serif;color:#4a3f2c;max-width:60%}
 @media (prefers-reduced-motion:reduce){.kpeek{transition:none}}
+/* Kimchi's spaceship on the share card */
+.e .ship{position:absolute;right:2%;top:10%;width:48%;z-index:3}
+.e .ship-in{position:relative;width:100%;aspect-ratio:200/120;animation:shipbob 3.2s ease-in-out infinite}
+.e .ship-svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(61,230,255,.55))}
+.e .ship .flame{transform-origin:46px 68px;animation:shipflame .16s steps(2) infinite}
+.e .dome{position:absolute;left:43%;top:-14%;width:34%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:2px solid #3de6ff;box-shadow:0 0 14px rgba(61,230,255,.7),inset 0 0 12px rgba(255,255,255,.35);background:#86c3ea}
+.e .dome::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.35) 0 9%,transparent 24%);pointer-events:none;z-index:3}
+.e .kpod{position:absolute;left:50%;top:50%;transform:translate(-50%,-46%)}
+.e .ship .tag{position:absolute;left:0;right:0;bottom:-12%;text-align:center;font-size:3cqw;color:#c9a7ff;letter-spacing:.08em}
+@keyframes shipbob{0%,100%{transform:translate(0,0) rotate(-2deg)}50%{transform:translate(2%,-6%) rotate(1deg)}}
+@keyframes shipflame{50%{transform:scaleX(.7)}}
+@media (prefers-reduced-motion:reduce){.e .ship-in,.e .ship .flame{animation:none}}
 </style>
 <script src="motion.js"></script>
 <script src="scorecore.js"></script>
