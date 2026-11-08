@@ -14,6 +14,8 @@ import subprocess
 import sys
 import threading
 from xml.etree import ElementTree
+import re
+ET = ElementTree
 
 ROOT = pathlib.Path(__file__).parent.resolve()
 TAGS = {"AI", "Tech", "Cyber"}
@@ -35,6 +37,45 @@ def text(where, value, limit=None):
             need(len(value) <= limit, f"{where}: {len(value)} characters, limit {limit}")
 
 
+PHOTO_SRC = re.compile(r"^https://(upload|thumb)\.wikimedia\.org/wikipedia/commons/[^\s?#\"'<>]+\.jpe?g$|^https://images\.unsplash\.com/photo-[A-Za-z0-9-]+\?[^\s#\"'<>]*fm=jpg[^\s#\"'<>]*$", re.I)
+PHOTO_PAGE = re.compile(r"^https://commons\.wikimedia\.org/wiki/File:[^\s\"'<>]+$|^https://unsplash\.com/photos/[^\s\"'<>]+$")
+LICENCES = {"CC0", "Public domain", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC BY 4.0",
+            "CC BY-SA 2.0", "CC BY-SA 2.5", "CC BY-SA 3.0", "CC BY-SA 4.0", "Unsplash Licence"}
+
+
+def media(where, s):
+    ph = s.get("photo")
+    if ph is not None:
+        src, page, lic = str(ph.get("src", "")), str(ph.get("page", "")), ph.get("licence")
+        need(PHOTO_SRC.match(src) is not None, f"{where} photo: src must be a .jpg on upload.wikimedia.org or thumb.wikimedia.org, or an images.unsplash.com photo with fm=jpg")
+        need(PHOTO_PAGE.match(page) is not None, f"{where} photo: page must be the photo's own Commons file page or unsplash.com/photos page")
+        need(lic in LICENCES, f"{where} photo: licence must be one of {sorted(LICENCES)}")
+        need(("unsplash.com" in src) == (lic == "Unsplash Licence") == ("unsplash.com" in page), f"{where} photo: Unsplash photos use the Unsplash Licence; Commons photos use their Commons licence")
+        text(f"{where} photo credit", ph.get("credit"), 80)
+        text(f"{where} photo alt", ph.get("alt"), 200)
+    fg = s.get("figure")
+    if fg is not None:
+        text(f"{where} figure value", fg.get("value"), 10)
+        text(f"{where} figure label", fg.get("label"), 30)
+    d = s.get("drawing")
+    if d is not None:
+        low = str(d).lower()
+        need(str(d).lstrip().startswith("<svg") and 'xmlns="http://www.w3.org/2000/svg"' in str(d), f"{where} drawing: must be one inline svg with the svg xmlns")
+        for bad in ("<script", "<image", "<foreignobject", "<use", "href", "javascript:", "data:"):
+            need(bad not in low, f"{where} drawing: must not contain {bad}")
+        need(low.count("http") == low.count("http://www.w3.org/2000/svg"), f"{where} drawing: no web addresses")
+        try:
+            root = ET.fromstring(d)
+            need(sum(1 for e in root.iter() if e.tag.endswith("text") and (e.text or "").strip()) >= 3, f"{where} drawing: needs at least 3 text labels")
+            for e in root.iter():
+                fs = e.get("font-size")
+                if fs:
+                    need(re.fullmatch(r"\d+(\.\d+)?(px)?", fs.strip()) is not None and float(re.sub("px", "", fs)) >= 11, f"{where} drawing: font-size {fs} is below 11")
+        except ET.ParseError:
+            need(False, f"{where} drawing: not valid SVG")
+        text(f"{where} drawingAlt", s.get("drawingAlt"), 200)
+
+
 def story(where, s, poster):
     need(s.get("tag") in TAGS, f"{where}: tag must be AI, Tech or Cyber")
     text(f"{where} headline", s.get("headline"),
@@ -51,6 +92,7 @@ def story(where, s, poster):
     need(isinstance(r, dict) and r, f"{where}: needs a read with what, how, why and take")
     for k in ("what", "how", "why", "take"):
         text(f"{where} read.{k}", r.get(k), 700)
+    media(where, s)
     if poster and s.get("big"):
         need(len(str(s.get("headline", "")).split()) >= 3, f"{where}: headline must say what happened in at least 3 words")
         text(f"{where} big", s["big"], LIMITS["big"])

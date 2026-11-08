@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-mr7Cc4OmXIYElXvpmwADVUC1Apx1VnDLp9AvcLfUFHo='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-tzMeqNextYVuVfcDJgzMRZpo8lUGaw4zn3YgjhibBZA='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -39,6 +39,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .card{background:#160c3a;border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:10px}
 .pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;color:var(--ink)}
 .pill.AI{background:#ff7aa5}.pill.Tech{background:var(--tech)}.pill.Cyber{background:#b49cff}
+.cthumb{margin:-16px -16px 12px;border-radius:18px 18px 0 0;overflow:hidden}.cthumb img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.cthumb figcaption{font-size:11px;color:var(--lilac);padding:6px 16px 0}
+.cfig{display:inline-flex;align-items:baseline;gap:6px;margin-left:8px;font-size:12px;color:var(--lilac)}.cfig b{font-size:20px;color:#fff;font-weight:800}
+.shero{margin:0 -18px 14px}.shero img{display:block;width:100%;max-height:300px;object-fit:cover}.shero figcaption{font-size:12px;padding:6px 18px 0}.shero figcaption a{color:var(--lilac)}
+.sfig{display:flex;align-items:baseline;gap:10px;margin:12px 0;padding:12px 14px;border-radius:14px;background:#160c3a;border:1px solid var(--line)}.sfig b{font-size:36px;font-weight:800;color:#fff}.sfig span{font-size:13px;color:var(--lilac)}
+.sdraw{display:block;width:100%;height:auto;margin:12px 0;background:#fff;border-radius:14px;padding:8px}
 .card h3{font-size:19px;line-height:1.22;margin:9px 0 6px}
 .card p{font-size:15px;line-height:1.4;color:var(--lilac)}
 .card .sw{color:#fff;margin-top:6px}
@@ -188,8 +194,10 @@ function sheet(tag,label){
   return{sh,bd,bar,pill,close:()=>history.back()}}
 const SECTIONS=[['What happened','what'],['How it works','how'],['Why it matters','why']];
 function openStory(st){
-  const{bd}=sheet(st.tag),r=st.read||{};
+  const{bd}=sheet(st.tag),r=st.read||{};const hp=pimg(st,'shero');if(hp){const c=el('figcaption');const cl=el('a',null,'Photo: '+st.photo.credit+', '+st.photo.licence+' ↗');cl.href=safe(st.photo.page);cl.target='_blank';cl.rel='noopener';c.append(cl);hp.append(c);bd.append(hp)}
   bd.append(el('h2',null,st.headline),el('div','meta','Source: '+st.source.name+', '+st.source.date));
+  if(st.figure){const f=el('div','sfig');f.append(el('b',null,st.figure.value),el('span',null,st.figure.label));bd.append(f)}
+  if(st.drawing){const i=document.createElement('img');i.className='diagram sdraw';i.alt=st.drawingAlt||'';i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(st.drawing);bd.append(i)}
   if(!st.read)bd.append(el('h3',null,'In short'),el('p',null,st.summary));
   SECTIONS.forEach(([t,k])=>{if(r[k])bd.append(el('h3',null,t),el('p',null,r[k]))});
   bd.append(el('h3',null,'So what'),el('p',null,st.soWhat.replace(/^[A-Za-z]+:\s*/,'')));
@@ -319,7 +327,10 @@ c,seed){
     x.globalAlpha=1;const g=x.createLinearGradient(0,H*.42,0,H);g.addColorStop(0,'rgba(11,6,32,0)');g.addColorStop(.72,'#0b0620');x.fillStyle=g;x.fillRect(0,0,W,H);
     if(!still)requestAnimationFrame(draw)}
   draw(0)}
-function render(b,list){
+let CUR='';
+function tagPhotos(b){let k=0;const walk=o=>{if(Array.isArray(o))o.forEach(walk);else if(o&&typeof o==='object'){if(o.photo&&typeof o.photo.src==='string')o._pk=k++;Object.keys(o).forEach(x=>{if(x!=='photo')walk(o[x])})}};walk(b)}
+const pimg=(st,cls)=>{if(!st.photo||st._pk==null)return null;const f=el('figure',cls),i=el('img');i.src='briefs/img/'+CUR+'-'+st._pk+'.jpg';i.alt=st.photo.alt||'';i.loading='lazy';i.onerror=()=>f.remove();f.append(i);return f};
+function render(b,list){CUR=b.date;tagPhotos(b);
   const app=document.getElementById('app');document.title='Brief: '+b.dayLabel;
   if(b.sample)app.append(el('div','sample',b.sample));
   const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(b.posters.length+(b.stories||[]).length+(b.themes||[]).reduce((n,t)=>n+(t.stories||[]).length,0))+' stories and today’s lesson ↓'));app.append(h);
@@ -329,7 +340,7 @@ function render(b,list){
     if(p.big){const n=el('div','big',p.big);w.append(n);setTimeout(()=>fit(n,130))}
     w.append(el('h2',null,p.headline),el('p',null,p.summary),el('p','sw',p.soWhat),src(p.source));open(s,p);s.append(w);app.append(s)});
   const m=el('main','wrap');
-  const add=(st,box)=>{const k=el('article','card');k.append(el('span','pill '+st.tag,st.tag),el('h3',null,st.headline),el('p',null,st.summary),el('p','sw',st.soWhat),src(st.source));open(k,st);box.append(k)};
+  const add=(st,box)=>{const k=el('article','card');const th=pimg(st,'cthumb');if(th){th.append(el('figcaption',null,'Photo: '+st.photo.credit+', '+st.photo.licence));k.append(th)}k.append(el('span','pill '+st.tag,st.tag));if(st.figure){const fg=el('span','cfig');fg.append(el('b',null,st.figure.value),' '+st.figure.label);k.append(fg)}k.append(el('h3',null,st.headline),el('p',null,st.summary),el('p','sw',st.soWhat),src(st.source));open(k,st);box.append(k)};
   if(b.themes)b.themes.forEach(t=>{m.append(el('div','sect',t.title));t.stories.forEach(s=>add(s,m))});
   else{const more=b.stories||[];if(more.length)m.append(el('div','sect','Also today'));more.forEach(s=>add(s,m))}
   const chat=b.chatter||[],xs=chat.filter(c=>c.via==='X'),fs=chat.filter(c=>c.via!=='X');

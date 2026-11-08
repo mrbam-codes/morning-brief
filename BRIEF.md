@@ -48,6 +48,16 @@ Every story, poster or card, also has `read`: `{ "what", "how", "why", "take" }`
 - `why`: why it matters and who is affected.
 - `take`: Claude's own view, marked as opinion. Separate fact from vendor claims, say what is unproven, and say what to watch next.
 
+## Photos, drawings and key figures (optional on any story)
+
+- `figure`: `{ "value", "label" }`, the story's key number (`value` up to 10 characters such as `42%`, `$2bn`, `11 Nov`; `label` up to 30 saying what it is). Add it whenever the story has one.
+- `photo`: `{ "src", "page", "credit", "licence", "alt" }`, a **free-licence** photo only (Wikimedia Commons or Unsplash). Never use the article's own photo: it belongs to the publisher.
+  1. When you open the article, note what its main photo shows. Search for a free-licence photo of the same subject, for example `"Microsoft Redmond campus" site:commons.wikimedia.org File` or `server room unsplash`. Logos and product shots are rarely free; an honest subject photo (a data centre, a chip, a city) is fine. Never pass off a different person or place as the one in the story.
+  2. Only open a Commons `File:` page or `unsplash.com/photos/` page that your own search returned; never guess a file name. Confirm the licence on that page.
+  3. `src`: for Commons a `.jpg` on `upload.wikimedia.org` or `thumb.wikimedia.org`, using the 960px version (from `.../commons/a/ab/Name.jpg` build `.../commons/thumb/a/ab/Name.jpg/960px-Name.jpg`). For Unsplash the `images.unsplash.com/photo-...` address with `?w=960&q=70&fm=jpg`. `page`: the photo's own page. `credit`: the author, then `, Wikimedia Commons` or `, Unsplash` (up to 80). `licence`: exactly one of `CC0`, `Public domain`, `CC BY 2.0`, `CC BY 2.5`, `CC BY 3.0`, `CC BY 4.0`, `CC BY-SA 2.0`, `CC BY-SA 2.5`, `CC BY-SA 3.0`, `CC BY-SA 4.0`, `Unsplash Licence`. `alt`: what it shows (up to 200).
+  4. If you cannot confirm a free licence, leave `photo` out. You cannot download images and must not try: the publishing step fetches, checks and serves each photo.
+- `drawing` and `drawingAlt`: an inline SVG when a number or comparison is the point (a jump, a before and after, a timeline). One `<svg>` with `xmlns="http://www.w3.org/2000/svg"`, viewBox about 340 wide, at least 3 text labels, every `font-size` 11 or more, no scripts, links or web addresses. Shown on a white panel, so draw on white. Every number must match the story. `drawingAlt` up to 200.
+
 ## The quiz, glossary, build idea and interview round
 
 Always five quiz questions, multiple choice, each `{ "kind", "tag", "n", "q", "options", "answer", "why" }`.
