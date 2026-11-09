@@ -139,6 +139,224 @@ def story(where, s, poster):
         text(f"{where} big", s["big"], LIMITS["big"])
 
 
+# ---------- the 577-lesson course (editions from 16 Nov 2026) ----------
+COURSE_START = "2026-11-16"
+_COURSE = {}
+
+
+def course():
+    if not _COURSE:
+        _COURSE.update(json.loads((ROOT / "course.json").read_text(encoding="utf-8")))
+    return _COURSE
+
+
+def course_day(date):
+    return next((d for d in course().get("days", []) if d["date"] == date), None)
+
+
+SVG_BAD = ("<script", "<image", "<foreignobject", "<use", "<a ", "<a>", "href", "javascript:", "data:", "<style", "@import", "url(")
+
+
+def diagram(where, d):
+    """A lesson diagram: one safe inline svg whose labels are readable and fit inside it."""
+    if not isinstance(d, dict):
+        need(False, f"{where}: needs a diagram with alt and svg")
+        return
+    text(f"{where} diagram alt", d.get("alt"), 300)
+    svg = str(d.get("svg", ""))
+    low = svg.lower()
+    need(svg.lstrip().startswith("<svg") and 'xmlns="http://www.w3.org/2000/svg"' in svg, f"{where} diagram: must be one inline svg with the svg xmlns")
+    for bad in SVG_BAD:
+        need(bad not in low, f"{where} diagram: must not contain {bad.strip()}")
+    need(low.count("http") == low.count("http://www.w3.org/2000/svg"), f"{where} diagram: no web addresses")
+    need(len(svg) <= 12000, f"{where} diagram: {len(svg)} characters, limit 12000")
+    try:
+        root = ET.fromstring(svg)
+    except ET.ParseError:
+        need(False, f"{where} diagram: not valid SVG")
+        return
+    vb = (root.get("viewBox") or "").replace(",", " ").split()
+    try:
+        x0, y0, W, H = map(float, vb)
+    except ValueError:
+        need(False, f"{where} diagram: needs a viewBox of four numbers")
+        return
+    need(W == 320, f"{where} diagram: viewBox must be 320 wide")
+    need(160 <= H <= 420, f"{where} diagram: viewBox height must be 160 to 420")
+    shapes = sum(1 for e in root.iter() if e.tag.split("}")[-1] in {"rect", "circle", "ellipse", "line", "path", "polyline", "polygon"})
+    need(shapes >= 3, f"{where} diagram: needs at least 3 shapes, so it shows a mechanism")
+    labels = 0
+    parents = {c: p for p in root.iter() for c in p}
+
+    def inherited(e, k):
+        while e is not None:
+            if e.get(k):
+                return e.get(k)
+            e = parents.get(e)
+        return None
+
+    def moved(e):
+        while e is not None:
+            if e.get("transform"):
+                return True
+            e = parents.get(e)
+        return False
+
+    for e in root.iter():
+        if e.tag.split("}")[-1] != "text":
+            continue
+        words = "".join(e.itertext()).strip()
+        if not words:
+            continue
+        labels += 1
+        fs = inherited(e, "font-size") or "16"
+        if re.fullmatch(r"\d+(\.\d+)?(px)?", fs.strip()) is None:
+            need(False, f"{where} diagram: font-size {fs!r} must be a plain number")
+            continue
+        size = float(fs.replace("px", ""))
+        need(size >= 14, f"{where} diagram: label {words[:30]!r} is {fs}, below 14")
+        try:
+            x = float(e.get("x", "0").split()[0])
+        except ValueError:
+            continue
+        if moved(e):
+            continue
+        w = len(words) * 0.55 * size
+        anchor = inherited(e, "text-anchor") or "start"
+        left = x - w / 2 if anchor == "middle" else x - w if anchor == "end" else x
+        need(left >= x0 - 2 and left + w <= x0 + W + 2, f"{where} diagram: label {words[:30]!r} runs outside the 320 width (about {w:.0f} wide at x {x:g})")
+    need(labels >= 3, f"{where} diagram: needs at least 3 text labels")
+
+
+def check_learn(b, day, date):
+    cd = course_day(date)
+    need(cd is not None, f"no course day in course.json for {date}")
+    if cd is None:
+        return
+    need("lesson" not in b, "from 16 Nov use lessons (a list), not lesson")
+    want = cd["lessons"]
+    got = b.get("lessons") or []
+    need([l.get("n") for l in got] == [l["n"] for l in want],
+         f"lessons must be today's from course.json, in order: {[l['n'] for l in want]}, got {[l.get('n') for l in got]}")
+    for i, (l, c) in enumerate(zip(got, want)):
+        w = f"lesson {c['n']}"
+        need(l.get("title") == c["title"], f"{w}: title must be exactly {c['title']!r}")
+        need(l.get("tag") == c["tag"], f"{w}: tag must be {c['tag']}")
+        text(f"{w} idea", l.get("idea"), 160)
+        for k in ("analogy", "breaks", "why"):
+            text(f"{w} {k}", l.get(k), 500)
+        steps = l.get("steps") or []
+        need(3 <= len(steps) <= 6, f"{w}: needs 3 to 6 steps")
+        for j, s in enumerate(steps):
+            text(f"{w} step {j + 1}", s, 110)
+        need("diagrams" not in l, f"{w}: use one diagram, not diagrams")
+        diagram(w, l.get("diagram"))
+        if c.get("verify"):
+            v = l.get("verified") or {}
+            need(isinstance(v, dict) and v, f"{w}: course.json says {c['verify']!r}. Add verified with what you did and the source you checked")
+            if isinstance(v, dict) and v:
+                text(f"{w} verified note", v.get("note"), 300)
+                src = v.get("source") or {}
+                text(f"{w} verified source name", src.get("name"))
+                need(str(src.get("url", "")).startswith("https://"), f"{w}: verified source url must be https")
+    fact = b.get("fact") or {}
+    text("fact text", fact.get("text"), 260)
+    fs = fact.get("source") or {}
+    text("fact source name", fs.get("name"))
+    need(str(fs.get("url", "")).startswith("https://"), "fact: source url must be https")
+    if cd.get("try"):
+        t = b.get("try") or {}
+        need(t.get("title") == cd["try"][0]["title"], f"try: today is a Try it day. title must be exactly {cd['try'][0]['title']!r}")
+        text("try task", t.get("task"), 300)
+        st = t.get("steps") or []
+        need(3 <= len(st) <= 6, "try: needs 3 to 6 steps")
+        for j, s in enumerate(st):
+            text(f"try step {j + 1}", s, 160)
+    else:
+        need("try" not in b, "try: only on the Try it days in course.json")
+    # Quiz: one question per lesson, plus 2 reviews of earlier lessons (2 news questions on day 1).
+    quiz = b.get("quiz") or []
+    n_today = [c["n"] for c in want]
+    need(len(quiz) == len(want) + 2, f"quiz needs {len(want) + 2} questions: one per lesson plus 2 reviews")
+    kinds = [q.get("kind") for q in quiz]
+    need(sorted(q.get("n") for q in quiz if q.get("kind") == "lesson") == n_today, f"quiz: exactly one lesson question for each of lessons {n_today}")
+    first_day = n_today[0] == 1
+    extra = "news" if first_day else "review"
+    need(kinds.count(extra) == 2 and kinds.count("lesson") == len(want), f"quiz kinds: {len(want)} lesson and 2 {extra}")
+    titles = {l["n"]: l["title"] for d in course()["days"] for l in d["lessons"]}
+    for i, q in enumerate(quiz):
+        w = f"quiz {i + 1}"
+        need(q.get("kind") in {"lesson", "review", "news"}, f"{w}: kind must be lesson, review or news")
+        need(q.get("tag") in TAGS, f"{w}: tag")
+        text(f"{w} question", q.get("q"), 150)
+        opts = q.get("options") or []
+        need(len(opts) == 4 and len(set(opts)) == 4, f"{w}: needs 4 different options")
+        for o in opts:
+            text(f"{w} option", o, 80)
+        need(isinstance(q.get("answer"), int) and 0 <= q["answer"] <= 3, f"{w}: answer must be 0 to 3")
+        text(f"{w} why", q.get("why"), 190)
+        if q.get("kind") == "review":
+            need(isinstance(q.get("n"), int) and 1 <= q["n"] < n_today[0], f"{w}: review n must be an earlier course lesson (1 to {n_today[0] - 1})")
+            need(q.get("title") == titles.get(q.get("n")), f"{w}: review title must be lesson {q.get('n')}'s title from course.json")
+    need(len({q.get("answer") for q in quiz}) > 1, "quiz answers must not all be the same position")
+
+
+def check_v1_lesson(b, day, date):
+    """The 90-lesson course (editions before 16 Nov 2026)."""
+    l = b.get("lesson") or {}
+    need(l.get("n") == (day - datetime.date(2026, 11, 7)).days % 90 + 1, "lesson number is wrong for this date")
+    need(l.get("tag") in TAGS, "lesson tag")
+    text("lesson title", l.get("title"), LIMITS["title"])
+    text("lesson idea", l.get("idea"), LIMITS["idea"])
+    for k in ("analogy", "breaks", "why"):
+        text(f"lesson {k}", l.get(k))
+    need(3 <= len(l.get("steps") or []) <= 6, "lesson needs 3 to 6 steps")
+    for i, s in enumerate(l.get("steps") or []):
+        text(f"lesson step {i + 1}", s, LIMITS["step"])
+    need(l.get("diagrams"), "lesson needs a diagram")
+    for d in l.get("diagrams") or []:
+        text("diagram alt", d.get("alt"))
+        svg = d.get("svg", "")
+        need(svg.lstrip().startswith("<svg") and 'xmlns="http://www.w3.org/2000/svg"' in svg
+             and "viewBox" in svg, "diagram must be an svg with xmlns and viewBox")
+        need("<script" not in svg.lower(), "diagram must not contain script")
+        try:
+            root = ElementTree.fromstring(svg)
+            need(len(list(root)) >= 3, "diagram looks empty")
+            need(not any(k.endswith("href") for e in root.iter() for k in e.attrib)
+                 and not any(e.tag.endswith("image") for e in root.iter()), "diagram must not load anything from outside")
+        except ElementTree.ParseError:
+            need(False, "diagram is not valid SVG")
+    quiz = l.get("quiz") or []
+    need(len(quiz) == 5, "lesson needs exactly 5 quiz questions")
+    kinds = [q.get("kind") for q in quiz]
+    need(kinds.count("news") == 1, "quiz needs exactly 1 news question")
+    first = date == "2026-11-07"
+    need(kinds.count("lesson") == (1 if b.get("type") == "sunday" else (4 if first else 2)),
+         "quiz lesson questions: Sunday 1, daily 2 (4 on the first day, with no recap)")
+    need(date < NEW_RULES or kinds.count("recap") == (0 if first else 3 if b.get("type") == "sunday" else 2),
+         "quiz recap questions: Sunday 3, daily 2 (none on the first day)")
+    for i, q in enumerate(quiz):
+        w = f"quiz {i + 1}"
+        need(q.get("kind") in {"lesson", "recap", "news"}, f"{w}: kind must be lesson, recap or news")
+        need(q.get("tag") in TAGS, f"{w}: tag")
+        text(f"{w} question", q.get("q"), 150)
+        opts = q.get("options") or []
+        need(len(opts) == 4 and len(set(opts)) == 4, f"{w}: needs 4 different options")
+        for o in opts:
+            text(f"{w} option", o, 80)
+        need(isinstance(q.get("answer"), int) and 0 <= q["answer"] <= 3, f"{w}: answer must be 0 to 3")
+        text(f"{w} why", q.get("why"), 190)
+        if q.get("kind") in {"lesson", "recap"}:
+            need(isinstance(q.get("n"), int) and 1 <= q["n"] <= 90, f"{w}: n must be a lesson number")
+        if q.get("kind") == "lesson":
+            need(q.get("n") == l.get("n"), f"{w}: lesson question n must be today's lesson")
+        if q.get("kind") == "recap":
+            need(q.get("n") != l.get("n"), f"{w}: recap must be an earlier lesson")
+    answers = [q.get("answer") for q in quiz]
+    need(len(set(answers)) > 1, "quiz answers must not all be the same position")
+
+
 def check(date):
     b = json.loads((ROOT / "briefs" / f"{date}.json").read_text())
     need(b.get("date") == date, "date does not match the filename")
@@ -192,67 +410,23 @@ def check(date):
             need(not u or u not in seen_urls, f"story {i + 1}: same article as the {seen_urls.get(u)} brief. Leave it out unless there is a new development with its own source")
     heads = [str(s.get("headline", "")).strip().lower() for s in posters + stories]
     need(len(heads) == len(set(heads)), "two stories have the same headline")
-    l = b.get("lesson") or {}
-    need(l.get("n") == (day - datetime.date(2026, 11, 7)).days % 90 + 1, "lesson number is wrong for this date")
-    need(l.get("tag") in TAGS, "lesson tag")
-    text("lesson title", l.get("title"), LIMITS["title"])
-    text("lesson idea", l.get("idea"), LIMITS["idea"])
-    for k in ("analogy", "breaks", "why"):
-        text(f"lesson {k}", l.get(k))
-    need(3 <= len(l.get("steps") or []) <= 6, "lesson needs 3 to 6 steps")
-    for i, s in enumerate(l.get("steps") or []):
-        text(f"lesson step {i + 1}", s, LIMITS["step"])
-    need(l.get("diagrams"), "lesson needs a diagram")
-    for d in l.get("diagrams") or []:
-        text("diagram alt", d.get("alt"))
-        svg = d.get("svg", "")
-        need(svg.lstrip().startswith("<svg") and 'xmlns="http://www.w3.org/2000/svg"' in svg
-             and "viewBox" in svg, "diagram must be an svg with xmlns and viewBox")
-        need("<script" not in svg.lower(), "diagram must not contain script")
-        try:
-            root = ElementTree.fromstring(svg)
-            need(len(list(root)) >= 3, "diagram looks empty")
-            need(not any(k.endswith("href") for e in root.iter() for k in e.attrib)
-                 and not any(e.tag.endswith("image") for e in root.iter()), "diagram must not load anything from outside")
-        except ElementTree.ParseError:
-            need(False, "diagram is not valid SVG")
-    quiz = l.get("quiz") or []
-    need(len(quiz) == 5, "lesson needs exactly 5 quiz questions")
-    kinds = [q.get("kind") for q in quiz]
-    need(kinds.count("news") == 1, "quiz needs exactly 1 news question")
-    first = date == "2026-11-07"
-    need(kinds.count("lesson") == (1 if b.get("type") == "sunday" else (4 if first else 2)),
-         "quiz lesson questions: Sunday 1, daily 2 (4 on the first day, with no recap)")
-    need(date < NEW_RULES or kinds.count("recap") == (0 if first else 3 if b.get("type") == "sunday" else 2),
-         "quiz recap questions: Sunday 3, daily 2 (none on the first day)")
-    for i, q in enumerate(quiz):
-        w = f"quiz {i + 1}"
-        need(q.get("kind") in {"lesson", "recap", "news"}, f"{w}: kind must be lesson, recap or news")
-        need(q.get("tag") in TAGS, f"{w}: tag")
-        text(f"{w} question", q.get("q"), 150)
-        opts = q.get("options") or []
-        need(len(opts) == 4 and len(set(opts)) == 4, f"{w}: needs 4 different options")
-        for o in opts:
-            text(f"{w} option", o, 80)
-        need(isinstance(q.get("answer"), int) and 0 <= q["answer"] <= 3, f"{w}: answer must be 0 to 3")
-        text(f"{w} why", q.get("why"), 190)
-        if q.get("kind") in {"lesson", "recap"}:
-            need(isinstance(q.get("n"), int) and 1 <= q["n"] <= 90, f"{w}: n must be a lesson number")
-        if q.get("kind") == "lesson":
-            need(q.get("n") == l.get("n"), f"{w}: lesson question n must be today's lesson")
-        if q.get("kind") == "recap":
-            need(q.get("n") != l.get("n"), f"{w}: recap must be an earlier lesson")
-    answers = [q.get("answer") for q in quiz]
-    need(len(set(answers)) > 1, "quiz answers must not all be the same position")
+    if date >= COURSE_START:
+        check_learn(b, day, date)
+    else:
+        check_v1_lesson(b, day, date)
     terms = b.get("terms") or []
-    need(3 <= len(terms) <= 6, "terms: 3 to 6 glossary terms")
+    hi = 8 if date >= COURSE_START else 6
+    need(3 <= len(terms) <= hi, f"terms: 3 to {hi} glossary terms")
     for t in terms:
         text("term", t.get("term"), 40)
         text("term meaning", t.get("plain"), 150)
-    bd = b.get("build") or {}
-    text("build title", bd.get("title"), 50)
-    text("build idea", bd.get("idea"), 230)
-    text("build first", bd.get("first"), 230)
+    bd = b.get("build")
+    # From 16 Nov a Try it day may leave out the build idea: the exercise takes its place.
+    if bd is not None or not (date >= COURSE_START and (course_day(date) or {}).get("try")):
+        bd = bd or {}
+        text("build title", bd.get("title"), 50)
+        text("build idea", bd.get("idea"), 230)
+        text("build first", bd.get("first"), 230)
     chatter = b.get("chatter") or []
     need(len(chatter) <= 8, "chatter: at most 8 items")
     need(sum(1 for x in chatter if x.get("via") != "X") <= 3, "chatter: at most 3 forum items")
@@ -307,7 +481,11 @@ def render(date):
         server.shutdown()
     need('class="verdict"' in out, "page did not render the verdict")
     need('class="gcard quiz"' in out, "page did not render the quiz card")
-    need('class="lesson"' in out, "page did not render the lesson")
+    if date >= COURSE_START:
+        need(out.count('class="cd learn-card lesson"') == len((course_day(date) or {}).get("lessons", [])), "page did not render every lesson card")
+        need('class="cd radar-card"' in out, "page did not render the Radar card")
+    else:
+        need('class="cd learn-card lesson"' in out, "page did not render the lesson")
     need('class="err"' not in out, "page showed its error message")
 
 

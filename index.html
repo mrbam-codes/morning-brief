@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-4mkfvy/79Qu6w8V5EJb59VcNW4iE2AAxxKkhvANnIws='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-hRpWgiYJotfl7XQ64sYpZVAUgSUwsdJm6eIh2pMLCFw='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -65,7 +65,7 @@ button.cue{background:none;border:0;padding:4px 0;font-family:inherit;text-align
 .sheet .meta{font-size:13px;color:var(--lilac)}
 .sheet h3{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lilac);margin:22px 0 6px}
 .sheet p{font-size:17px;line-height:1.5}
-.sheet .take{background:linear-gradient(160deg,#ff2e6e,#7c4dff);border-radius:18px;padding:16px;margin-top:24px}
+.sheet .take{background:linear-gradient(160deg,#d6114f,#6a3de8);border-radius:18px;padding:16px;margin-top:24px}
 .sheet .take h3{color:#fff;margin-top:0;opacity:.9}
 .sheet .orig{display:block;margin-top:26px;font-size:14px;color:var(--lilac);padding:8px 0}
 .lesson{background:linear-gradient(rgba(10,6,30,.4),rgba(10,6,30,.4)),linear-gradient(160deg,#ff2e6e,#7c4dff 58%,#16b8f0);border-radius:24px;padding:20px 18px;margin-top:22px}
@@ -87,7 +87,7 @@ button.cue{background:none;border:0;padding:4px 0;font-family:inherit;text-align
 .gcard h2{font-size:24px;line-height:1.1;margin:6px 0 8px}
 .gcard p{font-size:15px;line-height:1.45;color:var(--lilac)}
 .gcard .lab{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tech)}
-.gcard.quiz{background:linear-gradient(160deg,#ff2e6e,#7c4dff);border:0}
+.gcard.quiz{background:linear-gradient(160deg,#d6114f,#6a3de8);border:0}
 .gcard.quiz p,.gcard.quiz .lab{color:#fff}
 .btn{display:block;width:100%;margin-top:14px;padding:15px;border-radius:14px;background:#fff;color:#2a1570;font-weight:700;font-size:16px;text-align:center}
 .btn.alt{background:transparent;color:#fff;border:1px solid #ffffff88;margin-top:8px}
@@ -249,6 +249,57 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 @keyframes shipbob{0%,100%{transform:translate(0,0) rotate(-2deg)}50%{transform:translate(2%,-6%) rotate(1deg)}}
 @keyframes shipflame{50%{transform:scaleX(.7)}}
 @media (prefers-reduced-motion:reduce){.e .ship-in,.e .ship .flame{animation:none}}
+/* ---- v2: Signal decks (Today and Learn), Radar card 00, Read rails ---- */
+:root{--learn:#3dffa2;--build:#16b8f0}
+.deckwrap{padding:22px 0 4px}
+.dk-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 18px 4px}
+.dk-head h2{font:700 13px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--lilac);margin:0}
+.dk-head h2 b{color:#fff}
+.dk-nav{display:flex;gap:6px}
+.dk-nav button{width:44px;height:44px;border-radius:99px;border:1px solid var(--line);background:#160c3a;font-size:20px;line-height:1}
+.dk-hint{font-size:13px;color:var(--lilac);padding:2px 18px 8px}
+.deck{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 18px 16px;scrollbar-width:none;overscroll-behavior-x:contain;scroll-padding:0 18px}
+.deck::-webkit-scrollbar{display:none}
+.deck>.cd{flex:0 0 84%;max-width:380px;scroll-snap-align:center;min-width:0}
+.cd{--h:#fff;--t:#fff;position:relative;border-radius:18px;padding:16px;min-height:310px;display:flex;flex-direction:column;gap:10px;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  background-color:#0d0920;background-image:linear-gradient(160deg,color-mix(in srgb,var(--h) 16%,#0d0920) 0%,#0b0718 60%);
+  border:1px solid color-mix(in srgb,var(--h) 55%,transparent);box-shadow:0 0 28px -8px color-mix(in srgb,var(--h) 60%,transparent),inset 0 1px 0 color-mix(in srgb,var(--h) 30%,transparent)}
+.cd[hidden]{display:none!important}
+.cd .k{display:flex;justify-content:space-between;gap:8px;font:600 11px/1.2 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--t)}
+.cd h3{font:700 23px/1.12 'Space Grotesk',system-ui,sans-serif;margin:0;text-wrap:balance;color:#fff}
+.cd p{margin:0;font-size:15px;line-height:1.4;color:#d6d0ec}
+.cd .vz{margin-top:auto;border-top:1px dashed color-mix(in srgb,var(--h) 45%,transparent);padding-top:12px;display:flex;align-items:baseline;justify-content:space-between;gap:10px;font:600 12px/1.3 'IBM Plex Mono',ui-monospace,monospace;color:#d6d0ec}
+.cd .vz b{font:700 26px/1 'Space Grotesk',system-ui,sans-serif;color:var(--t);white-space:nowrap}
+.cd .src2{font:500 12px/1.3 'IBM Plex Mono',ui-monospace,monospace;color:#b3abd1}
+.cd .go{align-self:flex-start;font:700 13px 'Space Grotesk',sans-serif;color:var(--t);padding:6px 0;background:none;border:0;text-align:left}
+.cd .ph{margin:-16px -16px 2px;border-radius:18px 18px 0 0;overflow:hidden}.cd .ph img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.cd .k .no{white-space:nowrap;flex:none}
+.cd.flash{animation:cdfl 1s ease-out}
+@keyframes cdfl{0%{box-shadow:0 0 0 3px var(--h),0 0 40px var(--h)}}
+.radar-card{cursor:default;padding:14px 14px 12px}
+.rc{position:relative;aspect-ratio:1;width:100%}
+.rc canvas{position:absolute;inset:0;width:100%;height:100%}
+.rc .blip{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border:0;background:transparent;border-radius:50%;padding:0}
+.rc .blip:focus-visible{outline:2px solid #fff;outline-offset:-6px}
+.radar-card .cap{font:600 12px/1.3 'IBM Plex Mono',ui-monospace,monospace;color:#d6d0ec;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.rail{display:flex;gap:6px;align-items:center;min-height:52px;padding:4px 18px 10px;overflow-x:auto;scrollbar-width:none}
+.rail .rl{font:600 11px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--lilac);flex:0 0 auto;margin-right:4px}
+.rail .none{font-size:12px;color:#a59cc8}
+.chip{flex:0 0 auto;min-height:36px;border:0;font:600 12px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.04em;padding:10px 10px;border-radius:8px;background:#140e2c;color:var(--t);box-shadow:inset 0 0 0 1px var(--h)}
+.sheet .donebar{display:flex;gap:10px;margin-top:26px}
+.sheet .donebar button{flex:1;padding:15px;border-radius:14px;font-weight:700;font-size:16px}
+.sheet .donebar .dn{background:var(--learn);color:#04110a}
+.sheet .donebar .kp{border:1px solid var(--line)}
+.lart{background:linear-gradient(rgba(10,6,30,.35),rgba(10,6,30,.35)),linear-gradient(160deg,#ff2e6e,#7c4dff 58%,#16b8f0);border-radius:18px;padding:12px;margin:14px 0 8px}
+.lart img{display:block;width:100%;height:auto}
+.enl{font:700 14px 'Space Grotesk',sans-serif;padding:10px 14px;border:1px solid var(--line);border-radius:99px}
+.bigart{overflow:auto;-webkit-overflow-scrolling:touch}.bigart .lart{width:720px;max-width:none}
+.sheet ol{margin:6px 0 0 22px;font-size:17px;line-height:1.5}.sheet li{margin-bottom:6px}
+.sheet .outc{border-left:3px solid var(--learn);padding-left:12px;margin-top:12px}
+.sheet .chk{background:#0f2a22;border:1px solid #2a7a5c;border-radius:14px;padding:12px 14px;margin-top:20px;font-size:15px;line-height:1.45}
+.grid.course{grid-template-columns:repeat(24,1fr);gap:2px}.grid.course i{border-radius:2px}
+@media (prefers-reduced-motion:reduce){.cd.flash{animation:none}.deck{scroll-behavior:auto}}
+@media (min-width:700px){.deck>.cd{flex-basis:340px}}
 </style>
 <script src="motion.js"></script>
 <script src="scorecore.js"></script>
@@ -262,7 +313,7 @@ const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=nu
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
 const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
-const BUILD='2026-11-07.6';
+const BUILD='2026-11-16.1';
 /* ---------- saved progress (this phone only) ---------- */
 const KEY='mb-v1',DAY=/^\d{4}-\d{2}-\d{2}$/;
 const fresh=()=>({days:{},tags:{AI:[0,0],Tech:[0,0],Cyber:[0,0]},lessons:{},points:0,badges:{},review:[],prog:{},sound:true});
@@ -322,7 +373,7 @@ function kimchiCameo(b){const box=el('div','kcam'),win=el('div','kwin'),lip=el('
 function kimchiReward(bd,b){if(!window.KIMCHI)return;const sk=streak(),r=el('div','kreward'),stage=el('div','kstage'),ov=el('div','kov');
   ov.append(el('b',null,sk>1?sk+'-day streak':'Quiz done'),el('span',null,sk>1?'Kimchi is proud of you. Same time tomorrow?':'Kimchi approves. Come back tomorrow to start a streak.'));
   r.append(stage,ov);bd.append(r);KIMCHI.mount(stage,KIMCHI.forDay(briefDay(b.date)))}
-function openStory(st){
+function openStory(st,onDone){
   const{bd}=sheet(st.tag),r=st.read||{};const hp=pimg(st,'shero');if(hp){const c=el('figcaption');const cl=el('a',null,'Photo: '+st.photo.credit+', '+st.photo.licence+' ↗');cl.href=safe(st.photo.page);cl.target='_blank';cl.rel='noopener';c.append(cl);hp.append(c);bd.append(hp)}
   bd.append(el('h2',null,st.headline),el('div','meta','Source: '+st.source.name+', '+st.source.date));
   if(st.figure){const f=el('div','sfig');f.append(el('b',null,st.figure.value),el('span',null,st.figure.label));bd.append(f)}
@@ -332,7 +383,7 @@ function openStory(st){
   if(KSTORY&&st===KSTORY.st)try{bd.append(kimchiCameo(KSTORY.b))}catch(e){}
   bd.append(el('h3',null,'So what'),el('p',null,st.soWhat.replace(/^[A-Za-z]+:\s*/,'').replace(/^./,ch=>ch.toUpperCase())));
   if(r.take){const t=el('div','take');t.append(el('h3',null,'Claude’s take'),el('p',null,r.take));bd.append(t)}
-  const o=el('a','orig','Read the original at '+st.source.name+' ↗');o.href=safe(st.source.url);o.target='_blank';o.rel='noopener';bd.append(o)}
+  const o=el('a','orig','Read the original at '+st.source.name+' ↗');o.href=safe(st.source.url);o.target='_blank';o.rel='noopener';bd.append(o);doneBar(bd,onDone)}
 /* the card is clickable with a mouse or finger; keyboards and screen readers use its real button, so no control sits inside another */
 const cueBtn=f=>{const b=el('button','cue','Read the short version →');b.type='button';b.onclick=e=>{e.stopPropagation();f()};return b};
 const open=(n,st)=>{n.onclick=e=>{if(e.target.closest('a,button'))return;openStory(st)};n.append(cueBtn(()=>openStory(st)))};
@@ -359,7 +410,7 @@ function play(items,o){
     bd.textContent='';if(i>=items.length)return finish();
     const it=items[i],card=el('div','qcard'),dots=el('div','dots');
     items.forEach((_,j)=>dots.append(el('i',j<i?(picks[j]===items[j].answer?'ok':'no'):j===i?'on':'')));
-    bd.append(el('div','meta',(o.title||'Quiz')+' · question '+(i+1)+' of '+items.length+(it.kind==='recap'?' · revision':it.kind==='news'?' · news':'')),dots,el('h3',null,it.tag+(it.n?' · lesson '+it.n:'')));
+    bd.append(el('div','meta',(o.title||'Quiz')+' · question '+(i+1)+' of '+items.length+(it.kind==='recap'||it.kind==='review'?' · revision':it.kind==='news'?' · news':'')),dots,el('h3',null,it.tag+(it.n?' · lesson '+it.n:'')));
     card.append(el('h2',null,it.q));
     const btns=it.options.map((t,k)=>{const b=el('button','opt');b.append(el('b',null,'ABCD'[k]),el('span',null,t));card.append(b);return b});
     const fb=el('div');card.append(fb);bd.append(card);
@@ -387,12 +438,12 @@ function play(items,o){
     o.after&&o.after();window.MBScores&&MBScores.paint(!o.practice)};
   q()}
 const mkItem=(it,extra)=>Object.assign({},it,extra);
-function dayItems(b){return(b.lesson.quiz||[]).map((it,i)=>mkItem(it,{id:b.date+'-'+i}))}
+function dayItems(b){return quizOf(b).map((it,i)=>mkItem(it,{id:b.date+'-'+i,course:!!b.lessons}))}
 function finishDay(b,key,items,r,practice){
   if(practice)return{badges:[]};
   S.days[key]={score:r.right,total:r.total,points:r.gained,at:Date.now()};if(!DAY.test(key))S.bonus=(S.bonus||0)+r.gained;
   items.forEach((it,i)=>{const ok=r.picks[i]===it.answer;S.tags[it.tag]=S.tags[it.tag]||[0,0];S.tags[it.tag][1]++;if(ok)S.tags[it.tag][0]++;
-    if(it.n){const L=S.lessons[it.n]=S.lessons[it.n]||{tag:it.tag,c:0,t:0};L.t++;if(ok)L.c++}
+    if(it.n){const st=it.course?(S.course=S.course||{}):S.lessons,L=st[it.n]=st[it.n]||{tag:it.tag,c:0,t:0};L.t++;if(ok)L.c++}
     if(ok&&key.endsWith('interview'))S.interviewWin=true;
     if(!ok&&!S.review.some(x=>x.id===it.id)){S.review.push(Object.assign({},it,{box:0,due:addDays(todayStr(),1)}))}});
   const before=level(S.points);const R=rescoreAll();const after=level(S.points);delete S.prog[key];save();
@@ -425,10 +476,10 @@ function openProgress(){
   ['AI','Tech','Cyber'].forEach(k=>{const[c,n]=S.tags[k],p=n?Math.round(100*c/n):0;const row=el('div');row.style.margin='10px 0';const r2=el('div','row');r2.append(el('span','pill '+k,k),el('span',null,n?c+' of '+n+' right ('+p+'%)':'No answers yet'));const br=el('div','bar2');br.append(el('i'));br.firstChild.style.width=p+'%';row.append(r2,br);bd.append(row)});
   bd.append(el('h3',null,'Today by topic'));
   bd.append(el('p','meta',t?'Today: '+t.score+' of '+t.total+' right, +'+t.points+' points.':'Take today’s quiz to see this.'));
-  bd.append(el('h3',null,'The 90-lesson map'));
-  const gr=el('div','grid');const tags=['AI','Tech','Cyber'];
-  for(let n=1;n<=90;n++){const L2=S.lessons[n],i=el('i',tags[(n-1)%3]+(L2&&L2.t&&L2.c/L2.t>=.8?' t':''));i.title='Lesson '+n;gr.append(i)}
-  bd.append(gr,el('p','meta','Bright squares are lessons you have mastered (80% or more right). Dim ones are still to come or need revising. Colours: pink AI, yellow Tech, purple Cyber.'));
+  bd.append(el('h3',null,'The course map: 577 lessons'));
+  const gr=el('div','grid course'),mp=el('p','meta','Loading the course…');bd.append(gr,mp);
+  courseData().then(c=>{const M=S.course||{};c.days.forEach(d=>d.lessons.forEach(l=>{const L2=M[l.n],i=el('i',l.tag+(L2&&L2.t&&L2.c/L2.t>=.8?' t':''));i.title='Lesson '+l.n+': '+l.title;gr.append(i)}));
+    mp.textContent='Bright squares are lessons you have mastered (80% or more right). Dim ones are still to come or need revising. Colours: pink AI, yellow Tech, purple Cyber.'}).catch(()=>{mp.textContent='The course map could not be loaded.'});
   bd.append(el('h3',null,'Badges'));const bg=el('div','badges');
   BADGES.forEach(([id,n,d])=>{const c=el('div','bd'+(S.badges[id]?'':' lock'));c.append(el('b',null,n),S.badges[id]?'Earned '+S.badges[id]:d);bg.append(c)});bd.append(bg);
   bd.append(el('h3',null,'Back up your scores'));
@@ -468,40 +519,146 @@ c,seed){
 let CUR='';
 function tagPhotos(b){let k=0;const walk=o=>{if(Array.isArray(o))o.forEach(walk);else if(o&&typeof o==='object'){if(o.photo&&typeof o.photo.src==='string')o._pk=k++;Object.keys(o).forEach(x=>{if(x!=='photo')walk(o[x])})}};walk(b)}
 const pimg=(st,cls)=>{if(!st.photo||st._pk==null)return null;const f=el('figure',cls),i=el('img');i.src='briefs/img/'+CUR+'-'+st._pk+'.jpg';i.alt=st.photo.alt||'';i.loading='lazy';i.onerror=()=>f.remove();f.append(i);return f};
+/* ---------- v2: two Signal decks (Today and Learn), Radar card 00 ---------- */
+const COL={AI:'#ff2e6e',Tech:'#ffe600',Cyber:'#7c4dff',Learn:'#3dffa2',Build:'#16b8f0'};
+/* text tints: the glow colours are for borders and blips; text uses a tint that keeps 4.5:1 on the dark cards */
+const TXT={AI:'#ff8fb3',Tech:'#ffe600',Cyber:'#b9a3ff',Learn:'#3dffa2',Build:'#6fd8ff'};
+const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lessonsOf=b=>b.lessons||(b.lesson?[Object.assign({},b.lesson,{diagram:(b.lesson.diagrams||[])[0],more:(b.lesson.diagrams||[]).slice(1),legacy:true})]:[]);
+const quizOf=b=>b.quiz||(b.lesson&&b.lesson.quiz)||[];
+let COURSE=null;const courseData=()=>COURSE||(COURSE=fetch('course.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).catch(e=>{COURSE=null;throw e}));
+const MON={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
+function ageDays(st,b){const m=/(\d{1,2}) ([A-Za-z]{3})/.exec((st.source||{}).date||'');if(!m||MON[m[2].toLowerCase()]==null)return 0;const[y,mo,d]=b.date.split('-').map(Number);let t=new Date(y,MON[m[2].toLowerCase()],+m[1]);if(t>new Date(y,mo-1,d+1))t=new Date(y-1,MON[m[2].toLowerCase()],+m[1]);return Math.max(0,Math.round((new Date(y,mo-1,d)-t)/864e5))}
+const STOP=/^(the|a|an|and|of|to|in|on|for|as|is|its|how|why|what|new)$/i;
+const shortOf=st=>{if(st.figure&&st.figure.value)return st.figure.value;if(st.big)return st.big;const w=(st.headline||'').split(/\s+/).find(x=>!STOP.test(x))||'';return w.replace(/[^\w£$%.,-]/g,'').slice(0,10)};
+const two=n=>String(n).padStart(2,'0');
+const readSet=(b,k)=>{S.read=S.read||{};const r=S.read[b.date]=S.read[b.date]||{};return r[k]=r[k]||[]};
+function doneBar(bd,onDone){if(!onDone)return;const row=el('div','donebar'),kp=el('button','kp','Keep'),dn=el('button','dn','Done ✓');kp.type=dn.type='button';kp.onclick=()=>history.back();dn.onclick=()=>{history.back();setTimeout(onDone,260)};row.append(kp,dn);bd.append(row)}
+/* one deck: horizontal swipe cards, a counter, arrow buttons and a Read rail */
+function makeDeck(b,key,label,hint){
+  const sec=el('section','deckwrap '+key);sec.setAttribute('aria-label',label+' deck');sec.id='deck-'+key;
+  const hd=el('div','dk-head'),h2=el('h2');h2.append(el('b',null,label),' · swipe');const nav=el('div','dk-nav'),pv=el('button',null,'‹'),nx=el('button',null,'›');
+  pv.type=nx.type='button';pv.setAttribute('aria-label','Previous card');nx.setAttribute('aria-label','Next card');nav.append(pv,nx);hd.append(h2,nav);
+  const dk=el('div','deck'),rail=el('div','rail');rail.setAttribute('aria-label','Read '+label+' cards');rail.append(el('span','rl','Read'));const none=el('span','none','Tap Done on a card to file it here');rail.append(none);
+  sec.append(hd,el('div','dk-hint',hint),dk,rail);
+  const step=d=>{const c=dk.querySelector('.cd:not([hidden])');dk.scrollBy({left:d*((c?c.offsetWidth:300)+12),behavior:REDUCE?'auto':'smooth'})};pv.onclick=()=>step(-1);nx.onclick=()=>step(1);
+  const D={sec,dk,rail,items:[],onChange:()=>{}};
+  D.add=(node,o)=>{node.dataset.id=o.id;dk.append(node);D.items.push(Object.assign({node},o))};
+  D.number=()=>{const all=D.items.filter(x=>x.count!==false);all.forEach((x,i)=>{const c=x.node.querySelector('.k .no');if(c)c.textContent=two(i+1)+' / '+two(all.length)})};
+  const chipFor=it=>{const ch=el('button','chip',it.short);ch.type='button';ch.style.setProperty('--h',it.col);ch.style.setProperty('--t',it.txt);ch.title='Put back: '+it.title;ch.setAttribute('aria-label','Put back: '+it.title);
+    ch.onclick=()=>D.putBack(it.id,true);it.chip=ch;return ch};
+  const sync=()=>{none.hidden=!!rail.querySelector('.chip');D.onChange()};
+  D.isRead=id=>readSet(b,key).includes(id);
+  D.done=(id,instant)=>{const it=D.items.find(x=>x.id===id);if(!it||it.node.hidden)return;const rs=readSet(b,key);if(!rs.includes(id)){rs.push(id);save()}
+    const ch=chipFor(it);ch.style.visibility='hidden';rail.append(ch);none.hidden=true;
+    const fin=()=>{it.node.hidden=true;ch.style.visibility='';sync()};
+    const a=it.node.getBoundingClientRect(),c=ch.getBoundingClientRect();
+    if(instant||REDUCE||!a.width||!it.node.animate){fin();return}
+    const g=it.node.cloneNode(true);g.style.cssText+=';position:fixed;left:'+a.left+'px;top:'+a.top+'px;width:'+a.width+'px;height:'+a.height+'px;margin:0;z-index:70;pointer-events:none;transform-origin:0 0';document.body.append(g);it.node.style.visibility='hidden';
+    const an=g.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:'translate('+(c.left-a.left)*.55+'px,'+((c.top-a.top)*.55-40)+'px) scale(.45) rotate(-6deg)',opacity:1,offset:.55},{transform:'translate('+(c.left-a.left)+'px,'+(c.top-a.top)+'px) scale('+c.width/a.width+','+c.height/a.height+')',opacity:.4}],{duration:620,easing:'cubic-bezier(.5,0,.2,1)'});
+    let f=false;const end=()=>{if(f)return;f=true;g.remove();it.node.style.visibility='';fin()};an.onfinish=end;setTimeout(end,900)};
+  D.putBack=(id,go)=>{const it=D.items.find(x=>x.id===id);if(!it)return;const rs=readSet(b,key),i=rs.indexOf(id);if(i>=0){rs.splice(i,1);save()}if(it.chip){it.chip.remove();it.chip=null}it.node.hidden=false;sync();if(go)D.jump(id)};
+  D.jump=id=>{const it=D.items.find(x=>x.id===id);if(!it)return;if(it.node.hidden)D.putBack(id,false);
+    sec.scrollIntoView({block:'nearest',behavior:REDUCE?'auto':'smooth'});dk.scrollTo({left:it.node.offsetLeft-18,behavior:REDUCE?'auto':'smooth'});
+    it.node.classList.remove('flash');void it.node.offsetWidth;it.node.classList.add('flash');setTimeout(()=>{const f=it.node.querySelector('.go');f&&f.focus({preventScroll:true})},REDUCE?0:450)};
+  D.restore=()=>{readSet(b,key).slice().forEach(id=>{if(D.items.some(x=>x.id===id))D.done(id,true)})};
+  return D}
+/* a Signal card: kicker row, title, text, readout, a real button for keyboards and screen readers */
+function sigCard(o){const n=el('article','cd'+(o.cls?' '+o.cls:''));n.style.setProperty('--h',o.col);n.style.setProperty('--t',o.txt);
+  if(o.photo)n.append(o.photo);const k=el('div','k');k.append(el('span',null,o.kicker),el('span','no',''));n.append(k,el('h3',null,o.title));if(o.text)n.append(el('p',null,o.text));
+  if(o.vz){const v=el('div','vz');v.append(el('span',null,o.vz[1]),el('b',null,o.vz[0]));n.append(v)}else n.append(el('div','vz'));
+  if(o.src)n.append(el('div','src2',o.src));const go=el('button','go',o.cue||'Read the short version →');go.type='button';go.setAttribute('aria-label',(o.cue||'Read')+': '+o.title);
+  go.onclick=e=>{e.stopPropagation();o.open()};n.append(go);n.onclick=e=>{if(e.target.closest('a,button'))return;o.open()};return n}
+/* Radar: sector = topic, ring = how recent; one Learn blip jumps to the Learn deck */
+function radarCard(b,news,learnGo,learnCount){
+  const card=el('article','cd radar-card');card.style.setProperty('--h',COL.Learn);card.style.setProperty('--t',TXT.Learn);
+  const k=el('div','k');k.append(el('span',null,'Today’s scan'),el('span',null,'00 / '+two(news.items.length)));const rc=el('div','rc'),cap=el('div','cap');
+  cap.append(el('span',null,'Tap a blip to jump'),el('span',null,'Inner ring: last 24 hours'));card.append(k,rc,cap);card.setAttribute('aria-label','Radar: today’s stories by topic and age');
+  const SECT={AI:-150,Tech:-70,Cyber:10,Learn:100},pts=[],byTag={};
+  news.items.forEach(it=>{(byTag[it.tag]=byTag[it.tag]||[]).push(it)});
+  news.items.forEach(it=>{const g=byTag[it.tag],j=g.indexOf(it),sp=g.length>1?Math.min(38,76/(g.length-1)):0,a=(SECT[it.tag]+(j-(g.length-1)/2)*sp)*Math.PI/180,r=it.age<=1?.45:.8;
+    pts.push({it,a,r,x:.5+Math.cos(a)*r/2,y:.5+Math.sin(a)*r/2,col:COL[it.tag],lab:it.short,lit:.4})});
+  if(learnCount){const a=SECT.Learn*Math.PI/180;pts.push({learn:true,a,r:.62,x:.5+Math.cos(a)*.31,y:.5+Math.sin(a)*.31,col:COL.Learn,lab:'LEARN '+learnCount,lit:.4})}
+  const cv=document.createElement('canvas');cv.setAttribute('aria-hidden','true');rc.append(cv);
+  pts.forEach(p=>{const bt=el('button','blip');bt.type='button';bt.style.left=p.x*100+'%';bt.style.top=p.y*100+'%';bt.setAttribute('aria-label',p.learn?'Jump to the Learn deck: '+learnCount+' cards':'Jump to: '+p.it.title);
+    bt.onclick=e=>{e.stopPropagation();p.learn?learnGo():news.jump(p.it.id)};rc.append(bt)});
+  const x=cv.getContext('2d');let W=0,vis=true,sweep=-Math.PI/2,last=0,raf=0;
+  const size=()=>{const d=Math.min(devicePixelRatio||1,2);W=rc.clientWidth;cv.width=W*d;cv.height=W*d;x.setTransform(d,0,0,d,0,0);if(REDUCE)paint(16)};
+  function paint(dt){if(!W)return;const c=W/2,r=W/2-3;x.clearRect(0,0,W,W);x.fillStyle='#04100b';x.beginPath();x.arc(c,c,r,0,7);x.fill();
+    x.strokeStyle='rgba(61,255,162,.22)';x.lineWidth=1;[.45,.8,1].forEach(f=>{x.beginPath();x.arc(c,c,r*f,0,7);x.stroke()});
+    [[-150,'AI'],[-70,'TECH'],[10,'CYBER'],[100,'LEARN']].forEach(([deg,t])=>{const a=deg*Math.PI/180;x.fillStyle='rgba(61,255,162,.5)';x.font='600 10px "IBM Plex Mono",monospace';x.textAlign='center';x.fillText(t,c+Math.cos(a)*r*.97*.92,c+Math.sin(a)*r*.92+3)});
+    if(!REDUCE&&x.createConicGradient){const g=x.createConicGradient(sweep-1.2,c,c);g.addColorStop(0,'rgba(61,255,162,0)');g.addColorStop(.19,'rgba(61,255,162,.3)');g.addColorStop(.191,'rgba(61,255,162,0)');x.fillStyle=g;x.beginPath();x.arc(c,c,r,0,7);x.fill();
+      x.strokeStyle='rgba(61,255,162,.9)';x.lineWidth=2;x.beginPath();x.moveTo(c,c);x.lineTo(c+Math.cos(sweep)*r,c+Math.sin(sweep)*r);x.stroke()}
+    pts.forEach(p=>{const d=((sweep-p.a)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);if(d<.08)p.lit=1;p.lit=REDUCE?1:Math.max(.45,p.lit-dt*.0006);
+      const rd=!p.learn&&news.isRead(p.it.id),L=rd?.22:p.lit,X=p.x*W,Y=p.y*W,rad=Math.max(4.5,W*.02);
+      x.globalAlpha=L;x.shadowColor=p.col;x.shadowBlur=14*L;x.fillStyle=p.col;x.beginPath();x.arc(X,Y,rad,0,7);x.fill();x.shadowBlur=0;
+      x.strokeStyle=p.col;x.lineWidth=1.3;x.beginPath();x.arc(X,Y,rad+(1-p.lit)*W*.04,0,7);x.stroke();x.globalAlpha=rd?.4:1;
+      if(W>200){const rt=Math.cos(p.a)>=0&&p.x<.72;x.fillStyle=p.learn?TXT.Learn:TXT[p.it.tag];x.font='600 11px "IBM Plex Mono",monospace';x.textAlign=rt?'left':'right';x.fillText(String(p.lab).toUpperCase(),X+(rt?rad+6:-rad-6),Y+4)}
+      x.globalAlpha=1})}
+  function frame(t){raf=0;const dt=last?Math.min(t-last,60):16;last=t;sweep+=dt*.0012;paint(dt);if(vis)raf=requestAnimationFrame(frame)}
+  new ResizeObserver(size).observe(rc);
+  if('IntersectionObserver' in window)new IntersectionObserver(e=>{vis=e[0].isIntersecting;if(vis&&!REDUCE&&!raf){last=0;raf=requestAnimationFrame(frame)}}).observe(rc);
+  setTimeout(()=>{size();if(REDUCE)paint(16);else if(!raf)raf=requestAnimationFrame(frame)},0);
+  news.onChange=()=>{if(REDUCE)paint(16)};
+  return card}
+/* sheets for the Learn deck */
+function lessonArt(bd,d){if(!d||!d.svg)return;const box=el('div','lart'),i=document.createElement('img');i.alt=d.alt||'';i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(d.svg);box.append(i);bd.append(box);
+  const en=el('button','enl','Enlarge the diagram ⤢');en.type='button';en.onclick=()=>{const{bd:b2}=sheet(null,'Diagram');const w=el('div','bigart'),bx=el('div','lart'),j=document.createElement('img');j.alt=d.alt||'';j.src=i.src;bx.append(j);w.append(bx);b2.append(el('p','meta','Scroll sideways to see all of it.'),w,el('p',null,d.alt||''))};bd.append(en)}
+function openLesson(l,total,onDone){const{bd}=sheet(null,'Lesson '+l.n);
+  bd.append(el('div','meta','Lesson '+l.n+' of '+total+(l.area?' · '+l.area:'')+(l.module?' · '+l.module:'')),el('h2',null,l.title));
+  if(l.outcome)bd.append(el('p','outc',l.outcome));if(l.idea)bd.append(el('h3',null,'The idea'),el('p',null,l.idea));
+  lessonArt(bd,l.diagram);(l.more||[]).forEach(d=>lessonArt(bd,d));
+  if(l.steps&&l.steps.length){bd.append(el('h3',null,'How it works'));const ol=el('ol');l.steps.forEach(t=>ol.append(el('li',null,t)));bd.append(ol)}
+  [['Think of it like',l.analogy],['Where that breaks',l.breaks],['Why it matters',l.why]].forEach(([a,t])=>{if(t)bd.append(el('h3',null,a),el('p',null,t))});
+  if(l.verified){const v=el('div','chk');v.append(el('b',null,'Checked today: '),l.verified.note);if(l.verified.source){v.append(' ');const a=el('a',null,l.verified.source.name+' ↗');a.href=safe(l.verified.source.url);a.target='_blank';a.rel='noopener';v.append(a)}bd.append(v)}
+  if(l.source&&/^https:\/\//.test(l.source)){const a=el('a','orig','Go deeper: the course source ↗');a.href=l.source;a.target='_blank';a.rel='noopener';bd.append(a)}
+  doneBar(bd,onDone)}
+function openFact(f,onDone){const{bd}=sheet(null,'Fun fact');bd.append(el('h2',null,'Fun fact'),el('p',null,f.text));if(f.source){const a=el('a','orig','Source: '+f.source.name+' ↗');a.href=safe(f.source.url);a.target='_blank';a.rel='noopener';bd.append(a)}doneBar(bd,onDone)}
+function openTry(t,onDone){const{bd}=sheet(null,'Try it');bd.append(el('div','meta','Try it · 10 to 20 minutes with Claude Code'),el('h2',null,t.title),el('p',null,t.task));
+  if(t.needs)bd.append(el('p','meta','Builds on: '+t.needs));if(t.steps){bd.append(el('h3',null,'Steps'));const ol=el('ol');t.steps.forEach(s=>ol.append(el('li',null,s)));bd.append(ol)}doneBar(bd,onDone)}
+function openBuild(x,onDone){const{bd}=sheet(null,'Build idea');bd.append(el('div','meta','You could build this'),el('h2',null,x.title),el('p',null,x.idea),el('h3',null,'First step'),el('p',null,x.first));doneBar(bd,onDone)}
 function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp?{st:kp,b}:null;
   const app=document.getElementById('app');document.title='Brief: '+b.dayLabel;
   if(b.sample)app.append(el('div','sample',b.sample));
-  const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(b.posters.length+(b.stories||[]).length+(b.themes||[]).reduce((n,t)=>n+(t.stories||[]).length,0))+' stories and today’s lesson ↓'));if(KSTORY)h.append(kimchiHint(b));app.append(h);
+  const LS=lessonsOf(b),themed=(b.themes||[]).flatMap(t=>(t.stories||[]).map(s=>[s,t.title]));
+  const news=[...b.posters.map(s=>[s,'Top story']),...(b.stories||[]).map(s=>[s,null]),...themed];
+  const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',news.length+' stories and '+(LS.length===1?'today’s lesson':LS.length+' lessons')+' ↓'));if(KSTORY)h.append(kimchiHint(b));app.append(h);
   if(window.MBScores&&window.ScoreCore)MBScores.init({state:()=>S,save,today:todayStr,mode:MODE,ranks:RANKS,label:'BRIEF',foot:'AI × TECH × CYBER',day:()=>briefDay(todayStr()),openProgress});
-  b.posters.forEach(p=>{
-    const s=el('section','poster p-'+p.tag);s.append(el('span','k',p.tag));
-    const w=el('div',p.big?'':'noBig');
-    if(p.big){const n=el('div','big',p.big);w.append(n);setTimeout(()=>fit(n,130))}
-    w.append(el('h2',null,p.headline),el('p',null,p.summary),el('p','sw',p.soWhat),src(p.source));open(s,p);s.append(w);app.append(s)});
+  /* Today deck */
+  const T=makeDeck(b,'news','Today','Swipe sideways. Tap a card to read it, then Done to file it.');
+  news.forEach(([st,lab],i)=>{const id='s'+i,ph=pimg(st,'ph'),vz=st.figure?[st.figure.value,st.figure.label]:st.big?[st.big,'Key figure']:null;
+    const n=sigCard({col:COL[st.tag],txt:TXT[st.tag],kicker:st.tag+(lab?' · '+lab:''),title:st.headline,text:st.summary,vz:vz||[' ',st.soWhat],src:st.source.name+', '+st.source.date,photo:ph,open:()=>openStory(st,()=>T.done(id))});
+    if(ph&&st.photo.credit)ph.title='Photo: '+st.photo.credit+', '+st.photo.licence;
+    T.add(n,{id,tag:st.tag,title:st.headline,short:shortOf(st),age:ageDays(st,b),col:COL[st.tag],txt:TXT[st.tag]})});
+  /* Learn deck */
+  const L=makeDeck(b,'learn','Learn','Today’s lessons, then the fun fact'+(b.try?' and a Try it exercise':'')+'.');
+  const total=b.lessons?577:90;
+  LS.forEach((l,i)=>{const id='l'+l.n,n=sigCard({cls:'learn-card lesson',col:COL.Learn,txt:TXT.Learn,kicker:'Lesson '+l.n+(l.area?' · '+l.area:' · '+(l.tag||'')),title:l.title,text:l.idea,vz:['3 min','Diagram inside'],cue:'Learn it →',open:()=>openLesson(l,total,()=>L.done(id))});
+    L.add(n,{id,tag:'Learn',title:l.title,short:'L'+l.n,col:COL.Learn,txt:TXT.Learn})});
+  if(b.fact){const n=sigCard({cls:'learn-card fact',col:COL.Learn,txt:TXT.Learn,kicker:'Fun fact',title:'Did you know?',text:b.fact.text,cue:'Open the fact →',src:b.fact.source&&b.fact.source.name,open:()=>openFact(b.fact,()=>L.done('fact'))});L.add(n,{id:'fact',title:'Fun fact',short:'Fact',col:COL.Learn,txt:TXT.Learn})}
+  if(b.try){const n=sigCard({cls:'learn-card try',col:COL.Build,txt:TXT.Build,kicker:'Try it · 10 to 20 min',title:b.try.title,text:b.try.task,vz:['Hands on','In Claude Code'],cue:'Start the exercise →',open:()=>openTry(b.try,()=>L.done('try'))});L.add(n,{id:'try',title:b.try.title,short:'Try it',col:COL.Build,txt:TXT.Build})}
+  if(b.build){const n=sigCard({cls:'learn-card build',col:COL.Build,txt:TXT.Build,kicker:'You could build this',title:b.build.title,text:b.build.idea,vz:['1 step','To start today'],cue:'See the first step →',open:()=>openBuild(b.build,()=>L.done('build'))});L.add(n,{id:'build',title:b.build.title,short:'Build',col:COL.Build,txt:TXT.Build})}
+  const learnGo=()=>{const f=L.items.find(x=>!x.node.hidden)||L.items[0];if(f)L.jump(f.id)};
+  T.dk.prepend(radarCard(b,T,learnGo,L.items.length));T.number();L.number();
+  app.append(T.sec);
   const m=el('main','wrap');
-  const add=(st,box)=>{const k=el('article','card');const th=pimg(st,'cthumb');if(th){th.append(el('figcaption',null,'Photo: '+st.photo.credit+', '+st.photo.licence));k.append(th)}k.append(el('span','pill '+st.tag,st.tag));if(st.figure){const fg=el('span','cfig');fg.append(el('b',null,st.figure.value),' '+st.figure.label);k.append(fg)}k.append(el('h3',null,st.headline),el('p',null,st.summary),el('p','sw',st.soWhat),src(st.source));open(k,st);box.append(k)};
-  if(b.themes)b.themes.forEach(t=>{m.append(el('div','sect',t.title));t.stories.forEach(s=>add(s,m))});
-  else{const more=b.stories||[];if(more.length)m.append(el('div','sect','Also today'));more.forEach(s=>add(s,m))}
   const chat=b.chatter||[],xs=chat.filter(c=>c.via==='X'),fs=chat.filter(c=>c.via!=='X');
   const chatCard=c=>{const k=el('article','card chat'+(c.via==='X'?' onx':'')),p=el('span','pill '+c.tag,c.tag),tr=el('span','trust '+c.trust,c.trust);k.append(p,tr);if(c.group)k.append(el('span','grp',c.group));k.append(el('h3',null,c.headline),el('p',null,c.summary),el('p','sw',c.via==='X'?(c.handle+' on X, '+c.thread.date):('Source: '+c.thread.name+', '+c.thread.date)));openC(k,c);m.append(k)};
   if(xs.length){const fd=el('section','xfeed'),fh=el('div','xhead');fh.append(el('span',null,'On X today'));const lg=el('span','xlogo');lg.innerHTML=X_LOGO;fh.append(lg);fd.append(fh);
     xs.forEach(c=>{const col={AI:'#ff2e6e',Tech:'#ffe600',Cyber:'#a98bff'}[c.tag]||'#c9b8ff',k=el('article','xitem');k.style.setProperty('--c',col);k.append(el('span','xdot'),el('span','xline'),el('div','xwho',c.handle+' · '+c.thread.date));const mt=el('div','xmeta');mt.append(el('span','pill '+c.tag,c.tag),el('span','trust '+c.trust,c.trust));if(c.group)mt.append(el('span','grp',c.group));k.append(el('h3',null,c.headline),el('p',null,c.summary),mt);openC(k,c);fd.append(k)});
     fd.append(el('div','xnote','Summaries, not the original posts'));m.append(fd)}
   if(fs.length){m.append(el('div','sect','What people are saying'));fs.forEach(chatCard)}
-  const l=b.lesson,k=el('section','lesson');
-  k.append(el('small',null,'Lesson '+l.n+' of 90 · '+l.tag),el('h2',null,l.title),el('p',null,l.idea));
-  (l.diagrams||[]).forEach(d=>{const i=document.createElement('img');i.className='diagram';i.alt=d.alt;i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(d.svg);k.append(i)});
-  const ol=el('ol');l.steps.forEach(t=>ol.append(el('li',null,t)));k.append(ol);
-  [['Think of it like',l.analogy],['Where that breaks',l.breaks],['Why it matters',l.why]].forEach(([a,t])=>{if(!t)return;const p=el('p');p.append(el('span','lab',a),t);k.append(p)});
-  m.append(k);
+  if(xs.length||fs.length)app.append(m);
+  app.append(L.sec);
+  const m2=el('main','wrap');
   const items=dayItems(b),qkey=b.date,qc=el('section','gcard quiz');
   const drawQuiz=()=>{qc.textContent='';const dn=S.days[qkey],pr=(S.prog[qkey]||[]).length;
-    qc.append(el('span','lab','Today’s quiz'),el('h2',null,dn?'You scored '+dn.score+' out of '+dn.total:items.length+' questions'),el('p',null,dn?'+'+dn.points+' points earned. Replays are for practice and do not change your score.':pr?'You are '+pr+' questions in. Pick up where you left off.':'Pick the right answer. Points, streaks and badges for every day you play. Up to '+maxPoints(items.length)+' points today.'));
+    qc.append(el('span','lab','Today’s quiz'),el('h2',null,dn?'You scored '+dn.score+' out of '+dn.total:items.length+' questions'),el('p',null,dn?'+'+dn.points+' points earned. Replays are for practice and do not change your score.':pr?'You are '+pr+' questions in. Pick up where you left off.':'One question per lesson, plus revision. Points, streaks and badges for every day you play. Up to '+maxPoints(items.length)+' points today.'));
     const bt=el('button','btn',dn?'Practise again':pr?'Resume quiz':'Start quiz');bt.onclick=()=>startQuiz(b,items,qkey);qc.append(bt)};
-  drawQuiz();m.append(qc);
-  if(b.interview){const ic=el('section','gcard'),idn=S.days[b.date+'-interview'];ic.append(el('span','lab','Interview round'),el('h2',null,'A question you might be asked'),el('p',null,idn?'Done. Replay for practice.':'One scenario, in a consultant’s voice. +15 points if you get it right.'));const bt=el('button','btn',idn?'Practise again':'Take the interview question');bt.onclick=()=>startInterview(b);ic.append(bt);m.append(ic)}
-  if(b.build){const bc=el('section','gcard');bc.append(el('span','lab','You could build this'),el('h2',null,b.build.title),el('p',null,b.build.idea),el('span','lab','First step'),el('p',null,b.build.first));m.append(bc)}
-  app.append(m);
+  drawQuiz();m2.append(qc);
+  if(b.interview){const ic=el('section','gcard'),idn=S.days[b.date+'-interview'];ic.append(el('span','lab','Interview round'),el('h2',null,'A question you might be asked'),el('p',null,idn?'Done. Replay for practice.':'One scenario, in a consultant’s voice. +15 points if you get it right.'));const bt=el('button','btn',idn?'Practise again':'Take the interview question');bt.onclick=()=>startInterview(b);ic.append(bt);m2.append(ic)}
+  app.append(m2);
+  T.restore();L.restore();
   document.body.append(Object.assign(document.createElement('canvas'),{id:'fx'}));
   refreshNav=()=>{nav.textContent='';const due=S.review.filter(x=>x.due<=todayStr()).length;
     const pb=el('button',null,'Progress');pb.onclick=openProgress;
@@ -518,7 +675,10 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
 (async()=>{try{
   const list=await fetch('briefs/index.json',{cache:'no-store'}).then(r=>r.json());
   const q=new URLSearchParams(location.search).get('d'),d=/^\d{4}-\d{2}-\d{2}$/.test(q||'')?q:list[0];
-  render(await fetch('briefs/'+d+'.json',{cache:'no-store'}).then(r=>r.json()),list);
+  const bf=await fetch('briefs/'+d+'.json',{cache:'no-store'}).then(r=>r.json());
+  /* course editions: area, module, outcome and source come from course.json, the single source of truth */
+  if(bf.lessons){try{const c=await courseData(),by={};c.days.forEach(x=>x.lessons.forEach(l=>by[l.n]=l));bf.lessons.forEach(l=>{const k=by[l.n];if(k)['area','module','outcome','source'].forEach(f=>{if(l[f]==null&&k[f])l[f]=k[f]})})}catch(e){}}
+  render(bf,list);
   fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/BUILD\s*=\s*'([^']+)'/);if(m&&m[1]!==BUILD){const u=el('button','upd','A newer version is ready. Tap to update.');u.onclick=()=>{location.href=location.pathname+'?d='+d+'&v='+Date.now()};document.body.append(u)}}).catch(()=>0);
 }catch(e){document.getElementById('app').append(el('p','err','This brief could not be loaded.'))}})();
 </script>
