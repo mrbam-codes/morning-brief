@@ -2,13 +2,13 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-tzMeqNextYVuVfcDJgzMRZpo8lUGaw4zn3YgjhibBZA='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-toTeyIHUKsMJyhnoK+EblSB/Qj5tJ7Rl4FB977rlTjs='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&family=Orbitron:wght@900&family=VT323&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#0b0620;--lilac:#c9b8ff;--ai:#ff2e6e;--tech:#ffe600;--cyber:#7c4dff;--line:#38257f}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -138,8 +138,119 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .err{padding:40px 18px;font-size:18px}
 footer{padding:0 16px 40px;font-size:14px;color:var(--lilac)}
 footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
+/* ---- Score badge (top right, every page) ---- */
+.cc-badge{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 12px);right:max(12px,env(safe-area-inset-right,0px));
+  display:grid;justify-items:center;gap:3px;background:none;border:0;padding:0;cursor:pointer;color:#fff;font:inherit}
+.cc-badge .rg{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;position:relative;
+  background:conic-gradient(#ff3df2 0 var(--p,0%),rgba(255,255,255,.14) 0);box-shadow:0 0 18px rgba(255,61,242,.45),0 6px 16px rgba(0,0,0,.35)}
+.cc-badge .rg::before{content:"";position:absolute;inset:5px;border-radius:50%;background:#0a0520}
+.cc-badge .rg span{position:relative;font:400 21px "VT323",'IBM Plex Mono',ui-monospace,monospace;color:#b6ffcf;text-shadow:0 0 8px rgba(125,255,168,.7);line-height:1}
+.cc-badge .pill{font:600 11px 'IBM Plex Mono',ui-monospace,monospace;padding:2px 7px;border-radius:99px;background:#0a0520;color:#bff7ff;border:1px solid rgba(61,230,255,.6);font-variant-numeric:tabular-nums}
+.cc-badge:focus-visible .rg{outline:2px solid #3de6ff;outline-offset:3px}
+.cc-badge.bump .rg{animation:ccbump .6s ease}
+@keyframes ccbump{40%{transform:scale(1.18)}}
+
+/* ---- Overlay sheets (panel and share card) ---- */
+.cc-over{position:fixed;inset:0;z-index:60;background:rgba(3,4,10,.72);backdrop-filter:blur(4px);display:grid;place-items:end center;overflow-y:auto;
+  padding:calc(env(safe-area-inset-top,0px) + 16px) max(12px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 16px) max(12px,env(safe-area-inset-left,0px))}
+@media (min-width:640px){.cc-over{place-items:center}}
+.cc-sheet{width:100%;max-width:440px;background:#0b0f16;color:#eef2f7;border:1px solid #26303d;border-radius:20px;padding:20px;display:grid;gap:16px;
+  font:15px/1.5 'Space Grotesk',system-ui,sans-serif;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.cc-sheet h3{font:800 24px 'Space Grotesk',system-ui,sans-serif;margin:0}
+.cc-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.cc-x{background:#151b24;border:1px solid #26303d;color:#eef2f7;border-radius:99px;width:38px;height:38px;font:600 18px 'Space Grotesk',system-ui,sans-serif;cursor:pointer;flex:none}
+.cc-hero{display:flex;gap:16px;align-items:center}
+.cc-hero .rg{width:96px;height:96px;flex:none;border-radius:50%;display:grid;place-items:center;position:relative;
+  background:conic-gradient(#ff3df2 0 var(--p,0%),rgba(255,255,255,.1) 0);box-shadow:0 0 26px rgba(255,61,242,.4)}
+.cc-hero .rg::before{content:"";position:absolute;inset:8px;border-radius:50%;background:#0a0520}
+.cc-hero .rg b{position:relative;font:900 12px "Orbitron",'Space Grotesk',system-ui,sans-serif;color:#3de6ff;text-shadow:0 0 8px #3de6ff;letter-spacing:.04em;text-align:center}
+.cc-hero .tot{font:400 54px/0.9 "VT323",'IBM Plex Mono',ui-monospace,monospace;color:#b6ffcf;text-shadow:0 0 14px rgba(125,255,168,.6)}
+.cc-hero small{display:block;color:#98a4b5;font-size:13px}
+.cc-bar{height:8px;border-radius:99px;background:#1b2330;overflow:hidden}.cc-bar i{display:block;height:100%;background:linear-gradient(90deg,#3de6ff,#ff3df2)}
+.cc-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.cc-stats div{background:#121822;border:1px solid #222b38;border-radius:12px;padding:10px;display:grid;gap:2px}
+.cc-stats b{font:400 26px/1 "VT323",'IBM Plex Mono',ui-monospace,monospace;color:#eef2f7;font-variant-numeric:tabular-nums}
+.cc-stats span{font:500 10px 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#98a4b5}
+.cc-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(18px,1fr));gap:4px}
+.cc-strip i{aspect-ratio:1;border-radius:4px;background:#1b2330;display:block}
+.cc-strip i.d{background:#2a7a4c}.cc-strip i.p{background:#ff3df2;box-shadow:0 0 8px rgba(255,61,242,.6)}
+.cc-strip i.m{background:transparent;border:1px dashed #ff6f91}.cc-strip i.t{outline:2px solid #3de6ff;outline-offset:1px}
+.cc-key{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:#98a4b5}
+.cc-key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.cc-btn{font:600 15px 'Space Grotesk',system-ui,sans-serif;padding:12px 16px;border-radius:12px;border:1px solid #3de6ff;background:rgba(61,230,255,.12);color:#dffaff;cursor:pointer;text-align:center}
+.cc-btn.ghost{border-color:#26303d;background:#121822;color:#c8d1dc;font-weight:500;font-size:14px}
+.cc-btn:focus-visible,.cc-x:focus-visible{outline:2px solid #3de6ff;outline-offset:2px}
+.cc-row{display:flex;flex-wrap:wrap;gap:8px}.cc-row>*{flex:1 1 140px}
+.cc-demo{border-top:1px dashed #26303d;padding-top:12px;display:grid;gap:8px}
+.cc-demo p{font-size:12px;color:#98a4b5;margin:0}
+.cc-name{display:grid;gap:6px;font-size:13px;color:#98a4b5}
+.cc-name input{font:500 16px 'Space Grotesk',system-ui,sans-serif;padding:10px 12px;border-radius:10px;border:1px solid #26303d;background:#121822;color:#eef2f7}
+
+/* ---- Share card (Terminal x Neon) ---- */
+.card.e{box-sizing:border-box;position:relative;width:100%;aspect-ratio:9/16;border-radius:22px;overflow:hidden;isolation:isolate}
+.e{background:radial-gradient(120% 75% at 50% 0%,#1d0a3d 0%,#07041a 55%,#020806 100%);color:#7dffa8;font-family:"VT323",'IBM Plex Mono',ui-monospace,monospace;display:flex;flex-direction:column;box-shadow:inset 0 0 90px rgba(61,230,255,.10)}
+.card.e{container-type:inline-size;padding:6% 5.5%;gap:6px}.e>*{font-size:5cqw;min-width:0}
+.e canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.75}
+.e::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 2px,transparent 2px 4px);pointer-events:none;z-index:2}
+.e .hd{font-size:5cqw;color:#3fae6a;display:flex;justify-content:space-between}
+.e .ok{color:#03140a;background:#7dffa8;padding:0 6px}
+.e .lbl,.e .bar{font-size:5.3cqw}.e .lbl{color:#3fae6a}
+.e .mid{display:flex;align-items:center;gap:4.4cqw;margin:1.6cqw 0}
+.e .ring{flex:none;width:33cqw;height:33cqw;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(#ff3df2 0 var(--p),rgba(255,255,255,.08) 0);box-shadow:0 0 30px rgba(255,61,242,.45)}
+.e .ring::before{content:"";position:absolute;inset:2.5cqw;border-radius:50%;background:#0a0520}
+.e .ring::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px dashed rgba(61,230,255,.65);animation:ccspin 18s linear infinite}
+@keyframes ccspin{to{transform:rotate(360deg)}}
+.e .ring div{position:relative;text-align:center;display:grid}
+.e .ring b{font:900 4.2cqw "Orbitron",'Space Grotesk',system-ui,sans-serif;color:#3de6ff;text-shadow:0 0 10px #3de6ff;letter-spacing:.04em}
+.e .ring span{font-size:4.2cqw;color:#c9a7ff}
+.e .big{font-size:23cqw;line-height:.85;color:#b6ffcf;text-shadow:0 0 18px rgba(125,255,168,.75)}
+.e .big small{display:block;font-size:5cqw;color:#3fae6a;text-shadow:none;margin-top:6px}
+.e .chips{display:flex;gap:1.6cqw;flex-wrap:wrap}
+.e .chips span{font:600 3.4cqw 'IBM Plex Mono',ui-monospace,monospace;padding:1.4cqw 2.5cqw;border-radius:99px;border:1px solid rgba(61,230,255,.6);color:#bff7ff;background:rgba(61,230,255,.08)}
+.e .chips span.p{border-color:#ff3df2;color:#ffc8fb;background:rgba(255,61,242,.14);box-shadow:0 0 12px rgba(255,61,242,.4)}
+.e .bar{white-space:nowrap;overflow:hidden}
+.e .row{display:flex;justify-content:space-between;font-size:6.1cqw;border-top:1px dashed #1f5a35;padding-top:6px}
+.e .cur{display:inline-block;width:3cqw;height:6cqw;background:#7dffa8;vertical-align:-3px;animation:ccblink 1s steps(1) infinite}
+@keyframes ccblink{50%{opacity:0}}
+.e .foot{margin-top:auto;font-size:4.5cqw;color:#3fae6a;display:flex;justify-content:space-between}
+@media (prefers-reduced-motion:reduce){.e .ring::after,.e .cur{animation:none}}
+
+.cc-tag{font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#c9a7ff}
+.cc-note{font-size:12px;color:#98a4b5;margin:0}
+.cc-badge{top:calc(env(safe-area-inset-top,0px) + 12px);z-index:15}
+/* the badge now carries streak, rank and points: keep the top buttons clear of it */
+.nav{right:calc(76px + env(safe-area-inset-right,0px))!important}.nav .lv{display:none}
+.kpaused *{animation-play-state:paused!important}
+.khint{display:block;margin-top:10px;font:500 13px 'Space Grotesk',sans-serif;color:#c9b8ff}
+.khint::before{content:'';display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff3df2;margin-right:7px;box-shadow:0 0 10px #ff3df2}
+.kcam{display:flex;align-items:flex-end;gap:14px;margin:22px 0 4px}
+.kwin{position:relative;flex:none;width:112px;height:96px;overflow:hidden;border-radius:16px 16px 0 0;box-shadow:0 0 24px rgba(255,61,242,.35)}
+.kpeek{position:absolute;left:0;top:0;border-radius:16px 16px 0 0;overflow:hidden;transform:translateY(78%);transition:transform .9s cubic-bezier(.2,1.3,.4,1) .15s}
+.kcam.up .kpeek{transform:translateY(0)}
+.klip{position:absolute;left:-6px;right:-6px;bottom:0;height:12px;z-index:2;background:var(--ink);border-top:2px dashed #3de6ff}
+.ktx{display:grid;gap:2px;padding-bottom:8px;min-width:0}.ktx b{font:700 20px/1.15 'Space Grotesk',sans-serif;color:#fff}.ktx span{font:400 14px/1.4 'Space Grotesk',sans-serif;color:#c9b8ff}
+.kreward{position:relative;width:100%;aspect-ratio:420/360;border-radius:20px;overflow:hidden;isolation:isolate;margin:6px 0 16px;box-shadow:0 0 0 1px #38257f,0 0 40px rgba(255,61,242,.3);background:#fcf9f2}
+.kstage{position:absolute;inset:0}.kstage>.khero{position:absolute;inset:0}
+.kov{position:absolute;left:0;right:0;bottom:0;z-index:5;padding:40px 18px 16px;display:grid;gap:4px;pointer-events:none;background:linear-gradient(180deg,rgba(252,249,242,0),rgba(252,249,242,.85) 55%)}
+.kov b{font:700 30px/1 'Space Grotesk',sans-serif;color:#2b2417}.kov span{font:500 14px/1.35 'Space Grotesk',sans-serif;color:#4a3f2c;max-width:60%}
+@media (prefers-reduced-motion:reduce){.kpeek{transition:none}}
+/* Kimchi's spaceship on the share card */
+.e .ship{position:absolute;right:2%;top:10%;width:48%;z-index:3}
+.e .ship-in{position:relative;width:100%;aspect-ratio:200/120;animation:shipbob 3.2s ease-in-out infinite}
+.e .ship-svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 8px rgba(61,230,255,.55))}
+.e .ship .flame{transform-origin:46px 68px;animation:shipflame .16s steps(2) infinite}
+.e .dome{position:absolute;left:43%;top:-14%;width:34%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:2px solid #3de6ff;box-shadow:0 0 14px rgba(61,230,255,.7),inset 0 0 12px rgba(255,255,255,.35);background:#86c3ea}
+.e .dome::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.35) 0 9%,transparent 24%);pointer-events:none;z-index:3}
+.e .kpod{position:absolute;left:50%;top:50%;transform:translate(-50%,-46%)}
+.e .ship .tag{position:absolute;left:0;right:0;bottom:-12%;text-align:center;font-size:3cqw;color:#c9a7ff;letter-spacing:.08em}
+@keyframes shipbob{0%,100%{transform:translate(0,0) rotate(-2deg)}50%{transform:translate(2%,-6%) rotate(1deg)}}
+@keyframes shipflame{50%{transform:scaleX(.7)}}
+@media (prefers-reduced-motion:reduce){.e .ship-in,.e .ship .flame{animation:none}}
 </style>
 <script src="motion.js"></script>
+<script src="scorecore.js"></script>
+<script src="kimchi.js"></script>
+<script src="scorecard.js"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -154,7 +265,7 @@ const KEY='mb-v1',DAY=/^\d{4}-\d{2}-\d{2}$/;
 const fresh=()=>({days:{},tags:{AI:[0,0],Tech:[0,0],Cyber:[0,0]},lessons:{},points:0,badges:{},review:[],prog:{},sound:true});
 let S=(()=>{try{const s=JSON.parse(localStorage.getItem(KEY));return s&&s.days?Object.assign(fresh(),s):fresh()}catch(e){return fresh()}})();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
-const LEVELS=[[0,'Curious'],[100,'Learner'],[300,'Practitioner'],[600,'Analyst'],[1000,'Specialist'],[1600,'Expert'],[2500,'Master']];
+const LEVELS=[[0,'Recruit'],[500,'Operator'],[2000,'Analyst'],[5000,'Hunter'],[9000,'Architect'],[15000,'Chief']];
 const level=p=>{let i=0;LEVELS.forEach((l,j)=>{if(p>=l[0])i=j});const nx=LEVELS[i+1];return{name:LEVELS[i][1],i:i,from:LEVELS[i][0],next:nx?nx[0]:null}};
 const ds=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const addDays=(s,n)=>{const[y,m,d]=s.split('-').map(Number);return ds(new Date(y,m-1,d+n))};
@@ -193,6 +304,21 @@ function sheet(tag,label){
   const bd=el('div','body');sh.append(bar,bd);document.body.append(sh);document.body.style.overflow='hidden';cl.focus();history.pushState({s:1},'');stack.push({sh,prev});
   return{sh,bd,bar,pill,close:()=>history.back()}}
 const SECTIONS=[['What happened','what'],['How it works','how'],['Why it matters','why']];
+const briefDay=d=>Math.round((new Date(d+'T12:00')-new Date(FIRST+'T12:00'))/864e5)+1;
+let KSTORY=null;
+const kimchiFound=b=>!!(S.kimchi&&S.kimchi[b.date]);
+function kimchiPick(b){const all=[...(b.posters||[]),...(b.stories||[]),...((b.themes||[]).flatMap(t=>t.stories||[]))];if(all.length<2||!window.KIMCHI)return null;let h=2166136261;for(const c of b.date){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0}return all[1+h%(all.length-1)]}
+function kimchiHint(b){const t=el('span','khint',kimchiFound(b)?'You found Kimchi today. He hides somewhere new tomorrow.':'Kimchi is hiding in one of today’s stories. Can you find him?');t.id='khint';return t}
+function kimchiCameo(b){const box=el('div','kcam'),win=el('div','kwin'),lip=el('div','klip'),tx=el('div','ktx');box.setAttribute('aria-live','polite');
+  const say=()=>{tx.textContent='';if(kimchiFound(b))tx.append(el('b',null,'You found Kimchi!'),el('span',null,'Tomorrow he’ll pick a new story to hide in.'));else tx.append(el('b',null,'Psst…'),el('span',null,'someone is reading along with you.'))};
+  say();win.append(lip);box.append(win,tx);let host=null;
+  const io=new IntersectionObserver(es=>{if(!es.some(e=>e.isIntersecting))return;io.disconnect();box.classList.add('up');
+    if(!host){host=el('div','kpeek');win.prepend(host);KIMCHI.cameo(host,KIMCHI.cameoFor(briefDay(b.date)),112)}
+    if(!kimchiFound(b)){S.kimchi=S.kimchi||{};S.kimchi[b.date]=Date.now();save();say();try{confetti(30)}catch(e){}const h=document.getElementById('khint');if(h)h.replaceWith(kimchiHint(b))}},{threshold:.6});
+  setTimeout(()=>io.observe(box),300);return box}
+function kimchiReward(bd,b){if(!window.KIMCHI)return;const sk=streak(),r=el('div','kreward'),stage=el('div','kstage'),ov=el('div','kov');
+  ov.append(el('b',null,sk>1?sk+'-day streak':'Quiz done'),el('span',null,sk>1?'Kimchi is proud of you. Same time tomorrow?':'Kimchi approves. Come back tomorrow to start a streak.'));
+  r.append(stage,ov);bd.append(r);KIMCHI.mount(stage,KIMCHI.forDay(briefDay(b.date)))}
 function openStory(st){
   const{bd}=sheet(st.tag),r=st.read||{};const hp=pimg(st,'shero');if(hp){const c=el('figcaption');const cl=el('a',null,'Photo: '+st.photo.credit+', '+st.photo.licence+' ↗');cl.href=safe(st.photo.page);cl.target='_blank';cl.rel='noopener';c.append(cl);hp.append(c);bd.append(hp)}
   bd.append(el('h2',null,st.headline),el('div','meta','Source: '+st.source.name+', '+st.source.date));
@@ -200,6 +326,7 @@ function openStory(st){
   if(st.drawing){const i=document.createElement('img');i.className='diagram sdraw';i.alt=st.drawingAlt||'';i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(st.drawing);bd.append(i)}
   if(!st.read)bd.append(el('h3',null,'In short'),el('p',null,st.summary));
   SECTIONS.forEach(([t,k])=>{if(r[k])bd.append(el('h3',null,t),el('p',null,r[k]))});
+  if(KSTORY&&st===KSTORY.st)try{bd.append(kimchiCameo(KSTORY.b))}catch(e){}
   bd.append(el('h3',null,'So what'),el('p',null,st.soWhat.replace(/^[A-Za-z]+:\s*/,'')));
   if(r.take){const t=el('div','take');t.append(el('h3',null,'Claude’s take'),el('p',null,r.take));bd.append(t)}
   const o=el('a','orig','Read the original at '+st.source.name+' ↗');o.href=safe(st.source.url);o.target='_blank';o.rel='noopener';bd.append(o)}
@@ -212,8 +339,13 @@ function openChatter(c){
   if(c.original){const o=el('a','orig','Read the original: '+c.original.name+' ↗');o.href=safe(c.original.url);o.target='_blank';o.rel='noopener';bd.append(o)}}
 const openC=(n,c)=>{n.tabIndex=0;n.setAttribute('role','button');n.onclick=e=>{if(e.target.closest('a'))return;openChatter(c)};n.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openChatter(c)}};n.append(el('span','cue','Read the short version →'))};
 /* ---------- quiz engine ---------- */
-const pointsFor=run=>10+Math.min(run-1,4)*2;
-const maxPoints=n=>{let t=0;for(let i=1;i<=n;i++)t+=pointsFor(i);return t+(n>=5?20:0)};
+/* scoring: shared rules in scorecore.js, re-scored from history; every day counts */
+const MODE='all',RANKS=LEVELS.map(l=>[l[1],l[0]]),FIRST='2026-11-07';
+function rescoreAll(){if(!window.ScoreCore)return null;const R=ScoreCore.rescore(S.days,MODE);Object.keys(R.day).forEach(k=>{S.days[k].points=R.day[k].points});S.points=R.total+(S.bonus||0);return R}
+const pointsFor=()=>10;
+const todayMult=()=>window.ScoreCore?ScoreCore.preview(S.days,todayStr(),MODE).mult:1;
+if(!S.v2){S.v2=1;S.bonus=Object.keys(S.days).filter(k=>!DAY.test(k)).reduce((t,k)=>t+(S.days[k].points||0),0);if(Object.keys(S.days).length)S.rescored=1}rescoreAll();save();
+const maxPoints=n=>Math.round((n*10+(n>=3?20:0))*todayMult());
 function play(items,o){
   const{bd,pill}=sheet(null,o.title);let i=0,run=0,gained=0,right=0,picks=[],missed=[];
   const resume=(o.resume||[]).slice(0,items.length);
@@ -235,9 +367,9 @@ function play(items,o){
       const nx=el('button','btn',i+1<items.length?'Next question →':'See my score');nx.onclick=()=>{i++;q()};fb.append(nx);nx.scrollIntoView({block:'nearest',behavior:'smooth'})})};
   const finish=()=>{
     const perfect=right===items.length&&items.length>=3&&!o.review;if(perfect)gained+=20;
-    const res=o.done?o.done({right,total:items.length,gained,missed,picks,perfect}):{badges:[],lv:null};
+    const res=o.done?o.done({right,total:items.length,gained,missed,picks,perfect}):{badges:[],lv:null};if(res.gained!=null)gained=res.gained;if(o.reward)try{o.reward(bd)}catch(e){}
     perfect?(sfx.win(),confetti(160,true)):right>=items.length/2&&sfx.ok();
-    bd.append(el('div','meta',(o.title||'Quiz')+' complete'),el('div','score',right+'/'+items.length),el('div','pts','+'+gained+' points'+(perfect?' (includes perfect bonus)':'')));
+    bd.append(el('div','meta',(o.title||'Quiz')+' complete'),el('div','score',right+'/'+items.length),el('div','pts',res.math||('+'+gained+' points'+(perfect?' (includes perfect bonus)':''))));
     if(o.practice)bd.append(el('p','meta','Practice run: not scored.'));
     const L=level(S.points);const w=L.next?Math.round(100*(S.points-L.from)/(L.next-L.from)):100;
     const bx=el('div','gcard');bx.append(el('span','lab','Level '+(L.i+1)+' · '+L.name),(()=>{const b=el('div','bar2');b.append(el('i'));b.firstChild.style.width=w+'%';return b})(),el('div','row',null));
@@ -247,23 +379,24 @@ function play(items,o){
     if(res.lvUp)bd.append(el('p','pts','Level up: '+res.lvUp+'!'));
     if(missed.length){bd.append(el('h3',null,'To revise'));missed.forEach(m=>{const g=el('div','why');g.append(el('b',null,m.q),el('br'),'Answer: '+m.options[m.answer]+'. '+m.why);bd.append(g)});bd.append(el('p','meta','Missed questions come back in Review over the next days.'))}
     const pr=el('button','btn','See my progress');pr.onclick=()=>{history.back();setTimeout(openProgress,60)};const dn=el('button','btn alt','Done');dn.onclick=()=>history.back();bd.append(pr,dn);
-    o.after&&o.after()};
+    o.after&&o.after();window.MBScores&&MBScores.paint(!o.practice)};
   q()}
 const mkItem=(it,extra)=>Object.assign({},it,extra);
 function dayItems(b){return(b.lesson.quiz||[]).map((it,i)=>mkItem(it,{id:b.date+'-'+i}))}
 function finishDay(b,key,items,r,practice){
   if(practice)return{badges:[]};
-  S.days[key]={score:r.right,total:r.total,points:r.gained,at:Date.now()};
+  S.days[key]={score:r.right,total:r.total,points:r.gained,at:Date.now()};if(!DAY.test(key))S.bonus=(S.bonus||0)+r.gained;
   items.forEach((it,i)=>{const ok=r.picks[i]===it.answer;S.tags[it.tag]=S.tags[it.tag]||[0,0];S.tags[it.tag][1]++;if(ok)S.tags[it.tag][0]++;
     if(it.n){const L=S.lessons[it.n]=S.lessons[it.n]||{tag:it.tag,c:0,t:0};L.t++;if(ok)L.c++}
     if(ok&&key.endsWith('interview'))S.interviewWin=true;
     if(!ok&&!S.review.some(x=>x.id===it.id)){S.review.push(Object.assign({},it,{box:0,due:addDays(todayStr(),1)}))}});
-  const before=level(S.points);S.points+=r.gained;const after=level(S.points);delete S.prog[key];save();
-  const badges=award();save();return{badges,lvUp:after.i>before.i?after.name:null}}
+  const before=level(S.points);const R=rescoreAll();const after=level(S.points);delete S.prog[key];save();
+  const badges=award();save();const dd=R&&DAY.test(key)?R.day[key]:null;
+  return{badges,lvUp:after.i>before.i?after.name:null,gained:dd?dd.points:r.gained,math:dd?r.right+' right × 10'+(dd.bonus?' + 20 perfect':'')+(dd.mult>1?', × '+dd.mult+' streak':'')+' = +'+dd.points+' points':null}}
 function startQuiz(b,items,key){
   const done=S.days[key],prog=S.prog[key]||[];
   if(done){return play(items,{title:'Practice',practice:true,done:()=>({badges:[]})})}
-  play(items,{title:'Today’s quiz',resume:prog.filter(k=>Number.isInteger(k)&&k>=0&&k<4),each:(it,ok,i,picks)=>{S.prog[key]=picks.slice();save()},done:r=>finishDay(b,key,items,r),after:()=>refreshNav()})}
+  play(items,{title:'Today’s quiz',resume:prog.filter(k=>Number.isInteger(k)&&k>=0&&k<4),each:(it,ok,i,picks)=>{S.prog[key]=picks.slice();save()},done:r=>finishDay(b,key,items,r),reward:bd=>kimchiReward(bd,b),after:()=>refreshNav()})}
 function startInterview(b){const x=b.interview,it={q:x.scenario,options:x.options,answer:x.answer,why:x.why,tag:x.tag,kind:'interview',id:b.date+'-i'};
   const key=b.date+'-interview';
   play([it],{title:'Interview round',practice:!!S.days[key],done:r=>finishDay(b,key,[it],r,!!S.days[key]),after:()=>refreshNav()})}
@@ -272,7 +405,7 @@ function startReview(){
   if(!due.length)return;const steps=[1,3,7,14,30];
   play(due,{title:'Review',review:true,each:(it,ok)=>{const r=S.review.find(x=>x.id===it.id);if(!r)return;
       if(ok){r.box++;if(r.box>=steps.length){S.review=S.review.filter(x=>x!==r);S.cleared=true}else r.due=addDays(t,steps[r.box])}else{r.box=0;r.due=addDays(t,1)}save()},
-    done:r=>{S.points+=r.gained;const badges=award();save();return{badges}},after:()=>refreshNav()})}
+    done:r=>{S.bonus=(S.bonus||0)+r.gained;rescoreAll();const badges=award();save();return{badges}},after:()=>refreshNav()})}
 /* ---------- progress, glossary, backup ---------- */
 function openProgress(){
   const{bd}=sheet(null,'Progress');const L=level(S.points),days=doneDays(),w=L.next?Math.round(100*(S.points-L.from)/(L.next-L.from)):100;
@@ -330,10 +463,11 @@ c,seed){
 let CUR='';
 function tagPhotos(b){let k=0;const walk=o=>{if(Array.isArray(o))o.forEach(walk);else if(o&&typeof o==='object'){if(o.photo&&typeof o.photo.src==='string')o._pk=k++;Object.keys(o).forEach(x=>{if(x!=='photo')walk(o[x])})}};walk(b)}
 const pimg=(st,cls)=>{if(!st.photo||st._pk==null)return null;const f=el('figure',cls),i=el('img');i.src='briefs/img/'+CUR+'-'+st._pk+'.jpg';i.alt=st.photo.alt||'';i.loading='lazy';i.onerror=()=>f.remove();f.append(i);return f};
-function render(b,list){CUR=b.date;tagPhotos(b);
+function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp?{st:kp,b}:null;
   const app=document.getElementById('app');document.title='Brief: '+b.dayLabel;
   if(b.sample)app.append(el('div','sample',b.sample));
-  const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(b.posters.length+(b.stories||[]).length+(b.themes||[]).reduce((n,t)=>n+(t.stories||[]).length,0))+' stories and today’s lesson ↓'));app.append(h);
+  const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(b.posters.length+(b.stories||[]).length+(b.themes||[]).reduce((n,t)=>n+(t.stories||[]).length,0))+' stories and today’s lesson ↓'));if(KSTORY)h.append(kimchiHint(b));app.append(h);
+  if(window.MBScores&&window.ScoreCore)MBScores.init({state:()=>S,save,today:todayStr,mode:MODE,ranks:RANKS,label:'BRIEF',foot:'AI × TECH × CYBER',day:()=>briefDay(todayStr()),openProgress});
   b.posters.forEach(p=>{
     const s=el('section','poster p-'+p.tag);s.append(el('span','k',p.tag));
     const w=el('div',p.big?'':'noBig');

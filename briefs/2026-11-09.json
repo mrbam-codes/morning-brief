@@ -1,0 +1,175 @@
+{
+ "date": "2026-11-09",
+ "dayLabel": "Monday 9 November 2026",
+ "type": "daily",
+ "verdict": "Quiet day: one big chip story. No fresh AI or cyber story passed my checks.",
+ "posters": [
+  {
+   "tag": "Tech",
+   "headline": "Nvidia probes its own chief",
+   "summary": "Nvidia's board is investigating chief executive Jensen Huang over a reported tie to an alleged Chinese spy. The board says no secrets were compromised. That is unproven.",
+   "soWhat": "Work: expect tougher questions on chip supply chains and exports.",
+   "source": {
+    "name": "Al Jazeera",
+    "date": "8 Nov",
+    "url": "https://www.aljazeera.com/news/2026/11/8/us-chipmaker-nvidia-investigates-ceo-jensen-huang-over-affair"
+   },
+   "big": "$450bn",
+   "figure": {
+    "value": "$450bn",
+    "label": "Market value lost in one day"
+   },
+   "read": {
+    "what": "On Sunday 8 November, Nvidia's board said a committee of independent directors, advised by outside lawyers, will investigate chief executive Jensen Huang. The Times reported last month that US officials believe a Megaspeed executive, Alice Huang, was a Chinese spy and was close to him. Huang admitted an affair. Megaspeed reportedly bought more than $4.8bn of Nvidia chips. Nvidia lost $450bn of value in one day last week.",
+    "how": "The inquiry is an internal board review (an investigation by directors with no ties to management). Huang stays in post. The board says it has no reason to believe secrets or national security were compromised. That is a starting position, not a finding. The spy claim rests on the New York Times and unnamed US intelligence officials. The Chinese embassy denies it.",
+    "why": "Nvidia supplies most of the chips used to train and run AI, so doubts about its leadership move markets and politics. Three Republican members of Congress asked Huang to testify on 18 November. Senator Elizabeth Warren urged action on chip export rules. Investors now expect more scrutiny of chip sales to China.",
+    "take": "Opinion: the personal story is loud, but the lasting issue is how closely a key chip supplier is watched. Unproven: that any secrets leaked, and that Alice Huang is a spy. I could not open Nvidia's own statement, so its wording comes from Al Jazeera and CBS News. Watch the 18 November hearing request and whether the board names its findings."
+   }
+  }
+ ],
+ "stories": [
+  {
+   "tag": "Tech",
+   "headline": "Tech shares recover part of losses",
+   "summary": "Asian tech shares bounced on Monday after last week's fall. Taiwan pledged a US$15.2 billion support fund. The Nvidia inquiry limited gains.",
+   "soWhat": "Curious: watch whether data centre limits become law.",
+   "source": {
+    "name": "Malay Mail",
+    "date": "9 Nov",
+    "url": "https://www.malaymail.com/news/money/2026/11/09/tech-firms-claw-back-losses-on-bargain-buying-nvidia-scrutiny-weighs-on-sentiment/242589"
+   },
+   "figure": {
+    "value": "US$15.2bn",
+    "label": "Taiwan stock support fund"
+   },
+   "read": {
+    "what": "Tech shares clawed back part of last week's losses on Monday 9 November, with gains held back by the Nvidia inquiry. Japan's Nikkei 225 rose more than 2%. Taipei rose more than 4% after Taiwan pledged support, including a US$15.2 billion stock stabilisation fund. Seoul ended lower. Markets price an 80% chance of a US interest rate rise in December.",
+    "how": "Last week's fall followed US midterm results that gave Democrats both chambers of Congress. The article says voters were angry about tariffs, the Iran war and the data centre buildout. A stabilisation fund (money a government uses to buy shares and calm a falling market) is how Taipei tried to steady chip stocks. The article does not say what the fund will buy.",
+    "why": "Investors are worried about AI regulation, spending plans and when hundreds of billions of dollars of AI investment will pay off. Lawmakers are expected to scale back the data centre buildout, which the article says could put thousands of jobs at risk. Chip makers in Taiwan, Japan and South Korea feel this first.",
+    "take": "Opinion: one day's rebound shows little. This is a market report from one outlet (Malay Mail), and it contains an obvious slip about the midterms, so treat its colour with care. The analyst quotes are views, not facts. Watch whether data centre limits become actual law, which would matter more than share prices."
+   }
+  }
+ ],
+ "chatter": [],
+ "lesson": {
+  "n": 3,
+  "tag": "Cyber",
+  "title": "The three goals of security",
+  "idea": "Security protects three things: who can see data (confidentiality), whether it is correct (integrity) and whether it works when needed (availability).",
+  "steps": [
+   "Name the thing you are protecting, such as customer records.",
+   "Ask who should be allowed to see it. Breaking this is a breach of confidentiality.",
+   "Ask who should be allowed to change it. Breaking this is a failure of integrity.",
+   "Ask if people can use it when needed. Breaking this is a failure of availability.",
+   "Choose protections for each goal: locks, checks and backups.",
+   "Accept trade-offs: more locks can make a system harder to use."
+  ],
+  "analogy": "A hospital records room. Only staff get in (confidentiality), nobody can quietly alter a chart (integrity) and the door opens at 3am for an emergency (availability).",
+  "breaks": "A room has one door. Digital systems have thousands of paths in, and a copy of data can be taken without anything going missing.",
+  "why": "Every incident fits one or more of these goals. Asking 'which goal was hit?' tells you what to fix first and what the business loses.",
+  "diagrams": [
+   {
+    "alt": "Three rows. Confidentiality fails in a data breach. Integrity fails through tampering. Availability fails through a ransomware lock-out.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 260\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"12\" y=\"26\" font-size=\"17\" font-weight=\"bold\">Confidentiality</text><text x=\"12\" y=\"48\" font-size=\"14\">Only the right people see it</text><text x=\"12\" y=\"68\" font-size=\"14\" opacity=\"1\">Fails: a data breach</text><line x1=\"12\" y1=\"84\" x2=\"308\" y2=\"84\" stroke=\"#fff\" stroke-width=\"4\"/><text x=\"12\" y=\"108\" font-size=\"17\" font-weight=\"bold\">Integrity</text><text x=\"12\" y=\"130\" font-size=\"14\">It is accurate and unchanged</text><text x=\"12\" y=\"150\" font-size=\"14\" opacity=\"1\">Fails: tampering</text><line x1=\"12\" y1=\"166\" x2=\"308\" y2=\"166\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.7\"/><text x=\"12\" y=\"190\" font-size=\"17\" font-weight=\"bold\">Availability</text><text x=\"12\" y=\"212\" font-size=\"14\">It works when you need it</text><text x=\"12\" y=\"232\" font-size=\"14\" opacity=\"1\">Fails: ransomware lock-out</text></svg>"
+   }
+  ],
+  "quiz": [
+   {
+    "kind": "lesson",
+    "tag": "Cyber",
+    "n": 3,
+    "q": "An attacker quietly changes the bank details on a supplier invoice. Which goal failed?",
+    "options": [
+     "Confidentiality",
+     "Integrity",
+     "Availability",
+     "None, nothing was stolen"
+    ],
+    "answer": 1,
+    "why": "Integrity means data is accurate and unchanged. Nothing was copied or switched off, but the data was altered, and the payment goes to the wrong account."
+   },
+   {
+    "kind": "lesson",
+    "tag": "Cyber",
+    "n": 3,
+    "q": "Ransomware locks staff out of their files. Which goal is hit most directly?",
+    "options": [
+     "Confidentiality",
+     "Integrity",
+     "Authenticity",
+     "Availability"
+    ],
+    "answer": 3,
+    "why": "Availability means data and systems work when needed. Locked files cannot be used. Many gangs also threaten to leak data, which adds a confidentiality problem."
+   },
+   {
+    "kind": "recap",
+    "tag": "AI",
+    "n": 1,
+    "q": "An AI chatbot gives a fluent but wrong answer. Which idea from lesson 1 explains it?",
+    "options": [
+     "It predicts likely next words rather than looking facts up",
+     "It deliberately hides the truth",
+     "It copies the first web page it finds",
+     "It only fails when it is switched off"
+    ],
+    "answer": 0,
+    "why": "A large language model picks likely next words from patterns in its training. Fluent text is not checked fact, so confident mistakes happen."
+   },
+   {
+    "kind": "recap",
+    "tag": "Tech",
+    "n": 2,
+    "q": "Why does your browser ask the Domain Name System (DNS) first when you type a web address?",
+    "options": [
+     "To scan the page for viruses",
+     "To make the page load in colour",
+     "To turn the name into the number of the server",
+     "To log you into the site"
+    ],
+    "answer": 2,
+    "why": "Computers reach each other by number (IP address). DNS is the directory that turns a name into that number before the browser connects."
+   },
+   {
+    "kind": "news",
+    "tag": "Tech",
+    "q": "What did Nvidia's board say about its inquiry into Jensen Huang?",
+    "options": [
+     "It found that secrets were stolen",
+     "It has no reason to believe secrets were compromised, and the inquiry continues",
+     "It removed him as chief executive",
+     "It cleared him and closed the case"
+    ],
+    "answer": 1,
+    "why": "The board's view is a starting position, not a finding. The spy claim comes from the New York Times and unnamed officials, and China denies it."
+   }
+  ]
+ },
+ "terms": [
+  {
+   "term": "Confidentiality",
+   "plain": "Only the right people can see the information."
+  },
+  {
+   "term": "Integrity",
+   "plain": "Information is accurate and has not been changed without permission."
+  },
+  {
+   "term": "Availability",
+   "plain": "Systems and data work when people need them."
+  },
+  {
+   "term": "Independent directors",
+   "plain": "Board members who do not work for the company, so they can review its leaders."
+  },
+  {
+   "term": "Stabilisation fund",
+   "plain": "Government money used to buy shares and calm a falling market."
+  }
+ ],
+ "build": {
+  "title": "A goal sorter",
+  "idea": "Ask an AI assistant to sort real news incidents into confidentiality, integrity or availability, and explain each choice.",
+  "first": "Copy three recent breach headlines into an AI assistant and ask: which of the three security goals failed in each, and why?"
+ }
+}
