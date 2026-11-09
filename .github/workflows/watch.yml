@@ -1,0 +1,32 @@
+# Independent check that today's edition went out. Runs at 09:15 UTC (09:15
+# UK in winter, 10:15 in summer), separate from "Publish site", so a stuck or
+# skipped publish still shows up. It fails, and GitHub emails the account
+# that owns this schedule, if today's UK date is missing from
+# briefs/index.json on the briefs branch or on the live site.
+name: Edition watch
+on:
+  schedule:
+    - cron: "15 9 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  today:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Today's edition is on the briefs branch and live
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SITE: https://mrbam-codes.github.io/morning-brief/
+          FIRST: ""
+          LAST: ""
+        run: |
+          TODAY=$(TZ=Europe/London date +%F)
+          echo "Today in the UK: $TODAY"
+          if [ -n "$FIRST" ] && { [ "$TODAY" \< "$FIRST" ] || [ "$TODAY" \> "$LAST" ]; }; then echo "Outside the course dates: nothing to check"; exit 0; fi
+          has() { python3 -c 'import json,sys; sys.exit(0 if sys.argv[1] in json.load(sys.stdin) else 1)' "$TODAY"; }
+          FAIL=0
+          if gh api "repos/$REPO/contents/briefs/index.json?ref=briefs" -H "Accept: application/vnd.github.raw" | has; then echo "briefs branch: $TODAY present"; else echo "::error::briefs branch: $TODAY is missing from briefs/index.json"; FAIL=1; fi
+          if curl -fsS -m 30 "${SITE}briefs/index.json?t=$(date +%s)" | has; then echo "live site: $TODAY present"; else echo "::error::live site: $TODAY is not published"; FAIL=1; fi
+          exit $FAIL

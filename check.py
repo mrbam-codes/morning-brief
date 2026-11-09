@@ -76,6 +76,46 @@ def media(where, s):
         text(f"{where} drawingAlt", s.get("drawingAlt"), 200)
 
 
+# Rules added on 9 Nov 2026 (source age, no repeats, Sunday cap, recap count)
+# apply from that edition on, so older published briefs are never re-judged
+# by them and dropped from the site.
+NEW_RULES = "2026-11-09"
+MONTHS = {m: i + 1 for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"])}
+EDITION = {}
+
+
+def fresh(where, value):
+    """A story's source must be from the last 2 days (8 on Sunday, which covers the week)."""
+    day = EDITION.get("day")
+    if not day or day.isoformat() < NEW_RULES:
+        return
+    m = re.fullmatch(r"\s*(\d{1,2}) ([A-Za-z]{3})[a-z]*\.?(?: (\d{4}))?\s*", str(value or ""))
+    if not day or not m or m.group(2).lower() not in MONTHS:
+        need(False, f"{where}: source date must look like 8 Nov 2026")
+        return
+    try:
+        y = int(m.group(3) or day.year)
+        d = datetime.date(y, MONTHS[m.group(2).lower()], int(m.group(1)))
+        if not m.group(3) and d > day + datetime.timedelta(days=1):
+            d = d.replace(year=y - 1)
+    except ValueError:
+        need(False, f"{where}: source date {value!r} is not a real date")
+        return
+    limit = 8 if day.weekday() == 6 else 2
+    need(-1 <= (day - d).days <= limit, f"{where}: source is dated {value}, more than {limit} days before this brief")
+
+
+def all_stories(b):
+    items = list(b.get("posters") or []) + list(b.get("stories") or [])
+    for t in b.get("themes") or []:
+        items += t.get("stories") or []
+    return items
+
+
+def norm(h):
+    return re.sub(r"[^a-z0-9]+", " ", str(h).lower()).strip()
+
+
 def story(where, s, poster):
     need(s.get("tag") in TAGS, f"{where}: tag must be AI, Tech or Cyber")
     text(f"{where} headline", s.get("headline"),
@@ -87,6 +127,7 @@ def story(where, s, poster):
     src = s.get("source") or {}
     text(f"{where} source name", src.get("name"))
     text(f"{where} source date", src.get("date"))
+    fresh(where, src.get("date"))
     need(str(src.get("url", "")).startswith("https://"), f"{where}: source url must be https")
     r = s.get("read") or {}
     need(isinstance(r, dict) and r, f"{where}: needs a read with what, how, why and take")
@@ -104,6 +145,7 @@ def check(date):
     need("sample" not in b, "remove the sample flag")
     text("dayLabel", b.get("dayLabel"))
     day = datetime.date.fromisoformat(date)
+    EDITION["day"] = day
     need(b.get("dayLabel") == f"{day:%A} {day.day} {day:%B %Y}", "dayLabel does not match the date")
     sunday = day.weekday() == 6
     need(b.get("type") == ("sunday" if sunday else "daily"), "type must match the day of the week")
@@ -125,7 +167,29 @@ def check(date):
     if tags != TAGS:
         print(f"NOTE: no story today for {sorted(TAGS - tags)}. Say so in the verdict.")
     total = len(posters) + len(stories)
-    need(total <= (12 if sunday else 7), f"{total} stories is too many for this day")
+    new = date >= NEW_RULES
+    need(total <= (10 if sunday and new else 12 if sunday else 7), f"{total} stories is too many for this day (Sunday 10, other days 7)")
+    # No repeats (BRIEF.md step 0): the same headline or the same article as one
+    # of the last 3 briefs. Sunday themes may revisit a story with what is new,
+    # so on Sunday only the posters are held to the article rule.
+    try:
+        earlier = sorted(d for d in json.loads((ROOT / "briefs" / "index.json").read_text()) if d < date)[-3:] if new else []
+    except (OSError, ValueError):
+        earlier = []
+    seen_heads, seen_urls = {}, {}
+    for d in earlier:
+        try:
+            old_b = json.loads((ROOT / "briefs" / f"{d}.json").read_text())
+        except (OSError, ValueError):
+            continue
+        for s in all_stories(old_b):
+            seen_heads.setdefault(norm(s.get("headline")), d)
+            seen_urls.setdefault(str((s.get("source") or {}).get("url", "")).rstrip("/"), d)
+    for i, s in enumerate(all_stories(b)):
+        h, u = norm(s.get("headline")), str((s.get("source") or {}).get("url", "")).rstrip("/")
+        need(h not in seen_heads, f"story {i + 1}: same headline as the {seen_heads.get(h)} brief. Leave it out, or say what is new")
+        if not sunday or i < len(posters):
+            need(not u or u not in seen_urls, f"story {i + 1}: same article as the {seen_urls.get(u)} brief. Leave it out unless there is a new development with its own source")
     heads = [str(s.get("headline", "")).strip().lower() for s in posters + stories]
     need(len(heads) == len(set(heads)), "two stories have the same headline")
     l = b.get("lesson") or {}
@@ -156,8 +220,11 @@ def check(date):
     need(len(quiz) == 5, "lesson needs exactly 5 quiz questions")
     kinds = [q.get("kind") for q in quiz]
     need(kinds.count("news") == 1, "quiz needs exactly 1 news question")
-    need(kinds.count("lesson") == (1 if b.get("type") == "sunday" else (2 if "recap" in kinds else 4)),
+    first = date == "2026-11-07"
+    need(kinds.count("lesson") == (1 if b.get("type") == "sunday" else (4 if first else 2)),
          "quiz lesson questions: Sunday 1, daily 2 (4 on the first day, with no recap)")
+    need(date < NEW_RULES or kinds.count("recap") == (0 if first else 3 if b.get("type") == "sunday" else 2),
+         "quiz recap questions: Sunday 3, daily 2 (none on the first day)")
     for i, q in enumerate(quiz):
         w = f"quiz {i + 1}"
         need(q.get("kind") in {"lesson", "recap", "news"}, f"{w}: kind must be lesson, recap or news")

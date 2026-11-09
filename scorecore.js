@@ -1,5 +1,5 @@
 /* ScoreCore: the shared daily-quiz scoring rules, re-scored from history.
-   Rules (agreed with Adam, 8 Nov 2026): 10 points per correct first try, +20 for a
+   Rules (agreed 8 Nov 2026): 10 points per correct first try, +20 for a
    perfect day, streak multiplier x1.5 at 5 days in a row and x2 at 10 (the cap), a
    missed day drops the multiplier one step (never straight to zero).
    Counted days: 'all' (every day) or 'weekdays' (weekends never count or break).

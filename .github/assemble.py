@@ -59,7 +59,7 @@ def published(date):
 # skipped: the story shows without it and the edition still publishes.
 import concurrent.futures, urllib.parse
 PHOTO_HOSTS = {"upload.wikimedia.org", "thumb.wikimedia.org", "images.unsplash.com"}
-UA = {"User-Agent": "MiseEnPlacePublisher/1.0 (https://mrbam-codes.github.io/mise-en-place/)"}
+UA = {"User-Agent": "MorningBriefPublisher/1.0 (https://mrbam-codes.github.io/morning-brief/)"}
 MAX_PHOTO = 1_500_000
 
 

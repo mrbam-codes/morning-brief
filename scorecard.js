@@ -66,10 +66,10 @@
     var chips = td ? (td.perfect ? '<span class="p">PERFECT ' + m.tdRaw.score + '/' + m.tdRaw.total + '</span>' : '<span>' + m.tdRaw.score + '/' + m.tdRaw.total + ' CORRECT</span>') : '<span>NO QUIZ YET TODAY</span>';
     chips += '<span>×' + mult + ' STREAK</span>' + (td && td.perfect ? '<span>+20 BONUS</span>' : '');
     var name = (m.S.name || 'anonymous').toLowerCase().slice(0, 16);
-    return '<div class="card e" style="--p:' + Math.round(rk.toTop * 100) + '%" aria-label="Share card: ' + rk.name + ', ' + pts + ' points today">' +
+    return '<div class="sharecard e" style="--p:' + Math.round(rk.toTop * 100) + '%" aria-label="Share card: ' + rk.name + ', ' + pts + ' points today">' +
       '<canvas data-net></canvas><div class="hd"><span>' + esc(cfg.label) + ' // DAY ' + cfg.day() + '</span><span>v1</span></div>' +
       '<div>&gt; whoami<br>' + esc(name) + ' <span class="ok">AUTH OK</span></div><div class="lbl">&gt; status --today</div>' +
-      '<div class="mid"><div class="ring"><div><b>' + rk.name.toUpperCase() + '</b><span>RANK ' + rk.index + '/' + rk.of + '</span></div></div><div class="big">' + pts + '<small>POINTS TODAY</small></div></div>' +
+      '<div class="mid"><div class="ring"><div><b>' + rk.name.toUpperCase() + '</b><span>RANK ' + rk.index + '/' + rk.of + '</span></div></div><div class="sbig">' + pts + '<small>POINTS TODAY</small></div></div>' +
       '<div class="chips">' + chips + '</div><div class="lbl">&gt; rank --next</div>' +
       '<div class="bar">[' + bar + '] ' + fmt(m.S.points) + (rk.next ? '/' + fmt(rk.ceil) : '') + '</div>' +
       '<div class="lbl">' + (rk.next ? fmt(rk.toNext) + ' pts to ' + rk.next.toUpperCase() : 'TOP RANK: ' + rk.name.toUpperCase()) + '</div>' +

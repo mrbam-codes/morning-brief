@@ -2,13 +2,12 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-toTeyIHUKsMJyhnoK+EblSB/Qj5tJ7Rl4FB977rlTjs='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-4mkfvy/79Qu6w8V5EJb59VcNW4iE2AAxxKkhvANnIws='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&family=Orbitron:wght@900&family=VT323&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2307080f'/%3E%3Ctext x='16' y='23' font-size='19' font-weight='700' text-anchor='middle' fill='%2300f0ff' font-family='monospace'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 :root{--ink:#0b0620;--lilac:#c9b8ff;--ai:#ff2e6e;--tech:#ffe600;--cyber:#7c4dff;--line:#38257f}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -18,6 +17,8 @@ a{color:inherit}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hero{position:relative;min-height:88svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 18px 34px;overflow:hidden}
 .hero canvas{position:absolute;inset:0;width:100%;height:100%}
+/* the canvas starts below the buttons and score badge, so its readout is never covered */
+.hero>canvas{top:calc(100px + env(safe-area-inset-top));height:calc(100% - 100px - env(safe-area-inset-top))}
 .hero>*:not(canvas){position:relative}
 .date{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--lilac);text-transform:uppercase}
 .verdict{font-size:38px;line-height:1.05;font-weight:700;margin-top:10px}
@@ -52,6 +53,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .card{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .card:active{transform:scale(.99)}
 .cue{display:block;margin-top:10px;font-size:13px;font-weight:700;color:var(--tech)}
+button.cue{background:none;border:0;padding:4px 0;font-family:inherit;text-align:left;cursor:pointer}
+:focus-visible{outline:3px solid #00f0ff;outline-offset:3px;border-radius:6px}
 .poster{cursor:pointer}
 .poster .cue{color:inherit;margin-top:14px;font-size:14px;text-decoration:underline}
 .sheet{position:fixed;inset:0;z-index:20;background:var(--ink);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
@@ -65,11 +68,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .sheet .take{background:linear-gradient(160deg,#ff2e6e,#7c4dff);border-radius:18px;padding:16px;margin-top:24px}
 .sheet .take h3{color:#fff;margin-top:0;opacity:.9}
 .sheet .orig{display:block;margin-top:26px;font-size:14px;color:var(--lilac);padding:8px 0}
-.lesson{background:linear-gradient(160deg,#ff2e6e,#7c4dff 58%,#16b8f0);border-radius:24px;padding:20px 18px;margin-top:22px}
+.lesson{background:linear-gradient(rgba(10,6,30,.4),rgba(10,6,30,.4)),linear-gradient(160deg,#ff2e6e,#7c4dff 58%,#16b8f0);border-radius:24px;padding:20px 18px;margin-top:22px}
 .lesson small{font-size:13px;font-weight:700}
 .lesson h2{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:40px;line-height:1.05;text-transform:uppercase;margin:6px 0 12px}
 .lesson p{font-size:16px;line-height:1.42;margin-bottom:10px}
-.lesson .lab{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.lesson .lab{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .diagram{display:block;width:100%;height:auto;margin:12px 0 14px}
 .lesson ol{margin:0 0 12px 20px;font-size:15px;line-height:1.4}
 .lesson li{margin-bottom:5px}
@@ -187,9 +190,9 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 .cc-name input{font:500 16px 'Space Grotesk',system-ui,sans-serif;padding:10px 12px;border-radius:10px;border:1px solid #26303d;background:#121822;color:#eef2f7}
 
 /* ---- Share card (Terminal x Neon) ---- */
-.card.e{box-sizing:border-box;position:relative;width:100%;aspect-ratio:9/16;border-radius:22px;overflow:hidden;isolation:isolate}
+.sharecard.e{box-sizing:border-box;position:relative;width:100%;aspect-ratio:9/16;border-radius:22px;overflow:hidden;isolation:isolate}
 .e{background:radial-gradient(120% 75% at 50% 0%,#1d0a3d 0%,#07041a 55%,#020806 100%);color:#7dffa8;font-family:"VT323",'IBM Plex Mono',ui-monospace,monospace;display:flex;flex-direction:column;box-shadow:inset 0 0 90px rgba(61,230,255,.10)}
-.card.e{container-type:inline-size;padding:6% 5.5%;gap:6px}.e>*{font-size:5cqw;min-width:0}
+.sharecard.e{container-type:inline-size;padding:6% 5.5%;gap:6px}.e>*{font-size:5cqw;min-width:0}
 .e canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.75}
 .e::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0 2px,transparent 2px 4px);pointer-events:none;z-index:2}
 .e .hd{font-size:5cqw;color:#3fae6a;display:flex;justify-content:space-between}
@@ -203,8 +206,8 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 .e .ring div{position:relative;text-align:center;display:grid}
 .e .ring b{font:900 4.2cqw "Orbitron",'Space Grotesk',system-ui,sans-serif;color:#3de6ff;text-shadow:0 0 10px #3de6ff;letter-spacing:.04em}
 .e .ring span{font-size:4.2cqw;color:#c9a7ff}
-.e .big{font-size:23cqw;line-height:.85;color:#b6ffcf;text-shadow:0 0 18px rgba(125,255,168,.75)}
-.e .big small{display:block;font-size:5cqw;color:#3fae6a;text-shadow:none;margin-top:6px}
+.e .sbig{font-size:23cqw;line-height:.85;color:#b6ffcf;text-shadow:0 0 18px rgba(125,255,168,.75)}
+.e .sbig small{display:block;font-size:5cqw;color:#3fae6a;text-shadow:none;margin-top:6px}
 .e .chips{display:flex;gap:1.6cqw;flex-wrap:wrap}
 .e .chips span{font:600 3.4cqw 'IBM Plex Mono',ui-monospace,monospace;padding:1.4cqw 2.5cqw;border-radius:99px;border:1px solid rgba(61,230,255,.6);color:#bff7ff;background:rgba(61,230,255,.08)}
 .e .chips span.p{border-color:#ff3df2;color:#ffc8fb;background:rgba(255,61,242,.14);box-shadow:0 0 12px rgba(255,61,242,.4)}
@@ -327,17 +330,19 @@ function openStory(st){
   if(!st.read)bd.append(el('h3',null,'In short'),el('p',null,st.summary));
   SECTIONS.forEach(([t,k])=>{if(r[k])bd.append(el('h3',null,t),el('p',null,r[k]))});
   if(KSTORY&&st===KSTORY.st)try{bd.append(kimchiCameo(KSTORY.b))}catch(e){}
-  bd.append(el('h3',null,'So what'),el('p',null,st.soWhat.replace(/^[A-Za-z]+:\s*/,'')));
+  bd.append(el('h3',null,'So what'),el('p',null,st.soWhat.replace(/^[A-Za-z]+:\s*/,'').replace(/^./,ch=>ch.toUpperCase())));
   if(r.take){const t=el('div','take');t.append(el('h3',null,'Claude’s take'),el('p',null,r.take));bd.append(t)}
   const o=el('a','orig','Read the original at '+st.source.name+' ↗');o.href=safe(st.source.url);o.target='_blank';o.rel='noopener';bd.append(o)}
-const open=(n,st)=>{n.tabIndex=0;n.setAttribute('role','button');n.onclick=e=>{if(e.target.closest('a'))return;openStory(st)};n.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openStory(st)}};n.append(el('span','cue','Read the short version →'))};
+/* the card is clickable with a mouse or finger; keyboards and screen readers use its real button, so no control sits inside another */
+const cueBtn=f=>{const b=el('button','cue','Read the short version →');b.type='button';b.onclick=e=>{e.stopPropagation();f()};return b};
+const open=(n,st)=>{n.onclick=e=>{if(e.target.closest('a,button'))return;openStory(st)};n.append(cueBtn(()=>openStory(st)))};
 function openChatter(c){
   const{bd}=sheet(c.tag);bd.append(el('h2',null,c.headline),el('div','meta','Forum: '+c.thread.name+', '+c.thread.date+'. This is opinion, not reporting.'));
   bd.append(el('h3',null,'What people are discussing'),el('p',null,c.summary),el('h3',null,'The best insight'),el('p',null,c.insight),el('h3',null,'The other side'),el('p',null,c.dissent));
   const t=el('div','take');t.append(el('h3',null,'How far to trust it: '+c.trust),el('p',null,c.trustNote));bd.append(t);
   const a=el('a','orig','Read the discussion at '+c.thread.name+' ↗');a.href=safe(c.thread.url);a.target='_blank';a.rel='noopener';bd.append(a);
   if(c.original){const o=el('a','orig','Read the original: '+c.original.name+' ↗');o.href=safe(c.original.url);o.target='_blank';o.rel='noopener';bd.append(o)}}
-const openC=(n,c)=>{n.tabIndex=0;n.setAttribute('role','button');n.onclick=e=>{if(e.target.closest('a'))return;openChatter(c)};n.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openChatter(c)}};n.append(el('span','cue','Read the short version →'))};
+const openC=(n,c)=>{n.onclick=e=>{if(e.target.closest('a,button'))return;openChatter(c)};n.append(cueBtn(()=>openChatter(c)))};
 /* ---------- quiz engine ---------- */
 /* scoring: shared rules in scorecore.js, re-scored from history; every day counts */
 const MODE='all',RANKS=LEVELS.map(l=>[l[1],l[0]]),FIRST='2026-11-07';
@@ -429,7 +434,7 @@ function openProgress(){
   bd.append(el('h3',null,'Back up your scores'));
   bd.append(el('p','meta','Scores live only on this phone. Copy a backup code to keep or move them.'));
   const ex=el('button','btn','Copy backup code'),ta=el('textarea');ta.placeholder='Paste a backup code here to restore';
-  ex.onclick=()=>{const code=btoa(unescape(encodeURIComponent(JSON.stringify(S))));try{navigator.clipboard.writeText(code).then(()=>ex.textContent='Copied')}catch(e){ta.value=code;ta.select();ex.textContent='Code shown below, copy it'}};
+  ex.onclick=()=>{const code=btoa(unescape(encodeURIComponent(JSON.stringify(S))));const show=()=>{ta.value=code;ta.select();ex.textContent='Code shown below, copy it'};try{navigator.clipboard.writeText(code).then(()=>ex.textContent='Copied',show)}catch(e){show()}};
   const im=el('button','btn alt','Restore from code');
   im.onclick=()=>{try{const o=JSON.parse(decodeURIComponent(escape(atob(ta.value.trim()))));if(!o.days||!o.tags)throw 0;if(!confirm('Replace the scores on this phone with the backup?'))return;S=Object.assign(fresh(),o);save();history.back();setTimeout(openProgress,60);refreshNav()}catch(e){im.textContent='That code did not work'}};
   bd.append(ex,ta,im)}

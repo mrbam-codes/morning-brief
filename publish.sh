@@ -8,8 +8,12 @@ DATE="$1"; BRANCH="${2:-briefs}"
 case "$BRANCH" in briefs|briefs-rehearsal) ;; *) echo "Refusing to push to $BRANCH"; exit 1 ;; esac
 git fetch -q origin briefs "$BRANCH" 2>/dev/null || git fetch -q origin briefs
 PARENT=$(git rev-parse -q --verify "origin/$BRANCH" || git rev-parse origin/briefs)
-git add briefs
-TREE=$(git write-tree)
+# The commit is the branch tip plus this folder's briefs/ files only, so no
+# other file the run touched can travel with it.
+IDX=$(mktemp); rm -f "$IDX"
+GIT_INDEX_FILE="$IDX" git read-tree "$PARENT" && GIT_INDEX_FILE="$IDX" git add briefs && TREE=$(GIT_INDEX_FILE="$IDX" git write-tree)
+rm -f "$IDX"
+if [ -z "$TREE" ]; then echo "PUSH FAILED: could not build the commit"; exit 1; fi
 COMMIT=$(git -c user.name="Morning brief" -c user.email="mrbam-codes@users.noreply.github.com" commit-tree "$TREE" -p "$PARENT" -m "Brief $DATE")
 START=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 if ! git push -q origin "$COMMIT:refs/heads/$BRANCH"; then echo "PUSH FAILED"; exit 1; fi
