@@ -107,9 +107,10 @@ laser(o){const{r,c,col,card}=o,tr=[];
     for(let i=1;i<tr.length;i++){x.globalAlpha=i/tr.length*.8;x.lineWidth=1+i/tr.length*4;x.beginPath();x.moveTo(tr[i-1][0],tr[i-1][1]);x.lineTo(tr[i][0],tr[i][1]);x.stroke()}
     if(on){x.globalAlpha=1;x.fillStyle=col;x.beginPath();x.arc(d[0],d[1],7,0,7);x.fill();x.fillStyle='#fff';x.beginPath();x.arc(d[0],d[1],3.5,0,7);x.fill()}x.restore();
     const uc=Math.min(.55,cl((t-.42)/1.5)),fc=feet(uc),stop=uc>=.55;
-    drawCat(x,'C',fc.x,fc.y,1.25,{pose:stop?'sit':'run',flip:!stop&&fc.fl,ph:t*16,a:fade});
     const uk=cl((t-.34)/1),fk=feet(uk),land=uk>=1;
     drawCat(x,'K',land?Math.min(W-26,c.x+34):fk.x,land?Math.min(H-4,c.y+20):fk.y,1.2,{pose:land?'sit':'run',flip:fk.fl,ph:t*22,a:fade});
+    /* Charlee runs her own lane, below and to the left of Kimchi, and is drawn last so neither cat hides the other */
+    drawCat(x,'C',Math.max(64,Math.min(W-64,fc.x-56)),Math.min(H-8,fc.y+46),1.25,{pose:stop?'sit':'run',flip:!stop&&fc.fl,ph:t*16,a:fade});
     ring(c,(t-1.2)/.4,col)}}},
 };
 

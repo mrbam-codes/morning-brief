@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-2Bz/LD4zbJzWAve3Brvo35ma7IZsnFYAS4FLKjXFyJc='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-GYQoMKzL2sXvlIcIgYUqWEZvqmwkWmQ7jv0gv5sqmZ8='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -661,9 +661,10 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
   const drawQuiz=()=>{qc.textContent='';const dn=S.days[qkey],pr=(S.prog[qkey]||[]).length;
     qc.append(el('span','lab','Today’s quiz'),el('h2',null,dn?'You scored '+dn.score+' out of '+dn.total:items.length+' questions'),el('p',null,dn?'+'+dn.points+' points earned. Replays are for practice and do not change your score.':pr?'You are '+pr+' questions in. Pick up where you left off.':'One question per lesson, plus revision. Points, streaks and badges for every day you play. Up to '+maxPoints(items.length)+' points today.'));
     const bt=el('button','btn',dn?'Practise again':pr?'Resume quiz':'Start quiz');bt.onclick=()=>startQuiz(b,items,qkey);qc.append(bt)};
+  /* the quiz and the interview round go last on the page, after everything there is to read */
+  if(window.Evidence)Evidence.mount(m2,b,{cls:'gcard evidence',heading:'h2'});
   drawQuiz();m2.append(qc);
   if(b.interview){const ic=el('section','gcard'),idn=S.days[b.date+'-interview'];ic.append(el('span','lab','Interview round'),el('h2',null,'A question you might be asked'),el('p',null,idn?'Done. Replay for practice.':'One scenario, in a consultant’s voice. +15 points if you get it right.'));const bt=el('button','btn',idn?'Practise again':'Take the interview question');bt.onclick=()=>startInterview(b);ic.append(bt);m2.append(ic)}
-  if(window.Evidence)Evidence.mount(m2,b,{cls:'gcard evidence',heading:'h2'});
   app.append(m2);
   T.restore();L.restore();
   document.body.append(Object.assign(document.createElement('canvas'),{id:'fx'}));
