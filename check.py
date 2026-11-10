@@ -204,8 +204,8 @@ def story(where, s, poster):
         text(f"{where} big", s["big"], LIMITS["big"])
 
 
-# ---------- the 577-lesson course (editions from 16 Nov 2026) ----------
-COURSE_START = "2026-11-16"
+# ---------- the 577-lesson course (editions from 11 Nov 2026) ----------
+COURSE_START = "2026-11-11"
 _COURSE = {}
 
 
@@ -298,7 +298,7 @@ def check_learn(b, day, date):
     need(cd is not None, f"no course day in course.json for {date}")
     if cd is None:
         return
-    need("lesson" not in b, "from 16 Nov use lessons (a list), not lesson")
+    need("lesson" not in b, "from 11 Nov use lessons (a list), not lesson")
     want = cd["lessons"]
     got = b.get("lessons") or []
     need([l.get("n") for l in got] == [l["n"] for l in want],
@@ -368,7 +368,7 @@ def check_learn(b, day, date):
 
 
 def check_v1_lesson(b, day, date):
-    """The 90-lesson course (editions before 16 Nov 2026)."""
+    """The 90-lesson course (editions before 11 Nov 2026)."""
     l = b.get("lesson") or {}
     need(l.get("n") == (day - datetime.date(2026, 11, 7)).days % 90 + 1, "lesson number is wrong for this date")
     need(l.get("tag") in TAGS, "lesson tag")
@@ -488,7 +488,7 @@ def check(date):
         text("term", t.get("term"), 40)
         text("term meaning", t.get("plain"), 150)
     bd = b.get("build")
-    # From 16 Nov a Try it day may leave out the build idea: the exercise takes its place.
+    # From 11 Nov a Try it day may leave out the build idea: the exercise takes its place.
     if bd is not None or not (date >= COURSE_START and (course_day(date) or {}).get("try")):
         bd = bd or {}
         text("build title", bd.get("title"), 50)

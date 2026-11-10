@@ -1,15 +1,15 @@
 """Course data test. Run: python3 tests/test_course.py   (prints COURSE OK or the problems)
 
-Every date from 16 Nov 2026 to 27 Apr 2027 appears once, in order, with its lessons:
+Every date from 11 Nov 2026 to 21 Apr 2027 appears once, in order, with its lessons:
 3 on weekdays and 5 on Saturdays and Sundays. No lesson is missing or repeated.
 """
 import datetime, json, pathlib, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-START, END, TOTAL = datetime.date(2026, 11, 16), datetime.date(2027, 4, 27), 577
-# The 9 capstones run 3 a day over 25 to 27 Apr, so the last weekend
-# (Sat 24 and Sun 25 Apr) has 3 lessons each. This is in the approved course.
-THREE_AT_WEEKEND = {"2027-04-24", "2027-04-25"}
+START, END, TOTAL = datetime.date(2026, 11, 11), datetime.date(2027, 4, 21), 577
+# Lessons 1 to 568 end on Sun 18 Apr, which holds the 4 left over, then the 9 capstones
+# run 3 a day over Mon 19 to Wed 21 Apr. Sun 18 Apr is the one weekend day without 5.
+FOUR_AT_WEEKEND = {"2027-04-18"}
 c = json.loads(pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else ROOT / "course.json").read_text(encoding="utf-8"))
 bad = []
 days = c["days"]
@@ -25,7 +25,7 @@ if got != sorted(got): bad.append("dates are not in order")
 for i, d in enumerate(days):
     if d.get("day") != i + 1: bad.append(f"{d['date']}: day number {d.get('day')}, expected {i + 1}")
     wk = datetime.date.fromisoformat(d["date"]).weekday() >= 5
-    need = 3 if (not wk or d["date"] in THREE_AT_WEEKEND) else 5
+    need = 3 if not wk else (4 if d["date"] in FOUR_AT_WEEKEND else 5)
     if len(d["lessons"]) != need: bad.append(f"{d['date']}: {len(d['lessons'])} lessons, expected {need}")
     if not (d.get("fact") or {}).get("fact"): bad.append(f"{d['date']}: no fun fact")
     for l in d["lessons"]:

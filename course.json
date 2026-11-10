@@ -1,6 +1,6 @@
 {
- "start": "2026-11-16",
- "end": "2027-04-27",
+ "start": "2026-11-11",
+ "end": "2027-04-21",
  "lessons": 577,
  "phases": {
   "1": "Builder's foundations: how it all works",
@@ -11,7 +11,7 @@
  "days": [
   {
    "day": 1,
-   "date": "2026-11-16",
+   "date": "2026-11-11",
    "phase": 1,
    "lessons": [
     {
@@ -65,7 +65,7 @@
   },
   {
    "day": 2,
-   "date": "2026-11-17",
+   "date": "2026-11-12",
    "phase": 1,
    "lessons": [
     {
@@ -119,7 +119,7 @@
   },
   {
    "day": 3,
-   "date": "2026-11-18",
+   "date": "2026-11-13",
    "phase": 1,
    "lessons": [
     {
@@ -173,7 +173,7 @@
   },
   {
    "day": 4,
-   "date": "2026-11-19",
+   "date": "2026-11-14",
    "phase": 1,
    "lessons": [
     {
@@ -217,19 +217,7 @@
      "verify": "",
      "n": 12,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Computing foundations",
-    "fact": "The Apollo Guidance Computer had just 2,048 words of erasable memory and 36,864 words of rope memory, made by weaving wires through magnetic cores",
-    "source": "https://en.wikipedia.org/wiki/Apollo_Guidance_Computer"
-   }
-  },
-  {
-   "day": 5,
-   "date": "2026-11-20",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 209,
      "area": "AI from first principles",
@@ -257,7 +245,19 @@
      "verify": "",
      "n": 14,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Computing foundations",
+    "fact": "The Apollo Guidance Computer had just 2,048 words of erasable memory and 36,864 words of rope memory, made by weaving wires through magnetic cores",
+    "source": "https://en.wikipedia.org/wiki/Apollo_Guidance_Computer"
+   }
+  },
+  {
+   "day": 5,
+   "date": "2026-11-15",
+   "phase": 1,
+   "lessons": [
     {
      "id": 3,
      "area": "Computing foundations",
@@ -271,19 +271,7 @@
      "verify": "",
      "n": 15,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Computing foundations",
-    "fact": "The first \"bug\" logged in a computer was a real moth found in a Harvard Mark II relay about 1947, taped into the log book",
-    "source": "https://en.wikipedia.org/wiki/Computer_bug"
-   }
-  },
-  {
-   "day": 6,
-   "date": "2026-11-21",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 210,
      "area": "AI from first principles",
@@ -339,7 +327,19 @@
      "verify": "",
      "n": 19,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Computing foundations",
+    "fact": "The first \"bug\" logged in a computer was a real moth found in a Harvard Mark II relay about 1947, taped into the log book",
+    "source": "https://en.wikipedia.org/wiki/Computer_bug"
+   }
+  },
+  {
+   "day": 6,
+   "date": "2026-11-16",
+   "phase": 1,
+   "lessons": [
     {
      "id": 212,
      "area": "AI from first principles",
@@ -353,19 +353,7 @@
      "verify": "",
      "n": 20,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Computing foundations",
-    "fact": "Thomas Edison called faults in invention \"Bugs\" in an 1878 letter, long before computers",
-    "source": "https://en.wikipedia.org/wiki/Computer_bug"
-   }
-  },
-  {
-   "day": 7,
-   "date": "2026-11-22",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 311,
      "area": "Cyber foundations",
@@ -393,7 +381,19 @@
      "verify": "",
      "n": 22,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Computing foundations",
+    "fact": "Thomas Edison called faults in invention \"Bugs\" in an 1878 letter, long before computers",
+    "source": "https://en.wikipedia.org/wiki/Computer_bug"
+   }
+  },
+  {
+   "day": 7,
+   "date": "2026-11-17",
+   "phase": 1,
+   "lessons": [
     {
      "id": 213,
      "area": "AI from first principles",
@@ -441,20 +441,11 @@
     "area": "Computing foundations",
     "fact": "Ariane 5's maiden flight in 1996 was destroyed about 37 seconds after launch by converting a 64-bit number into a 16-bit integer, costing over US$370 million",
     "source": "https://en.wikipedia.org/wiki/Ariane_flight_V88"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "How models work for builders",
-     "title": "Count tokens and cost",
-     "task": "Ask Claude Code to estimate the token count and cost of a long document you have using the official counter, and chart where the tokens go",
-     "needs": "Tokens: how models read"
-    }
-   ]
+   }
   },
   {
    "day": 8,
-   "date": "2026-11-23",
+   "date": "2026-11-18",
    "phase": 1,
    "lessons": [
     {
@@ -508,7 +499,7 @@
   },
   {
    "day": 9,
-   "date": "2026-11-24",
+   "date": "2026-11-19",
    "phase": 1,
    "lessons": [
     {
@@ -562,7 +553,7 @@
   },
   {
    "day": 10,
-   "date": "2026-11-25",
+   "date": "2026-11-20",
    "phase": 1,
    "lessons": [
     {
@@ -616,7 +607,7 @@
   },
   {
    "day": 11,
-   "date": "2026-11-26",
+   "date": "2026-11-21",
    "phase": 1,
    "lessons": [
     {
@@ -660,19 +651,7 @@
      "verify": "",
      "n": 37,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Computing foundations",
-    "fact": "Unicode reserves 1,114,112 code points and has 3,972 emoji in its latest version",
-    "source": "https://en.wikipedia.org/wiki/Unicode"
-   }
-  },
-  {
-   "day": 12,
-   "date": "2026-11-27",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 603,
      "area": "Cyber foundations",
@@ -700,7 +679,19 @@
      "verify": "",
      "n": 39,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Computing foundations",
+    "fact": "Unicode reserves 1,114,112 code points and has 3,972 emoji in its latest version",
+    "source": "https://en.wikipedia.org/wiki/Unicode"
+   }
+  },
+  {
+   "day": 12,
+   "date": "2026-11-22",
+   "phase": 1,
+   "lessons": [
     {
      "id": 316,
      "area": "Cyber foundations",
@@ -714,19 +705,7 @@
      "verify": "",
      "n": 40,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "Computing foundations",
-    "fact": "Henry Sheffer showed in 1913 that NAND alone can build every other logic gate",
-    "source": "https://en.wikipedia.org/wiki/NAND_logic"
-   }
-  },
-  {
-   "day": 13,
-   "date": "2026-11-28",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 11,
      "area": "Computing foundations",
@@ -782,7 +761,28 @@
      "verify": "",
      "n": 44,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Computing foundations",
+    "fact": "Henry Sheffer showed in 1913 that NAND alone can build every other logic gate",
+    "source": "https://en.wikipedia.org/wiki/NAND_logic"
+   },
+   "try": [
+    {
+     "area": "Building with AI",
+     "module": "How models work for builders",
+     "title": "Count tokens and cost",
+     "task": "Ask Claude Code to estimate the token count and cost of a long document you have using the official counter, and chart where the tokens go",
+     "needs": "Tokens: how models read"
+    }
+   ]
+  },
+  {
+   "day": 13,
+   "date": "2026-11-23",
+   "phase": 1,
+   "lessons": [
     {
      "id": 13,
      "area": "Computing foundations",
@@ -796,19 +796,7 @@
      "verify": "",
      "n": 45,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Computing foundations",
-    "fact": "Binary floating point cannot store 0.1 exactly, which is why 0.1 + 0.2 may not equal 0.3",
-    "source": "https://en.wikipedia.org/wiki/Floating-point_arithmetic"
-   }
-  },
-  {
-   "day": 14,
-   "date": "2026-11-29",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 571,
      "area": "History and big ideas",
@@ -836,7 +824,19 @@
      "verify": "",
      "n": 47,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Computing foundations",
+    "fact": "Binary floating point cannot store 0.1 exactly, which is why 0.1 + 0.2 may not equal 0.3",
+    "source": "https://en.wikipedia.org/wiki/Floating-point_arithmetic"
+   }
+  },
+  {
+   "day": 14,
+   "date": "2026-11-24",
+   "phase": 1,
+   "lessons": [
     {
      "id": 14,
      "area": "Computing foundations",
@@ -888,7 +888,7 @@
   },
   {
    "day": 15,
-   "date": "2026-11-30",
+   "date": "2026-11-25",
    "phase": 1,
    "lessons": [
     {
@@ -942,7 +942,7 @@
   },
   {
    "day": 16,
-   "date": "2026-12-01",
+   "date": "2026-11-26",
    "phase": 1,
    "lessons": [
     {
@@ -996,7 +996,7 @@
   },
   {
    "day": 17,
-   "date": "2026-12-02",
+   "date": "2026-11-27",
    "phase": 1,
    "lessons": [
     {
@@ -1050,7 +1050,7 @@
   },
   {
    "day": 18,
-   "date": "2026-12-03",
+   "date": "2026-11-28",
    "phase": 1,
    "lessons": [
     {
@@ -1094,19 +1094,7 @@
      "verify": "",
      "n": 62,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "Networks and the internet",
-    "fact": "The first ARPANET message on 29 October 1969 was meant to be \"login\" but the receiving machine crashed after \"lo\"",
-    "source": "https://en.wikipedia.org/wiki/ARPANET"
-   }
-  },
-  {
-   "day": 19,
-   "date": "2026-12-04",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 53,
      "area": "Networks and the internet",
@@ -1134,7 +1122,19 @@
      "verify": "",
      "n": 64,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Networks and the internet",
+    "fact": "The first ARPANET message on 29 October 1969 was meant to be \"login\" but the receiving machine crashed after \"lo\"",
+    "source": "https://en.wikipedia.org/wiki/ARPANET"
+   }
+  },
+  {
+   "day": 19,
+   "date": "2026-11-29",
+   "phase": 1,
+   "lessons": [
     {
      "id": 324,
      "area": "Cyber foundations",
@@ -1148,19 +1148,7 @@
      "verify": "",
      "n": 65,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "Networks and the internet",
-    "fact": "BGP was sketched in January 1989 on napkins and nicknamed the \"Two-Napkin Protocol\"",
-    "source": "https://en.wikipedia.org/wiki/Border_Gateway_Protocol"
-   }
-  },
-  {
-   "day": 20,
-   "date": "2026-12-05",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 574,
      "area": "History and big ideas",
@@ -1216,7 +1204,19 @@
      "verify": "Present the five blockers as our own synthesis, not a McKinsey finding",
      "n": 69,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Networks and the internet",
+    "fact": "BGP was sketched in January 1989 on napkins and nicknamed the \"Two-Napkin Protocol\"",
+    "source": "https://en.wikipedia.org/wiki/Border_Gateway_Protocol"
+   }
+  },
+  {
+   "day": 20,
+   "date": "2026-11-30",
+   "phase": 1,
+   "lessons": [
     {
      "id": 18,
      "area": "Computing foundations",
@@ -1230,19 +1230,7 @@
      "verify": "",
      "n": 70,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Networks and the internet",
-    "fact": "On 4 October 2021 a BGP withdrawal cut Facebook's DNS servers off for around six to seven hours, and staff reportedly could not use their door badges",
-    "source": "https://en.wikipedia.org/wiki/2021_Facebook_outage"
-   }
-  },
-  {
-   "day": 21,
-   "date": "2026-12-06",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 55,
      "area": "Networks and the internet",
@@ -1270,7 +1258,19 @@
      "verify": "",
      "n": 72,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Networks and the internet",
+    "fact": "On 4 October 2021 a BGP withdrawal cut Facebook's DNS servers off for around six to seven hours, and staff reportedly could not use their door badges",
+    "source": "https://en.wikipedia.org/wiki/2021_Facebook_outage"
+   }
+  },
+  {
+   "day": 21,
+   "date": "2026-12-01",
+   "phase": 1,
+   "lessons": [
     {
      "id": 325,
      "area": "Cyber foundations",
@@ -1322,7 +1322,7 @@
   },
   {
    "day": 22,
-   "date": "2026-12-07",
+   "date": "2026-12-02",
    "phase": 1,
    "lessons": [
     {
@@ -1376,7 +1376,7 @@
   },
   {
    "day": 23,
-   "date": "2026-12-08",
+   "date": "2026-12-03",
    "phase": 1,
    "lessons": [
     {
@@ -1430,7 +1430,7 @@
   },
   {
    "day": 24,
-   "date": "2026-12-09",
+   "date": "2026-12-04",
    "phase": 1,
    "lessons": [
     {
@@ -1484,7 +1484,7 @@
   },
   {
    "day": 25,
-   "date": "2026-12-10",
+   "date": "2026-12-05",
    "phase": 1,
    "lessons": [
     {
@@ -1528,19 +1528,7 @@
      "verify": "",
      "n": 87,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Networks and the internet",
-    "fact": "IPv6 has 2^128 addresses, about 3.4 x 10^38, versus 4,294,967,296 for IPv4",
-    "source": "https://en.wikipedia.org/wiki/IPv6_address"
-   }
-  },
-  {
-   "day": 26,
-   "date": "2026-12-11",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 59,
      "area": "Networks and the internet",
@@ -1568,7 +1556,19 @@
      "verify": "",
      "n": 89,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Networks and the internet",
+    "fact": "IPv6 has 2^128 addresses, about 3.4 x 10^38, versus 4,294,967,296 for IPv4",
+    "source": "https://en.wikipedia.org/wiki/IPv6_address"
+   }
+  },
+  {
+   "day": 26,
+   "date": "2026-12-06",
+   "phase": 1,
+   "lessons": [
     {
      "id": 22,
      "area": "Computing foundations",
@@ -1582,19 +1582,7 @@
      "verify": "",
      "n": 90,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Networks and the internet",
-    "fact": "There are only 13 root name server identities (a to m), but about 1,954 physical instances via anycast as of December 2025",
-    "source": "https://en.wikipedia.org/wiki/Root_name_server"
-   }
-  },
-  {
-   "day": 27,
-   "date": "2026-12-12",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 60,
      "area": "Networks and the internet",
@@ -1650,7 +1638,19 @@
      "verify": "",
      "n": 94,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Networks and the internet",
+    "fact": "There are only 13 root name server identities (a to m), but about 1,954 physical instances via anycast as of December 2025",
+    "source": "https://en.wikipedia.org/wiki/Root_name_server"
+   }
+  },
+  {
+   "day": 27,
+   "date": "2026-12-07",
+   "phase": 1,
+   "lessons": [
     {
      "id": 61,
      "area": "Networks and the internet",
@@ -1664,19 +1664,7 @@
      "verify": "",
      "n": 95,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Networks and the internet",
-    "fact": "Let's Encrypt serves more than 700 million websites and issues certificates valid for 90 days by default",
-    "source": "https://en.wikipedia.org/wiki/Let%27s_Encrypt"
-   }
-  },
-  {
-   "day": 28,
-   "date": "2026-12-13",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 227,
      "area": "AI from first principles",
@@ -1704,7 +1692,19 @@
      "verify": "",
      "n": 97,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Networks and the internet",
+    "fact": "Let's Encrypt serves more than 700 million websites and issues certificates valid for 90 days by default",
+    "source": "https://en.wikipedia.org/wiki/Let%27s_Encrypt"
+   }
+  },
+  {
+   "day": 28,
+   "date": "2026-12-08",
+   "phase": 1,
+   "lessons": [
     {
      "id": 62,
      "area": "Networks and the internet",
@@ -1756,7 +1756,7 @@
   },
   {
    "day": 29,
-   "date": "2026-12-14",
+   "date": "2026-12-09",
    "phase": 1,
    "lessons": [
     {
@@ -1810,7 +1810,7 @@
   },
   {
    "day": 30,
-   "date": "2026-12-15",
+   "date": "2026-12-10",
    "phase": 1,
    "lessons": [
     {
@@ -1864,7 +1864,7 @@
   },
   {
    "day": 31,
-   "date": "2026-12-16",
+   "date": "2026-12-11",
    "phase": 1,
    "lessons": [
     {
@@ -1918,7 +1918,7 @@
   },
   {
    "day": 32,
-   "date": "2026-12-17",
+   "date": "2026-12-12",
    "phase": 1,
    "lessons": [
     {
@@ -1962,19 +1962,7 @@
      "verify": "",
      "n": 112,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Networks and the internet",
-    "fact": "Original 16-bit AS numbers allowed only about 64,510 public networks; 32-bit extension (2007) allows about 4 billion",
-    "source": "https://en.wikipedia.org/wiki/Border_Gateway_Protocol"
-   }
-  },
-  {
-   "day": 33,
-   "date": "2026-12-18",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 232,
      "area": "AI from first principles",
@@ -2002,7 +1990,19 @@
      "verify": "",
      "n": 114,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Networks and the internet",
+    "fact": "Original 16-bit AS numbers allowed only about 64,510 public networks; 32-bit extension (2007) allows about 4 billion",
+    "source": "https://en.wikipedia.org/wiki/Border_Gateway_Protocol"
+   }
+  },
+  {
+   "day": 33,
+   "date": "2026-12-13",
+   "phase": 1,
+   "lessons": [
     {
      "id": 28,
      "area": "Computing foundations",
@@ -2016,19 +2016,7 @@
      "verify": "",
      "n": 115,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "AI from first principles",
-    "fact": "The original transformer paper reached 41.8 BLEU on English-to-French translation after only 3.5 days of training on eight GPUs",
-    "source": "https://arxiv.org/abs/1706.03762"
-   }
-  },
-  {
-   "day": 34,
-   "date": "2026-12-19",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 233,
      "area": "AI from first principles",
@@ -2084,7 +2072,19 @@
      "verify": "",
      "n": 119,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI from first principles",
+    "fact": "The original transformer paper reached 41.8 BLEU on English-to-French translation after only 3.5 days of training on eight GPUs",
+    "source": "https://arxiv.org/abs/1706.03762"
+   }
+  },
+  {
+   "day": 34,
+   "date": "2026-12-14",
+   "phase": 1,
+   "lessons": [
     {
      "id": 234,
      "area": "AI from first principles",
@@ -2098,19 +2098,7 @@
      "verify": "",
      "n": 120,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "AI from first principles",
-    "fact": "The paper that introduced the transformer was titled \"Attention Is All You Need\" and its architecture now underpins nearly every major language model",
-    "source": "https://arxiv.org/abs/1706.03762"
-   }
-  },
-  {
-   "day": 35,
-   "date": "2026-12-20",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 235,
      "area": "AI from first principles",
@@ -2138,7 +2126,19 @@
      "verify": "",
      "n": 122,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI from first principles",
+    "fact": "The paper that introduced the transformer was titled \"Attention Is All You Need\" and its architecture now underpins nearly every major language model",
+    "source": "https://arxiv.org/abs/1706.03762"
+   }
+  },
+  {
+   "day": 35,
+   "date": "2026-12-15",
+   "phase": 1,
+   "lessons": [
     {
      "id": 30,
      "area": "Computing foundations",
@@ -2190,7 +2190,7 @@
   },
   {
    "day": 36,
-   "date": "2026-12-21",
+   "date": "2026-12-16",
    "phase": 1,
    "lessons": [
     {
@@ -2244,7 +2244,7 @@
   },
   {
    "day": 37,
-   "date": "2026-12-22",
+   "date": "2026-12-17",
    "phase": 1,
    "lessons": [
     {
@@ -2298,7 +2298,7 @@
   },
   {
    "day": 38,
-   "date": "2026-12-23",
+   "date": "2026-12-18",
    "phase": 1,
    "lessons": [
     {
@@ -2352,7 +2352,7 @@
   },
   {
    "day": 39,
-   "date": "2026-12-24",
+   "date": "2026-12-19",
    "phase": 1,
    "lessons": [
     {
@@ -2396,19 +2396,7 @@
      "verify": "",
      "n": 137,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "AI from first principles",
-    "fact": "word2vec learned useful word vectors from a 1.6 billion word dataset in under a day",
-    "source": "https://arxiv.org/abs/1301.3781"
-   }
-  },
-  {
-   "day": 40,
-   "date": "2026-12-25",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 241,
      "area": "AI from first principles",
@@ -2436,7 +2424,19 @@
      "verify": "",
      "n": 139,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI from first principles",
+    "fact": "word2vec learned useful word vectors from a 1.6 billion word dataset in under a day",
+    "source": "https://arxiv.org/abs/1301.3781"
+   }
+  },
+  {
+   "day": 40,
+   "date": "2026-12-20",
+   "phase": 1,
+   "lessons": [
     {
      "id": 70,
      "area": "Networks and the internet",
@@ -2450,19 +2450,7 @@
      "verify": "",
      "n": 140,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "AI from first principles",
-    "fact": "Anthropic found that when Claude adds 36 and 59 it uses parallel paths (a rough estimate and a last-digit check), yet when asked how, it describes the school carrying method",
-    "source": "https://www.anthropic.com/research/tracing-thoughts-language-model"
-   }
-  },
-  {
-   "day": 41,
-   "date": "2026-12-26",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 575,
      "area": "History and big ideas",
@@ -2518,7 +2506,19 @@
      "verify": "",
      "n": 144,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI from first principles",
+    "fact": "Anthropic found that when Claude adds 36 and 59 it uses parallel paths (a rough estimate and a last-digit check), yet when asked how, it describes the school carrying method",
+    "source": "https://www.anthropic.com/research/tracing-thoughts-language-model"
+   }
+  },
+  {
+   "day": 41,
+   "date": "2026-12-21",
+   "phase": 1,
+   "lessons": [
     {
      "id": 71,
      "area": "Networks and the internet",
@@ -2532,28 +2532,7 @@
      "verify": "",
      "n": 145,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "AI from first principles",
-    "fact": "In the same study, Claude chose the rhyming word of a poem line before writing the line, and changed course when the planned word was suppressed",
-    "source": "https://www.anthropic.com/research/tracing-thoughts-language-model"
-   },
-   "try": [
-    {
-     "area": "Cloud and modern software",
-     "module": "How software talks (clients, servers, APIs)",
-     "title": "Call a public API and read the status codes",
-     "task": "Ask Claude Code to call a free public API with curl, show you the headers, then trigger a 404 and a 429 deliberately and explain each",
-     "needs": "HTTP requests and responses"
-    }
-   ]
-  },
-  {
-   "day": 42,
-   "date": "2026-12-27",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 243,
      "area": "AI from first principles",
@@ -2581,7 +2560,19 @@
      "verify": "",
      "n": 147,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI from first principles",
+    "fact": "In the same study, Claude chose the rhyming word of a poem line before writing the line, and changed course when the planned word was suppressed",
+    "source": "https://www.anthropic.com/research/tracing-thoughts-language-model"
+   }
+  },
+  {
+   "day": 42,
+   "date": "2026-12-22",
+   "phase": 1,
+   "lessons": [
     {
      "id": 72,
      "area": "Networks and the internet",
@@ -2633,7 +2624,7 @@
   },
   {
    "day": 43,
-   "date": "2026-12-28",
+   "date": "2026-12-23",
    "phase": 1,
    "lessons": [
     {
@@ -2687,7 +2678,7 @@
   },
   {
    "day": 44,
-   "date": "2026-12-29",
+   "date": "2026-12-24",
    "phase": 1,
    "lessons": [
     {
@@ -2741,7 +2732,7 @@
   },
   {
    "day": 45,
-   "date": "2026-12-30",
+   "date": "2026-12-25",
    "phase": 1,
    "lessons": [
     {
@@ -2795,7 +2786,7 @@
   },
   {
    "day": 46,
-   "date": "2026-12-31",
+   "date": "2026-12-26",
    "phase": 1,
    "lessons": [
     {
@@ -2839,19 +2830,7 @@
      "verify": "",
      "n": 162,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Building with AI",
-    "fact": "The paper's title nods to the Beatles song \"All You Need Is Love\", and \"Transformer\" was chosen because co-author Jakob Uszkoreit liked the sound of the word",
-    "source": "https://en.wikipedia.org/wiki/Attention_Is_All_You_Need"
-   }
-  },
-  {
-   "day": 47,
-   "date": "2027-01-01",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 153,
      "area": "Building with AI",
@@ -2879,7 +2858,28 @@
      "verify": "",
      "n": 164,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Building with AI",
+    "fact": "The paper's title nods to the Beatles song \"All You Need Is Love\", and \"Transformer\" was chosen because co-author Jakob Uszkoreit liked the sound of the word",
+    "source": "https://en.wikipedia.org/wiki/Attention_Is_All_You_Need"
+   },
+   "try": [
+    {
+     "area": "Cloud and modern software",
+     "module": "How software talks (clients, servers, APIs)",
+     "title": "Call a public API and read the status codes",
+     "task": "Ask Claude Code to call a free public API with curl, show you the headers, then trigger a 404 and a 429 deliberately and explain each",
+     "needs": "HTTP requests and responses"
+    }
+   ]
+  },
+  {
+   "day": 47,
+   "date": "2026-12-27",
+   "phase": 1,
+   "lessons": [
     {
      "id": 41,
      "area": "Computing foundations",
@@ -2893,28 +2893,7 @@
      "verify": "",
      "n": 165,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Building with AI",
-    "fact": "The original big Transformer model trained for about 3.5 days on 8 NVIDIA P100 graphics chips",
-    "source": "https://en.wikipedia.org/wiki/Attention_Is_All_You_Need"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "How models work for builders",
-     "title": "Call a model through its API",
-     "task": "Ask Claude Code to write a ten-line script that calls the Messages API with a question, prints the answer and the token usage, then change temperature and compare runs. Keep the key in an environment variable",
-     "needs": "Calling a model through its API"
-    }
-   ]
-  },
-  {
-   "day": 48,
-   "date": "2027-01-02",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 154,
      "area": "Building with AI",
@@ -2970,7 +2949,19 @@
      "verify": "",
      "n": 169,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Building with AI",
+    "fact": "The original big Transformer model trained for about 3.5 days on 8 NVIDIA P100 graphics chips",
+    "source": "https://en.wikipedia.org/wiki/Attention_Is_All_You_Need"
+   }
+  },
+  {
+   "day": 48,
+   "date": "2026-12-28",
+   "phase": 1,
+   "lessons": [
     {
      "id": 384,
      "area": "Attack and defence",
@@ -2984,28 +2975,7 @@
      "verify": "",
      "n": 170,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "Building with AI",
-    "fact": "Model Context Protocol was announced by Anthropic on 25 November 2024, with Block and Apollo among the first adopters",
-    "source": "https://www.anthropic.com/news/model-context-protocol"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "Prompting and context engineering",
-     "title": "Turn a vague prompt into a spec",
-     "task": "Give Claude Code a one-line request of yours and have it rewrite it as a six-part spec, run both through the API, and compare",
-     "needs": "Prompting as specification"
-    }
-   ]
-  },
-  {
-   "day": 49,
-   "date": "2027-01-03",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 586,
      "area": "History and big ideas",
@@ -3033,7 +3003,19 @@
      "verify": "",
      "n": 172,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Building with AI",
+    "fact": "Model Context Protocol was announced by Anthropic on 25 November 2024, with Block and Apollo among the first adopters",
+    "source": "https://www.anthropic.com/news/model-context-protocol"
+   }
+  },
+  {
+   "day": 49,
+   "date": "2026-12-29",
+   "phase": 1,
+   "lessons": [
     {
      "id": 155,
      "area": "Building with AI",
@@ -3085,7 +3067,7 @@
   },
   {
    "day": 50,
-   "date": "2027-01-04",
+   "date": "2026-12-30",
    "phase": 1,
    "lessons": [
     {
@@ -3139,7 +3121,7 @@
   },
   {
    "day": 51,
-   "date": "2027-01-05",
+   "date": "2026-12-31",
    "phase": 1,
    "lessons": [
     {
@@ -3193,7 +3175,7 @@
   },
   {
    "day": 52,
-   "date": "2027-01-06",
+   "date": "2027-01-01",
    "phase": 1,
    "lessons": [
     {
@@ -3246,17 +3228,17 @@
    },
    "try": [
     {
-     "area": "Cloud and modern software",
-     "module": "How software talks (clients, servers, APIs)",
-     "title": "Build a tiny API in Claude Code",
-     "task": "Ask Claude Code to create a 20-line API with one route returning JSON, run it locally, call it with curl and then break it on purpose (bad JSON) to read the error",
-     "needs": "REST: resources and verbs"
+     "area": "Building with AI",
+     "module": "How models work for builders",
+     "title": "Call a model through its API",
+     "task": "Ask Claude Code to write a ten-line script that calls the Messages API with a question, prints the answer and the token usage, then change temperature and compare runs. Keep the key in an environment variable",
+     "needs": "Calling a model through its API"
     }
    ]
   },
   {
    "day": 53,
-   "date": "2027-01-07",
+   "date": "2027-01-02",
    "phase": 1,
    "lessons": [
     {
@@ -3300,19 +3282,7 @@
      "verify": "",
      "n": 187,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "Cloud and modern software",
-    "fact": "The CrowdStrike update of 19 July 2024 reached customers at 04:09 UTC and was reverted at 05:27 UTC, 78 minutes later, yet about 8.5 million Windows systems were hit",
-    "source": "https://en.wikipedia.org/wiki/2024_CrowdStrike_incident"
-   }
-  },
-  {
-   "day": 54,
-   "date": "2027-01-08",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 92,
      "area": "Cloud and modern software",
@@ -3340,7 +3310,28 @@
      "verify": "",
      "n": 189,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cloud and modern software",
+    "fact": "The CrowdStrike update of 19 July 2024 reached customers at 04:09 UTC and was reverted at 05:27 UTC, 78 minutes later, yet about 8.5 million Windows systems were hit",
+    "source": "https://en.wikipedia.org/wiki/2024_CrowdStrike_incident"
+   },
+   "try": [
+    {
+     "area": "Building with AI",
+     "module": "Prompting and context engineering",
+     "title": "Turn a vague prompt into a spec",
+     "task": "Give Claude Code a one-line request of yours and have it rewrite it as a six-part spec, run both through the API, and compare",
+     "needs": "Prompting as specification"
+    }
+   ]
+  },
+  {
+   "day": 54,
+   "date": "2027-01-03",
+   "phase": 1,
+   "lessons": [
     {
      "id": 330,
      "area": "Cyber foundations",
@@ -3354,19 +3345,7 @@
      "verify": "",
      "n": 190,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "Cloud and modern software",
-    "fact": "Microsoft said the 8.5 million CrowdStrike-affected machines were less than one percent of all Windows devices, which shows how small a share can still be a global outage",
-    "source": "https://en.wikipedia.org/wiki/2024_CrowdStrike_incident"
-   }
-  },
-  {
-   "day": 55,
-   "date": "2027-01-09",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 93,
      "area": "Cloud and modern software",
@@ -3422,7 +3401,19 @@
      "verify": "",
      "n": 194,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cloud and modern software",
+    "fact": "Microsoft said the 8.5 million CrowdStrike-affected machines were less than one percent of all Windows devices, which shows how small a share can still be a global outage",
+    "source": "https://en.wikipedia.org/wiki/2024_CrowdStrike_incident"
+   }
+  },
+  {
+   "day": 55,
+   "date": "2027-01-04",
+   "phase": 1,
+   "lessons": [
     {
      "id": 250,
      "area": "AI from first principles",
@@ -3436,19 +3427,7 @@
      "verify": "",
      "n": 195,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Cloud and modern software",
-    "fact": "A service with 99.999 percent availability may be down for only 5.26 minutes a year; 99 percent allows 3.65 days",
-    "source": "https://sre.google/sre-book/availability-table/"
-   }
-  },
-  {
-   "day": 56,
-   "date": "2027-01-10",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 588,
      "area": "History and big ideas",
@@ -3476,7 +3455,19 @@
      "verify": "",
      "n": 197,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cloud and modern software",
+    "fact": "A service with 99.999 percent availability may be down for only 5.26 minutes a year; 99 percent allows 3.65 days",
+    "source": "https://sre.google/sre-book/availability-table/"
+   }
+  },
+  {
+   "day": 56,
+   "date": "2027-01-05",
+   "phase": 1,
+   "lessons": [
     {
      "id": 162,
      "area": "Building with AI",
@@ -3524,20 +3515,11 @@
     "area": "Cloud and modern software",
     "fact": "99.99 percent availability leaves just 8.64 seconds of downtime per day",
     "source": "https://sre.google/sre-book/availability-table/"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "Prompting and context engineering",
-     "title": "Break your own prompt with injection",
-     "task": "Ask Claude Code to build a tiny summariser, feed it a page with a hidden instruction, and then add a defence and retest",
-     "needs": "Prompt injection"
-    }
-   ]
+   }
   },
   {
    "day": 57,
-   "date": "2027-01-11",
+   "date": "2027-01-06",
    "phase": 1,
    "lessons": [
     {
@@ -3587,11 +3569,20 @@
     "area": "Cloud and modern software",
     "fact": "Google's Bigtable team once missed important alerts because their latency target was based on a mean and noisy alerts hid the real ones; they loosened the target to fix the root causes first",
     "source": "https://sre.google/sre-book/monitoring-distributed-systems/"
-   }
+   },
+   "try": [
+    {
+     "area": "Cloud and modern software",
+     "module": "How software talks (clients, servers, APIs)",
+     "title": "Build a tiny API in Claude Code",
+     "task": "Ask Claude Code to create a 20-line API with one route returning JSON, run it locally, call it with curl and then break it on purpose (bad JSON) to read the error",
+     "needs": "REST: resources and verbs"
+    }
+   ]
   },
   {
    "day": 58,
-   "date": "2027-01-12",
+   "date": "2027-01-07",
    "phase": 1,
    "lessons": [
     {
@@ -3641,20 +3632,11 @@
     "area": "Cloud and modern software",
     "fact": "The Google SRE book has 34 chapters and six appendices, including an example postmortem and a launch coordination checklist",
     "source": "https://sre.google/sre-book/table-of-contents/"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "Tools, harnesses and MCP",
-     "title": "Give a model one tool",
-     "task": "Ask Claude Code to write a script where the model can call a calculator function you define, then watch the tool_use and tool_result blocks",
-     "needs": "Tool use and function calling"
-    }
-   ]
+   }
   },
   {
    "day": 59,
-   "date": "2027-01-13",
+   "date": "2027-01-08",
    "phase": 1,
    "lessons": [
     {
@@ -3708,7 +3690,7 @@
   },
   {
    "day": 60,
-   "date": "2027-01-14",
+   "date": "2027-01-09",
    "phase": 1,
    "lessons": [
     {
@@ -3752,19 +3734,7 @@
      "verify": "",
      "n": 212,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Cloud and modern software",
-    "fact": "Kubernetes was open sourced by Google in 2014, drawing on more than 15 years of Google's production experience",
-    "source": "https://kubernetes.io/docs/concepts/overview/"
-   }
-  },
-  {
-   "day": 61,
-   "date": "2027-01-15",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 618,
      "area": "Cloud and modern software",
@@ -3792,7 +3762,19 @@
      "verify": "",
      "n": 214,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cloud and modern software",
+    "fact": "Kubernetes was open sourced by Google in 2014, drawing on more than 15 years of Google's production experience",
+    "source": "https://kubernetes.io/docs/concepts/overview/"
+   }
+  },
+  {
+   "day": 61,
+   "date": "2027-01-10",
+   "phase": 1,
+   "lessons": [
     {
      "id": 252,
      "area": "AI from first principles",
@@ -3806,19 +3788,7 @@
      "verify": "",
      "n": 215,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Cloud and modern software",
-    "fact": "The AWS Cloud Practitioner exam has 50 scored and 15 unscored questions, the unscored ones unmarked; the pass mark is 700 on a 100 to 1,000 scale",
-    "source": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html"
-   }
-  },
-  {
-   "day": 62,
-   "date": "2027-01-16",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 98,
      "area": "Cloud and modern software",
@@ -3874,7 +3844,28 @@
      "verify": "",
      "n": 219,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cloud and modern software",
+    "fact": "The AWS Cloud Practitioner exam has 50 scored and 15 unscored questions, the unscored ones unmarked; the pass mark is 700 on a 100 to 1,000 scale",
+    "source": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html"
+   },
+   "try": [
+    {
+     "area": "Building with AI",
+     "module": "Prompting and context engineering",
+     "title": "Break your own prompt with injection",
+     "task": "Ask Claude Code to build a tiny summariser, feed it a page with a hidden instruction, and then add a defence and retest",
+     "needs": "Prompt injection"
+    }
+   ]
+  },
+  {
+   "day": 62,
+   "date": "2027-01-11",
+   "phase": 1,
+   "lessons": [
     {
      "id": 532,
      "area": "AI industry and economics",
@@ -3888,19 +3879,7 @@
      "verify": "",
      "n": 220,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Cloud and modern software",
-    "fact": "Coding and designing cloud architecture are explicitly out of scope for the AWS Cloud Practitioner candidate; the exam tests judgement, not building",
-    "source": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html"
-   }
-  },
-  {
-   "day": 63,
-   "date": "2027-01-17",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 100,
      "area": "Cloud and modern software",
@@ -3928,7 +3907,19 @@
      "verify": "",
      "n": 222,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cloud and modern software",
+    "fact": "Coding and designing cloud architecture are explicitly out of scope for the AWS Cloud Practitioner candidate; the exam tests judgement, not building",
+    "source": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html"
+   }
+  },
+  {
+   "day": 63,
+   "date": "2027-01-12",
+   "phase": 1,
+   "lessons": [
     {
      "id": 168,
      "area": "Building with AI",
@@ -3979,17 +3970,17 @@
    },
    "try": [
     {
-     "area": "Cloud and modern software",
-     "module": "Cloud foundations and the shared responsibility model",
-     "title": "Draw your own responsibility line",
-     "task": "Ask Claude Code to take a product you know (for example a tool you use at work or an app you are building) and write a table of who owns what under IaaS, PaaS and SaaS, then argue with it",
-     "needs": "Shared responsibility model"
+     "area": "Building with AI",
+     "module": "Tools, harnesses and MCP",
+     "title": "Give a model one tool",
+     "task": "Ask Claude Code to write a script where the model can call a calculator function you define, then watch the tool_use and tool_result blocks",
+     "needs": "Tool use and function calling"
     }
    ]
   },
   {
    "day": 64,
-   "date": "2027-01-18",
+   "date": "2027-01-13",
    "phase": 1,
    "lessons": [
     {
@@ -4039,20 +4030,11 @@
     "area": "Building with AI",
     "fact": "The MCP documentation describes the protocol as a \"USB-C port for AI applications\"",
     "source": "https://modelcontextprotocol.io/docs/getting-started/intro"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "Tools, harnesses and MCP",
-     "title": "Read an agent transcript",
-     "task": "Run Claude Code on a small bug in your tiny API, then open the transcript and mark each tool call as read, edit or run",
-     "needs": "How a coding agent works on a repository"
-    }
-   ]
+   }
   },
   {
    "day": 65,
-   "date": "2027-01-19",
+   "date": "2027-01-14",
    "phase": 1,
    "lessons": [
     {
@@ -4106,7 +4088,7 @@
   },
   {
    "day": 66,
-   "date": "2027-01-20",
+   "date": "2027-01-15",
    "phase": 1,
    "lessons": [
     {
@@ -4156,20 +4138,11 @@
     "area": "Building with AI",
     "fact": "Research found that language models do best when the key information is at the start or end of a long input, and worse in the middle",
     "source": "https://arxiv.org/abs/2307.03172"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "Tools, harnesses and MCP",
-     "title": "Connect and then build an MCP server",
-     "task": "Ask Claude Code to connect an existing MCP server, then write a 30-line one that returns a fixed list, and test it from Claude Code",
-     "needs": "Model Context Protocol"
-    }
-   ]
+   }
   },
   {
    "day": 67,
-   "date": "2027-01-21",
+   "date": "2027-01-16",
    "phase": 1,
    "lessons": [
     {
@@ -4213,19 +4186,7 @@
      "verify": "",
      "n": 237,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Building with AI",
-    "fact": "Anthropic's tests showed contextual retrieval plus reranking cut retrieval failures by 67 percent, from 5.7 percent to 1.9 percent",
-    "source": "https://www.anthropic.com/engineering/contextual-retrieval"
-   }
-  },
-  {
-   "day": 68,
-   "date": "2027-01-22",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 104,
      "area": "Cloud and modern software",
@@ -4253,7 +4214,19 @@
      "verify": "",
      "n": 239,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Building with AI",
+    "fact": "Anthropic's tests showed contextual retrieval plus reranking cut retrieval failures by 67 percent, from 5.7 percent to 1.9 percent",
+    "source": "https://www.anthropic.com/engineering/contextual-retrieval"
+   }
+  },
+  {
+   "day": 68,
+   "date": "2027-01-17",
+   "phase": 1,
+   "lessons": [
     {
      "id": 174,
      "area": "Building with AI",
@@ -4267,19 +4240,7 @@
      "verify": "",
      "n": 240,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Building with AI",
-    "fact": "If your knowledge base is under about 200,000 tokens (roughly 500 pages), Anthropic says you may not need RAG at all",
-    "source": "https://www.anthropic.com/engineering/contextual-retrieval"
-   }
-  },
-  {
-   "day": 69,
-   "date": "2027-01-23",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 105,
      "area": "Cloud and modern software",
@@ -4335,7 +4296,28 @@
      "verify": "",
      "n": 244,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Building with AI",
+    "fact": "If your knowledge base is under about 200,000 tokens (roughly 500 pages), Anthropic says you may not need RAG at all",
+    "source": "https://www.anthropic.com/engineering/contextual-retrieval"
+   },
+   "try": [
+    {
+     "area": "Cloud and modern software",
+     "module": "Cloud foundations and the shared responsibility model",
+     "title": "Draw your own responsibility line",
+     "task": "Ask Claude Code to take a product you know (for example a tool you use at work or an app you are building) and write a table of who owns what under IaaS, PaaS and SaaS, then argue with it",
+     "needs": "Shared responsibility model"
+    }
+   ]
+  },
+  {
+   "day": 69,
+   "date": "2027-01-18",
+   "phase": 1,
+   "lessons": [
     {
      "id": 44,
      "area": "Computing foundations",
@@ -4349,19 +4331,7 @@
      "verify": "",
      "n": 245,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Building with AI",
-    "fact": "On most Claude models a prompt cache read costs 0.1x the base input price; on Opus 5.5 and Sonnet 5.5 it is 0.05x, and on Fable 5.1 it is 0.025x",
-    "source": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"
-   }
-  },
-  {
-   "day": 70,
-   "date": "2027-01-24",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 106,
      "area": "Cloud and modern software",
@@ -4389,7 +4359,28 @@
      "verify": "",
      "n": 247,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Building with AI",
+    "fact": "On most Claude models a prompt cache read costs 0.1x the base input price; on Opus 5.5 and Sonnet 5.5 it is 0.05x, and on Fable 5.1 it is 0.025x",
+    "source": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"
+   },
+   "try": [
+    {
+     "area": "Building with AI",
+     "module": "Tools, harnesses and MCP",
+     "title": "Read an agent transcript",
+     "task": "Run Claude Code on a small bug in your tiny API, then open the transcript and mark each tool call as read, edit or run",
+     "needs": "How a coding agent works on a repository"
+    }
+   ]
+  },
+  {
+   "day": 70,
+   "date": "2027-01-19",
+   "phase": 1,
+   "lessons": [
     {
      "id": 258,
      "area": "AI from first principles",
@@ -4441,7 +4432,7 @@
   },
   {
    "day": 71,
-   "date": "2027-01-25",
+   "date": "2027-01-20",
    "phase": 1,
    "lessons": [
     {
@@ -4495,16 +4486,16 @@
    "try": [
     {
      "area": "Building with AI",
-     "module": "Retrieval (RAG) and data for AI",
-     "title": "Break your chunking",
-     "task": "Change chunk size to 100 then 2,000 tokens and ask Claude Code to show how answers and citations change",
-     "needs": "Chunking"
+     "module": "Tools, harnesses and MCP",
+     "title": "Connect and then build an MCP server",
+     "task": "Ask Claude Code to connect an existing MCP server, then write a 30-line one that returns a fixed list, and test it from Claude Code",
+     "needs": "Model Context Protocol"
     }
    ]
   },
   {
    "day": 72,
-   "date": "2027-01-26",
+   "date": "2027-01-21",
    "phase": 1,
    "lessons": [
     {
@@ -4554,20 +4545,11 @@
     "area": "Cyber foundations",
     "fact": "Before Heartbleed, OpenSSL, which secured much of the web, reportedly received only around US$2,000 a year in donations",
     "source": "https://en.wikipedia.org/wiki/Heartbleed"
-   },
-   "try": [
-    {
-     "area": "Cloud and modern software",
-     "module": "Where code runs (VMs, containers, Kubernetes, serverless)",
-     "title": "Put the tiny API in a container",
-     "task": "Ask Claude Code to write a Dockerfile for the API from the first TRY, build it and run it, then ask it to explain each layer",
-     "needs": "Reading a Dockerfile"
-    }
-   ]
+   }
   },
   {
    "day": 73,
-   "date": "2027-01-27",
+   "date": "2027-01-22",
    "phase": 1,
    "lessons": [
     {
@@ -4621,7 +4603,7 @@
   },
   {
    "day": 74,
-   "date": "2027-01-28",
+   "date": "2027-01-23",
    "phase": 1,
    "lessons": [
     {
@@ -4665,19 +4647,7 @@
      "verify": "",
      "n": 262,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Cyber foundations",
-    "fact": "Log4Shell (CVE-2021-44228) scored the maximum CVSS 10 and had sat unnoticed in Log4j since 2013",
-    "source": "https://en.wikipedia.org/wiki/Log4Shell"
-   }
-  },
-  {
-   "day": 75,
-   "date": "2027-01-29",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 346,
      "area": "Cyber foundations",
@@ -4705,7 +4675,19 @@
      "verify": "",
      "n": 264,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cyber foundations",
+    "fact": "Log4Shell (CVE-2021-44228) scored the maximum CVSS 10 and had sat unnoticed in Log4j since 2013",
+    "source": "https://en.wikipedia.org/wiki/Log4Shell"
+   }
+  },
+  {
+   "day": 75,
+   "date": "2027-01-24",
+   "phase": 1,
+   "lessons": [
     {
      "id": 260,
      "area": "AI from first principles",
@@ -4719,19 +4701,7 @@
      "verify": "",
      "n": 265,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "AI from first principles",
-    "fact": "Elements of AI, made by MinnaLearn and the University of Helsinki, has had over 2 million sign-ups from more than 170 countries",
-    "source": "https://www.elementsofai.com/"
-   }
-  },
-  {
-   "day": 76,
-   "date": "2027-01-30",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 347,
      "area": "Cyber foundations",
@@ -4787,7 +4757,19 @@
      "verify": "",
      "n": 269,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI from first principles",
+    "fact": "Elements of AI, made by MinnaLearn and the University of Helsinki, has had over 2 million sign-ups from more than 170 countries",
+    "source": "https://www.elementsofai.com/"
+   }
+  },
+  {
+   "day": 76,
+   "date": "2027-01-25",
+   "phase": 1,
+   "lessons": [
     {
      "id": 178,
      "area": "Building with AI",
@@ -4801,19 +4783,7 @@
      "verify": "",
      "n": 270,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Building with AI",
-    "fact": "Prompt caching only works above a minimum prompt length, which is 512 tokens on current models but was 4,096 tokens on Haiku 4.5",
-    "source": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"
-   }
-  },
-  {
-   "day": 77,
-   "date": "2027-01-31",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 597,
      "area": "History and big ideas",
@@ -4841,7 +4811,28 @@
      "verify": "",
      "n": 272,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Building with AI",
+    "fact": "Prompt caching only works above a minimum prompt length, which is 512 tokens on current models but was 4,096 tokens on Haiku 4.5",
+    "source": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"
+   },
+   "try": [
+    {
+     "area": "Building with AI",
+     "module": "Retrieval (RAG) and data for AI",
+     "title": "Break your chunking",
+     "task": "Change chunk size to 100 then 2,000 tokens and ask Claude Code to show how answers and citations change",
+     "needs": "Chunking"
+    }
+   ]
+  },
+  {
+   "day": 77,
+   "date": "2027-01-26",
+   "phase": 1,
+   "lessons": [
     {
      "id": 113,
      "area": "Cloud and modern software",
@@ -4889,11 +4880,20 @@
     "area": "Cyber foundations",
     "fact": "Wiz and EY reported that 93% of enterprise cloud environments were affected by Log4Shell",
     "source": "https://en.wikipedia.org/wiki/Log4Shell"
-   }
+   },
+   "try": [
+    {
+     "area": "Cloud and modern software",
+     "module": "Where code runs (VMs, containers, Kubernetes, serverless)",
+     "title": "Put the tiny API in a container",
+     "task": "Ask Claude Code to write a Dockerfile for the API from the first TRY, build it and run it, then ask it to explain each layer",
+     "needs": "Reading a Dockerfile"
+    }
+   ]
   },
   {
    "day": 78,
-   "date": "2027-02-01",
+   "date": "2027-01-27",
    "phase": 1,
    "lessons": [
     {
@@ -4947,7 +4947,7 @@
   },
   {
    "day": 79,
-   "date": "2027-02-02",
+   "date": "2027-01-28",
    "phase": 1,
    "lessons": [
     {
@@ -5001,7 +5001,7 @@
   },
   {
    "day": 80,
-   "date": "2027-02-03",
+   "date": "2027-01-29",
    "phase": 1,
    "lessons": [
     {
@@ -5055,7 +5055,7 @@
   },
   {
    "day": 81,
-   "date": "2027-02-04",
+   "date": "2027-01-30",
    "phase": 1,
    "lessons": [
     {
@@ -5099,19 +5099,7 @@
      "verify": "",
      "n": 287,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Cyber foundations",
-    "fact": "NIST's password guidance says verifiers should NOT force periodic password changes or character composition rules, the opposite of decades of corporate policy",
-    "source": "https://pages.nist.gov/800-63-3/sp800-63b.html"
-   }
-  },
-  {
-   "day": 82,
-   "date": "2027-02-05",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 361,
      "area": "Cyber foundations",
@@ -5139,7 +5127,19 @@
      "verify": "",
      "n": 289,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cyber foundations",
+    "fact": "NIST's password guidance says verifiers should NOT force periodic password changes or character composition rules, the opposite of decades of corporate policy",
+    "source": "https://pages.nist.gov/800-63-3/sp800-63b.html"
+   }
+  },
+  {
+   "day": 82,
+   "date": "2027-01-31",
+   "phase": 1,
+   "lessons": [
     {
      "id": 81,
      "area": "Networks and the internet",
@@ -5153,19 +5153,7 @@
      "verify": "",
      "n": 290,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Building with AI",
-    "fact": "Anthropic says many agent patterns can be built in a few lines of direct API code, and that frameworks can hide prompts and make debugging harder",
-    "source": "https://www.anthropic.com/engineering/building-effective-agents"
-   }
-  },
-  {
-   "day": 83,
-   "date": "2027-02-06",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 362,
      "area": "Cyber foundations",
@@ -5221,7 +5209,19 @@
      "verify": "",
      "n": 294,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Building with AI",
+    "fact": "Anthropic says many agent patterns can be built in a few lines of direct API code, and that frameworks can hide prompts and make debugging harder",
+    "source": "https://www.anthropic.com/engineering/building-effective-agents"
+   }
+  },
+  {
+   "day": 83,
+   "date": "2027-02-01",
+   "phase": 1,
+   "lessons": [
     {
      "id": 538,
      "area": "AI industry and economics",
@@ -5235,28 +5235,7 @@
      "verify": "",
      "n": 295,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Cyber foundations",
-    "fact": "Stuxnet's drivers were signed with stolen private keys from two Taiwanese firms, JMicron and Realtek, both based in Hsinchu Science Park, so Windows trusted them",
-    "source": "https://en.wikipedia.org/wiki/Stuxnet"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "Retrieval (RAG) and data for AI",
-     "title": "Build a 50-line RAG over your notes",
-     "task": "Ask Claude Code to chunk a folder of markdown, embed it, retrieve the top three chunks for a question and answer with citations",
-     "needs": "The full RAG pipeline"
-    }
-   ]
-  },
-  {
-   "day": 84,
-   "date": "2027-02-07",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 363,
      "area": "Cyber foundations",
@@ -5284,7 +5263,19 @@
      "verify": "",
      "n": 297,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cyber foundations",
+    "fact": "Stuxnet's drivers were signed with stolen private keys from two Taiwanese firms, JMicron and Realtek, both based in Hsinchu Science Park, so Windows trusted them",
+    "source": "https://en.wikipedia.org/wiki/Stuxnet"
+   }
+  },
+  {
+   "day": 84,
+   "date": "2027-02-02",
+   "phase": 1,
+   "lessons": [
     {
      "id": 180,
      "area": "Building with AI",
@@ -5332,20 +5323,11 @@
     "area": "Building with AI",
     "fact": "Sub-agents in Anthropic's design often return only a 1,000 to 2,000 token summary to the lead agent, keeping the main context small",
     "source": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
-   },
-   "try": [
-    {
-     "area": "Cloud and modern software",
-     "module": "Shipping safely (Git, testing, CI/CD, observability)",
-     "title": "Your first Git history",
-     "task": "Ask Claude Code to init a repository, make three commits with a deliberate mistake, create a branch, and revert the mistake; then have it draw the graph with `git log --graph --oneline`",
-     "needs": "Git: commits, branches and merges"
-    }
-   ]
+   }
   },
   {
    "day": 85,
-   "date": "2027-02-08",
+   "date": "2027-02-03",
    "phase": 1,
    "lessons": [
     {
@@ -5399,7 +5381,7 @@
   },
   {
    "day": 86,
-   "date": "2027-02-09",
+   "date": "2027-02-04",
    "phase": 1,
    "lessons": [
     {
@@ -5453,7 +5435,7 @@
   },
   {
    "day": 87,
-   "date": "2027-02-10",
+   "date": "2027-02-05",
    "phase": 1,
    "lessons": [
     {
@@ -5507,7 +5489,7 @@
   },
   {
    "day": 88,
-   "date": "2027-02-11",
+   "date": "2027-02-06",
    "phase": 1,
    "lessons": [
     {
@@ -5551,19 +5533,7 @@
      "verify": "",
      "n": 312,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Cyber foundations",
-    "fact": "The NCSC counted 204 nationally significant UK incidents in September 2024 to August 2025, up from 89 the year before, including 18 rated highly significant",
-    "source": "https://www.ncsc.gov.uk/collection/ncsc-annual-review-2025/chapter-01-cyber-threat-to-the-uk/incident-management"
-   }
-  },
-  {
-   "day": 89,
-   "date": "2027-02-12",
-   "phase": 1,
-   "lessons": [
+    },
     {
      "id": 613,
      "area": "Computing foundations",
@@ -5591,7 +5561,28 @@
      "verify": "",
      "n": 314,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cyber foundations",
+    "fact": "The NCSC counted 204 nationally significant UK incidents in September 2024 to August 2025, up from 89 the year before, including 18 rated highly significant",
+    "source": "https://www.ncsc.gov.uk/collection/ncsc-annual-review-2025/chapter-01-cyber-threat-to-the-uk/incident-management"
+   },
+   "try": [
+    {
+     "area": "Building with AI",
+     "module": "Retrieval (RAG) and data for AI",
+     "title": "Build a 50-line RAG over your notes",
+     "task": "Ask Claude Code to chunk a folder of markdown, embed it, retrieve the top three chunks for a question and answer with citations",
+     "needs": "The full RAG pipeline"
+    }
+   ]
+  },
+  {
+   "day": 89,
+   "date": "2027-02-07",
+   "phase": 1,
+   "lessons": [
     {
      "id": 269,
      "area": "AI from first principles",
@@ -5605,19 +5596,7 @@
      "verify": "",
      "n": 315,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Cyber foundations",
-    "fact": "CVE (Common Vulnerabilities and Exposures) was launched publicly in September 1999 and is run by MITRE with US Department of Homeland Security funding",
-    "source": "https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures"
-   }
-  },
-  {
-   "day": 90,
-   "date": "2027-02-13",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 182,
      "area": "Building with AI",
@@ -5673,7 +5652,28 @@
      "verify": "",
      "n": 319,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cyber foundations",
+    "fact": "CVE (Common Vulnerabilities and Exposures) was launched publicly in September 1999 and is run by MITRE with US Department of Homeland Security funding",
+    "source": "https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures"
+   },
+   "try": [
+    {
+     "area": "Cloud and modern software",
+     "module": "Shipping safely (Git, testing, CI/CD, observability)",
+     "title": "Your first Git history",
+     "task": "Ask Claude Code to init a repository, make three commits with a deliberate mistake, create a branch, and revert the mistake; then have it draw the graph with `git log --graph --oneline`",
+     "needs": "Git: commits, branches and merges"
+    }
+   ]
+  },
+  {
+   "day": 90,
+   "date": "2027-02-08",
+   "phase": 2,
+   "lessons": [
     {
      "id": 348,
      "area": "Cyber foundations",
@@ -5687,19 +5687,7 @@
      "verify": "",
      "n": 320,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "Cyber foundations",
-    "fact": "Verizon's 2025 breach report found third-party involvement in breaches doubled from 15% to 30% in a year (reported via secondary coverage, check the primary report)",
-    "source": "https://www.verizon.com/business/resources/reports/dbir/"
-   }
-  },
-  {
-   "day": 91,
-   "date": "2027-02-14",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 503,
      "area": "Law, policy and geopolitics",
@@ -5727,7 +5715,19 @@
      "verify": "",
      "n": 322,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Cyber foundations",
+    "fact": "Verizon's 2025 breach report found third-party involvement in breaches doubled from 15% to 30% in a year (reported via secondary coverage, check the primary report)",
+    "source": "https://www.verizon.com/business/resources/reports/dbir/"
+   }
+  },
+  {
+   "day": 91,
+   "date": "2027-02-09",
+   "phase": 2,
+   "lessons": [
     {
      "id": 542,
      "area": "AI industry and economics",
@@ -5779,7 +5779,7 @@
   },
   {
    "day": 92,
-   "date": "2027-02-15",
+   "date": "2027-02-10",
    "phase": 2,
    "lessons": [
     {
@@ -5833,7 +5833,7 @@
   },
   {
    "day": 93,
-   "date": "2027-02-16",
+   "date": "2027-02-11",
    "phase": 2,
    "lessons": [
     {
@@ -5883,20 +5883,11 @@
     "area": "Law, policy and geopolitics",
     "fact": "The Digital Omnibus pushed standalone high-risk AI obligations to 2 December 2027, but left the banned practices and general-purpose AI rules untouched",
     "source": "https://labs.cloudsecurityalliance.org/research/csa-research-note-eu-ai-act-high-risk-deadline-omnibus-20260/"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "Evaluations, guardrails and reliability",
-     "title": "Write a 20-case eval",
-     "task": "Ask Claude Code to build a CSV of 20 test cases for your summariser and a script that scores it with exact-match and an LLM judge",
-     "needs": "Building an eval set"
-    }
-   ]
+   }
   },
   {
    "day": 94,
-   "date": "2027-02-17",
+   "date": "2027-02-12",
    "phase": 2,
    "lessons": [
     {
@@ -5946,20 +5937,11 @@
     "area": "AI industry and economics",
     "fact": "A 2025 randomised trial found experienced developers were 19% slower with AI tools while believing they were about 20% faster",
     "source": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"
-   },
-   "try": [
-    {
-     "area": "Cloud and modern software",
-     "module": "Shipping safely (Git, testing, CI/CD, observability)",
-     "title": "Add a test and a CI pipeline",
-     "task": "Ask Claude Code to add two tests to your tiny API and a GitHub Actions file that runs them, then break a test and watch the pipeline go red",
-     "needs": "Continuous integration"
-    }
-   ]
+   }
   },
   {
    "day": 95,
-   "date": "2027-02-18",
+   "date": "2027-02-13",
    "phase": 2,
    "lessons": [
     {
@@ -6003,19 +5985,7 @@
      "verify": "",
      "n": 337,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Attack and defence",
-    "fact": "WannaCry was stopped on its first day when researcher Marcus Hutchins registered a domain the malware checked, which acted as a kill switch for new infections",
-    "source": "https://en.wikipedia.org/wiki/WannaCry_ransomware_attack"
-   }
-  },
-  {
-   "day": 96,
-   "date": "2027-02-19",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 350,
      "area": "Cyber foundations",
@@ -6043,7 +6013,19 @@
      "verify": "",
      "n": 339,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Attack and defence",
+    "fact": "WannaCry was stopped on its first day when researcher Marcus Hutchins registered a domain the malware checked, which acted as a kill switch for new infections",
+    "source": "https://en.wikipedia.org/wiki/WannaCry_ransomware_attack"
+   }
+  },
+  {
+   "day": 96,
+   "date": "2027-02-14",
+   "phase": 2,
+   "lessons": [
     {
      "id": 123,
      "area": "Cloud and modern software",
@@ -6057,19 +6039,7 @@
      "verify": "",
      "n": 340,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "AI industry and economics",
-    "fact": "Stanford researchers found early-career workers in the most AI-exposed jobs saw a relative 13% employment fall, a relative gap, not 13% of young workers losing jobs",
-    "source": "https://digitaleconomy.stanford.edu/publications/canaries-in-the-coal-mine/"
-   }
-  },
-  {
-   "day": 97,
-   "date": "2027-02-20",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 505,
      "area": "Law, policy and geopolitics",
@@ -6125,7 +6095,19 @@
      "verify": "",
      "n": 344,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI industry and economics",
+    "fact": "Stanford researchers found early-career workers in the most AI-exposed jobs saw a relative 13% employment fall, a relative gap, not 13% of young workers losing jobs",
+    "source": "https://digitaleconomy.stanford.edu/publications/canaries-in-the-coal-mine/"
+   }
+  },
+  {
+   "day": 97,
+   "date": "2027-02-15",
+   "phase": 2,
+   "lessons": [
     {
      "id": 547,
      "area": "AI industry and economics",
@@ -6139,19 +6121,7 @@
      "verify": "",
      "n": 345,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Attack and defence",
-    "fact": "WannaCry used EternalBlue, an NSA-developed exploit leaked by the Shadow Brokers about a month earlier, and Microsoft had patched the flaw in March 2017 (MS17-010)",
-    "source": "https://en.wikipedia.org/wiki/WannaCry_ransomware_attack"
-   }
-  },
-  {
-   "day": 98,
-   "date": "2027-02-21",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 386,
      "area": "Attack and defence",
@@ -6179,7 +6149,19 @@
      "verify": "",
      "n": 347,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Attack and defence",
+    "fact": "WannaCry used EternalBlue, an NSA-developed exploit leaked by the Shadow Brokers about a month earlier, and Microsoft had patched the flaw in March 2017 (MS17-010)",
+    "source": "https://en.wikipedia.org/wiki/WannaCry_ransomware_attack"
+   }
+  },
+  {
+   "day": 98,
+   "date": "2027-02-16",
+   "phase": 2,
+   "lessons": [
     {
      "id": 351,
      "area": "Cyber foundations",
@@ -6232,15 +6214,15 @@
     {
      "area": "Building with AI",
      "module": "Evaluations, guardrails and reliability",
-     "title": "Catch a regression",
-     "task": "Change the prompt, rerun the eval, and have Claude Code report which cases got worse",
-     "needs": "Regression testing prompts and models"
+     "title": "Write a 20-case eval",
+     "task": "Ask Claude Code to build a CSV of 20 test cases for your summariser and a script that scores it with exact-match and an LLM judge",
+     "needs": "Building an eval set"
     }
    ]
   },
   {
    "day": 99,
-   "date": "2027-02-22",
+   "date": "2027-02-17",
    "phase": 2,
    "lessons": [
     {
@@ -6290,11 +6272,20 @@
     "area": "Attack and defence",
     "fact": "A White House assessment put NotPetya damage at more than $10 billion",
     "source": "https://en.wikipedia.org/wiki/NotPetya"
-   }
+   },
+   "try": [
+    {
+     "area": "Cloud and modern software",
+     "module": "Shipping safely (Git, testing, CI/CD, observability)",
+     "title": "Add a test and a CI pipeline",
+     "task": "Ask Claude Code to add two tests to your tiny API and a GitHub Actions file that runs them, then break a test and watch the pipeline go red",
+     "needs": "Continuous integration"
+    }
+   ]
   },
   {
    "day": 100,
-   "date": "2027-02-23",
+   "date": "2027-02-18",
    "phase": 2,
    "lessons": [
     {
@@ -6348,7 +6339,7 @@
   },
   {
    "day": 101,
-   "date": "2027-02-24",
+   "date": "2027-02-19",
    "phase": 2,
    "lessons": [
     {
@@ -6402,7 +6393,7 @@
   },
   {
    "day": 102,
-   "date": "2027-02-25",
+   "date": "2027-02-20",
    "phase": 2,
    "lessons": [
     {
@@ -6446,19 +6437,7 @@
      "verify": "",
      "n": 362,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Attack and defence",
-    "fact": "About 18,000 customers downloaded the trojanised SolarWinds Orion update, and the malware stayed dormant for 12 to 14 days before calling home",
-    "source": "https://en.wikipedia.org/wiki/2020_United_States_federal_government_data_breach"
-   }
-  },
-  {
-   "day": 103,
-   "date": "2027-02-26",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 391,
      "area": "Attack and defence",
@@ -6486,7 +6465,19 @@
      "verify": "",
      "n": 364,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Attack and defence",
+    "fact": "About 18,000 customers downloaded the trojanised SolarWinds Orion update, and the malware stayed dormant for 12 to 14 days before calling home",
+    "source": "https://en.wikipedia.org/wiki/2020_United_States_federal_government_data_breach"
+   }
+  },
+  {
+   "day": 103,
+   "date": "2027-02-21",
+   "phase": 2,
+   "lessons": [
     {
      "id": 277,
      "area": "AI from first principles",
@@ -6500,28 +6491,7 @@
      "verify": "",
      "n": 365,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Attack and defence",
-    "fact": "FireEye found the SolarWinds compromise only while investigating the theft of its own red team tools, disclosed on 8 December 2020",
-    "source": "https://en.wikipedia.org/wiki/2020_United_States_federal_government_data_breach"
-   },
-   "try": [
-    {
-     "area": "Cloud and modern software",
-     "module": "Shipping safely (Git, testing, CI/CD, observability)",
-     "title": "Add logging and one health check",
-     "task": "Ask Claude Code to add structured logs and a /health route to the API, call it, and explain what an uptime monitor would watch",
-     "needs": "The four golden signals"
-    }
-   ]
-  },
-  {
-   "day": 104,
-   "date": "2027-02-27",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 392,
      "area": "Attack and defence",
@@ -6577,7 +6547,28 @@
      "verify": "",
      "n": 369,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Attack and defence",
+    "fact": "FireEye found the SolarWinds compromise only while investigating the theft of its own red team tools, disclosed on 8 December 2020",
+    "source": "https://en.wikipedia.org/wiki/2020_United_States_federal_government_data_breach"
+   },
+   "try": [
+    {
+     "area": "Building with AI",
+     "module": "Evaluations, guardrails and reliability",
+     "title": "Catch a regression",
+     "task": "Change the prompt, rerun the eval, and have Claude Code report which cases got worse",
+     "needs": "Regression testing prompts and models"
+    }
+   ]
+  },
+  {
+   "day": 104,
+   "date": "2027-02-22",
+   "phase": 2,
+   "lessons": [
     {
      "id": 127,
      "area": "Cloud and modern software",
@@ -6591,19 +6582,7 @@
      "verify": "",
      "n": 370,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Attack and defence",
-    "fact": "The Colonial Pipeline attack began with one compromised password on an inactive VPN account with no multi-factor authentication",
-    "source": "https://en.wikipedia.org/wiki/Colonial_Pipeline_ransomware_attack"
-   }
-  },
-  {
-   "day": 105,
-   "date": "2027-02-28",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 394,
      "area": "Attack and defence",
@@ -6631,7 +6610,19 @@
      "verify": "",
      "n": 372,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Attack and defence",
+    "fact": "The Colonial Pipeline attack began with one compromised password on an inactive VPN account with no multi-factor authentication",
+    "source": "https://en.wikipedia.org/wiki/Colonial_Pipeline_ransomware_attack"
+   }
+  },
+  {
+   "day": 105,
+   "date": "2027-02-23",
+   "phase": 2,
+   "lessons": [
     {
      "id": 278,
      "area": "AI from first principles",
@@ -6683,7 +6674,7 @@
   },
   {
    "day": 106,
-   "date": "2027-03-01",
+   "date": "2027-02-24",
    "phase": 2,
    "lessons": [
     {
@@ -6737,7 +6728,7 @@
   },
   {
    "day": 107,
-   "date": "2027-03-02",
+   "date": "2027-02-25",
    "phase": 2,
    "lessons": [
     {
@@ -6791,7 +6782,7 @@
   },
   {
    "day": 108,
-   "date": "2027-03-03",
+   "date": "2027-02-26",
    "phase": 2,
    "lessons": [
     {
@@ -6841,11 +6832,20 @@
     "area": "Attack and defence",
     "fact": "M&S estimated a profit hit of about £300m before mitigation and took online orders offline for about seven weeks in 2025; attribution to Scattered Spider was widely reported but not confirmed",
     "source": "https://www.grocerygazette.co.uk/2025/06/10/ms-reopens-online-orders/"
-   }
+   },
+   "try": [
+    {
+     "area": "Cloud and modern software",
+     "module": "Shipping safely (Git, testing, CI/CD, observability)",
+     "title": "Add logging and one health check",
+     "task": "Ask Claude Code to add structured logs and a /health route to the API, call it, and explain what an uptime monitor would watch",
+     "needs": "The four golden signals"
+    }
+   ]
   },
   {
    "day": 109,
-   "date": "2027-03-04",
+   "date": "2027-02-27",
    "phase": 2,
    "lessons": [
     {
@@ -6889,19 +6889,7 @@
      "verify": "",
      "n": 387,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Attack and defence",
-    "fact": "Stuxnet reportedly destroyed about 1,000 centrifuges at Natanz, yet Iran quickly replaced them",
-    "source": "https://en.wikipedia.org/wiki/Stuxnet"
-   }
-  },
-  {
-   "day": 110,
-   "date": "2027-03-05",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 398,
      "area": "Attack and defence",
@@ -6929,7 +6917,19 @@
      "verify": "",
      "n": 389,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Attack and defence",
+    "fact": "Stuxnet reportedly destroyed about 1,000 centrifuges at Natanz, yet Iran quickly replaced them",
+    "source": "https://en.wikipedia.org/wiki/Stuxnet"
+   }
+  },
+  {
+   "day": 110,
+   "date": "2027-02-28",
+   "phase": 2,
+   "lessons": [
     {
      "id": 280,
      "area": "AI from first principles",
@@ -6943,19 +6943,7 @@
      "verify": "",
      "n": 390,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Attack and defence",
-    "fact": "The Morris worm (2 November 1988) was the subject of the first felony conviction under the US Computer Fraud and Abuse Act, and it copied itself 14% of the time even on machines already infected",
-    "source": "https://en.wikipedia.org/wiki/Morris_worm"
-   }
-  },
-  {
-   "day": 111,
-   "date": "2027-03-06",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 399,
      "area": "Attack and defence",
@@ -7011,7 +6999,19 @@
      "verify": "",
      "n": 394,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Attack and defence",
+    "fact": "The Morris worm (2 November 1988) was the subject of the first felony conviction under the US Computer Fraud and Abuse Act, and it copied itself 14% of the time even on machines already infected",
+    "source": "https://en.wikipedia.org/wiki/Morris_worm"
+   }
+  },
+  {
+   "day": 111,
+   "date": "2027-03-01",
+   "phase": 2,
+   "lessons": [
     {
      "id": 491,
      "area": "Law, policy and geopolitics",
@@ -7025,19 +7025,7 @@
      "verify": "",
      "n": 395,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "Law, policy and geopolitics",
-    "fact": "The European Parliament approved the Omnibus on AI by 423 votes to 57 with 174 abstentions on 16 June 2026",
-    "source": "https://www.europeanoutdoorgroup.com/members-knowledge-hub/european-parliament-adopts-provisional-agreement-on-ai-omnibus (secondary; confirm on europarl.europa.eu)"
-   }
-  },
-  {
-   "day": 112,
-   "date": "2027-03-07",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 400,
      "area": "Attack and defence",
@@ -7065,7 +7053,19 @@
      "verify": "",
      "n": 397,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Law, policy and geopolitics",
+    "fact": "The European Parliament approved the Omnibus on AI by 423 votes to 57 with 174 abstentions on 16 June 2026",
+    "source": "https://www.europeanoutdoorgroup.com/members-knowledge-hub/european-parliament-adopts-provisional-agreement-on-ai-omnibus (secondary; confirm on europarl.europa.eu)"
+   }
+  },
+  {
+   "day": 112,
+   "date": "2027-03-02",
+   "phase": 2,
+   "lessons": [
     {
      "id": 619,
      "area": "Cyber foundations",
@@ -7113,20 +7113,11 @@
     "area": "Securing AI",
     "fact": "Around 250 poisoned documents were enough to backdoor language models from 600 million to 13 billion parameters, about 0.00016% of the training tokens in the study; 100 were not enough",
     "source": "https://www.anthropic.com/research/small-samples-poison"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "Agents, orchestration, cost and shipping",
-     "title": "Run two sub-agents and compare",
-     "task": "Ask Claude Code to split a research task across two sub-agents, then measure tokens used against a single-agent run",
-     "needs": "Multi-agent orchestration and sub-agents"
-    }
-   ]
+   }
   },
   {
    "day": 113,
-   "date": "2027-03-08",
+   "date": "2027-03-03",
    "phase": 2,
    "lessons": [
     {
@@ -7180,7 +7171,7 @@
   },
   {
    "day": 114,
-   "date": "2027-03-09",
+   "date": "2027-03-04",
    "phase": 2,
    "lessons": [
     {
@@ -7234,7 +7225,7 @@
   },
   {
    "day": 115,
-   "date": "2027-03-10",
+   "date": "2027-03-05",
    "phase": 2,
    "lessons": [
     {
@@ -7288,7 +7279,7 @@
   },
   {
    "day": 116,
-   "date": "2027-03-11",
+   "date": "2027-03-06",
    "phase": 2,
    "lessons": [
     {
@@ -7332,28 +7323,7 @@
      "verify": "",
      "n": 412,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "AI industry and economics",
-    "fact": "Nvidia reported $89.0bn of data-centre revenue in a single quarter (ended 26 July 2026) and guided to none from China",
-    "source": "https://investor.nvidia.com"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "Agents, orchestration, cost and shipping",
-     "title": "Measure caching savings",
-     "task": "Ask Claude Code to call the API 10 times with a long fixed prefix, with and without cache_control, and print the usage fields and cost",
-     "needs": "Prompt caching"
-    }
-   ]
-  },
-  {
-   "day": 117,
-   "date": "2027-03-12",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 405,
      "area": "Attack and defence",
@@ -7381,7 +7351,19 @@
      "verify": "",
      "n": 414,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI industry and economics",
+    "fact": "Nvidia reported $89.0bn of data-centre revenue in a single quarter (ended 26 July 2026) and guided to none from China",
+    "source": "https://investor.nvidia.com"
+   }
+  },
+  {
+   "day": 117,
+   "date": "2027-03-07",
+   "phase": 2,
+   "lessons": [
     {
      "id": 198,
      "area": "Building with AI",
@@ -7395,19 +7377,7 @@
      "verify": "",
      "n": 415,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Securing AI",
-    "fact": "The NCSC says the window between a vulnerability being disclosed and exploited has already shrunk to days, and AI will almost certainly shorten it further",
-    "source": "https://www.ncsc.gov.uk/report/impact-ai-cyber-threat-now-2027"
-   }
-  },
-  {
-   "day": 118,
-   "date": "2027-03-13",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 406,
      "area": "Attack and defence",
@@ -7463,7 +7433,28 @@
      "verify": "",
      "n": 419,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Securing AI",
+    "fact": "The NCSC says the window between a vulnerability being disclosed and exploited has already shrunk to days, and AI will almost certainly shorten it further",
+    "source": "https://www.ncsc.gov.uk/report/impact-ai-cyber-threat-now-2027"
+   },
+   "try": [
+    {
+     "area": "Building with AI",
+     "module": "Agents, orchestration, cost and shipping",
+     "title": "Run two sub-agents and compare",
+     "task": "Ask Claude Code to split a research task across two sub-agents, then measure tokens used against a single-agent run",
+     "needs": "Multi-agent orchestration and sub-agents"
+    }
+   ]
+  },
+  {
+   "day": 118,
+   "date": "2027-03-08",
+   "phase": 2,
+   "lessons": [
     {
      "id": 199,
      "area": "Building with AI",
@@ -7477,19 +7468,7 @@
      "verify": "",
      "n": 420,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Law, policy and geopolitics",
-    "fact": "The UK renamed its AI Safety Institute the AI Security Institute on 14 February 2025 to focus on national security and criminal misuse",
-    "source": "https://www.eweek.com/news/uk-ai-security-institute-rename/"
-   }
-  },
-  {
-   "day": 119,
-   "date": "2027-03-14",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 429,
      "area": "Securing AI",
@@ -7517,7 +7496,19 @@
      "verify": "",
      "n": 422,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Law, policy and geopolitics",
+    "fact": "The UK renamed its AI Safety Institute the AI Security Institute on 14 February 2025 to focus on national security and criminal misuse",
+    "source": "https://www.eweek.com/news/uk-ai-security-institute-rename/"
+   }
+  },
+  {
+   "day": 119,
+   "date": "2027-03-09",
+   "phase": 2,
+   "lessons": [
     {
      "id": 557,
      "area": "AI industry and economics",
@@ -7565,20 +7556,11 @@
     "area": "Securing AI",
     "fact": "The NCSC judges that universal access to AI for cyber defence by 2027 is only a remote chance",
     "source": "https://www.ncsc.gov.uk/report/impact-ai-cyber-threat-now-2027"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "Agents, orchestration, cost and shipping",
-     "title": "Build a router",
-     "task": "Ask Claude Code to write a 30-line router that sends easy questions to a small model and hard ones to a larger one, then evaluate cost and quality on your 20 cases",
-     "needs": "Model routing: cheap versus expensive models"
-    }
-   ]
+   }
   },
   {
    "day": 120,
-   "date": "2027-03-15",
+   "date": "2027-03-10",
    "phase": 2,
    "lessons": [
     {
@@ -7632,7 +7614,7 @@
   },
   {
    "day": 121,
-   "date": "2027-03-16",
+   "date": "2027-03-11",
    "phase": 2,
    "lessons": [
     {
@@ -7682,11 +7664,20 @@
     "area": "Securing AI",
     "fact": "The UK Code of Practice for the Cyber Security of AI has 13 principles across five lifecycle phases, including one on safe disposal of data and models at end of life",
     "source": "https://www.gov.uk/government/publications/ai-cyber-security-code-of-practice/code-of-practice-for-the-cyber-security-of-ai"
-   }
+   },
+   "try": [
+    {
+     "area": "Building with AI",
+     "module": "Agents, orchestration, cost and shipping",
+     "title": "Measure caching savings",
+     "task": "Ask Claude Code to call the API 10 times with a long fixed prefix, with and without cache_control, and print the usage fields and cost",
+     "needs": "Prompt caching"
+    }
+   ]
   },
   {
    "day": 122,
-   "date": "2027-03-17",
+   "date": "2027-03-12",
    "phase": 2,
    "lessons": [
     {
@@ -7740,7 +7731,7 @@
   },
   {
    "day": 123,
-   "date": "2027-03-18",
+   "date": "2027-03-13",
    "phase": 2,
    "lessons": [
     {
@@ -7784,19 +7775,7 @@
      "verify": "",
      "n": 437,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "Securing AI",
-    "fact": "The OWASP Top 10 for Agentic Applications was published on 9 December 2025 and was built by more than 100 security experts, per secondary coverage",
-    "source": "https://www.giskard.ai/knowledge/owasp-top-10-for-agentic-application-2026"
-   }
-  },
-  {
-   "day": 124,
-   "date": "2027-03-19",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 436,
      "area": "Securing AI",
@@ -7824,7 +7803,19 @@
      "verify": "",
      "n": 439,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Securing AI",
+    "fact": "The OWASP Top 10 for Agentic Applications was published on 9 December 2025 and was built by more than 100 security experts, per secondary coverage",
+    "source": "https://www.giskard.ai/knowledge/owasp-top-10-for-agentic-application-2026"
+   }
+  },
+  {
+   "day": 124,
+   "date": "2027-03-14",
+   "phase": 2,
+   "lessons": [
     {
      "id": 200,
      "area": "Building with AI",
@@ -7838,19 +7829,7 @@
      "verify": "",
      "n": 440,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Securing AI",
-    "fact": "Anthropic reported that in mid-September 2025 a Chinese state-sponsored group used Claude Code with MCP tools against about 30 organisations, getting past safeguards by posing as penetration testers",
-    "source": "https://thehackernews.com/2025/11/chinese-hackers-use-anthropics-ai-to.html"
-   }
-  },
-  {
-   "day": 125,
-   "date": "2027-03-20",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 437,
      "area": "Securing AI",
@@ -7906,7 +7885,28 @@
      "verify": "",
      "n": 444,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Securing AI",
+    "fact": "Anthropic reported that in mid-September 2025 a Chinese state-sponsored group used Claude Code with MCP tools against about 30 organisations, getting past safeguards by posing as penetration testers",
+    "source": "https://thehackernews.com/2025/11/chinese-hackers-use-anthropics-ai-to.html"
+   },
+   "try": [
+    {
+     "area": "Building with AI",
+     "module": "Agents, orchestration, cost and shipping",
+     "title": "Build a router",
+     "task": "Ask Claude Code to write a 30-line router that sends easy questions to a small model and hard ones to a larger one, then evaluate cost and quality on your 20 cases",
+     "needs": "Model routing: cheap versus expensive models"
+    }
+   ]
+  },
+  {
+   "day": 125,
+   "date": "2027-03-15",
+   "phase": 2,
+   "lessons": [
     {
      "id": 559,
      "area": "AI industry and economics",
@@ -7920,19 +7920,7 @@
      "verify": "",
      "n": 445,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Securing AI",
-    "fact": "The NCSC says AI integration into critical national infrastructure will almost certainly enlarge the attack surface",
-    "source": "https://www.ncsc.gov.uk/report/impact-ai-cyber-threat-now-2027"
-   }
-  },
-  {
-   "day": 126,
-   "date": "2027-03-21",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 438,
      "area": "Securing AI",
@@ -7960,7 +7948,19 @@
      "verify": "",
      "n": 447,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Securing AI",
+    "fact": "The NCSC says AI integration into critical national infrastructure will almost certainly enlarge the attack surface",
+    "source": "https://www.ncsc.gov.uk/report/impact-ai-cyber-threat-now-2027"
+   }
+  },
+  {
+   "day": 126,
+   "date": "2027-03-16",
+   "phase": 2,
+   "lessons": [
     {
      "id": 369,
      "area": "Cyber foundations",
@@ -8012,7 +8012,7 @@
   },
   {
    "day": 127,
-   "date": "2027-03-22",
+   "date": "2027-03-17",
    "phase": 2,
    "lessons": [
     {
@@ -8066,7 +8066,7 @@
   },
   {
    "day": 128,
-   "date": "2027-03-23",
+   "date": "2027-03-18",
    "phase": 2,
    "lessons": [
     {
@@ -8120,7 +8120,7 @@
   },
   {
    "day": 129,
-   "date": "2027-03-24",
+   "date": "2027-03-19",
    "phase": 2,
    "lessons": [
     {
@@ -8174,7 +8174,7 @@
   },
   {
    "day": 130,
-   "date": "2027-03-25",
+   "date": "2027-03-20",
    "phase": 2,
    "lessons": [
     {
@@ -8218,19 +8218,7 @@
      "verify": "",
      "n": 462,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Securing AI",
-    "fact": "The NCSC advises defenders to log failed tool calls because they may signal an attacker refining a prompt injection",
-    "source": "https://www.ncsc.gov.uk/blog-post/prompt-injection-is-not-sql-injection"
-   }
-  },
-  {
-   "day": 131,
-   "date": "2027-03-26",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 443,
      "area": "Securing AI",
@@ -8258,7 +8246,19 @@
      "verify": "",
      "n": 464,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Securing AI",
+    "fact": "The NCSC advises defenders to log failed tool calls because they may signal an attacker refining a prompt injection",
+    "source": "https://www.ncsc.gov.uk/blog-post/prompt-injection-is-not-sql-injection"
+   }
+  },
+  {
+   "day": 131,
+   "date": "2027-03-21",
+   "phase": 2,
+   "lessons": [
     {
      "id": 370,
      "area": "Cyber foundations",
@@ -8272,28 +8272,7 @@
      "verify": "",
      "n": 465,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "Law, policy and geopolitics",
-    "fact": "The AI Security Institute published its first Frontier AI Trends Report on 18 December 2025, based on two years of evaluations",
-    "source": "https://www.gov.uk/government/publications/ai-security-institute-frontier-ai-trends-report-factsheet"
-   },
-   "try": [
-    {
-     "area": "Building with AI",
-     "module": "Agents, orchestration, cost and shipping",
-     "title": "Plan an AI feature launch",
-     "task": "Ask Claude Code to produce a launch plan with eval gate, canary and kill switch for a feature of your choice, then critique it as a sceptic",
-     "needs": "Shipping an AI feature to real users"
-    }
-   ]
-  },
-  {
-   "day": 132,
-   "date": "2027-03-27",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 444,
      "area": "Securing AI",
@@ -8349,7 +8328,19 @@
      "verify": "",
      "n": 469,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Law, policy and geopolitics",
+    "fact": "The AI Security Institute published its first Frontier AI Trends Report on 18 December 2025, based on two years of evaluations",
+    "source": "https://www.gov.uk/government/publications/ai-security-institute-frontier-ai-trends-report-factsheet"
+   }
+  },
+  {
+   "day": 132,
+   "date": "2027-03-22",
+   "phase": 2,
+   "lessons": [
     {
      "id": 561,
      "area": "AI industry and economics",
@@ -8363,19 +8354,7 @@
      "verify": "Use Gartner's latest security-spend forecast (Feb 2026 research put 2026 at $244bn)",
      "n": 470,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "AI industry and economics",
-    "fact": "DeepSeek-V3's final training run was reported at about $5.6m, but that excludes research and failed runs",
-    "source": "https://arxiv.org/abs/2412.19437"
-   }
-  },
-  {
-   "day": 133,
-   "date": "2027-03-28",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 445,
      "area": "Securing AI",
@@ -8403,7 +8382,19 @@
      "verify": "",
      "n": 472,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI industry and economics",
+    "fact": "DeepSeek-V3's final training run was reported at about $5.6m, but that excludes research and failed runs",
+    "source": "https://arxiv.org/abs/2412.19437"
+   }
+  },
+  {
+   "day": 133,
+   "date": "2027-03-23",
+   "phase": 2,
+   "lessons": [
     {
      "id": 204,
      "area": "Building with AI",
@@ -8455,7 +8446,7 @@
   },
   {
    "day": 134,
-   "date": "2027-03-29",
+   "date": "2027-03-24",
    "phase": 2,
    "lessons": [
     {
@@ -8509,7 +8500,7 @@
   },
   {
    "day": 135,
-   "date": "2027-03-30",
+   "date": "2027-03-25",
    "phase": 2,
    "lessons": [
     {
@@ -8563,7 +8554,7 @@
   },
   {
    "day": 136,
-   "date": "2027-03-31",
+   "date": "2027-03-26",
    "phase": 2,
    "lessons": [
     {
@@ -8616,17 +8607,17 @@
    },
    "try": [
     {
-     "area": "Cloud and modern software",
-     "module": "Scale, data and cost",
-     "title": "Review a repository for production readiness",
-     "task": "Ask Claude Code to audit your tiny API against the Twelve-Factor list and the go-live checklist and give a pass or fail per item with evidence",
-     "needs": "The non-negotiables checklist for shipping to real users"
+     "area": "Building with AI",
+     "module": "Agents, orchestration, cost and shipping",
+     "title": "Plan an AI feature launch",
+     "task": "Ask Claude Code to produce a launch plan with eval gate, canary and kill switch for a feature of your choice, then critique it as a sceptic",
+     "needs": "Shipping an AI feature to real users"
     }
    ]
   },
   {
    "day": 137,
-   "date": "2027-04-01",
+   "date": "2027-03-27",
    "phase": 2,
    "lessons": [
     {
@@ -8670,19 +8661,7 @@
      "verify": "",
      "n": 487,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Law, policy and geopolitics",
-    "fact": "In January 2026 the US moved H200-class chip sales to China to case-by-case review, capped at 50% of US-bound volume, alongside a 25% duty",
-    "source": "https://news.bloomberglaw.com/capital-markets/nvidia-h200-chip-china-export-review-process-eased-by-the-us"
-   }
-  },
-  {
-   "day": 138,
-   "date": "2027-04-02",
-   "phase": 2,
-   "lessons": [
+    },
     {
      "id": 450,
      "area": "Securing AI",
@@ -8710,7 +8689,19 @@
      "verify": "",
      "n": 489,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Law, policy and geopolitics",
+    "fact": "In January 2026 the US moved H200-class chip sales to China to case-by-case review, capped at 50% of US-bound volume, alongside a 25% duty",
+    "source": "https://news.bloomberglaw.com/capital-markets/nvidia-h200-chip-china-export-review-process-eased-by-the-us"
+   }
+  },
+  {
+   "day": 138,
+   "date": "2027-03-28",
+   "phase": 2,
+   "lessons": [
     {
      "id": 563,
      "area": "AI industry and economics",
@@ -8724,19 +8715,7 @@
      "verify": "",
      "n": 490,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "AI industry and economics",
-    "fact": "Cached input on the dearest tier costs 2.5% of the normal input price ($0.25 against $10 per million tokens)",
-    "source": "https://claude.com/pricing"
-   }
-  },
-  {
-   "day": 139,
-   "date": "2027-04-03",
-   "phase": 3,
-   "lessons": [
+    },
     {
      "id": 596,
      "area": "History and big ideas",
@@ -8792,7 +8771,19 @@
      "verify": "",
      "n": 494,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI industry and economics",
+    "fact": "Cached input on the dearest tier costs 2.5% of the normal input price ($0.25 against $10 per million tokens)",
+    "source": "https://claude.com/pricing"
+   }
+  },
+  {
+   "day": 139,
+   "date": "2027-03-29",
+   "phase": 3,
+   "lessons": [
     {
      "id": 283,
      "area": "AI from first principles",
@@ -8806,19 +8797,7 @@
      "verify": "",
      "n": 495,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Law, policy and geopolitics",
-    "fact": "The December 2025 US executive order created a Justice Department AI Litigation Task Force whose job is to challenge state AI laws",
-    "source": "https://www.ropesgray.com/en/insights/alerts/2025/12/trump-attempts-to-preempt-state-ai-regulation-through-executive-order"
-   }
-  },
-  {
-   "day": 140,
-   "date": "2027-04-04",
-   "phase": 3,
-   "lessons": [
+    },
     {
      "id": 452,
      "area": "Securing AI",
@@ -8846,7 +8825,19 @@
      "verify": "",
      "n": 497,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Law, policy and geopolitics",
+    "fact": "The December 2025 US executive order created a Justice Department AI Litigation Task Force whose job is to challenge state AI laws",
+    "source": "https://www.ropesgray.com/en/insights/alerts/2025/12/trump-attempts-to-preempt-state-ai-regulation-through-executive-order"
+   }
+  },
+  {
+   "day": 140,
+   "date": "2027-03-30",
+   "phase": 3,
+   "lessons": [
     {
      "id": 495,
      "area": "Law, policy and geopolitics",
@@ -8898,7 +8889,7 @@
   },
   {
    "day": 141,
-   "date": "2027-04-05",
+   "date": "2027-03-31",
    "phase": 3,
    "lessons": [
     {
@@ -8948,11 +8939,20 @@
     "area": "Law, policy and geopolitics",
     "fact": "Under NIS2, essential entities face fines up to the higher of EUR 10 million or 2% of worldwide turnover (as a ceiling Member States must provide for)",
     "source": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj (figures confirmed via secondary summary)"
-   }
+   },
+   "try": [
+    {
+     "area": "Cloud and modern software",
+     "module": "Scale, data and cost",
+     "title": "Review a repository for production readiness",
+     "task": "Ask Claude Code to audit your tiny API against the Twelve-Factor list and the go-live checklist and give a pass or fail per item with evidence",
+     "needs": "The non-negotiables checklist for shipping to real users"
+    }
+   ]
   },
   {
    "day": 142,
-   "date": "2027-04-06",
+   "date": "2027-04-01",
    "phase": 3,
    "lessons": [
     {
@@ -9006,7 +9006,7 @@
   },
   {
    "day": 143,
-   "date": "2027-04-07",
+   "date": "2027-04-02",
    "phase": 3,
    "lessons": [
     {
@@ -9060,7 +9060,7 @@
   },
   {
    "day": 144,
-   "date": "2027-04-08",
+   "date": "2027-04-03",
    "phase": 3,
    "lessons": [
     {
@@ -9104,19 +9104,7 @@
      "verify": "",
      "n": 512,
      "tag": "AI"
-    }
-   ],
-   "fact": {
-    "area": "Law, policy and geopolitics",
-    "fact": "Claude Opus 4 was the first model released with Anthropic's ASL-3 safeguards, because Anthropic treats a model as above a threshold if it cannot show it is sufficiently far below",
-    "source": "https://www.anthropic.com/rsp"
-   }
-  },
-  {
-   "day": 145,
-   "date": "2027-04-09",
-   "phase": 3,
-   "lessons": [
+    },
     {
      "id": 457,
      "area": "Securing AI",
@@ -9144,7 +9132,19 @@
      "verify": "",
      "n": 514,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "Law, policy and geopolitics",
+    "fact": "Claude Opus 4 was the first model released with Anthropic's ASL-3 safeguards, because Anthropic treats a model as above a threshold if it cannot show it is sufficiently far below",
+    "source": "https://www.anthropic.com/rsp"
+   }
+  },
+  {
+   "day": 145,
+   "date": "2027-04-04",
+   "phase": 3,
+   "lessons": [
     {
      "id": 371,
      "area": "Cyber foundations",
@@ -9158,19 +9158,7 @@
      "verify": "",
      "n": 515,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "AI industry and economics",
-    "fact": "Only one company, ASML, makes the extreme ultraviolet lithography machines that print the most advanced chips",
-    "source": "https://www.asml.com/en/technology/lithography-principles"
-   }
-  },
-  {
-   "day": 146,
-   "date": "2027-04-10",
-   "phase": 3,
-   "lessons": [
+    },
     {
      "id": 458,
      "area": "Securing AI",
@@ -9226,7 +9214,19 @@
      "verify": "",
      "n": 519,
      "tag": "AI"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI industry and economics",
+    "fact": "Only one company, ASML, makes the extreme ultraviolet lithography machines that print the most advanced chips",
+    "source": "https://www.asml.com/en/technology/lithography-principles"
+   }
+  },
+  {
+   "day": 146,
+   "date": "2027-04-05",
+   "phase": 3,
+   "lessons": [
     {
      "id": 459,
      "area": "Securing AI",
@@ -9240,19 +9240,7 @@
      "verify": "",
      "n": 520,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "AI industry and economics",
-    "fact": "Anthropic reportedly passed OpenAI on valuation in May 2026, at $965bn post-money (press reports; check the primary announcement)",
-    "source": "https://www.anthropic.com/news"
-   }
-  },
-  {
-   "day": 147,
-   "date": "2027-04-11",
-   "phase": 3,
-   "lessons": [
+    },
     {
      "id": 461,
      "area": "Securing AI",
@@ -9280,7 +9268,19 @@
      "verify": "",
      "n": 522,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI industry and economics",
+    "fact": "Anthropic reportedly passed OpenAI on valuation in May 2026, at $965bn post-money (press reports; check the primary announcement)",
+    "source": "https://www.anthropic.com/news"
+   }
+  },
+  {
+   "day": 147,
+   "date": "2027-04-06",
+   "phase": 3,
+   "lessons": [
     {
      "id": 298,
      "area": "AI from first principles",
@@ -9332,7 +9332,7 @@
   },
   {
    "day": 148,
-   "date": "2027-04-12",
+   "date": "2027-04-07",
    "phase": 3,
    "lessons": [
     {
@@ -9386,7 +9386,7 @@
   },
   {
    "day": 149,
-   "date": "2027-04-13",
+   "date": "2027-04-08",
    "phase": 3,
    "lessons": [
     {
@@ -9440,7 +9440,7 @@
   },
   {
    "day": 150,
-   "date": "2027-04-14",
+   "date": "2027-04-09",
    "phase": 3,
    "lessons": [
     {
@@ -9494,7 +9494,7 @@
   },
   {
    "day": 151,
-   "date": "2027-04-15",
+   "date": "2027-04-10",
    "phase": 3,
    "lessons": [
     {
@@ -9538,19 +9538,7 @@
      "verify": "",
      "n": 537,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "History and big ideas",
-    "fact": "Shannon's 1948 paper introduced the word \"bit\" and credits John Tukey for coining it",
-    "source": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf"
-   }
-  },
-  {
-   "day": 152,
-   "date": "2027-04-16",
-   "phase": 3,
-   "lessons": [
+    },
     {
      "id": 468,
      "area": "Securing AI",
@@ -9578,7 +9566,19 @@
      "verify": "",
      "n": 539,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "History and big ideas",
+    "fact": "Shannon's 1948 paper introduced the word \"bit\" and credits John Tukey for coining it",
+    "source": "https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf"
+   }
+  },
+  {
+   "day": 152,
+   "date": "2027-04-11",
+   "phase": 3,
+   "lessons": [
     {
      "id": 469,
      "area": "Securing AI",
@@ -9592,19 +9592,7 @@
      "verify": "",
      "n": 540,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "AI industry and economics",
-    "fact": "Sequoia's 2024 essay asked where the revenue would come from to justify AI infrastructure spend, and pegged the gap at $600bn",
-    "source": "https://www.sequoiacap.com/article/ais-600b-question/"
-   }
-  },
-  {
-   "day": 153,
-   "date": "2027-04-17",
-   "phase": 3,
-   "lessons": [
+    },
     {
      "id": 470,
      "area": "Securing AI",
@@ -9660,7 +9648,19 @@
      "verify": "",
      "n": 544,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "AI industry and economics",
+    "fact": "Sequoia's 2024 essay asked where the revenue would come from to justify AI infrastructure spend, and pegged the gap at $600bn",
+    "source": "https://www.sequoiacap.com/article/ais-600b-question/"
+   }
+  },
+  {
+   "day": 153,
+   "date": "2027-04-12",
+   "phase": 3,
+   "lessons": [
     {
      "id": 473,
      "area": "Securing AI",
@@ -9674,19 +9674,7 @@
      "verify": "",
      "n": 545,
      "tag": "Cyber"
-    }
-   ],
-   "fact": {
-    "area": "History and big ideas",
-    "fact": "Shannon's 1937 master's thesis showed Boolean algebra could design relay circuits, a base of all digital design",
-    "source": "https://dspace.mit.edu/handle/1721.1/11173"
-   }
-  },
-  {
-   "day": 154,
-   "date": "2027-04-18",
-   "phase": 3,
-   "lessons": [
+    },
     {
      "id": 486,
      "area": "Law, policy and geopolitics",
@@ -9714,7 +9702,19 @@
      "verify": "",
      "n": 547,
      "tag": "Cyber"
-    },
+    }
+   ],
+   "fact": {
+    "area": "History and big ideas",
+    "fact": "Shannon's 1937 master's thesis showed Boolean algebra could design relay circuits, a base of all digital design",
+    "source": "https://dspace.mit.edu/handle/1721.1/11173"
+   }
+  },
+  {
+   "day": 154,
+   "date": "2027-04-13",
+   "phase": 3,
+   "lessons": [
     {
      "id": 487,
      "area": "Law, policy and geopolitics",
@@ -9766,7 +9766,7 @@
   },
   {
    "day": 155,
-   "date": "2027-04-19",
+   "date": "2027-04-14",
    "phase": 3,
    "lessons": [
     {
@@ -9820,7 +9820,7 @@
   },
   {
    "day": 156,
-   "date": "2027-04-20",
+   "date": "2027-04-15",
    "phase": 3,
    "lessons": [
     {
@@ -9874,7 +9874,7 @@
   },
   {
    "day": 157,
-   "date": "2027-04-21",
+   "date": "2027-04-16",
    "phase": 3,
    "lessons": [
     {
@@ -9928,7 +9928,7 @@
   },
   {
    "day": 158,
-   "date": "2027-04-22",
+   "date": "2027-04-17",
    "phase": 3,
    "lessons": [
     {
@@ -9972,19 +9972,7 @@
      "verify": "",
      "n": 562,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "History and big ideas",
-    "fact": "The Lighthill report (1973) triggered deep UK cuts to AI research funding",
-    "source": "https://aima.cs.berkeley.edu"
-   }
-  },
-  {
-   "day": 159,
-   "date": "2027-04-23",
-   "phase": 3,
-   "lessons": [
+    },
     {
      "id": 515,
      "area": "Law, policy and geopolitics",
@@ -10012,7 +10000,19 @@
      "verify": "",
      "n": 564,
      "tag": "Tech"
-    },
+    }
+   ],
+   "fact": {
+    "area": "History and big ideas",
+    "fact": "The Lighthill report (1973) triggered deep UK cuts to AI research funding",
+    "source": "https://aima.cs.berkeley.edu"
+   }
+  },
+  {
+   "day": 159,
+   "date": "2027-04-18",
+   "phase": 3,
+   "lessons": [
     {
      "id": 517,
      "area": "Law, policy and geopolitics",
@@ -10026,19 +10026,7 @@
      "verify": "",
      "n": 565,
      "tag": "Tech"
-    }
-   ],
-   "fact": {
-    "area": "History and big ideas",
-    "fact": "Minsky and Papert's 1969 \"Perceptrons\" showed single-layer networks cannot learn XOR, helping start the first winter",
-    "source": "https://aima.cs.berkeley.edu"
-   }
-  },
-  {
-   "day": 160,
-   "date": "2027-04-24",
-   "phase": 3,
-   "lessons": [
+    },
     {
      "id": 518,
      "area": "Law, policy and geopolitics",
@@ -10084,13 +10072,13 @@
    ],
    "fact": {
     "area": "History and big ideas",
-    "fact": "AlexNet won ImageNet 2012 on two consumer Nvidia GTX 580 graphics cards, with 15.3% top-5 error against 26.2% for second place",
-    "source": "https://papers.nips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html"
+    "fact": "Minsky and Papert's 1969 \"Perceptrons\" showed single-layer networks cannot learn XOR, helping start the first winter",
+    "source": "https://aima.cs.berkeley.edu"
    }
   },
   {
-   "day": 161,
-   "date": "2027-04-25",
+   "day": 160,
+   "date": "2027-04-19",
    "phase": 4,
    "lessons": [
     {
@@ -10132,13 +10120,13 @@
    ],
    "fact": {
     "area": "History and big ideas",
-    "fact": "The original transformer paper trained its large model in 3.5 days on eight GPUs",
-    "source": "https://arxiv.org/abs/1706.03762"
+    "fact": "AlexNet won ImageNet 2012 on two consumer Nvidia GTX 580 graphics cards, with 15.3% top-5 error against 26.2% for second place",
+    "source": "https://papers.nips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html"
    }
   },
   {
-   "day": 162,
-   "date": "2027-04-26",
+   "day": 161,
+   "date": "2027-04-20",
    "phase": 4,
    "lessons": [
     {
@@ -10180,13 +10168,13 @@
    ],
    "fact": {
     "area": "History and big ideas",
-    "fact": "GPT-3 had 175 billion parameters",
-    "source": "https://arxiv.org/abs/2005.14165"
+    "fact": "The original transformer paper trained its large model in 3.5 days on eight GPUs",
+    "source": "https://arxiv.org/abs/1706.03762"
    }
   },
   {
-   "day": 163,
-   "date": "2027-04-27",
+   "day": 162,
+   "date": "2027-04-21",
    "phase": 4,
    "lessons": [
     {
@@ -10228,8 +10216,8 @@
    ],
    "fact": {
     "area": "History and big ideas",
-    "fact": "British codebreakers at GCHQ (Ellis, Cocks, Williamson) found public-key cryptography in the early 1970s, but it stayed secret until 1997",
-    "source": "https://www.gchq.gov.uk/information/history-of-gchq"
+    "fact": "GPT-3 had 175 billion parameters",
+    "source": "https://arxiv.org/abs/2005.14165"
    }
   }
  ]

@@ -19,7 +19,7 @@ idx = (site / "index.html").read_text(encoding="utf-8")
 (site / "frame-test.html").write_text('<!doctype html><meta charset="utf-8"><body><script src="frame-test.js"></script></body>')
 shutil.copy(here / "audit.js", site / "audit.js")
 course = json.loads((site / "course.json").read_text())
-want_lessons = len(next(d for d in course["days"] if d["date"] == date)["lessons"]) if date >= "2026-11-16" else 1
+want_lessons = len(next(d for d in course["days"] if d["date"] == date)["lessons"]) if date >= "2026-11-11" else 1
 
 
 class Q(http.server.SimpleHTTPRequestHandler):

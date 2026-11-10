@@ -2,7 +2,7 @@
 
 Each brief is one JSON file at `briefs/YYYY-MM-DD.json`. The page design is fixed in `index.html`. Do not edit `index.html`, `check.py`, `course.json`, `course.md` or this file.
 
-These rules are for editions dated 16 November 2026 or later, which follow the 577-lesson course in `course.json`. Editions dated before then follow `BRIEF-v1.md` and `course.md`.
+These rules are for editions dated 11 November 2026 or later, which follow the 577-lesson course in `course.json`. Editions dated before then follow `BRIEF-v1.md` and `course.md`.
 
 ## Fields
 
@@ -23,7 +23,7 @@ A poster also has `big`: a short number of up to 7 characters, such as `-12%` or
 
 ## The course
 
-Run `python3 course.py YYYY-MM-DD`. It prints today's lessons from `course.json`, in order, with each lesson's number `n`, `tag`, `title`, `outcome`, the `visual` to draw, its `source`, its `level` and any `verify` note, plus today's fun fact and, on about 23 days, a Try it exercise. It also prints the 2 earlier lessons to use for review questions. Never choose lessons yourself: today's lessons are fixed. There are 3 on weekdays and 5 on Saturdays and Sundays (3 on the last weekend, 24 and 25 April 2027).
+Run `python3 course.py YYYY-MM-DD`. It prints today's lessons from `course.json`, in order, with each lesson's number `n`, `tag`, `title`, `outcome`, the `visual` to draw, its `source`, its `level` and any `verify` note, plus today's fun fact and, on about 23 days, a Try it exercise. It also prints the 2 earlier lessons to use for review questions. Never choose lessons yourself: today's lessons are fixed. There are 3 on weekdays and 5 on Saturdays and Sundays (4 on Sunday 18 April 2027, the last day before the capstones).
 
 `lessons`: one entry per lesson printed, in the same order, each `{ "n", "tag", "title", "idea", "steps", "analogy", "breaks", "why", "diagram" }` and `verified` when the lesson has a verify note.
 
@@ -80,7 +80,7 @@ Every story, poster or card, also has `read`: `{ "what", "how", "why", "take" }`
 
 `quiz`: one question per lesson, plus 2 review questions. That is 5 on weekdays and 7 at weekends. Each is multiple choice: `{ "kind", "tag", "n", "q", "options", "answer", "why" }`.
 
-- `kind`: `lesson` (one for each of today's lessons, with that lesson's `n`) or `review` (the 2 earlier lessons `course.py` prints, with their `n` and also their exact `title`). On 16 November 2026, lesson 1, there is nothing earlier, so use 2 `news` questions about today's stories instead.
+- `kind`: `lesson` (one for each of today's lessons, with that lesson's `n`) or `review` (the 2 earlier lessons `course.py` prints, with their `n` and also their exact `title`). On 11 November 2026, lesson 1, there is nothing earlier, so use 2 `news` questions about today's stories instead.
 - `tag` is AI, Tech or Cyber. `answer` is the position 0 to 3 of the right option. Vary the positions. Options up to 80 characters, `q` up to 150, `why` up to 190 and it must teach, not just repeat the answer.
 - Lesson and review questions test understanding, not recall of a phrase. Review questions must be true to that lesson's title and outcome. News questions must be answerable from the short read.
 

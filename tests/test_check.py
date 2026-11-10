@@ -46,7 +46,7 @@ CASES = [
     ("no fun fact", lambda b: b.pop("fact"), "fact text: missing text"),
     ("em dash", lambda b: L(b)[0].update(idea="A test — idea."), "em dash"),
 ]
-if date != "2026-11-16":
+if date != "2026-11-11":
     CASES += [
         ("review of a future lesson", lambda b: [q.update(n=L(b)[-1]["n"] + 5) for q in b["quiz"] if q["kind"] == "review"][:1], "review n must be an earlier course lesson"),
         ("review with the wrong title", lambda b: [q.update(title="Made up") for q in b["quiz"] if q["kind"] == "review"][:1], "review title must be"),
