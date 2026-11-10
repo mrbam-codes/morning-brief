@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-XeMlkeejRWFXl2abU29vUpLU2Bn7/SkMjBeiJsKcvcA='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-9iEDd/I/fzlOlsNLdeQQVGTbmKtHCu2Ix3t4GTHmxMw='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -214,6 +214,14 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 .e .ring span{font-size:4.2cqw;color:#c9a7ff}
 .e .sbig{font-size:23cqw;line-height:.85;color:#b6ffcf;text-shadow:0 0 18px rgba(125,255,168,.75)}
 .e .sbig small{display:block;font-size:5cqw;color:#3fae6a;text-shadow:none;margin-top:6px}
+.e .sbig.sm{font-size:18cqw}.e .sbig.xs{font-size:12cqw}
+.e .wk{display:flex;gap:2cqw}
+.e .wk i,.e .wkey i{font-style:normal;border-radius:1.4cqw;background:#1b2330;color:#5d6b7d}
+.e .wk i{flex:none;width:9.6cqw;height:9.6cqw;display:grid;place-items:center;font-size:5cqw}
+.e .wk i.d,.e .wkey i.d{background:#2a7a4c;color:#d7ffe5}.e .wk i.p,.e .wkey i.p{background:#ff3df2;color:#2a0428;box-shadow:0 0 10px rgba(255,61,242,.6)}
+.e .wk i.m,.e .wkey i.m{background:transparent;border:1px dashed #ff6f91;color:#ff9db3}.e .wk i.t{outline:2px solid #3de6ff;outline-offset:1px}
+.e .wkey{display:flex;gap:4cqw;font-size:3.8cqw;color:#8fa0b3}.e .wkey i{display:inline-block;width:3cqw;height:3cqw;margin-right:1.4cqw;border-radius:.8cqw;box-sizing:border-box}
+.e .foot{flex-wrap:wrap;row-gap:1cqw}.e .foot .url{flex:0 0 100%;color:#bff7ff;letter-spacing:.03em}
 .e .chips{display:flex;gap:1.6cqw;flex-wrap:wrap}
 .e .chips span{font:600 3.4cqw 'IBM Plex Mono',ui-monospace,monospace;padding:1.4cqw 2.5cqw;border-radius:99px;border:1px solid rgba(61,230,255,.6);color:#bff7ff;background:rgba(61,230,255,.08)}
 .e .chips span.p{border-color:#ff3df2;color:#ffc8fb;background:rgba(255,61,242,.14);box-shadow:0 0 12px rgba(255,61,242,.4)}
@@ -682,7 +690,7 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
   const LS=lessonsOf(b),themed=(b.themes||[]).flatMap(t=>(t.stories||[]).map(s=>[s,t.title]));
   const news=[...b.posters.map(s=>[s,'Top story']),...(b.stories||[]).map(s=>[s,null]),...themed];
   const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(LS.length===1?'Today’s lesson':LS.length+' lessons')+' and '+news.length+' stories ↓'));if(KSTORY)h.append(kimchiHint(b));app.append(h);
-  if(window.MBScores&&window.ScoreCore)MBScores.init({state:()=>S,save,today:todayStr,mode:MODE,ranks:RANKS,label:'BRIEF',foot:'AI × TECH × CYBER',day:()=>briefDay(todayStr()),openProgress});
+  if(window.MBScores&&window.ScoreCore)MBScores.init({state:()=>S,save,today:todayStr,mode:MODE,ranks:RANKS,label:'BRIEF',foot:'AI × TECH × CYBER',url:'mrbam-codes.github.io/morning-brief',day:()=>briefDay(todayStr()),openProgress});
   /* Today deck */
   const T=makeDeck(b,'news','Today','Swipe sideways. Tap a card to read it, then Done to file it.');
   news.forEach(([st,lab],i)=>{const id='s'+i,ph=pimg(st,'ph'),vz=st.figure?[st.figure.value,st.figure.label]:st.big?[st.big,'Key figure']:null;

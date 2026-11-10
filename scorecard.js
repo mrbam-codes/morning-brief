@@ -63,20 +63,31 @@
   function cardHTML(m) {
     var rk = m.rk, td = m.td, pts = td ? td.points : 0, mult = td ? td.mult : m.pv.mult;
     var filled = rk.next ? Math.round(15 * (m.S.points - rk.floor) / (rk.ceil - rk.floor)) : 15, bar = '█'.repeat(filled) + '░'.repeat(15 - filled);
-    var chips = td ? (td.perfect ? '<span class="p">PERFECT ' + m.tdRaw.score + '/' + m.tdRaw.total + '</span>' : '<span>' + m.tdRaw.score + '/' + m.tdRaw.total + ' CORRECT</span>') : '<span>NO QUIZ YET TODAY</span>';
-    chips += '<span>×' + mult + ' STREAK</span>' + (td && td.perfect ? '<span>+20 BONUS</span>' : '');
+    /* the headline is today's quiz score, the one figure a stranger understands; points sit in a chip */
+    var big = td ? m.tdRaw.score + '/' + m.tdRaw.total : '–', bigLbl = td ? 'QUIZ TODAY' : 'QUIZ NOT DONE YET';
+    var chips = (td ? (td.perfect ? '<span class="p">PERFECT</span>' : '') + '<span>+' + pts + ' PTS TODAY</span>' : '') + '<span>×' + mult + ' MULTIPLIER</span>';
+    var acc = m.R.asked ? Math.round(100 * m.R.right / m.R.asked) + '%' : '–';
+    var MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'], DAY = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    var when = +m.t.slice(8) + ' ' + MON[+m.t.slice(5, 7) - 1];
+    var first = Object.keys(m.S.days).filter(function (k) { return /^\d{4}-\d{2}-\d{2}$/.test(k); }).sort()[0] || m.t, week = '';
+    for (var i = 6; i >= 0; i--) {
+      var d = new Date(ScoreCore.parse(m.t)); d.setDate(d.getDate() - i); var k = ScoreCore.iso(d), x = m.R.day[k];
+      week += '<i class="' + (x ? (x.perfect ? 'p' : 'd') : (i && k > first ? 'm' : '')) + (i ? '' : ' t') + '">' + DAY[d.getDay()] + '</i>';
+    }
     var name = (m.S.name || 'anonymous').toLowerCase().slice(0, 16);
-    return '<div class="sharecard e" style="--p:' + Math.round(rk.toTop * 100) + '%" aria-label="Share card: ' + rk.name + ', ' + pts + ' points today">' +
-      '<canvas data-net></canvas><div class="hd"><span>' + esc(cfg.label) + ' // DAY ' + cfg.day() + '</span><span>v1</span></div>' +
+    return '<div class="sharecard e" style="--p:' + Math.round(rk.toTop * 100) + '%" aria-label="Share card: ' + rk.name + ', ' + (td ? big + ' in today\'s quiz, ' : '') + pts + ' points today">' +
+      '<canvas data-net></canvas><div class="hd"><span>' + esc(cfg.label) + ' // DAY ' + cfg.day() + '</span><span>' + when + '</span></div>' +
       '<div>&gt; whoami<br>' + esc(name) + ' <span class="ok">AUTH OK</span></div><div class="lbl">&gt; status --today</div>' +
-      '<div class="mid"><div class="ring"><div><b>' + rk.name.toUpperCase() + '</b><span>RANK ' + rk.index + '/' + rk.of + '</span></div></div><div class="sbig">' + pts + '<small>POINTS TODAY</small></div></div>' +
+      '<div class="mid"><div class="ring"><div><b>' + rk.name.toUpperCase() + '</b><span>RANK ' + rk.index + '/' + rk.of + '</span></div></div><div class="sbig' + (big.length > 4 ? ' xs' : big.length > 2 ? ' sm' : '') + '">' + big + '<small>' + bigLbl + '</small></div></div>' +
       '<div class="chips">' + chips + '</div><div class="lbl">&gt; rank --next</div>' +
       '<div class="bar">[' + bar + '] ' + fmt(m.S.points) + (rk.next ? '/' + fmt(rk.ceil) : '') + '</div>' +
       '<div class="lbl">' + (rk.next ? fmt(rk.toNext) + ' pts to ' + rk.next.toUpperCase() : 'TOP RANK: ' + rk.name.toUpperCase()) + '</div>' +
       '<div class="row"><span>STREAK</span><span>' + m.run + (m.run === 1 ? ' DAY' : ' DAYS') + ' 🔥</span></div>' +
-      '<div class="row"><span>QUIZZES</span><span>' + Object.keys(m.R.day).length + '</span></div>' +
+      '<div class="row"><span>CORRECT, ALL TIME</span><span>' + acc + '</span></div>' +
+      '<div class="lbl">&gt; log --week</div><div class="wk">' + week + '</div>' +
+      '<div class="wkey"><span><i class="d"></i>done</span><span><i class="p"></i>perfect</span><span><i class="m"></i>missed</span></div>' +
       '<div class="ship" aria-hidden="true"><div class="ship-in">' +'<svg class="ship-svg" viewBox="0 0 200 120"><defs><linearGradient id="shipb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1a5e"/><stop offset="1" stop-color="#120a33"/></linearGradient>' +'<linearGradient id="shipf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff3df2" stop-opacity="0"/><stop offset=".5" stop-color="#ff3df2"/><stop offset="1" stop-color="#ffe66d"/></linearGradient></defs>' +'<g class="flame"><path d="M14 66 L46 58 L46 78 Z" fill="url(#shipf)"/><path d="M24 68 L46 63 L46 73 Z" fill="#fff" opacity=".8"/></g>' +'<path d="M46 52 Q90 30 150 52 Q182 64 150 80 Q90 98 46 84 Z" fill="url(#shipb)" stroke="#3de6ff" stroke-width="2.5"/>' +'<path d="M70 84 L58 104 L84 92 Z M110 88 L118 108 L128 90 Z" fill="#120a33" stroke="#ff3df2" stroke-width="2"/>' +'<circle cx="60" cy="68" r="4" fill="#ffe66d"/><circle cx="162" cy="68" r="3" fill="#3de6ff"/>' +'<path d="M58 76 L150 76" stroke="#3de6ff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="4 5"/></svg>' +'<div class="dome"><div class="kpod"></div></div><div class="tag">' + (who === 'charlee' ? 'CHARLEE' : 'KIMCHI') + ' // CO-PILOT</div></div></div>' +
-      '<div class="foot"><span>&gt; _<span class="cur"></span></span><span>' + esc(cfg.foot) + '</span></div></div>';
+      '<div class="foot">' + (cfg.url ? '<span class="url">' + esc(cfg.url) + '</span>' : '') + '<span>&gt; _<span class="cur"></span></span><span>' + esc(cfg.foot) + '</span></div></div>';
   }
   function net(cv) {
     var ctx = cv.getContext('2d'), W, H, pts = [];
