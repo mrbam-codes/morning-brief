@@ -52,6 +52,7 @@ try:
         need(R["radar"] == 1 and R["blips"] == R["newsCards"] + 1, f"Radar card {R['radar']}, blips {R['blips']} for {R['newsCards']} stories plus Learn")
         need(R["lessonCards"] == want_lessons, f"{R['lessonCards']} lesson cards, expected {want_lessons}")
         need(R["learnBlip"], "no Learn blip on the Radar")
+        need(R.get("decks") and not [d for d in R["decks"] if d["bad"]], f"cards in a deck are not the same size: {[(d['id'], d['bad']) for d in R.get('decks') or [] if d['bad']]}")
         need(not R["errorShown"], "page showed its error message")
         need(not R["contrastPage"]["bad"], f"text below contrast: {R['contrastPage']['bad']}")
         need(R.get("contrastSheet") and not R["contrastSheet"]["bad"], f"lesson sheet text below contrast: {(R.get('contrastSheet') or {}).get('bad')}")

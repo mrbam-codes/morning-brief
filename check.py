@@ -550,10 +550,10 @@ def render(date):
     need('class="verdict"' in out, "page did not render the verdict")
     need('class="gcard quiz"' in out, "page did not render the quiz card")
     if date >= COURSE_START:
-        need(out.count('class="cd learn-card lesson"') == len((course_day(date) or {}).get("lessons", [])), "page did not render every lesson card")
+        need(out.count('class="cd learn-card lcard"') == len((course_day(date) or {}).get("lessons", [])), "page did not render every lesson card")
         need('class="cd radar-card"' in out, "page did not render the Radar card")
     else:
-        need('class="cd learn-card lesson"' in out, "page did not render the lesson")
+        need('class="cd learn-card lcard"' in out, "page did not render the lesson")
     need('class="err"' not in out, "page showed its error message")
 
 

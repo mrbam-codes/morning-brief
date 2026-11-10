@@ -25,14 +25,21 @@ async function run(){const R={};await sleep(1800);
   R.reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   R.radar=document.querySelectorAll('.cd.radar-card').length;R.blips=document.querySelectorAll('.rc .blip').length;
   R.newsCards=document.querySelectorAll('#deck-news .deck>.cd:not(.radar-card)').length;R.learnCards=document.querySelectorAll('#deck-learn .deck>.cd').length;
-  R.lessonCards=document.querySelectorAll('.cd.learn-card.lesson').length;
+  R.lessonCards=document.querySelectorAll('.cd.learn-card.lcard').length;
   R.counters=[...document.querySelectorAll('.cd .k .no')].map(x=>x.textContent);
+  /* every card in one deck shares its top edge and height (within 1px) and has no top margin; Learn cards also share padding and corner */
+  R.decks=[...document.querySelectorAll('.deck')].map(dk=>{const cs=[...dk.children].filter(c=>c.matches('.cd')&&!c.hidden).map(c=>{const r=c.getBoundingClientRect(),st=getComputedStyle(c);return{cls:c.className,top:+r.top.toFixed(1),height:+r.height.toFixed(1),marginTop:st.marginTop,padding:st.padding,radius:st.borderRadius}});
+    const t=cs.map(c=>c.top),h=cs.map(c=>c.height),bad=[];
+    if(Math.max(...t)-Math.min(...t)>1)bad.push('tops differ: '+t.join(', '));if(Math.max(...h)-Math.min(...h)>1)bad.push('heights differ: '+h.join(', '));
+    cs.forEach(c=>{if(c.marginTop!=='0px')bad.push(c.cls+' has top margin '+c.marginTop)});
+    const lc=cs.filter(c=>/\blearn-card\b/.test(c.cls));if(new Set(lc.map(c=>c.padding)).size>1)bad.push('padding differs: '+lc.map(c=>c.padding).join(', '));if(new Set(lc.map(c=>c.radius)).size>1)bad.push('corner differs: '+lc.map(c=>c.radius).join(', '));
+    return{id:dk.closest('section').id,cards:cs,bad}});
   R.wide=[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>innerWidth+1&&!e.closest('.deck,.rail')}).slice(0,8).map(e=>e.tagName+'.'+e.className);
   R.contrastPage=contrast(document.body);
   R.running=document.getAnimations().filter(a=>a.playState==='running'&&a.effect&&a.effect.getTiming().iterations===Infinity).map(a=>a.animationName||'anim').slice(0,10);
   R.text={hero:(document.querySelector('.hero .verdict')||{}).innerText,news:document.querySelector('#deck-news').innerText,learn:document.querySelector('#deck-learn').innerText,quiz:(document.querySelector('.gcard.quiz')||{}).innerText};
   /* open the first lesson, read the sheet, then press Done and check the card files to the rail */
-  const go=document.querySelector('.cd.learn-card.lesson .go');if(go){go.click();await sleep(300);const sh=document.querySelector('.sheet:last-of-type');R.lessonSheet=sh?sh.innerText:null;R.contrastSheet=sh?contrast(sh):null;
+  const go=document.querySelector('.cd.learn-card.lcard .go');if(go){go.click();await sleep(300);const sh=document.querySelector('.sheet:last-of-type');R.lessonSheet=sh?sh.innerText:null;R.contrastSheet=sh?contrast(sh):null;
     R.diagramImgs=sh?sh.querySelectorAll('.lart img').length:0;const im=sh&&sh.querySelector('.lart img');R.diagramLoaded=im?(await new Promise(r=>{if(im.complete)r(im.naturalWidth>0);else{im.onload=()=>r(true);im.onerror=()=>r(false)}})):false;
     const dn=sh&&sh.querySelector('.donebar .dn');if(dn){dn.click();await sleep(2600);/* done-fx.js files the card by 1.6 s, 2.3 s at worst (its safety timer) */const id=go.closest('.cd').dataset.id;R.afterDone={cardHidden:go.closest('.cd').hidden,chips:[...document.querySelectorAll('#deck-learn .rail .chip')].map(c=>c.textContent),saved:JSON.parse(localStorage.getItem('mb-v1')||'{}').read,sheetsOpen:document.querySelectorAll('.sheet').length};
       const ch=document.querySelector('#deck-learn .rail .chip');if(ch){ch.click();await sleep(200);R.afterPutBack={cardHidden:go.closest('.cd').hidden,chips:document.querySelectorAll('#deck-learn .rail .chip').length}}}}

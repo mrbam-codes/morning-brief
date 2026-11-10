@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-0gB9tUZadC8UAJi7lDVmcUQbfq3u0x/sxmqGni8Mtfk='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-zMJhAY3yfzgq+PzHdIYiLThjRM4iVWpCHrQNGtMmDb8='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -639,7 +639,7 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
   /* Learn deck */
   const L=makeDeck(b,'learn','Learn','Today’s lessons, then the fun fact'+(b.try?' and a Try it exercise':'')+'.');
   const total=b.lessons?577:90;
-  LS.forEach((l,i)=>{const id='l'+l.n,n=sigCard({cls:'learn-card lesson',col:COL.Learn,txt:TXT.Learn,kicker:'Lesson '+l.n+(l.area?' · '+l.area:' · '+(l.tag||'')),title:l.title,text:l.idea,vz:['3 min','Diagram inside'],cue:'Learn it →',open:()=>openLesson(l,total,()=>L.done(id))});
+  LS.forEach((l,i)=>{const id='l'+l.n,n=sigCard({cls:'learn-card lcard',col:COL.Learn,txt:TXT.Learn,kicker:'Lesson '+l.n+(l.area?' · '+l.area:' · '+(l.tag||'')),title:l.title,text:l.idea,vz:['3 min','Diagram inside'],cue:'Learn it →',open:()=>openLesson(l,total,()=>L.done(id))});
     L.add(n,{id,tag:'Learn',title:l.title,short:'L'+l.n,col:COL.Learn,txt:TXT.Learn})});
   if(b.fact){const n=sigCard({cls:'learn-card fact',col:COL.Learn,txt:TXT.Learn,kicker:'Fun fact',title:'Did you know?',text:b.fact.text,cue:'Open the fact →',src:b.fact.source&&b.fact.source.name,open:()=>openFact(b.fact,()=>L.done('fact'))});L.add(n,{id:'fact',title:'Fun fact',short:'Fact',col:COL.Learn,txt:TXT.Learn})}
   if(b.try){const n=sigCard({cls:'learn-card try',col:COL.Build,txt:TXT.Build,kicker:'Try it · 10 to 20 min',title:b.try.title,text:b.try.task,vz:['Hands on','In Claude Code'],cue:'Start the exercise →',open:()=>openTry(b.try,()=>L.done('try'))});L.add(n,{id:'try',title:b.try.title,short:'Try it',col:COL.Build,txt:TXT.Build})}
