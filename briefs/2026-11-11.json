@@ -1,0 +1,419 @@
+{
+ "date": "2026-11-11",
+ "dayLabel": "Wednesday 11 November 2026",
+ "type": "daily",
+ "verdict": "Cyber leads: an AI host breached, two flaws exploited, and AI claims that need checking",
+ "posters": [
+  {
+   "tag": "Cyber",
+   "headline": "Hackers raid an AI model host",
+   "big": "",
+   "summary": "Fireworks, which runs AI models for over 10,000 customers, says criminals took billing data, secrets and, for some accounts, datasets and unfinished model weights.",
+   "soWhat": "Work: ask every AI supplier where your data, keys and tuned models actually sit.",
+   "source": {
+    "name": "The Record",
+    "date": "10 Nov 2026",
+    "url": "https://therecord.media/ai-company-fireworks-says-hackers-stole-data-in-oct-attacks"
+   },
+   "read": {
+    "what": "Fireworks, a San Mateo company founded in 2022 that hosts AI models for businesses, says attackers stole data in two October incidents. It first found a breach on 6 October. On 23 October a third-party cloud provider hosting its research machines was attacked, and on 24 October the attacker used it to reach Fireworks development machines. Taken: account and billing details, invoices, stored secrets (passwords and keys that let apps log in), internal data and, for a limited set of accounts, datasets and incomplete model weights. Fireworks says payment card numbers were not stored and not hit. Notion cut its link to Fireworks and deleted its data there.",
+    "how": "The second break-in came through a supplier, not the front door (a supply chain attack): a cloud firm hosting Fireworks research machines was hacked, and the attacker stepped across. Fireworks links it to a money-driven group doing LLMjacking (stealing access to AI models and reselling it, leaving the owner with the bill). The Record cites Mandiant cases where such fraud passed $100,000 of charges in one day. Palo Alto Networks' Unit 42 team is investigating.",
+    "why": "AI hosts now hold the crown jewels of many firms: training data, custom models and the keys that connect them. Forbes reports customers such as Uber, Shopify and Cursor, and a $17.5bn valuation. When a host's own supplier is breached, every customer inherits that risk. Anyone using hosted AI should check what they keep there and rotate stored keys.",
+    "take": "Opinion: Fireworks' own bulletin, which I opened, confirms the scope, so this is not just press reporting. It still does not say how many customers were hit or how the cloud provider was breached. 'Incomplete model weights' sounds reassuring, but partial weights can still leak a customer's tuning work. Watch for Unit 42's findings and whether other AI hosts used the same provider."
+   },
+   "figure": {
+    "value": "10,000+",
+    "label": "Fireworks customers"
+   },
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1506399558188-acca6f8cbf41?w=960&q=70&fm=jpg",
+    "page": "https://unsplash.com/photos/server-racks-in-data-center-klWUhr-wPJ8",
+    "credit": "imgix, Unsplash",
+    "licence": "Unsplash Licence",
+    "alt": "Rows of black server racks in a data centre. A general data centre photo, not Fireworks' own."
+   }
+  },
+  {
+   "tag": "AI",
+   "headline": "Cheap open model, big claims",
+   "big": "1.6T",
+   "summary": "Meituan released the weights of LongCat-2.5 under the MIT licence. Its own tests put it near older top models on coding, at a fraction of the price.",
+   "soWhat": "Build: open weights let a firm run a strong model in-house, if it has the hardware.",
+   "source": {
+    "name": "VentureBeat",
+    "date": "9 Nov 2026",
+    "url": "https://venturebeat.com/technology/meituan-releases-the-open-weights-of-its-longcat-2-5-llm-with-vision-under-a-permissive-mit-license"
+   },
+   "read": {
+    "what": "Chinese delivery giant Meituan published the weights (the trained numbers that make up a model) of LongCat-2.5 on Hugging Face on 9 November, under the permissive MIT licence. Meituan says it has 1.6 trillion parameters, with about 48 billion used for each word; Hugging Face metadata shows 1.8T, a gap VentureBeat flagged. On Terminal Bench v2.1 it scored 88.4, against 89.1 for Claude Opus 5 and 88.8 for GPT-5.6 Sol in Meituan's own table. Its API costs $0.30 per million input tokens and $1.20 per million output tokens, for a limited time.",
+    "how": "It is a mixture of experts design (many specialist sub-networks, with only some switched on for each word), which keeps running costs down. It reads images, video and text. Meituan describes running it at four-bit precision on Chinese chips. VentureBeat estimates the 16-bit weights alone are about 3.2 TB, so self-hosting needs serious hardware.",
+    "why": "Open weights with a business-friendly licence let companies run and change a capable model without sending data to a US lab. On VentureBeat's sample job, LongCat costs $0.18 where Claude Opus 5.5 costs $2.80. That price gap puts pressure on paid models and widens the choice for clients who want data kept in-house.",
+    "take": "Opinion: treat the scores as Meituan's claims. No independent tests are reported yet, and the comparisons use older rival models. On the newer Terminal-Bench 4.0 it reports 38.5, well below the 64.8 listed for Opus 5.5. Check data handling and security before any client use. Watch for independent benchmark runs in the coming weeks."
+   },
+   "figure": {
+    "value": "$0.18",
+    "label": "sample job vs $2.80 on Opus"
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 170\" font-family=\"Arial,sans-serif\"><text x=\"0\" y=\"16\" font-size=\"13\" font-weight=\"bold\" fill=\"#222\">Cost of one sample job (VentureBeat)</text><text x=\"0\" y=\"49\" font-size=\"12\" fill=\"#222\">LongCat-2.5</text><rect x=\"85\" y=\"36\" width=\"6\" height=\"18\" fill=\"#d6336c\"/><text x=\"97\" y=\"49\" font-size=\"12\" fill=\"#222\">$0.18</text><text x=\"0\" y=\"81\" font-size=\"12\" fill=\"#222\">GPT-6.1 Sol</text><rect x=\"85\" y=\"68\" width=\"50\" height=\"18\" fill=\"#6c7a89\"/><text x=\"141\" y=\"81\" font-size=\"12\" fill=\"#222\">$1.40</text><text x=\"0\" y=\"113\" font-size=\"12\" fill=\"#222\">Opus 5.5</text><rect x=\"85\" y=\"100\" width=\"100\" height=\"18\" fill=\"#6c7a89\"/><text x=\"191\" y=\"113\" font-size=\"12\" fill=\"#222\">$2.80</text><text x=\"0\" y=\"145\" font-size=\"12\" fill=\"#222\">Fable 5.2</text><rect x=\"85\" y=\"132\" width=\"200\" height=\"18\" fill=\"#6c7a89\"/><text x=\"291\" y=\"145\" font-size=\"12\" fill=\"#222\">$5.60</text><text x=\"0\" y=\"166\" font-size=\"11\" fill=\"#555\">200K tokens in, 100K out, list prices</text></svg>",
+   "drawingAlt": "Bar chart of one sample job's cost: LongCat-2.5 $0.18, GPT-6.1 Sol $1.40, Claude Opus 5.5 $2.80, Claude Fable 5.2 $5.60, at list prices."
+  },
+  {
+   "tag": "Tech",
+   "headline": "Trump: FBI looking at Nvidia row",
+   "big": "-5%",
+   "summary": "Trump said the FBI is looking into the Nvidia chief's affair with a woman US intelligence reportedly linked to Beijing. China calls the spy claim unsubstantiated.",
+   "soWhat": "Work: insider and key-person risk now sits at the heart of the AI chip supply chain.",
+   "source": {
+    "name": "AP, via PBS NewsHour",
+    "date": "9 Nov 2026",
+    "url": "https://www.pbs.org/newshour/politics/watch-trump-says-fbi-is-looking-into-nvidia-ceo-jensen-huangs-affair-with-alleged-chinese-agent"
+   },
+   "read": {
+    "what": "At a White House briefing on Monday 9 November, Trump said: \"I know the FBI is looking into it in terms of something else, and I think that he'll be in good shape.\" He said Jensen Huang told him he had no idea the person was a spy. Nvidia has opened an independent investigation. The New York Times reported that US intelligence judged the woman, Alice Huang, a former executive at Singapore's Megaspeed, was gathering information for Beijing. Nvidia shares fell about 5% before trading opened on Monday.",
+    "how": "Two threads meet. One is personal: a chief executive admitted an affair, and his board is checking whether he was the target of a foreign intelligence effort (a classic insider-risk approach). The other is trade: Megaspeed is accused of smuggling about $2bn of Nvidia AI chips into China, Tom's Hardware reports, which Nvidia says its checks did not find. Bloomberg reports Nvidia's top lawyer contacted the US export regulator about the case.",
+    "why": "Nvidia makes most of the chips that power AI. If Washington decides its leadership is a security risk, rules on chip sales to China could tighten, hitting Nvidia, its suppliers and AI buyers. Trump is due to meet Xi Jinping at the APEC summit next week, so chips are now part of that conversation.",
+    "take": "Opinion: Trump's words were vague. 'In terms of something else' does not confirm an FBI case about Huang himself, and I found no FBI comment. The spy claim rests on anonymous intelligence sources reported by the New York Times, which I did not open. Watch for any FBI statement and any change to chip export rules."
+   },
+   "figure": {
+    "value": "-5%",
+    "label": "Nvidia before Monday's open"
+   }
+  }
+ ],
+ "stories": [
+  {
+   "tag": "Cyber",
+   "headline": "Very long password opens some SSH servers, now under attack",
+   "summary": "A flaw called SSHole lets a 257 to 1,024 character password log into locked accounts such as root on some small Linux systems. Attacks began on 6 November.",
+   "soWhat": "Work: ask suppliers if any Alpine-based containers or routers allow SSH password login.",
+   "source": {
+    "name": "SecurityWeek",
+    "date": "9 Nov 2026",
+    "url": "https://www.securityweek.com/hackers-exploiting-sshole-authentication-bypass-in-openssh/"
+   },
+   "read": {
+    "what": "The bug (CVE-2026-123158, rated 8.1 out of 10) affects OpenSSH, the standard remote login tool, on Linux systems built on the musl library without PAM (a plug-in login system), such as Alpine, OpenWrt, Buildroot and Yocto. OpenSSH fixed it in version 10.6p2 on 5 November. Security firm Previdian saw 20 attack attempts from 13 addresses in 9 countries between 6 and 8 November. WatchTowr says only botnets and crypto miners have used it so far.",
+    "how": "Accounts meant to have no password store a '*'. When a password is longer than 256 bytes, musl's hashing function fails and returns '*' instead of an error (a failure value that looks like a real answer). That matches the stored '*', so the server lets you in. StepSecurity's lab found it worked on a second attempt within the same connection.",
+    "why": "Alpine is a popular base for containers, and OpenWrt runs on many routers, so exposure can hide inside products. Upgrading the package is not enough: the running SSH service must be restarted, and old container images rebuilt.",
+    "take": "Opinion: the conditions are narrow (password login on, a musl build, no PAM), so this is not an internet-wide emergency. But attacks began the day after the fix, which shows how short the patch window now is. The simplest guard is to switch off password login and use keys. Watch whether bigger criminal groups pick it up."
+   },
+   "figure": {
+    "value": "257+",
+    "label": "characters that unlock it"
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "Chrome fixes its eighth exploited zero-day of 2026",
+   "summary": "Google patched a use-after-free flaw in how Chrome reads XML, which attackers are already exploiting. It is the browser's eighth such bug this year.",
+   "soWhat": "Work: check managed browsers update within days, not at the next monthly cycle.",
+   "source": {
+    "name": "SecurityWeek",
+    "date": "10 Nov 2026",
+    "url": "https://www.securityweek.com/chrome-update-patches-exploited-xml-zero-day-eighth-this-year/"
+   },
+   "read": {
+    "what": "Chrome 157.0.8103.50 and .51 for Windows and Mac, and .50 for Linux, fix nine flaws. One, CVE-2026-125350, rated high severity, is being exploited in attacks. An anonymous researcher reported it on 6 November. Google has shared no details of the attacks, and the US Cybersecurity and Infrastructure Security Agency (CISA) had not yet added it to its list of exploited flaws.",
+    "how": "A use-after-free bug happens when a program hands back a piece of memory but keeps using it. An attacker who controls what fills that gap can steer the program. This one sits in the code that reads XML (a common text format for structured data), so a booby-trapped web page could trigger it.",
+    "why": "The browser is the front door for most staff. Eight zero-days (flaws attacked before a fix exists) in one year shows attackers keep investing here. Chrome updates itself, but the fix only takes hold after a restart.",
+    "take": "Opinion: with no attack details we cannot tell whether this is targeted spying or broad crime; Google often holds details back until most users have updated. Restart your browser today. Watch for CISA adding it to its list, which sets a patch deadline for US agencies."
+   },
+   "figure": {
+    "value": "8th",
+    "label": "exploited Chrome bug in 2026"
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "Palantir security chief picked to run US cyber agency",
+   "summary": "Trump has nominated Palantir's Michael LoSapio to lead the US Cybersecurity and Infrastructure Security Agency, which has lost over 1,000 staff.",
+   "soWhat": "Work: US cyber alerts and threat sharing may stay thin while the agency has no leader.",
+   "source": {
+    "name": "The Register",
+    "date": "10 Nov 2026",
+    "url": "https://www.theregister.com/security/2026/11/10/trump-taps-palantir-security-chief-to-run-battered-us-cyber-defense-agency/5308763"
+   },
+   "read": {
+    "what": "On 9 November President Trump nominated Michael LoSapio to direct CISA, the US agency that defends federal networks and helps critical industries. The Register calls him Palantir's chief information security officer since September 2024; The Record calls him chief information officer. CISA has had no Senate-confirmed director since January 2025. It has shed more than 1,000 staff, about a third of its workforce.",
+    "how": "A director needs a Senate vote. The Record reports the end-of-term session is crowded with a must-pass funding bill and the annual defence bill. If the Senate does not act before it breaks next month, Trump would have to nominate him again next year, when Democrats are expected to hold the majority.",
+    "why": "CISA issues the alerts and patch deadlines that many UK and US security teams follow. A shrunken, leaderless agency means slower and thinner guidance. Palantir's ties to the administration, and its £330 million NHS England data platform contract, mean the pick will draw scrutiny on both sides of the Atlantic.",
+    "take": "Opinion: a hands-on security operator is a credible choice, but no leader can quickly refill a third of the workforce. The two outlets disagree on his exact title, which a confirmation hearing should settle. Watch whether the Senate moves before the new year."
+   },
+   "figure": {
+    "value": "1,000+",
+    "label": "staff CISA has lost"
+   }
+  },
+  {
+   "tag": "AI",
+   "headline": "Nvidia's robot model claims 95%, but the tests are unnamed",
+   "summary": "Nvidia says GR00T 2 learns new robot tasks from one to five demonstrations. A Tech Times review notes the 50 test tasks and the robots used are not listed.",
+   "soWhat": "Curious: robots that learn from human video could make retraining far cheaper.",
+   "source": {
+    "name": "Tech Times",
+    "date": "10 Nov 2026",
+    "url": "https://www.techtimes.com/articles/330365/20261110/nvidia-gr00t-2-robot-model-reports-95-success-while-leaving-50-test-tasks-unnamed.htm"
+   },
+   "read": {
+    "what": "Nvidia unveiled GR00T 2 at the Conference on Robot Learning in Austin on 9 November. It says the model completed 40 of 50 tasks at least once with no task-specific demonstrations, and averaged 71% success with one demonstration per task and 95% with five. Nvidia credits 100,000 hours of first-person human video for the skill transfer. Weights are slated for release by year-end.",
+    "how": "It is a world action model (a model that predicts how a scene will change and picks the robot's next move). Learning from video of people doing tasks means far fewer costly robot demonstrations. Nvidia also released Isaac Lab 3.0, its simulator for practising tasks, which it says trains up to 2.5 times faster than the last version.",
+    "why": "Teaching a robot a new job usually takes many hand-guided demonstrations. If one to five are enough, robots become practical for small batches and changing work. But public tests show the gap: on the independent RoboDojo benchmark, the best real-world score among 30 tested policies was 12.8%, against 100% for human experts.",
+    "take": "Opinion: these are Nvidia's own figures, and Nvidia's blog would not open for me to check them. Tech Times notes no task list, no trial counts and no named robots, so 95% is not yet a deployment number. A credible method, unproven at scale. Watch for the weights and outside replication."
+   },
+   "figure": {
+    "value": "95%",
+    "label": "Nvidia's claim, five demos"
+   },
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=960&q=70&fm=jpg",
+    "page": "https://unsplash.com/photos/closeup-photo-of-white-robot-arm-jIBMSMs4_kA",
+    "credit": "Franck V., Unsplash",
+    "licence": "Unsplash Licence",
+    "alt": "Close-up of a white robot arm and hand. A general robotics photo, not Nvidia's GR00T 2."
+   }
+  }
+ ],
+ "chatter": [
+  {
+   "via": "X",
+   "group": "Independent",
+   "handle": "@emollick",
+   "tag": "AI",
+   "headline": "Agent teams built 450 worlds, then wrote a rule book",
+   "summary": "Ethan Mollick had Claude Fable 5.2 build an endless 3D journey through portal-linked worlds. Agent teams made hundreds of worlds, then wrote a 204-section rule book.",
+   "insight": "The failures have moved from obvious errors to judgment and taste. The AI checkers caught factual slips but never asked whether the work was dull, repetitive or too long.",
+   "dissent": "Mollick admits his own vague order to 'polish' may have caused the bureaucracy, so it is hard to separate the AI's limits from poor management.",
+   "trust": "Plausible",
+   "trustNote": "I read Mollick's own write-up. The 25,000 agent runs figure is Claude's estimate, and no outside party has checked the build. I did not open the game itself.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "9 Nov 2026",
+    "url": "https://x.com/emollick/status/2119918307457577163"
+   },
+   "original": {
+    "name": "One Useful Thing (Ethan Mollick)",
+    "url": "https://www.oneusefulthing.org/p/fable-52-and-jagged-agi"
+   }
+  }
+ ],
+ "lessons": [
+  {
+   "n": 1,
+   "tag": "AI",
+   "title": "What \"learning from data\" means",
+   "idea": "Classic software runs rules a person wrote; machine learning is given examples with answers and works out the rules for itself.",
+   "steps": [
+    "Old way: a person writes a rule, such as 'if an email contains prize, mark it spam'.",
+    "The program applies that rule to new emails and gives answers. It never changes the rule itself.",
+    "Learning way: collect examples with answers, such as 1,000 emails labelled spam or not spam.",
+    "The model guesses a label for each example and measures how wrong it was (its loss).",
+    "It nudges its internal numbers (parameters) to shrink that error, then repeats many times.",
+    "The learned rules live in those numbers, so it can label emails it has never seen."
+   ],
+   "analogy": "Think of teaching a child to spot dogs. You could write a rulebook: four legs, fur, a tail. A cat breaks it at once. Or you could point at hundreds of animals and say 'dog' or 'not dog' until the child just knows. Machine learning is the second way: you supply the examples and the answers, and the learner builds its own sense of the pattern.",
+   "breaks": "A child understands what a dog is. A model only finds patterns that separate the labels in its data. If every spam email in training happened to arrive at night, it might learn 'night means spam' and never notice the rule is silly. It also cannot explain its rules in plain words the way a person who wrote them can.",
+   "why": "This is the core trade-off on any AI project. Hand-written rules are easy to audit but break on cases nobody foresaw. Learned rules cope with messy reality but depend on the quality and labels of the data, and are harder to explain. When a client asks why a model decided something, this is why the answer is hard. Data quality is a delivery risk, not a detail.",
+   "diagram": {
+    "alt": "Two pipelines. Top: rules plus data give answers, with the hand-written rule 'prize means spam'. Bottom: data plus answers give rules, from 1,000 labelled emails. Between them: who writes the rules?",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 260\" font-family=\"Arial,sans-serif\" fill=\"#fff\">\n<text x=\"10\" y=\"22\" font-size=\"14\" font-weight=\"bold\">Old way: a person writes rules</text>\n<rect x=\"10\" y=\"34\" width=\"84\" height=\"36\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"4\"/>\n<rect x=\"118\" y=\"34\" width=\"84\" height=\"36\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.8\"/>\n<rect x=\"226\" y=\"34\" width=\"84\" height=\"36\" rx=\"6\" fill=\"#fff\" fill-opacity=\"0.25\" stroke=\"#fff\" stroke-width=\"2\"/>\n<text x=\"52\" y=\"57\" font-size=\"14\" text-anchor=\"middle\">Rules</text>\n<text x=\"160\" y=\"57\" font-size=\"14\" text-anchor=\"middle\">+ Data</text>\n<text x=\"268\" y=\"57\" font-size=\"14\" text-anchor=\"middle\">Answers</text>\n<line x1=\"94\" y1=\"52\" x2=\"112\" y2=\"52\" stroke=\"#fff\" stroke-width=\"2\"/><polygon points=\"118,52 110,47 110,57\"/>\n<line x1=\"202\" y1=\"52\" x2=\"220\" y2=\"52\" stroke=\"#fff\" stroke-width=\"2\"/><polygon points=\"226,52 218,47 218,57\"/>\n<text x=\"10\" y=\"92\" font-size=\"14\" opacity=\"0.85\">Rule: \"prize\" means spam</text>\n<line x1=\"10\" y1=\"108\" x2=\"310\" y2=\"108\" stroke=\"#fff\" stroke-width=\"1\" stroke-dasharray=\"4 4\" opacity=\"0.6\"/>\n<text x=\"160\" y=\"132\" font-size=\"16\" font-weight=\"bold\" text-anchor=\"middle\">Who writes the rules?</text>\n<line x1=\"10\" y1=\"146\" x2=\"310\" y2=\"146\" stroke=\"#fff\" stroke-width=\"1\" stroke-dasharray=\"4 4\" opacity=\"0.6\"/>\n<text x=\"10\" y=\"168\" font-size=\"14\" font-weight=\"bold\">Learning way: the model does</text>\n<rect x=\"10\" y=\"180\" width=\"84\" height=\"36\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.8\"/>\n<rect x=\"118\" y=\"180\" width=\"84\" height=\"36\" rx=\"6\" fill=\"#fff\" fill-opacity=\"0.25\" stroke=\"#fff\" stroke-width=\"2\"/>\n<rect x=\"226\" y=\"180\" width=\"84\" height=\"36\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"4\"/>\n<text x=\"52\" y=\"203\" font-size=\"14\" text-anchor=\"middle\">Data</text>\n<text x=\"160\" y=\"203\" font-size=\"14\" text-anchor=\"middle\">+ Answers</text>\n<text x=\"268\" y=\"203\" font-size=\"14\" text-anchor=\"middle\">Rules</text>\n<line x1=\"94\" y1=\"198\" x2=\"112\" y2=\"198\" stroke=\"#fff\" stroke-width=\"2\"/><polygon points=\"118,198 110,193 110,203\"/>\n<line x1=\"202\" y1=\"198\" x2=\"220\" y2=\"198\" stroke=\"#fff\" stroke-width=\"2\"/><polygon points=\"226,198 218,193 218,203\"/>\n<text x=\"10\" y=\"240\" font-size=\"14\" opacity=\"0.85\">1,000 emails labelled spam or not</text>\n</svg>"
+   }
+  },
+  {
+   "n": 2,
+   "tag": "Cyber",
+   "title": "The CIA triad: confidentiality, integrity, availability",
+   "idea": "Every incident breaks secrecy (confidentiality), correctness (integrity) or access (availability), and ransomware goes after access.",
+   "steps": [
+    "Confidentiality: only the right people can read the information. A leak breaks it.",
+    "Integrity: data and software are not changed without permission. Tampering breaks it.",
+    "Availability: people can reach systems and data when they need them. An outage breaks it.",
+    "Heartbleed (2014) let attackers read server memory, including keys and passwords: confidentiality.",
+    "The SolarWinds Orion compromise slipped attacker code into trusted software: integrity.",
+    "NotPetya (2017) posed as ransomware but could not be decrypted, halting firms: availability."
+   ],
+   "analogy": "Think of a bank's safe-deposit boxes. Confidentiality means only you can open your box. Integrity means nobody swaps what is inside. Availability means the vault is open when you need your things. A burglar who reads your letters, a forger who swaps them and a flood that shuts the vault all hurt you, in three different ways.",
+   "breaks": "Real incidents often break more than one at once. Attackers who tamper with an update (integrity) usually go on to steal data (confidentiality). NotPetya looked like ransomware, so the label depends on what actually failed for you. NIST's legal definition also folds extra ideas into integrity, such as proving who did something (non-repudiation).",
+   "why": "It gives you a shared language with any security team. When an incident lands, ask first which of the three broke: it tells you who to call and what to measure. Ransomware is an availability attack: criminals lock your systems so you cannot work, then sell access back. That is why tested backups and recovery times matter as much as firewalls. Today's Fireworks breach is mainly a confidentiality failure.",
+   "diagram": {
+    "alt": "A triangle with C, I and A at its corners. Heartbleed sits at confidentiality, the tampered SolarWinds update at integrity and the NotPetya wiper at availability. The centre asks which one broke.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 310\" font-family=\"Arial,sans-serif\" fill=\"#fff\">\n<polygon points=\"160,50 45,235 275,235\" fill=\"#fff\" fill-opacity=\"0.12\" stroke=\"#fff\" stroke-width=\"3\"/>\n<circle cx=\"160\" cy=\"50\" r=\"20\" fill=\"#fff\" fill-opacity=\"0.3\" stroke=\"#fff\" stroke-width=\"3\"/>\n<circle cx=\"45\" cy=\"235\" r=\"20\" fill=\"#fff\" fill-opacity=\"0.3\" stroke=\"#fff\" stroke-width=\"3\"/>\n<circle cx=\"275\" cy=\"235\" r=\"20\" fill=\"#fff\" fill-opacity=\"0.3\" stroke=\"#fff\" stroke-width=\"3\"/>\n<text x=\"160\" y=\"57\" font-size=\"20\" font-weight=\"bold\" text-anchor=\"middle\">C</text>\n<text x=\"45\" y=\"242\" font-size=\"20\" font-weight=\"bold\" text-anchor=\"middle\">I</text>\n<text x=\"275\" y=\"242\" font-size=\"20\" font-weight=\"bold\" text-anchor=\"middle\">A</text>\n<text x=\"160\" y=\"20\" font-size=\"15\" font-weight=\"bold\" text-anchor=\"middle\">Confidentiality</text>\n<text x=\"186\" y=\"64\" font-size=\"14\" opacity=\"0.9\">Heartbleed: leak</text>\n<text x=\"160\" y=\"160\" font-size=\"16\" text-anchor=\"middle\">Which one broke?</text>\n<text x=\"160\" y=\"182\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">secret, correct, reachable</text>\n<text x=\"4\" y=\"280\" font-size=\"15\" font-weight=\"bold\">Integrity</text>\n<text x=\"4\" y=\"300\" font-size=\"14\" opacity=\"0.9\">SolarWinds: tampered</text>\n<text x=\"316\" y=\"280\" font-size=\"15\" font-weight=\"bold\" text-anchor=\"end\">Availability</text>\n<text x=\"316\" y=\"300\" font-size=\"14\" opacity=\"0.9\" text-anchor=\"end\">NotPetya: wiped</text>\n</svg>"
+   }
+  },
+  {
+   "n": 3,
+   "tag": "Tech",
+   "title": "Bits: why computers use two states",
+   "idea": "A computer stores everything as switches that are on (1) or off (0), and n of them can hold 2 to the power n different patterns.",
+   "steps": [
+    "A transistor is a tiny switch: on means 1, off means 0. A chip holds billions of them.",
+    "One switch, called a bit (binary digit), holds 2 patterns: 0 or 1.",
+    "Each extra bit doubles the patterns: 2 bits give 4, and 3 bits give 8 (counting 0 to 7).",
+    "So n bits give 2 to the power n patterns. Eight bits, a byte, give 2^8 = 256.",
+    "Meaning comes from agreed codes: in ASCII, 01000001 is 65, which stands for the letter A.",
+    "Pictures, sound and AI model weights are just longer runs of the same bits."
+   ],
+   "analogy": "Picture a row of light switches on a wall. With one switch the room is light or dark. Add a second and you get four combinations. Every new switch doubles the options, so eight switches can make 256 patterns. Harvard's CS50 course uses light bulbs the same way, counting from 0 to 7 with three bulbs.",
+   "breaks": "Real switches in a chip are not flicked by hand: billions change state every second, and 'on' and 'off' are ranges of voltage, not perfect values. A pattern also means nothing alone: 01000001 is the number 65, the letter A or part of a colour, depending on the code a program agrees to use.",
+   "why": "Bits explain the sizes and limits you meet everywhere. When AI teams shrink a model to four bits per weight, as Meituan describes for LongCat-2.5, each weight can take only 2^4 = 16 values instead of 2^16 = 65,536 at 16 bits. That saves memory but can cost accuracy. Knowing 2 to the power n lets you sanity-check such trade-offs.",
+   "diagram": {
+    "alt": "Eight switches with place values 128 to 1. Two are on, at 64 and 1, giving 65, the letter A in ASCII. Beneath: 2^8 = 256 patterns.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 220\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"160\" y=\"18\" font-size=\"14\" text-anchor=\"middle\">place value of each switch</text><text x=\"26\" y=\"38\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.85\">128</text><rect x=\"10\" y=\"48\" width=\"32\" height=\"52\" rx=\"5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.7\"/><text x=\"26\" y=\"82\" font-size=\"20\" text-anchor=\"middle\">0</text><text x=\"64\" y=\"38\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.85\">64</text><rect x=\"48\" y=\"48\" width=\"32\" height=\"52\" rx=\"5\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"64\" y=\"82\" font-size=\"20\" font-weight=\"bold\" text-anchor=\"middle\" fill=\"#b0306a\">1</text><text x=\"102\" y=\"38\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.85\">32</text><rect x=\"86\" y=\"48\" width=\"32\" height=\"52\" rx=\"5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.7\"/><text x=\"102\" y=\"82\" font-size=\"20\" text-anchor=\"middle\">0</text><text x=\"140\" y=\"38\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.85\">16</text><rect x=\"124\" y=\"48\" width=\"32\" height=\"52\" rx=\"5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.7\"/><text x=\"140\" y=\"82\" font-size=\"20\" text-anchor=\"middle\">0</text><text x=\"178\" y=\"38\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.85\">8</text><rect x=\"162\" y=\"48\" width=\"32\" height=\"52\" rx=\"5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.7\"/><text x=\"178\" y=\"82\" font-size=\"20\" text-anchor=\"middle\">0</text><text x=\"216\" y=\"38\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.85\">4</text><rect x=\"200\" y=\"48\" width=\"32\" height=\"52\" rx=\"5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.7\"/><text x=\"216\" y=\"82\" font-size=\"20\" text-anchor=\"middle\">0</text><text x=\"254\" y=\"38\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.85\">2</text><rect x=\"238\" y=\"48\" width=\"32\" height=\"52\" rx=\"5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.7\"/><text x=\"254\" y=\"82\" font-size=\"20\" text-anchor=\"middle\">0</text><text x=\"292\" y=\"38\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.85\">1</text><rect x=\"276\" y=\"48\" width=\"32\" height=\"52\" rx=\"5\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"292\" y=\"82\" font-size=\"20\" font-weight=\"bold\" text-anchor=\"middle\" fill=\"#b0306a\">1</text><line x1=\"10\" y1=\"116\" x2=\"310\" y2=\"116\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><text x=\"160\" y=\"146\" font-size=\"20\" font-weight=\"bold\" text-anchor=\"middle\">2^8 = 256 patterns</text><text x=\"160\" y=\"176\" font-size=\"14\" text-anchor=\"middle\">This one: 64 + 1 = 65</text><text x=\"160\" y=\"200\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.85\">In ASCII, 65 means \"A\"</text></svg>"
+   }
+  }
+ ],
+ "fact": {
+  "text": "The Intel 4004, the first single-chip microprocessor (1971), had 2,300 transistors, not the 2,250 often quoted. Apple's M3 Ultra has 184 billion, about 80 million times as many.",
+  "source": {
+   "name": "Computer History Museum",
+   "url": "https://www.computerhistory.org/revolution/digital-logic/12/285"
+  }
+ },
+ "quiz": [
+  {
+   "kind": "lesson",
+   "tag": "AI",
+   "n": 1,
+   "q": "A bank's fraud tool trains on 50,000 past payments marked fraud or genuine. What is it doing?",
+   "options": [
+    "Following rules a fraud analyst wrote down",
+    "Finding rules from the labelled examples",
+    "Checking each payment against a blocklist",
+    "Asking a person to approve every payment"
+   ],
+   "answer": 1,
+   "why": "Labelled examples plus a learning step means the model works out the rules itself. A blocklist or an analyst's rule is hand-written logic, the old way."
+  },
+  {
+   "kind": "lesson",
+   "tag": "Cyber",
+   "n": 2,
+   "q": "Ransomware locks a hospital's systems so staff cannot open patient records. Which property broke first?",
+   "options": [
+    "Confidentiality",
+    "Integrity",
+    "Availability",
+    "Authentication"
+   ],
+   "answer": 2,
+   "why": "Staff could not reach the systems they needed, so availability broke. If records were also copied out, confidentiality would break too."
+  },
+  {
+   "kind": "lesson",
+   "tag": "Tech",
+   "n": 3,
+   "q": "How many different patterns can 10 bits hold?",
+   "options": [
+    "1,024",
+    "100",
+    "512",
+    "1,000"
+   ],
+   "answer": 0,
+   "why": "Each extra bit doubles the count, so 2 to the power 10 is 1,024. 512 is only 9 bits, and 100 or 1,000 come from thinking in tens, not doubling."
+  },
+  {
+   "kind": "news",
+   "tag": "Cyber",
+   "q": "How did attackers reach Fireworks' development machines in the second October incident?",
+   "options": [
+    "By phishing a staff member for their password",
+    "Through a hacked third-party cloud provider",
+    "Through an unpatched flaw in Chrome",
+    "By bribing an insider for access"
+   ],
+   "answer": 1,
+   "why": "A cloud firm hosting its research machines was attacked on 23 October, and the attacker stepped across the next day. Entering through a supplier is a supply chain attack."
+  },
+  {
+   "kind": "news",
+   "tag": "Cyber",
+   "q": "Which setting blocks the SSHole flaw while you wait to patch?",
+   "options": [
+    "Switching off SSH password login",
+    "Setting a longer root password",
+    "Updating Chrome to version 157",
+    "Blocking traffic from 9 countries"
+   ],
+   "answer": 0,
+   "why": "The bug lives in the password login path, so switching it off and using keys removes it. A longer password does not help: 257 or more characters is the trigger."
+  }
+ ],
+ "terms": [
+  {
+   "term": "LLMjacking",
+   "plain": "Stealing access to someone's AI models and reselling it, leaving the owner with the bill."
+  },
+  {
+   "term": "Open weights",
+   "plain": "A model whose trained numbers are published, so anyone can download and run it."
+  },
+  {
+   "term": "Mixture of experts",
+   "plain": "A model built from many specialist parts, with only a few switched on for each word."
+  },
+  {
+   "term": "Zero-day",
+   "plain": "A flaw that attackers exploit before the maker has shipped a fix."
+  },
+  {
+   "term": "Use-after-free",
+   "plain": "A bug where a program keeps using memory it has already handed back."
+  },
+  {
+   "term": "CIA triad",
+   "plain": "Confidentiality, integrity and availability: the three things security protects."
+  },
+  {
+   "term": "Supervised learning",
+   "plain": "Training a model on examples that come with the right answers attached."
+  },
+  {
+   "term": "Bit",
+   "plain": "A binary digit: one switch that is either 0 or 1."
+  }
+ ],
+ "build": {
+  "title": "Spam rule vs learned rule",
+  "idea": "A one-page tool where you paste 20 subject lines you have labelled spam or not. It compares a keyword rule you write with a simple model that learns from your labels, and shows which got more right.",
+  "first": "Open Claude Code and ask: 'Build one HTML page that compares my keyword spam rule with a simple model trained on labelled subject lines I paste in.'"
+ },
+ "evidence": {
+  "searches": 29,
+  "kept": 7,
+  "rejected": [
+   {
+    "what": "Rapidus likely to miss its 2nm chip deadline",
+    "why": "Bloomberg's original and two trade reports would not open, so the claim could not be checked"
+   },
+   {
+    "what": "Moonshot AI renting Nvidia B300 servers",
+    "why": "Bloomberg's original would not open, and Moonshot disputes the documents"
+   },
+   {
+    "what": "Nearly 20% of workers replaced by AI asked back",
+    "why": "The survey was first reported on 3 November, outside the time window"
+   },
+   {
+    "what": "Microsoft's November Patch Tuesday",
+    "why": "No reliable report yet; the record-count article found was from September"
+   },
+   {
+    "what": "US gives low confidence to Iran fridge attack blame",
+    "why": "Could not find the original report; follow-up to a story already covered"
+   },
+   {
+    "what": "Australia plans criminal penalties for rogue AI",
+    "why": "Already covered in the last brief with no new fact opened"
+   },
+   {
+    "what": "US military satellites to patrol around the Moon",
+    "why": "Only a request for ideas, reported mainly by little-known sites"
+   },
+   {
+    "what": "SoftBank quarterly loss",
+    "why": "A finance result that changes little for AI, tech or security"
+   }
+  ],
+  "note": "Wikimedia Commons pages would not open today, so the two photos come from Unsplash."
+ }
+}
