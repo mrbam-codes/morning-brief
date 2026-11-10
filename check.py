@@ -105,6 +105,70 @@ def fresh(where, value):
     need(-1 <= (day - d).days <= limit, f"{where}: source is dated {value}, more than {limit} days before this brief")
 
 
+# ---------- trust rules (plan 2): editions dated 11 Nov 2026 or later ----------
+# Older editions are already published and are never re-judged by these rules.
+TRUST_FROM = "2026-11-11"
+REGISTER = json.loads((ROOT / "sources.json").read_text(encoding="utf-8"))["tiers"]
+
+
+def host(u):
+    m = re.match(r"^https?://([^/:?#]+)", str(u or ""), re.I)
+    h = m.group(1).lower() if m else ""
+    return h[4:] if h.startswith("www.") else h
+
+
+def tier(u):
+    """original, secondary, lead or unlisted. A domain matches itself and its sub-domains; the longest match wins."""
+    h, best, size = host(u), "unlisted", -1
+    for t in ("original", "secondary", "lead"):
+        for d in REGISTER.get(t, []):
+            if (h == d or h.endswith("." + d)) and len(d) > size:
+                best, size = t, len(d)
+    return best if h else "unlisted"
+
+
+def trusted(where, urls):
+    """Refuse a story whose only sources are lead only in sources.json."""
+    day = EDITION.get("day")
+    urls = [u for u in urls if u]
+    if not day or day.isoformat() < TRUST_FROM or not urls:
+        return
+    if all(tier(u) == "lead" for u in urls):
+        need(False, f"{where}: its only source ({', '.join(sorted({host(u) for u in urls}))}) is lead only in sources.json. "
+                    "Find the original report and cite that, or leave the story out")
+
+
+def evidence(b):
+    """Optional for now: how the morning run searched. Required once the routine prompt asks for it."""
+    ev = b.get("evidence")
+    if ev is None:
+        return
+    need(isinstance(ev, dict), "evidence: must be an object with searches, kept and rejected")
+    if not isinstance(ev, dict):
+        return
+    for k in ("searches", "kept"):
+        need(isinstance(ev.get(k), int) and 0 <= ev[k] <= 300, f"evidence {k}: a whole number from 0 to 300")
+    rj = ev.get("rejected", [])
+    need(isinstance(rj, list) and len(rj) <= 8, "evidence rejected: a list of 8 at most")
+    for i, r in enumerate(rj if isinstance(rj, list) else []):
+        text(f"evidence rejected {i + 1} what", (r or {}).get("what"), 90)
+        text(f"evidence rejected {i + 1} why", (r or {}).get("why"), 120)
+    if "note" in ev:
+        text("evidence note", ev.get("note"), 200)
+
+
+def length_tell(quiz, date):
+    """The right answer must not give itself away by being the longest option (copied from Mise en Place)."""
+    if date < TRUST_FROM or not quiz:
+        return
+    def longest(q):
+        n = [len(str(o).strip()) for o in q.get("options") or []]
+        a = q.get("answer")
+        return len(n) == 4 and isinstance(a, int) and 0 <= a <= 3 and n[a] == max(n) and n.count(n[a]) == 1
+    tell, cap = sum(longest(q) for q in quiz), max(1, len(quiz) * 2 // 5)
+    need(tell <= cap, f"quiz: the right answer is the longest option in {tell} of {len(quiz)} questions; at most {cap}. Make the options similar in length")
+
+
 def all_stories(b):
     items = list(b.get("posters") or []) + list(b.get("stories") or [])
     for t in b.get("themes") or []:
@@ -128,6 +192,7 @@ def story(where, s, poster):
     text(f"{where} source name", src.get("name"))
     text(f"{where} source date", src.get("date"))
     fresh(where, src.get("date"))
+    trusted(where, [src.get("url")])
     need(str(src.get("url", "")).startswith("https://"), f"{where}: source url must be https")
     r = s.get("read") or {}
     need(isinstance(r, dict) and r, f"{where}: needs a read with what, how, why and take")
@@ -299,6 +364,7 @@ def check_learn(b, day, date):
             need(isinstance(q.get("n"), int) and 1 <= q["n"] < n_today[0], f"{w}: review n must be an earlier course lesson (1 to {n_today[0] - 1})")
             need(q.get("title") == titles.get(q.get("n")), f"{w}: review title must be lesson {q.get('n')}'s title from course.json")
     need(len({q.get("answer") for q in quiz}) > 1, "quiz answers must not all be the same position")
+    length_tell(quiz, date)
 
 
 def check_v1_lesson(b, day, date):
@@ -355,6 +421,7 @@ def check_v1_lesson(b, day, date):
             need(q.get("n") != l.get("n"), f"{w}: recap must be an earlier lesson")
     answers = [q.get("answer") for q in quiz]
     need(len(set(answers)) > 1, "quiz answers must not all be the same position")
+    length_tell(quiz, date)
 
 
 def check(date):
@@ -452,6 +519,7 @@ def check(date):
         if x.get("original"):
             need(str(x["original"].get("url", "")).startswith("https://"), f"{w}: original url must be https")
             text(f"{w} original name", x["original"].get("name"))
+    evidence(b)
     iv = b.get("interview")
     need(bool(iv) or b.get("type") != "sunday", "Sunday needs an interview question")
     if iv:

@@ -2,10 +2,16 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-hRpWgiYJotfl7XQ64sYpZVAUgSUwsdJm6eIh2pMLCFw='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-2Bz/LD4zbJzWAve3Brvo35ma7IZsnFYAS4FLKjXFyJc='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Morning brief">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2307080f'/%3E%3Ctext x='16' y='23' font-size='19' font-weight='700' text-anchor='middle' fill='%2300f0ff' font-family='monospace'%3EM%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="fonts/fonts.css">
 <style>
@@ -305,6 +311,9 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 <script src="scorecore.js"></script>
 <script src="kimchi.js"></script>
 <script src="scorecard.js"></script>
+<script src="keep.js"></script>
+<script src="evidence.js"></script>
+<script src="done-fx.js"></script>
 </head>
 <body>
 <div id="app"></div>
@@ -313,7 +322,7 @@ const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=nu
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
 const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
-const BUILD='2026-11-16.1';
+const BUILD='2026-11-16.2';
 /* ---------- saved progress (this phone only) ---------- */
 const KEY='mb-v1',DAY=/^\d{4}-\d{2}-\d{2}$/;
 const fresh=()=>({days:{},tags:{AI:[0,0],Tech:[0,0],Cyber:[0,0]},lessons:{},points:0,badges:{},review:[],prog:{},sound:true});
@@ -482,13 +491,9 @@ function openProgress(){
     mp.textContent='Bright squares are lessons you have mastered (80% or more right). Dim ones are still to come or need revising. Colours: pink AI, yellow Tech, purple Cyber.'}).catch(()=>{mp.textContent='The course map could not be loaded.'});
   bd.append(el('h3',null,'Badges'));const bg=el('div','badges');
   BADGES.forEach(([id,n,d])=>{const c=el('div','bd'+(S.badges[id]?'':' lock'));c.append(el('b',null,n),S.badges[id]?'Earned '+S.badges[id]:d);bg.append(c)});bd.append(bg);
-  bd.append(el('h3',null,'Back up your scores'));
-  bd.append(el('p','meta','Scores live only on this phone. Copy a backup code to keep or move them.'));
-  const ex=el('button','btn','Copy backup code'),ta=el('textarea');ta.placeholder='Paste a backup code here to restore';
-  ex.onclick=()=>{const code=btoa(unescape(encodeURIComponent(JSON.stringify(S))));const show=()=>{ta.value=code;ta.select();ex.textContent='Code shown below, copy it'};try{navigator.clipboard.writeText(code).then(()=>ex.textContent='Copied',show)}catch(e){show()}};
-  const im=el('button','btn alt','Restore from code');
-  im.onclick=()=>{try{const o=JSON.parse(decodeURIComponent(escape(atob(ta.value.trim()))));if(!o.days||!o.tags)throw 0;if(!confirm('Replace the scores on this phone with the backup?'))return;S=Object.assign(fresh(),o);save();history.back();setTimeout(openProgress,60);refreshNav()}catch(e){im.textContent='That code did not work'}};
-  bd.append(ex,ta,im)}
+  if(window.Keep)Keep.mount(bd,{app:'MB',get:()=>S,valid:o=>!!(o&&o.days&&o.tags),
+    describe:o=>{const n=Object.keys(o.days||{}).filter(k=>DAY.test(k)).length;return (o.points||0)+' points, '+n+(n===1?' quiz day':' quiz days')},
+    apply:o=>{S=Object.assign(fresh(),o);save();history.back();setTimeout(openProgress,60);refreshNav()}})}
 let TERMS=null;
 async function openGlossary(list){
   const{bd}=sheet(null,'Glossary');bd.append(el('h2',null,'Glossary'),el('p','meta','Every term from your briefs, in plain English.'));
@@ -554,6 +559,7 @@ function makeDeck(b,key,label,hint){
     const fin=()=>{it.node.hidden=true;ch.style.visibility='';sync()};
     const a=it.node.getBoundingClientRect(),c=ch.getBoundingClientRect();
     if(instant||REDUCE||!a.width||!it.node.animate){fin();return}
+    if(window.DoneFX&&DoneFX.play(it.node,ch,it.col,()=>{ch.style.visibility='';ch.classList.add('pop')},fin))return;
     const g=it.node.cloneNode(true);g.style.cssText+=';position:fixed;left:'+a.left+'px;top:'+a.top+'px;width:'+a.width+'px;height:'+a.height+'px;margin:0;z-index:70;pointer-events:none;transform-origin:0 0';document.body.append(g);it.node.style.visibility='hidden';
     const an=g.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:'translate('+(c.left-a.left)*.55+'px,'+((c.top-a.top)*.55-40)+'px) scale(.45) rotate(-6deg)',opacity:1,offset:.55},{transform:'translate('+(c.left-a.left)+'px,'+(c.top-a.top)+'px) scale('+c.width/a.width+','+c.height/a.height+')',opacity:.4}],{duration:620,easing:'cubic-bezier(.5,0,.2,1)'});
     let f=false;const end=()=>{if(f)return;f=true;g.remove();it.node.style.visibility='';fin()};an.onfinish=end;setTimeout(end,900)};
@@ -657,6 +663,7 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
     const bt=el('button','btn',dn?'Practise again':pr?'Resume quiz':'Start quiz');bt.onclick=()=>startQuiz(b,items,qkey);qc.append(bt)};
   drawQuiz();m2.append(qc);
   if(b.interview){const ic=el('section','gcard'),idn=S.days[b.date+'-interview'];ic.append(el('span','lab','Interview round'),el('h2',null,'A question you might be asked'),el('p',null,idn?'Done. Replay for practice.':'One scenario, in a consultant’s voice. +15 points if you get it right.'));const bt=el('button','btn',idn?'Practise again':'Take the interview question');bt.onclick=()=>startInterview(b);ic.append(bt);m2.append(ic)}
+  if(window.Evidence)Evidence.mount(m2,b,{cls:'gcard evidence',heading:'h2'});
   app.append(m2);
   T.restore();L.restore();
   document.body.append(Object.assign(document.createElement('canvas'),{id:'fx'}));
@@ -680,7 +687,7 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
   if(bf.lessons){try{const c=await courseData(),by={};c.days.forEach(x=>x.lessons.forEach(l=>by[l.n]=l));bf.lessons.forEach(l=>{const k=by[l.n];if(k)['area','module','outcome','source'].forEach(f=>{if(l[f]==null&&k[f])l[f]=k[f]})})}catch(e){}}
   render(bf,list);
   fetch(location.pathname,{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/BUILD\s*=\s*'([^']+)'/);if(m&&m[1]!==BUILD){const u=el('button','upd','A newer version is ready. Tap to update.');u.onclick=()=>{location.href=location.pathname+'?d='+d+'&v='+Date.now()};document.body.append(u)}}).catch(()=>0);
-}catch(e){document.getElementById('app').append(el('p','err','This brief could not be loaded.'))}})();
+}catch(e){document.getElementById('app').append(el('p','err',(navigator.onLine===false||/fetch|network|load failed/i.test(String(e&&e.message)))?'No connection. Today’s brief needs signal: try again when you have it.':'This brief could not be loaded.'))}})();
 </script>
 </body>
 </html>

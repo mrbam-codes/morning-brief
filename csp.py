@@ -12,7 +12,7 @@ m = re.search(r"<script>(.*?)</script>", s, re.S)
 h = "'sha256-" + base64.b64encode(hashlib.sha256(m.group(1).encode("utf-8")).digest()).decode() + "'"
 policy = ("default-src 'none'; script-src 'self' " + h + "; "
           "style-src 'self' 'unsafe-inline'; "
-          "font-src 'self'; img-src 'self' data:; connect-src 'self'; "
+          "font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; "
           "media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'")
 tag = '<meta http-equiv="Content-Security-Policy" content="' + policy + '">'
 cur = re.search(r'<meta http-equiv="Content-Security-Policy"[^>]*>', s)
