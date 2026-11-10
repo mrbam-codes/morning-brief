@@ -14,7 +14,7 @@ import json, re, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FID = "c08"
 # Her head and ruff inside the 140x160 portrait: x, y, w, h (the ship's round window shows the middle of it)
-CROP = [16, 4, 88, 100]
+CROP = [2, -10, 117, 133]
 SIZE = [140, 160]
 
 raw = (ROOT / "tools" / "charlee" / f"{FID}.html").read_text(encoding="utf-8")
