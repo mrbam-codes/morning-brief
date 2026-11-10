@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-zMJhAY3yfzgq+PzHdIYiLThjRM4iVWpCHrQNGtMmDb8='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-XeMlkeejRWFXl2abU29vUpLU2Bn7/SkMjBeiJsKcvcA='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -306,6 +306,39 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 .grid.course{grid-template-columns:repeat(24,1fr);gap:2px}.grid.course i{border-radius:2px}
 @media (prefers-reduced-motion:reduce){.cd.flash{animation:none}.deck{scroll-behavior:auto}}
 @media (min-width:700px){.deck>.cd{flex-basis:340px}}
+/* ---- v3 Learn cards: a lesson card wears its own first diagram (an image, exactly as lessonArt), the build card is a terminal window ---- */
+.cd.lcard h3{font-size:21px;padding-bottom:3px}
+.cd.lcard .vz{display:none}
+.cd.lcard .go,.cd.tcard .go{margin-top:auto}
+.lpost{position:relative;margin:-16px -16px 2px;aspect-ratio:4/3;overflow:hidden;border-radius:17px 17px 0 0;padding:10px 12px 34px;
+  background:linear-gradient(rgba(10,6,30,.35),rgba(10,6,30,.35)),linear-gradient(160deg,#ff2e6e,#7c4dff 58%,#16b8f0);
+  box-shadow:inset 0 -2px 0 var(--h),0 6px 22px -6px var(--h)}
+.lpost img{display:block;width:100%;height:100%;object-fit:contain}
+.lpost::after{content:"";position:absolute;left:0;right:0;bottom:0;height:30px;background:linear-gradient(transparent,#1d0f45e6);pointer-events:none}
+.lpost .ltag{position:absolute;right:8px;bottom:6px;z-index:1;font:600 11px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.06em;padding:5px 7px;border-radius:6px;background:#0b0620e6;color:var(--t);border:1px solid var(--h)}
+.lpost .lshine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,#ffffff40 50%,transparent 65%);transform:translateX(-120%);pointer-events:none}
+.lpost.in .lshine{animation:lshine 1.1s .15s ease-out forwards}
+@keyframes lshine{to{transform:translateX(120%)}}
+.lpost.nodg{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px;padding:16px 18px 34px;background:#06121c;
+  background-image:linear-gradient(#3dffa222 1px,transparent 1px),linear-gradient(90deg,#3dffa222 1px,transparent 1px);background-size:22px 22px}
+.lpost.nodg b{font:400 88px/1 'Anton',Impact,sans-serif;color:var(--t);text-shadow:0 0 22px var(--h);padding-block:.22em;margin-block:-.22em}
+.lpost.nodg .lno{font:600 12px/1.2 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#d6f3ff}
+.cd.tcard{background-color:#020a04;background-image:repeating-linear-gradient(0deg,#39ff7a08 0 1px,transparent 1px 3px);border-color:#39ff7a99;box-shadow:0 0 26px -8px #39ff7a}
+.cd.tcard .tbar{margin:-16px -16px 2px;justify-content:flex-start;align-items:center;gap:7px;padding:10px 12px;background:#0c2412;border-bottom:1px solid #39ff7a66;border-radius:17px 17px 0 0;
+  font:400 17px/1 "VT323",'IBM Plex Mono',ui-monospace,monospace;letter-spacing:0;text-transform:none;color:#7dffa8}
+.tcard .tdots{display:flex;gap:7px;flex:none}
+.tcard .tdots i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.tcard .tdots i+i{background:#febc2e}.tcard .tdots i+i+i{background:#28c840}
+.tcard .tbar .tt{margin-left:3px;flex:1;min-width:0}
+.tcard .tbar .no{color:#9be8b4}
+.tcard .tln{font:400 20px/1.1 "VT323",'IBM Plex Mono',ui-monospace,monospace;color:#7dffa8;text-shadow:0 0 8px #39ff7a88}
+.tcard .tln .tps{color:#39ff7a}
+.cd.tcard h3{font:400 34px/1 "VT323",'IBM Plex Mono',ui-monospace,monospace;color:#d8ffe4;text-shadow:0 0 12px #39ff7a;letter-spacing:.02em}
+.cd.tcard p{font:400 20px/1.15 "VT323",'IBM Plex Mono',ui-monospace,monospace;color:#b6f7c8}
+.tcard .tcur{display:inline-block;width:11px;height:19px;margin-left:4px;vertical-align:-3px;background:#39ff7a;box-shadow:0 0 8px #39ff7a}
+.tcard .tcur.in{animation:tblink 1s steps(1) 6}
+@keyframes tblink{50%{opacity:0}}
+.cd.tcard .go{font:400 21px/1 "VT323",'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.04em;color:#020a04;background:#39ff7a;padding:7px 12px 6px;border-radius:3px;box-shadow:0 0 16px -2px #39ff7a}
+@media (prefers-reduced-motion:reduce){.lpost .lshine{display:none}.tcard .tcur,.tcard .tcur.in{animation:none}}
 </style>
 <script src="motion.js"></script>
 <script src="scorecore.js"></script>
@@ -531,6 +564,12 @@ const TXT={AI:'#ff8fb3',Tech:'#ffe600',Cyber:'#b9a3ff',Learn:'#3dffa2',Build:'#6
 const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const lessonsOf=b=>b.lessons||(b.lesson?[Object.assign({},b.lesson,{diagram:(b.lesson.diagrams||[])[0],more:(b.lesson.diagrams||[]).slice(1),legacy:true})]:[]);
 const quizOf=b=>b.quiz||(b.lesson&&b.lesson.quiz)||[];
+/* one short line of an idea for a card: up to its first colon or comma, or before " where " / " that "; the sheet keeps the whole sentence */
+const hook=t=>{t=String(t||'');const m=/^(.{18,}?)(?::|,| where | that )/.exec(t);return m?m[1]:t.replace(/\.$/,'')};
+/* how long a lesson takes to read: its own words at 200 a minute, rounded up */
+const readMin=l=>{const w=[l.outcome,l.idea,...(l.steps||[]),l.analogy,l.breaks,l.why].filter(Boolean).join(' ').split(/\s+/).filter(Boolean).length;return Math.max(1,Math.ceil(w/200))};
+/* once a card is mostly on screen, its one-off animation plays (never with reduced motion) */
+const onSeen=(node,fx)=>{if(REDUCE||!fx||!('IntersectionObserver' in window))return;const o=new IntersectionObserver(e=>{if(e[0].isIntersecting){fx.classList.add('in');o.disconnect()}},{threshold:.6});o.observe(node)};
 let COURSE=null;const courseData=()=>COURSE||(COURSE=fetch('course.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).catch(e=>{COURSE=null;throw e}));
 const MON={jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
 function ageDays(st,b){const m=/(\d{1,2}) ([A-Za-z]{3})/.exec((st.source||{}).date||'');if(!m||MON[m[2].toLowerCase()]==null)return 0;const[y,mo,d]=b.date.split('-').map(Number);let t=new Date(y,MON[m[2].toLowerCase()],+m[1]);if(t>new Date(y,mo-1,d+1))t=new Date(y-1,MON[m[2].toLowerCase()],+m[1]);return Math.max(0,Math.round((new Date(y,mo-1,d)-t)/864e5))}
@@ -575,6 +614,19 @@ function sigCard(o){const n=el('article','cd'+(o.cls?' '+o.cls:''));n.style.setP
   if(o.vz){const v=el('div','vz');v.append(el('span',null,o.vz[1]),el('b',null,o.vz[0]));n.append(v)}else n.append(el('div','vz'));
   if(o.src)n.append(el('div','src2',o.src));const go=el('button','go',o.cue||'Read the short version →');go.type='button';go.setAttribute('aria-label',(o.cue||'Read')+': '+o.title);
   go.onclick=e=>{e.stopPropagation();o.open()};n.append(go);n.onclick=e=>{if(e.target.closest('a,button'))return;o.open()};return n}
+/* the top of a lesson card: the lesson's own first diagram, whole, as an image (a data: URL, exactly as lessonArt; never markup); no diagram shows the lesson number */
+function lessonPoster(l,tag){const d=l.diagram,has=!!(d&&d.svg),f=el('figure','lpost'+(has?'':' nodg'));
+  if(has){const i=document.createElement('img');i.alt=d.alt||'';i.decoding='async';i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(d.svg);f.append(i)}
+  else{f.setAttribute('aria-hidden','true');f.append(el('b',null,two(l.n)),el('span','lno','Lesson'))}
+  f.append(el('span','ltag',tag),el('span','lshine'));return f}
+/* the build card: a terminal window with a title bar, the idea and a blinking prompt; same click behaviour as sigCard */
+function termCard(o){const n=el('article','cd learn-card build tcard');n.style.setProperty('--h','#39ff7a');n.style.setProperty('--t','#7dffa8');
+  const k=el('div','k tbar'),dt=el('span','tdots');dt.setAttribute('aria-hidden','true');dt.append(el('i'),el('i'),el('i'));k.append(dt,el('span','tt',o.kicker),el('span','no',''));
+  const ln=t=>{const d=el('div','tln');d.append(el('span','tps','$ '),t);return d};
+  const cur=el('span','tcur');cur.setAttribute('aria-hidden','true');const l2=ln(o.prompt);l2.append(cur);
+  n.append(k,ln('cat idea.txt'),el('h3',null,o.title),el('p',null,o.text),l2);
+  const go=el('button','go',o.cue);go.type='button';go.setAttribute('aria-label',o.cue+': '+o.title);
+  go.onclick=e=>{e.stopPropagation();o.open()};n.append(go);n.onclick=e=>{if(e.target.closest('a,button'))return;o.open()};onSeen(n,cur);return n}
 /* Radar: sector = topic, ring = how recent; one Learn blip jumps to the Learn deck */
 function radarCard(b,news,learnGo,learnCount){
   const card=el('article','cd radar-card');card.style.setProperty('--h',COL.Learn);card.style.setProperty('--t',TXT.Learn);
@@ -639,11 +691,13 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
   /* Learn deck */
   const L=makeDeck(b,'learn','Learn','Today’s lessons, then the fun fact'+(b.try?' and a Try it exercise':'')+'.');
   const total=b.lessons?577:90;
-  LS.forEach((l,i)=>{const id='l'+l.n,n=sigCard({cls:'learn-card lcard',col:COL.Learn,txt:TXT.Learn,kicker:'Lesson '+l.n+(l.area?' · '+l.area:' · '+(l.tag||'')),title:l.title,text:l.idea,vz:['3 min','Diagram inside'],cue:'Learn it →',open:()=>openLesson(l,total,()=>L.done(id))});
+  LS.forEach((l,i)=>{const id='l'+l.n,nd=l.diagram&&l.diagram.svg?1+(l.more||[]).filter(d=>d&&d.svg).length:0,
+      pz=lessonPoster(l,readMin(l)+' min'+(nd?' · '+nd+' diagram'+(nd>1?'s':''):'')),
+      n=sigCard({cls:'learn-card lcard',col:COL.Learn,txt:TXT.Learn,kicker:'Lesson '+l.n+(l.area?' · '+l.area:' · '+(l.tag||'')),title:l.title,text:hook(l.idea),photo:pz,cue:'Learn it →',open:()=>openLesson(l,total,()=>L.done(id))});onSeen(n,pz);
     L.add(n,{id,tag:'Learn',title:l.title,short:'L'+l.n,col:COL.Learn,txt:TXT.Learn})});
   if(b.fact){const n=sigCard({cls:'learn-card fact',col:COL.Learn,txt:TXT.Learn,kicker:'Fun fact',title:'Did you know?',text:b.fact.text,cue:'Open the fact →',src:b.fact.source&&b.fact.source.name,open:()=>openFact(b.fact,()=>L.done('fact'))});L.add(n,{id:'fact',title:'Fun fact',short:'Fact',col:COL.Learn,txt:TXT.Learn})}
   if(b.try){const n=sigCard({cls:'learn-card try',col:COL.Build,txt:TXT.Build,kicker:'Try it · 10 to 20 min',title:b.try.title,text:b.try.task,vz:['Hands on','In Claude Code'],cue:'Start the exercise →',open:()=>openTry(b.try,()=>L.done('try'))});L.add(n,{id:'try',title:b.try.title,short:'Try it',col:COL.Build,txt:TXT.Build})}
-  if(b.build){const n=sigCard({cls:'learn-card build',col:COL.Build,txt:TXT.Build,kicker:'You could build this',title:b.build.title,text:b.build.idea,vz:['1 step','To start today'],cue:'See the first step →',open:()=>openBuild(b.build,()=>L.done('build'))});L.add(n,{id:'build',title:b.build.title,short:'Build',col:COL.Build,txt:TXT.Build})}
+  if(b.build){const n=termCard({kicker:'You could build this',title:b.build.title,text:hook(b.build.idea),prompt:'to start today: 1 step',cue:'See the first step →',open:()=>openBuild(b.build,()=>L.done('build'))});L.add(n,{id:'build',title:b.build.title,short:'Build',col:COL.Build,txt:TXT.Build})}
   const learnGo=()=>{const f=L.items.find(x=>!x.node.hidden)||L.items[0];if(f)L.jump(f.id)};
   T.dk.prepend(radarCard(b,T,learnGo,L.items.length));T.number();L.number();
   app.append(L.sec);
