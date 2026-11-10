@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-GYQoMKzL2sXvlIcIgYUqWEZvqmwkWmQ7jv0gv5sqmZ8='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-0gB9tUZadC8UAJi7lDVmcUQbfq3u0x/sxmqGni8Mtfk='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -628,7 +628,7 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
   if(b.sample)app.append(el('div','sample',b.sample));
   const LS=lessonsOf(b),themed=(b.themes||[]).flatMap(t=>(t.stories||[]).map(s=>[s,t.title]));
   const news=[...b.posters.map(s=>[s,'Top story']),...(b.stories||[]).map(s=>[s,null]),...themed];
-  const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',news.length+' stories and '+(LS.length===1?'today’s lesson':LS.length+' lessons')+' ↓'));if(KSTORY)h.append(kimchiHint(b));app.append(h);
+  const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(LS.length===1?'Today’s lesson':LS.length+' lessons')+' and '+news.length+' stories ↓'));if(KSTORY)h.append(kimchiHint(b));app.append(h);
   if(window.MBScores&&window.ScoreCore)MBScores.init({state:()=>S,save,today:todayStr,mode:MODE,ranks:RANKS,label:'BRIEF',foot:'AI × TECH × CYBER',day:()=>briefDay(todayStr()),openProgress});
   /* Today deck */
   const T=makeDeck(b,'news','Today','Swipe sideways. Tap a card to read it, then Done to file it.');
@@ -646,6 +646,7 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
   if(b.build){const n=sigCard({cls:'learn-card build',col:COL.Build,txt:TXT.Build,kicker:'You could build this',title:b.build.title,text:b.build.idea,vz:['1 step','To start today'],cue:'See the first step →',open:()=>openBuild(b.build,()=>L.done('build'))});L.add(n,{id:'build',title:b.build.title,short:'Build',col:COL.Build,txt:TXT.Build})}
   const learnGo=()=>{const f=L.items.find(x=>!x.node.hidden)||L.items[0];if(f)L.jump(f.id)};
   T.dk.prepend(radarCard(b,T,learnGo,L.items.length));T.number();L.number();
+  app.append(L.sec);
   app.append(T.sec);
   const m=el('main','wrap');
   const chat=b.chatter||[],xs=chat.filter(c=>c.via==='X'),fs=chat.filter(c=>c.via!=='X');
@@ -655,7 +656,6 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
     fd.append(el('div','xnote','Summaries, not the original posts'));m.append(fd)}
   if(fs.length){m.append(el('div','sect','What people are saying'));fs.forEach(chatCard)}
   if(xs.length||fs.length)app.append(m);
-  app.append(L.sec);
   const m2=el('main','wrap');
   const items=dayItems(b),qkey=b.date,qc=el('section','gcard quiz');
   const drawQuiz=()=>{qc.textContent='';const dn=S.days[qkey],pr=(S.prog[qkey]||[]).length;
