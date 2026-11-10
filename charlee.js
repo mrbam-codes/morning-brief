@@ -4,7 +4,7 @@
    She blinks now and then, stops when her card leaves the page, and honours prefers-reduced-motion. */
 (function(){
 'use strict';
-var CSS="#c08{position:absolute;inset:0;overflow:hidden;background:#86c3ea}\n#c08 canvas{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 100%;image-rendering:pixelated;image-rendering:crisp-edges}\n#c08 canvas{position:static;z-index:auto;opacity:1}",HTML="<div class=\"khero\" id=\"c08\"><canvas width=\"70\" height=\"80\" role=\"img\" aria-label=\"Pixel-art Charlee, a Maine Coon with a brown tabby coat, lynx-tipped ears, a big white ruff and bright green eyes, sitting upright with her plume tail up, at a sunny window\"></canvas></div>",CROP=[2, -10, 117, 133],SIZE=[140, 160];
+var CSS="#c08{position:absolute;inset:0;overflow:hidden;background:#86c3ea}\n#c08 canvas{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 100%;image-rendering:pixelated;image-rendering:crisp-edges}\n#c08 canvas{position:static;z-index:auto;opacity:1}",HTML="<div class=\"khero\" id=\"c08\"><canvas width=\"70\" height=\"80\" role=\"img\" aria-label=\"Pixel-art Charlee, a Maine Coon with a brown tabby coat, lynx-tipped ears, a big white ruff and bright green eyes, sitting upright with her plume tail up, at a sunny window\"></canvas></div>",CROP=[-15, -12, 150, 170],SIZE=[140, 160];
 var run=function(root,K){
 var root=root;if(!root)return;
 var cv=root.querySelector('canvas'),cx=cv.getContext('2d'),W=70,H=80;
