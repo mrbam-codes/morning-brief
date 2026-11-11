@@ -18,7 +18,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
-          SITE: https://mrbam-codes.github.io/morning-brief/
+          SITE: https://nyoom.uk/
           FIRST: ""
           LAST: ""
         run: |
