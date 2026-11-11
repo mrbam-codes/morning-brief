@@ -43,7 +43,7 @@ function mount(app,b,pimg){
   const list=(Array.isArray(b&&b.builds)?b.builds:[]).slice(0,4).map(clean).filter(Boolean);
   if(!list.length)return null;
   list.forEach((x,i)=>{x.n=i+1});
-  const sec=el('section','bw');sec.id='builds';sec.setAttribute('aria-labelledby','bw-title');
+  const sec=el('section','bw');sec.id='builds';sec.setAttribute('data-tour','builds');sec.setAttribute('aria-labelledby','bw-title');
   const cab=el('div','bw-cab'),mq=el('h2','bw-marq','Built in the wild');mq.id='bw-title';
   const crt=el('div','bw-crt'),scr=el('div','bw-scr'),cap=el('div','bw-cap'),hud=el('div','bw-hud');crt.append(scr);hud.setAttribute('role','group');hud.setAttribute('aria-label','Build stats');
   cab.append(mq,crt,cap,hud);

@@ -9,7 +9,7 @@
    - The cache name includes this page's own address, because several briefs
      share one web origin and must not delete each other's caches.
    Change VERSION when FIXED changes. tests/test_keep.py checks FIXED. */
-const APP='morning-brief',VERSION='9';
+const APP='morning-brief',VERSION='10';
 const FIXED=[
   'index.html',
   'manifest.webmanifest',
@@ -27,6 +27,7 @@ const FIXED=[
   'scorecard.js',
   'done-fx.js',
   'builds.js',
+  'tour.js',
   'course.json',
   'fonts/Anton-400-latin-ext.woff2',
   'fonts/Anton-400-latin.woff2',

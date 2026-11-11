@@ -86,8 +86,12 @@
       '<div class="row"><span>CORRECT, ALL TIME</span><span>' + acc + '</span></div>' +
       '<div class="lbl">&gt; log --week</div><div class="wk">' + week + '</div>' +
       '<div class="wkey"><span><i class="d"></i>done</span><span><i class="p"></i>perfect</span><span><i class="m"></i>missed</span></div>' +
-      '<div class="ship" aria-hidden="true"><div class="ship-in">' +'<svg class="ship-svg" viewBox="0 0 200 120"><defs><linearGradient id="shipb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1a5e"/><stop offset="1" stop-color="#120a33"/></linearGradient>' +'<linearGradient id="shipf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff3df2" stop-opacity="0"/><stop offset=".5" stop-color="#ff3df2"/><stop offset="1" stop-color="#ffe66d"/></linearGradient></defs>' +'<g class="flame"><path d="M14 66 L46 58 L46 78 Z" fill="url(#shipf)"/><path d="M24 68 L46 63 L46 73 Z" fill="#fff" opacity=".8"/></g>' +'<path d="M46 52 Q90 30 150 52 Q182 64 150 80 Q90 98 46 84 Z" fill="url(#shipb)" stroke="#3de6ff" stroke-width="2.5"/>' +'<path d="M70 84 L58 104 L84 92 Z M110 88 L118 108 L128 90 Z" fill="#120a33" stroke="#ff3df2" stroke-width="2"/>' +'<circle cx="60" cy="68" r="4" fill="#ffe66d"/><circle cx="162" cy="68" r="3" fill="#3de6ff"/>' +'<path d="M58 76 L150 76" stroke="#3de6ff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="4 5"/></svg>' +'<div class="dome"><div class="kpod"></div></div><div class="tag">' + (who === 'charlee' ? 'CHARLEE' : 'KIMCHI') + ' // CO-PILOT</div></div></div>' +
+      shipHTML(who, 'CO-PILOT', '') +
       '<div class="foot"><span>&gt; ' + (flippable() ? 'TAP TO FLIP' : '_') + '<span class="cur"></span></span><span>' + esc(cfg.foot) + '</span></div></div>';
+  }
+  /* the pilot's ship, drawn once here for the share card and the first-visit tour (tour.js); sfx keeps the gradient ids apart */
+  function shipHTML(cat, label, sfx) {
+    return '<div class="ship" aria-hidden="true"><div class="ship-in">' +'<svg class="ship-svg" viewBox="0 0 200 120"><defs><linearGradient id="shipb' + sfx + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1a5e"/><stop offset="1" stop-color="#120a33"/></linearGradient>' +'<linearGradient id="shipf' + sfx + '" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff3df2" stop-opacity="0"/><stop offset=".5" stop-color="#ff3df2"/><stop offset="1" stop-color="#ffe66d"/></linearGradient></defs>' +'<g class="flame"><path d="M14 66 L46 58 L46 78 Z" fill="url(#shipf' + sfx + ')"/><path d="M24 68 L46 63 L46 73 Z" fill="#fff" opacity=".8"/></g>' +'<path d="M46 52 Q90 30 150 52 Q182 64 150 80 Q90 98 46 84 Z" fill="url(#shipb' + sfx + ')" stroke="#3de6ff" stroke-width="2.5"/>' +'<path d="M70 84 L58 104 L84 92 Z M110 88 L118 108 L128 90 Z" fill="#120a33" stroke="#ff3df2" stroke-width="2"/>' +'<circle cx="60" cy="68" r="4" fill="#ffe66d"/><circle cx="162" cy="68" r="3" fill="#3de6ff"/>' +'<path d="M58 76 L150 76" stroke="#3de6ff" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="4 5"/></svg>' +'<div class="dome"><div class="kpod"></div></div><div class="tag">' + (cat === 'charlee' ? 'CHARLEE' : 'KIMCHI') + ' // ' + label + '</div></div></div>';
   }
   function whenOf(t) { return +t.slice(8) + ' ' + ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'][+t.slice(5, 7) - 1]; }
   /* the card turns over to a QR code only when qr.js has loaded and the page passed its address */
@@ -123,9 +127,9 @@
   /* Kimchi and Charlee take turns flying the ship: each time the share card opens, the other cat is at the controls.
      The pixel-art style suits the terminal; one cat at a time. If Charlee's file is missing, Kimchi flies. */
   var who = 'kimchi';
-  function pilot(root) {
+  function pilot(root, cat) {
     var pod = root.querySelector('.kpod'), dome = root.querySelector('.dome');
-    if (pod && who === 'charlee') { requestAnimationFrame(function () { if (window.KIMCHI) KIMCHI.stop(); CHARLEE.cameo(pod, Math.round(dome.getBoundingClientRect().width * 1.25) || 90); }); return; }
+    if (pod && (cat || who) === 'charlee') { requestAnimationFrame(function () { if (window.KIMCHI) KIMCHI.stop(); CHARLEE.cameo(pod, Math.round(dome.getBoundingClientRect().width * 1.25) || 90); }); return; }
     if (!pod || !window.KIMCHI) { if (dome) dome.classList.add('empty'); return; }
     requestAnimationFrame(function () { var w = Math.round(dome.getBoundingClientRect().width * 1.25) || 90; KIMCHI.cameo(pod, 's08', w); });
   }
@@ -428,6 +432,9 @@
     });
     return box;
   }
+  /* the cat now in the share card's ship (Kimchi until the card has been opened); read only, never saved. Used by tour.js. */
+  function pilotNow() { var S = cfg && cfg.state(); return S && S.pilot === 'charlee' && window.CHARLEE ? 'charlee' : 'kimchi'; }
   window.MBScores = { init: function (c) { cfg = c; paint(false); }, paint: paint, panel: panel, share: share, moveBox: moveBox,
+    pilotNow: pilotNow, shipHTML: shipHTML, mountPilot: pilot,
     code: { make: makeCode, read: readCode, valid: validState } };
 })();
