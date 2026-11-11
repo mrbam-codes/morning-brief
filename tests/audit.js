@@ -34,7 +34,7 @@ async function run(){const R={};await sleep(1800);
     cs.forEach(c=>{if(c.marginTop!=='0px')bad.push(c.cls+' has top margin '+c.marginTop)});
     const lc=cs.filter(c=>/\blearn-card\b/.test(c.cls));if(new Set(lc.map(c=>c.padding)).size>1)bad.push('padding differs: '+lc.map(c=>c.padding).join(', '));if(new Set(lc.map(c=>c.radius)).size>1)bad.push('corner differs: '+lc.map(c=>c.radius).join(', '));
     return{id:dk.closest('section').id,cards:cs,bad}});
-  R.wide=[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>innerWidth+1&&!e.closest('.deck,.rail')}).slice(0,8).map(e=>e.tagName+'.'+e.className);
+  R.wide=[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>innerWidth+1&&!e.closest('.deck,.rail,.bw-carts')}).slice(0,8).map(e=>e.tagName+'.'+e.className);
   R.contrastPage=contrast(document.body);
   R.running=document.getAnimations().filter(a=>a.playState==='running'&&a.effect&&a.effect.getTiming().iterations===Infinity).map(a=>a.animationName||'anim').slice(0,10);
   R.text={hero:(document.querySelector('.hero .verdict')||{}).innerText,news:document.querySelector('#deck-news').innerText,learn:document.querySelector('#deck-learn').innerText,quiz:(document.querySelector('.gcard.quiz')||{}).innerText};

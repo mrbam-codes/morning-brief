@@ -26,6 +26,7 @@ const FIXED=[
   'qr.js',
   'scorecard.js',
   'done-fx.js',
+  'builds.js',
   'course.json',
   'fonts/Anton-400-latin-ext.woff2',
   'fonts/Anton-400-latin.woff2',
