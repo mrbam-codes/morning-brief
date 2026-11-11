@@ -11,7 +11,7 @@ the morning run reports it. Older failures are skipped with a warning.
 import json, os, re, shutil, subprocess, sys, tempfile, urllib.request
 
 SRC, OUT = sys.argv[1], sys.argv[2]
-SITE = "https://mrbam-codes.github.io/morning-brief/"
+SITE = "https://nyoom.uk/"
 DATED = re.compile(r"^briefs/(\d{4}-\d{2}-\d{2})\.json$")
 summary = []
 
@@ -59,7 +59,7 @@ def published(date):
 # skipped: the story shows without it and the edition still publishes.
 import concurrent.futures, urllib.parse
 PHOTO_HOSTS = {"upload.wikimedia.org", "thumb.wikimedia.org", "images.unsplash.com"}
-UA = {"User-Agent": "MorningBriefPublisher/1.0 (https://mrbam-codes.github.io/morning-brief/)"}
+UA = {"User-Agent": "MorningBriefPublisher/1.0 (https://nyoom.uk/)"}
 MAX_PHOTO = 1_500_000
 
 

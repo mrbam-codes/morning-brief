@@ -13,7 +13,7 @@ Needs the segno QR library. Run from the repository:
 """
 import json, pathlib
 
-SITE = "https://mrbam-codes.github.io/morning-brief/"
+SITE = "https://nyoom.uk/"
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
