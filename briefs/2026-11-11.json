@@ -1,0 +1,378 @@
+{
+ "date": "2026-11-11",
+ "dayLabel": "Wednesday 11 November 2026",
+ "type": "daily",
+ "verdict": "AI found a live Outlook flaw and proved Signal's code, as Anthropic eyes a $1.4tn IPO",
+ "posters": [
+  {
+   "tag": "Cyber",
+   "headline": "AI helped find a live Outlook flaw",
+   "big": "1,093",
+   "summary": "Microsoft fixed 1,093 flaws this month. The one already used by attackers in Outlook was found by a researcher using Anthropic's Claude.",
+   "soWhat": "Work: patch Outlook now, and plan for AI-scale bug volumes",
+   "source": {
+    "name": "The Record",
+    "date": "10 Nov 2026",
+    "url": "https://therecord.media/patch-tuesday-microsoft-1000-bugs-again"
+   },
+   "figure": {
+    "value": "63",
+    "label": "flaws rated critical"
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 200\" font-family=\"Arial,sans-serif\"><text x=\"10\" y=\"20\" font-size=\"13\" fill=\"#222\" font-weight=\"bold\">Microsoft flaws disclosed per month, 2026</text><line x1=\"20\" y1=\"170\" x2=\"330\" y2=\"170\" stroke=\"#999\"/><rect x=\"40\" y=\"99\" width=\"60\" height=\"71\" fill=\"#9aa4b2\"/><text x=\"70\" y=\"92\" font-size=\"12\" text-anchor=\"middle\" fill=\"#222\">about 900</text><text x=\"70\" y=\"188\" font-size=\"12\" text-anchor=\"middle\" fill=\"#444\">Sep</text><rect x=\"140\" y=\"60\" width=\"60\" height=\"110\" fill=\"#9aa4b2\"/><text x=\"170\" y=\"53\" font-size=\"12\" text-anchor=\"middle\" fill=\"#222\">1,400+</text><text x=\"170\" y=\"188\" font-size=\"12\" text-anchor=\"middle\" fill=\"#444\">Oct</text><rect x=\"240\" y=\"84\" width=\"60\" height=\"86\" fill=\"#d6336c\"/><text x=\"270\" y=\"77\" font-size=\"12\" text-anchor=\"middle\" fill=\"#222\" font-weight=\"bold\">1,093</text><text x=\"270\" y=\"188\" font-size=\"12\" text-anchor=\"middle\" fill=\"#444\">Nov</text></svg>",
+   "drawingAlt": "Bar chart of Microsoft flaws disclosed per month in 2026: about 900 in September, more than 1,400 in October and 1,093 in November.",
+   "read": {
+    "what": "Microsoft's monthly security update (Patch Tuesday) fixed 1,093 flaws, 63 rated critical, says The Record. It is the second month in a row above 1,000, after more than 1,400 in October. One flaw in Outlook (CVE-2026-124194) was already being used in attacks. Microsoft credits researcher Benoît Sevens with finding it 'using Anthropic's Claude'. The US Cybersecurity and Infrastructure Security Agency (CISA) told federal agencies to patch by the end of the month.",
+    "how": "An attacker sends a booby-trapped message file. If the user opens it, Outlook quietly connects to the attacker's server without the usual warning. That leaks a scrambled copy of the user's Windows login (an NTLMv2 hash), which can be used to pose as that user. Tenable rates it 6.5 out of 10, so moderate on paper.",
+    "why": "Every firm running Outlook is in scope. The bigger shift is volume: Tenable says Microsoft has disclosed more than 5,160 flaws this year, far above any earlier year. Patch teams built for a few hundred a month now face over a thousand.",
+    "take": "Opinion: the moderate score undersells a flaw that is already in use, so treat it as urgent. AI finding bugs faster is good news for defenders only if fixing keeps pace. Note the counts differ: BleepingComputer's headline says 1,235, while Tenable and The Record say 1,093. Watch whether December stays above 1,000."
+   }
+  },
+  {
+   "tag": "AI",
+   "headline": "AI proves Signal's code holds up",
+   "big": "1%",
+   "summary": "Google DeepMind says AI agents wrote machine-checked proofs that Signal's real code keeps key security promises, in four weeks.",
+   "soWhat": "Curious: maths proofs could become the new standard for security claims",
+   "source": {
+    "name": "Google DeepMind",
+    "date": "10 Nov 2026",
+    "url": "https://deepmind.google/blog/introducing-alphaproof-code/"
+   },
+   "figure": {
+    "value": "4 weeks",
+    "label": "to verify, says DeepMind"
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 150\" font-family=\"Arial,sans-serif\"><text x=\"10\" y=\"20\" font-size=\"13\" fill=\"#222\" font-weight=\"bold\">Signal code checked by AlphaProof Code</text><rect x=\"10\" y=\"40\" width=\"317\" height=\"40\" fill=\"#3b5bdb\"/><rect x=\"327\" y=\"40\" width=\"3\" height=\"40\" fill=\"#d6336c\"/><text x=\"20\" y=\"65\" font-size=\"13\" fill=\"#fff\">About 99%: proofs checked by Lean</text><text x=\"330\" y=\"100\" font-size=\"13\" text-anchor=\"end\" fill=\"#d6336c\" font-weight=\"bold\">About 1%: flagged for humans</text><text x=\"10\" y=\"130\" font-size=\"12\" fill=\"#444\">Four weeks of work, per Google DeepMind</text></svg>",
+   "drawingAlt": "Bar showing about 99% of the work checked automatically by Lean and about 1% flagged for human review, over four weeks.",
+   "read": {
+    "what": "Google DeepMind says its system, AlphaProof Code, formally verified key security properties of the code behind Signal's encryption. It took four weeks, against years for expert teams, the company says. Agents flagged about 1% of the code for human attention. DeepMind calls it the first time such a widely used protocol's actual code has been verified by any method.",
+    "how": "Humans and AI turn Signal's security goals into exact maths statements (formal specifications), and experts review each one. Agents running Gemini Carbon then write proofs in Lean, a language where a computer checks every step. As a test, the team put back two old, fixed bugs, and the system proved both broken versions were insecure.",
+    "why": "Today most software security is 'we tested it and found nothing'. A checked proof says it cannot happen, at least for the properties proven. If this scales, it changes how banks, governments and suppliers prove software is safe.",
+    "take": "Opinion: impressive, but these are DeepMind's own claims and I found no independent review yet. The page also contradicts itself on size: 'over six million' lines of proof in the text, 'over three million' in its summary. A proof is only as good as the specification, so ask what was not proven. DeepMind says it will open-source the proofs, so outside checks should follow."
+   }
+  },
+  {
+   "tag": "AI",
+   "headline": "Anthropic prices its giant IPO",
+   "big": "$1.4tn",
+   "summary": "Anthropic set a share price range of $70 to $78, valuing it at up to $1.4 trillion. Trading on Nasdaq could start as soon as next week.",
+   "soWhat": "Work: a listed Anthropic must publish risks and numbers clients can read",
+   "source": {
+    "name": "Fortune",
+    "date": "10 Nov 2026",
+    "url": "https://fortune.com/2026/11/10/anthropic-ipo-price-range-ai-stock-sell-off/"
+   },
+   "figure": {
+    "value": "$64.4bn",
+    "label": "raise at top of range"
+   },
+   "read": {
+    "what": "Anthropic, maker of Claude, plans to sell 825 million shares at $70 to $78 each on Nasdaq under the ticker ANT, Fortune reports. That would raise up to $64.4 billion and value the company at up to $1.4 trillion. Seven partners, including Google and Nvidia, plan to buy $26 billion of non-voting stock. The same day Reuters, citing the Wall Street Journal, reported OpenAI's quarterly revenue rose about 50% to $10 billion, with an operating loss of $10.9 billion.",
+    "how": "A first share sale (initial public offering, or IPO) starts with a 'roadshow', where the company pitches big investors. It sets a price range, gauges demand, then fixes the final price. Anthropic's filing with US regulators lists the risks investors must weigh.",
+    "why": "This would be one of the largest share sales ever and a test of whether investors still back AI after a sharp tech sell-off. The filing warns that using AI to build better AI could pose a 'considerable safety risk', and says Anthropic 'may imminently meet' its own threshold for AI-driven progress.",
+    "take": "Opinion: the range sits well below the $2 trillion some outlets floated, which suggests caution about the market mood. The safety warning in a sales document is unusual and worth reading in full. Watch the final price and the first day of trading."
+   }
+  }
+ ],
+ "stories": [
+  {
+   "tag": "Cyber",
+   "headline": "Russian spies hid inside government email servers",
+   "summary": "ESET says the Russian group Turla used new malware, 'Cereal', inside Microsoft Exchange to read emails with NATO and EU officials.",
+   "soWhat": "Work: on-premises email servers are a prime spy target",
+   "source": {
+    "name": "The Record",
+    "date": "10 Nov 2026",
+    "url": "https://therecord.media/russia-hackers-espionage-romania-kazakhstan"
+   },
+   "figure": {
+    "value": "2",
+    "label": "governments hit"
+   },
+   "read": {
+    "what": "Security firm ESET found a new toolkit, Cereal, on government email servers in Kazakhstan (first seen 28 November 2025) and Romania (compromised 23 December 2025). ESET links it with high confidence to Turla, a group tied to Russia's Federal Security Service (FSB). In Romania it was set to collect emails with NATO and EU addresses.",
+    "how": "Instead of calling home to an outside server that could be blocked, the malware turns the victim's own internet-facing Exchange email server into its control point. One part hides inside Exchange's mail-handling process and copies chosen emails. Another waits for web requests that look like normal Exchange traffic. How the attackers first got in is not known.",
+    "why": "Governments and firms that still run their own Exchange servers face a quiet, hard-to-spot threat. No outside server means the usual network blocklists do not help.",
+    "take": "Opinion: the clever part is the lack of outside traffic, which defeats many standard checks. Defenders should look for odd changes inside the server itself. ESET has published technical clues (indicators of compromise) for that. This is ESET's research, reported by The Record; how much data was taken is unknown."
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "Stolen AI keys ran up $740,000 in bills",
+   "summary": "Cloud host Railway says attackers stole customers' AI access keys in October and used them for about $740,000 of charges.",
+   "soWhat": "Build: keep AI keys out of shared settings, and set spending caps",
+   "source": {
+    "name": "The Hacker News",
+    "date": "11 Nov 2026",
+    "url": "https://thehackernews.com/2026/11/railway-says-stolen-customer-ai-keys.html"
+   },
+   "figure": {
+    "value": "$740,000",
+    "label": "estimated fraudulent charges"
+   },
+   "read": {
+    "what": "Railway, a service that hosts apps for developers, says an attacker broke in on 20 to 21 October. Up to 100,000 workspaces (at most 1.85%) had stored settings decrypted, and 1,852 users had linked tokens exposed. Stolen AI keys ran up about $740,000 in estimated charges, which Railway says it will cover when providers will not refund.",
+    "how": "The attacker escaped part of the walls around a build job, then hopped from one trusted credential to the next until reaching one that could unlock customers' secret settings (environment variables). They searched those for AI provider keys. Railway believes the keys were used by services that resell AI access.",
+    "why": "Anyone building with AI keeps paid keys somewhere. Wiz says at least nine AI developer platforms were hit in October, with attackers hunting for these keys each time.",
+    "take": "Opinion: stolen AI keys are now cash, like stolen cards. If you build apps, set spend limits with each AI provider and rotate keys after any supplier breach. Railway has not named the attacker or published technical clues yet."
+   }
+  },
+  {
+   "tag": "Tech",
+   "headline": "AMD's new server chip nearly doubles speed",
+   "summary": "In Tom's Hardware tests, AMD's 256-core EPYC 9996 server pair scored 93% higher than the last generation on a standard benchmark.",
+   "soWhat": "Work: more work per server can cut data centre costs and power",
+   "source": {
+    "name": "Tom's Hardware",
+    "date": "10 Nov 2026",
+    "url": "https://www.tomshardware.com/pc-components/cpus/amd-zen-6-epyc-venice-deep-dive-and-benchmarking-dual-epyc-9996-with-1-024-threads-delivers-up-to-93-percent-performance-gain-gen-on-gen-9686f-outclasses-nvidias-vera"
+   },
+   "figure": {
+    "value": "256",
+    "label": "cores per chip"
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 160\" font-family=\"Arial,sans-serif\"><text x=\"10\" y=\"20\" font-size=\"13\" fill=\"#222\" font-weight=\"bold\">SPEC CPU 2026 intrate, two-chip servers</text><rect x=\"10\" y=\"40\" width=\"150\" height=\"34\" fill=\"#9aa4b2\"/><text x=\"170\" y=\"62\" font-size=\"12\" fill=\"#222\">EPYC 9965 (old) = 100</text><rect x=\"10\" y=\"90\" width=\"290\" height=\"34\" fill=\"#d6336c\"/><text x=\"20\" y=\"112\" font-size=\"12\" fill=\"#fff\" font-weight=\"bold\">EPYC 9996 (new): 93% higher</text><text x=\"10\" y=\"148\" font-size=\"11\" fill=\"#444\">Tom's Hardware tests on AMD-supplied systems</text></svg>",
+   "drawingAlt": "Two bars: the old EPYC 9965 pair at 100 and the new EPYC 9996 pair 93% higher on SPEC CPU 2026 intrate.",
+   "read": {
+    "what": "AMD launched its 6th generation EPYC server chips, codenamed Venice. The top EPYC 9996 has 256 cores, so a two-chip server runs 1,024 threads. Tom's Hardware measured a 93% gain over the previous EPYC 9965 pair. A smaller 96-core chip beat Nvidia's Vera processor by 17% on the same test.",
+    "how": "A core is one worker inside the chip. More cores, plus better design per core, means more jobs at once. The main part is made on TSMC's N2P process, its 2 nanometre class, which packs transistors tighter. AMD claims each core does 27% more work per clock tick (IPC) than before.",
+    "why": "Most AI and cloud work still needs ordinary processors next to the AI chips. Faster ones mean fewer servers for the same work, which matters as data centres hit power limits.",
+    "take": "Opinion: the 93% gain is independent testing, but on systems AMD supplied, and the results are labelled estimates, not official SPEC submissions. The 27% figure is AMD's own claim. Nvidia's Vera still won some tests. Watch prices, which were not given."
+   }
+  },
+  {
+   "tag": "Tech",
+   "headline": "BT pauses Starlink broadband over Musk row",
+   "summary": "BT says its Starlink rural broadband is ready but on hold until negative attention on Starlink and Elon Musk fades.",
+   "soWhat": "Work: politics now shapes which tech suppliers firms will put their name to",
+   "source": {
+    "name": "ISPreview (reporting the Financial Times)",
+    "date": "10 Nov 2026",
+    "url": "https://www.ispreview.co.uk/index.php/2026/11/bt-delay-starlink-based-uk-rural-broadband-service-over-controversial-musk.html"
+   },
+   "figure": {
+    "value": "110,000",
+    "label": "UK Starlink homes, July 2025"
+   },
+   "read": {
+    "what": "BT chief executive Allison Kirkby told the Financial Times that a Starlink-based broadband service for rural BT and EE customers, announced in November 2025, is ready but paused. ISPreview reports Starlink had about 110,000 UK broadband customers as of July 2025.",
+    "how": "Starlink beams internet from about 11,210 satellites in low orbit to a small dish at home, so it reaches places fibre does not. BT planned to resell it under its own brands.",
+    "why": "Rural homes waiting for fast internet must wait longer. It also shows a big UK firm weighing the reputation of a supplier's owner, not just the product.",
+    "take": "Opinion: BT cited worries after Starlink disruptions in Ukraine, and says it still plans to launch 'in the coming months'. The original FT article is paywalled, so this rests on ISPreview's account of it. Watch whether other telecoms firms follow."
+   }
+  }
+ ],
+ "lessons": [
+  {
+   "n": 1,
+   "tag": "AI",
+   "title": "What \"learning from data\" means",
+   "idea": "In normal software a person writes the rules. In machine learning, you give examples with answers and the program works out the rules itself.",
+   "steps": [
+    "Old way: a person writes a rule, such as 'if an email says prize, call it spam'.",
+    "The program applies the rule to new data and gives answers.",
+    "New way: collect examples with the right answers, such as 1,000 emails marked spam or not spam.",
+    "A learning program searches for patterns that separate the two groups.",
+    "Those patterns become the rules (the model), which it then uses on new emails."
+   ],
+   "analogy": "Teaching a child to spot dogs. You could write a rulebook: four legs, fur, a tail. But cats break it. Instead you point at hundreds of animals and say 'dog' or 'not dog', and the child builds their own sense of what a dog is.",
+   "breaks": "A child understands what a dog is and can explain it. A learning program only finds patterns in the examples it saw. If every spam email in its examples happened to arrive at night, it may wrongly learn that 'night' means spam. It has no common sense to catch that.",
+   "why": "This is the core of nearly every AI tool you will meet. It explains why AI projects live or die on their example data, why a model can be confidently wrong, and why 'who checked the training data?' is a fair question for any vendor. Elements of AI, the free University of Helsinki course, starts here too.",
+   "diagram": {
+    "alt": "Two pipelines. Top: a person writes rules, and rules plus data give answers, such as 'says prize, so spam'. Bottom: data plus answers, such as 1,000 labelled emails, go in and the machine produces the rules. Caption: who writes the rules?",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 290\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"10\" y=\"22\" font-size=\"14\" font-weight=\"bold\">1. A person writes the rules</text><rect x=\"10\" y=\"32\" width=\"130\" height=\"44\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"75\" y=\"59\" font-size=\"14\" text-anchor=\"middle\">rules + data</text><line x1=\"140\" y1=\"54\" x2=\"190\" y2=\"54\" stroke=\"#fff\" stroke-width=\"4\"/><polygon points=\"188,46 200,54 188,62\"/><rect x=\"200\" y=\"32\" width=\"110\" height=\"44\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"255\" y=\"59\" font-size=\"14\" text-anchor=\"middle\">answers</text><text x=\"10\" y=\"100\" font-size=\"14\" opacity=\"0.8\">Rule: says prize, so spam</text><line x1=\"10\" y1=\"118\" x2=\"310\" y2=\"118\" stroke=\"#fff\" stroke-width=\"1\" stroke-dasharray=\"4 4\" opacity=\"0.6\"/><text x=\"10\" y=\"146\" font-size=\"14\" font-weight=\"bold\">2. The machine finds the rules</text><rect x=\"10\" y=\"156\" width=\"130\" height=\"44\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"75\" y=\"183\" font-size=\"14\" text-anchor=\"middle\">data + answers</text><line x1=\"140\" y1=\"178\" x2=\"190\" y2=\"178\" stroke=\"#fff\" stroke-width=\"4\"/><polygon points=\"188,170 200,178 188,186\"/><rect x=\"200\" y=\"156\" width=\"110\" height=\"44\" rx=\"8\" fill=\"#fff\" fill-opacity=\"0.25\" stroke=\"#fff\" stroke-width=\"4\"/><text x=\"255\" y=\"183\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">rules</text><text x=\"10\" y=\"224\" font-size=\"14\" opacity=\"0.8\">1,000 emails labelled spam</text><text x=\"10\" y=\"244\" font-size=\"14\" opacity=\"0.8\">or not spam</text><text x=\"160\" y=\"278\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">Who writes the rules?</text></svg>"
+   }
+  },
+  {
+   "n": 2,
+   "tag": "Cyber",
+   "title": "The CIA triad: confidentiality, integrity, availability",
+   "idea": "Every security incident breaks secrecy, accuracy or access: confidentiality, integrity or availability. Ransomware targets access.",
+   "steps": [
+    "Confidentiality: only the right people can see the information.",
+    "Integrity: information and systems are not changed improperly.",
+    "Availability: people can reach and use what they need, when they need it.",
+    "To classify an incident, ask which of the three broke first.",
+    "Heartbleed leaked secrets (C); tampered SolarWinds update broke trust (I); NotPetya wiped access (A)."
+   ],
+   "analogy": "A bank safe. Confidentiality: nobody peeks inside. Integrity: nobody swaps the gold for painted lead. Availability: you can open it when you need your money. A thief, a forger and a saboteur each attack a different promise.",
+   "breaks": "Real attacks often hit more than one corner. Ransomware gangs now steal data before locking it, which breaks confidentiality as well as availability. The triangle is a sorting tool, not a full description of an attack.",
+   "why": "The US National Institute of Standards and Technology (NIST) defines information security as protection 'to provide confidentiality, integrity, and availability'. Risk registers, contracts and incident reports use these three words. Ransomware locks or wipes systems so you cannot work, which is why backups and recovery plans matter as much as walls.",
+   "diagram": {
+    "alt": "A triangle with Confidentiality at the top, Integrity bottom left and Availability bottom right. Heartbleed sits at C, SolarWinds at I and NotPetya at A. Caption: ransomware aims at A.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 300\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><polygon points=\"160,44 40,236 280,236\" fill=\"#fff\" fill-opacity=\"0.12\" stroke=\"#fff\" stroke-width=\"4\"/><text x=\"160\" y=\"28\" font-size=\"15\" text-anchor=\"middle\" font-weight=\"bold\">C: Confidentiality</text><text x=\"10\" y=\"264\" font-size=\"15\" font-weight=\"bold\">I: Integrity</text><text x=\"310\" y=\"264\" font-size=\"15\" text-anchor=\"end\" font-weight=\"bold\">A: Availability</text><circle cx=\"160\" cy=\"74\" r=\"7\"/><text x=\"160\" y=\"100\" font-size=\"14\" text-anchor=\"middle\">Heartbleed</text><circle cx=\"68\" cy=\"222\" r=\"7\"/><text x=\"80\" y=\"208\" font-size=\"14\">SolarWinds</text><circle cx=\"252\" cy=\"222\" r=\"7\"/><text x=\"240\" y=\"208\" font-size=\"14\" text-anchor=\"end\">NotPetya</text><text x=\"160\" y=\"160\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">What broke?</text><text x=\"160\" y=\"290\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">Ransomware aims at A</text></svg>"
+   }
+  },
+  {
+   "n": 3,
+   "tag": "Tech",
+   "title": "Bits: why computers use two states",
+   "idea": "A computer stores everything as on or off, 1 or 0. Each extra bit doubles the options, so n bits give 2 to the power n combinations.",
+   "steps": [
+    "A transistor is a tiny switch: on means 1, off means 0. That one choice is a bit.",
+    "One bit has 2 options. Two bits have 4: 00, 01, 10, 11.",
+    "Each new bit doubles the count, so n bits give 2^n combinations.",
+    "8 bits (a byte) give 2^8 = 256 combinations, enough for the numbers 0 to 255.",
+    "Agreed codes give the patterns meaning, such as ASCII, where 65 stands for the letter A."
+   ],
+   "analogy": "A row of light switches. One switch gives two rooms states. Add a second and you get four patterns. Eight switches give 256 different patterns, each one able to stand for a number, a letter or a colour.",
+   "breaks": "Real switches are not neat on and off. A chip reads a voltage as 1 above a threshold and 0 below it. That margin is exactly why two states win: it is far easier to tell 'clearly on' from 'clearly off' than to tell ten levels apart reliably.",
+   "why": "Bits explain sizes you meet every day: storage, file sizes, network speeds, and why encryption keys are quoted in bits. A 128-bit key has 2^128 possible values, which is why guessing it is hopeless. Harvard's CS50 course starts with exactly this idea.",
+   "diagram": {
+    "alt": "Eight switches with place values 128 to 1. Only the 4 and 1 switches are on, giving 00000101 = 5. Below: 2^8 = 256 combinations; each switch is on (1) or off (0).",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 250\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"26\" y=\"36\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">128</text><rect x=\"10\" y=\"48\" width=\"32\" height=\"64\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><rect x=\"16\" y=\"82\" width=\"20\" height=\"24\" rx=\"4\" fill=\"#fff\" fill-opacity=\"0.35\"/><text x=\"26\" y=\"136\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">0</text><text x=\"64\" y=\"36\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">64</text><rect x=\"48\" y=\"48\" width=\"32\" height=\"64\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><rect x=\"54\" y=\"82\" width=\"20\" height=\"24\" rx=\"4\" fill=\"#fff\" fill-opacity=\"0.35\"/><text x=\"64\" y=\"136\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">0</text><text x=\"102\" y=\"36\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">32</text><rect x=\"86\" y=\"48\" width=\"32\" height=\"64\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><rect x=\"92\" y=\"82\" width=\"20\" height=\"24\" rx=\"4\" fill=\"#fff\" fill-opacity=\"0.35\"/><text x=\"102\" y=\"136\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">0</text><text x=\"140\" y=\"36\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">16</text><rect x=\"124\" y=\"48\" width=\"32\" height=\"64\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><rect x=\"130\" y=\"82\" width=\"20\" height=\"24\" rx=\"4\" fill=\"#fff\" fill-opacity=\"0.35\"/><text x=\"140\" y=\"136\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">0</text><text x=\"178\" y=\"36\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">8</text><rect x=\"162\" y=\"48\" width=\"32\" height=\"64\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><rect x=\"168\" y=\"82\" width=\"20\" height=\"24\" rx=\"4\" fill=\"#fff\" fill-opacity=\"0.35\"/><text x=\"178\" y=\"136\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">0</text><text x=\"216\" y=\"36\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">4</text><rect x=\"200\" y=\"48\" width=\"32\" height=\"64\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"4\"/><rect x=\"206\" y=\"54\" width=\"20\" height=\"24\" rx=\"4\" fill=\"#fff\" fill-opacity=\"1\"/><text x=\"216\" y=\"136\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">1</text><text x=\"254\" y=\"36\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">2</text><rect x=\"238\" y=\"48\" width=\"32\" height=\"64\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><rect x=\"244\" y=\"82\" width=\"20\" height=\"24\" rx=\"4\" fill=\"#fff\" fill-opacity=\"0.35\"/><text x=\"254\" y=\"136\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">0</text><text x=\"292\" y=\"36\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">1</text><rect x=\"276\" y=\"48\" width=\"32\" height=\"64\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"4\"/><rect x=\"282\" y=\"54\" width=\"20\" height=\"24\" rx=\"4\" fill=\"#fff\" fill-opacity=\"1\"/><text x=\"292\" y=\"136\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">1</text><text x=\"160\" y=\"170\" font-size=\"14\" text-anchor=\"middle\">00000101 = 4 + 1 = 5</text><text x=\"160\" y=\"200\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">2^8 = 256 combinations</text><text x=\"160\" y=\"232\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">each switch: on (1) or off (0)</text></svg>"
+   }
+  }
+ ],
+ "fact": {
+  "text": "The Intel 4004, the first single-chip microprocessor (1971), had 2,250 transistors. Apple's M3 Ultra, announced in March 2025, has 184 billion.",
+  "source": {
+   "name": "Apple Newsroom, M3 Ultra announcement",
+   "url": "https://www.apple.com/newsroom/2025/03/apple-reveals-m3-ultra-taking-apple-silicon-to-a-new-extreme/"
+  }
+ },
+ "quiz": [
+  {
+   "kind": "lesson",
+   "tag": "AI",
+   "n": 1,
+   "q": "A team gives a program 5,000 past invoices, each marked 'fraud' or 'fine'. What is the program's job?",
+   "options": [
+    "Follow fraud rules typed in by the finance team",
+    "Work out its own rules that separate fraud from fine",
+    "Store the invoices so staff can search them later",
+    "Mark every new invoice as fine until a person says otherwise"
+   ],
+   "answer": 1,
+   "why": "Examples plus answers go in and rules come out. That is learning from data. Typed-in rules are traditional software."
+  },
+  {
+   "kind": "lesson",
+   "tag": "Cyber",
+   "n": 2,
+   "q": "Ransomware locks a hospital's systems so staff cannot open patient records. Which property broke first?",
+   "options": [
+    "Confidentiality, because records were exposed",
+    "Integrity, because records were secretly altered",
+    "Availability, because staff cannot reach the records",
+    "None, because no patient data has left the hospital building"
+   ],
+   "answer": 2,
+   "why": "Locking systems stops people using them, which is availability. If the gang also copied the data first, confidentiality broke too."
+  },
+  {
+   "kind": "lesson",
+   "tag": "Tech",
+   "n": 3,
+   "q": "A setting uses 4 bits. How many different values can it hold?",
+   "options": [
+    "4",
+    "8",
+    "16",
+    "32"
+   ],
+   "answer": 2,
+   "why": "Each bit doubles the options: 2 x 2 x 2 x 2 = 2^4 = 16. Eight bits would give 256."
+  },
+  {
+   "kind": "news",
+   "tag": "Cyber",
+   "n": 0,
+   "q": "Why does the exploited Outlook flaw matter despite its moderate 6.5 score?",
+   "options": [
+    "It lets attackers delete every mailbox on the company's server",
+    "Attackers already use it to steal logins and pose as users",
+    "It only affects Outlook on Apple phones and tablets",
+    "Microsoft has said there is no fix available yet"
+   ],
+   "answer": 1,
+   "why": "A score rates the flaw in theory. Live use in attacks, and a path to impersonating users, make it urgent in practice."
+  },
+  {
+   "kind": "news",
+   "tag": "AI",
+   "n": 0,
+   "q": "What did Google DeepMind's AlphaProof Code produce for Signal's code?",
+   "options": [
+    "A machine-checked proof that key security properties hold",
+    "A list of new bugs found in Signal's live app",
+    "A faster version of Signal's encryption",
+    "A test score from trying a million attacks"
+   ],
+   "answer": 0,
+   "why": "A proof checked step by step in Lean shows a property always holds, which is stronger than testing. It only covers what the specification states."
+  }
+ ],
+ "terms": [
+  {
+   "term": "Machine learning",
+   "plain": "Software that works out its own rules from examples with answers, instead of following rules a person wrote."
+  },
+  {
+   "term": "CIA triad",
+   "plain": "Confidentiality, integrity, availability: the three things security protects. Every incident breaks at least one."
+  },
+  {
+   "term": "Bit",
+   "plain": "A single 0 or 1, the smallest unit a computer stores. 8 bits make a byte."
+  },
+  {
+   "term": "Formal verification",
+   "plain": "Proving with maths, checked by a computer, that software always keeps a stated promise, rather than just testing it."
+  },
+  {
+   "term": "Zero-day",
+   "plain": "A software flaw attackers use before the maker has released a fix."
+  },
+  {
+   "term": "NTLM hash",
+   "plain": "A scrambled copy of a Windows login that attackers can reuse to pose as the user."
+  },
+  {
+   "term": "Initial public offering (IPO)",
+   "plain": "A company's first sale of shares to the public on a stock exchange."
+  }
+ ],
+ "build": {
+  "title": "A tiny spam sorter that learns",
+  "idea": "Ask an AI assistant to help you build a small web page where you paste 20 emails, mark each spam or not, and it learns simple word rules to sort new ones. You see learning from data happen.",
+  "first": "Open Claude and ask: 'Help me build a single web page that learns to spot spam from 20 example emails I label, and shows the words it learned.'"
+ },
+ "chatter": [],
+ "evidence": {
+  "searches": 25,
+  "kept": 7,
+  "rejected": [
+   {
+    "what": "Gemini 4 Carbon goes on general sale",
+    "why": "Benchmarks are almost all Google's or partners' own; no independent tests yet"
+   },
+   {
+    "what": "Anthropic office tools: Meetings, Sheets, Whiteboards",
+    "why": "Product launch resting on company claims; the IPO is the bigger news"
+   },
+   {
+    "what": "Australia plans an AI safety regulator",
+    "why": "Already covered in the 10 November brief with no new fact found"
+   },
+   {
+    "what": "OpenAI quarterly loss of $10.9 billion",
+    "why": "Only a reprint of the Reuters wire opened; folded into the IPO story"
+   },
+   {
+    "what": "Fireworks AI breach widens",
+    "why": "Same pattern as the Railway story, which had more detail"
+   },
+   {
+    "what": "Data centre backlash is about electricity",
+    "why": "Analysis piece from 9 November rather than new news"
+   },
+   {
+    "what": "Nvidia board probes its chief executive",
+    "why": "Already covered on 9 November with no new fact found"
+   }
+  ],
+  "note": "No photos today: Wikimedia Commons pages would not open and the only Unsplash result was a paid photo. No X file arrived."
+ }
+}
