@@ -77,8 +77,8 @@ function run(stops){
   var who=el('div','tr-who'),count=el('span','tr-count');who.append(el('span','tr-name',cat==='charlee'?'Charlee':'Kimchi'),count);top.append(ship,who);
   var body=el('div','tr-body');card.append(top,body);
   var live=el('p','tr-vh');live.setAttribute('aria-live','polite');live.setAttribute('aria-atomic','true');
-  var bar=el('div','tr-bar'),skip=el('button','tr-skip','Skip tour'),dots=el('div','tr-dots'),next=el('button','tr-next','Next');
-  skip.type=next.type='button';dots.setAttribute('aria-hidden','true');for(var k=0;k<n;k++)dots.append(el('i'));bar.append(skip,dots,next);
+  var bar=el('div','tr-bar'),skip=el('button','tr-skip','Skip tour'),back=el('button','tr-back','\u2190'),dots=el('div','tr-dots'),next=el('button','tr-next','Next');
+  skip.type=back.type=next.type='button';back.setAttribute('aria-label','Back to the previous step');back.hidden=true;dots.setAttribute('aria-hidden','true');for(var k=0;k<n;k++)dots.append(el('i'));bar.append(skip,back,dots,next);
   ov.append(safe);blk.forEach(function(b){ov.append(b)});ov.append(ring,card,bar,live);
   document.body.append(ov);
   if(ship.firstChild&&MBScores.mountPilot)try{MBScores.mountPilot(ship,cat)}catch(e){}
@@ -95,7 +95,8 @@ function run(stops){
     return{i:i,s:s,box:box,said:'Step '+(i+1)+' of '+n+'. '+said.join(' ')}}
   function apply(nb){body.textContent='';while(nb.box.firstChild)body.append(nb.box.firstChild);
     count.textContent=(nb.i+1)+' of '+n;card.setAttribute('aria-label','Step '+(nb.i+1)+' of '+n+': '+nb.s.head);
-    [].forEach.call(dots.children,function(d,j){d.className=j<nb.i?'ok':j===nb.i?'on':''});next.textContent=nb.i===n-1?'Start reading':'Next'}
+    [].forEach.call(dots.children,function(d,j){d.className=j<nb.i?'ok':j===nb.i?'on':''});next.textContent=nb.i===n-1?'Start reading':'Next';
+    var hadFocus=document.activeElement===back;back.hidden=nb.i===0;if(back.hidden&&hadFocus)try{next.focus({preventScroll:true})}catch(e){}}   /* no Back on the first stop */
   function measure(nb){var m=card.cloneNode(true),mb=m.querySelector('.tr-body');mb.textContent='';mb.append(nb.box.cloneNode(true));
     m.style.visibility='hidden';m.style.transform='none';m.classList.remove('on');ov.append(m);var h=m.offsetHeight;m.remove();return h}
   /* the free band between the top safe area and the bar (which sits above the home-screen bar) */
@@ -150,8 +151,8 @@ function run(stops){
     var t0=Date.now(),last=-1,still=0;
     (function wait(){if(t!==tok||dead)return;var y=window.scrollY;still=Math.abs(y-last)<.5?still+1:0;last=y;
       if(Math.abs(y-want)<1||still>=8||Date.now()-t0>1200){if(Math.abs(window.scrollY-want)>=1)window.scrollTo(0,want);cb()}else setTimeout(wait,30)})()}
-  function go(i){if(dead)return;tok++;var t=tok;if(fl)fl.fin();                  /* a tap mid-flight lands it at once; taps never queue */
-    while(i<n&&stops[i].hook&&!part(stops[i]))i++;                                /* a part that has gone since the start is skipped */
+  function go(i,bk){if(dead)return;tok++;var t=tok;if(fl)fl.fin();                  /* a tap mid-flight lands it at once; taps never queue */
+    while(i>0&&i<n&&stops[i].hook&&!part(stops[i]))i+=bk?-1:1;if(i<0)i=0;                                /* a part that has gone since the start is skipped */
     if(i>=n)return end('done');
     var s=stops[i],nt=part(s),re=nt?(s.ring&&nt.querySelector(s.ring))||nt:null,nb=build(s,i),ch=measure(nb);
     var pl=plan(i,re,ch,!!nt&&nt===tgt),b=band(),W=document.documentElement.clientWidth,cw=card.offsetWidth,to=[(W-cw)/2,dockY(pl.dock,ch,b)],from=pos;
@@ -168,10 +169,11 @@ function run(stops){
     var b=tourBtn();if(b)try{b.focus({preventScroll:true})}catch(e){}}
   function key(e){if(dead||covered())return;
     if(e.key==='Escape'){e.preventDefault();end('skip');return}
-    if(e.key==='Tab'){var L=[skip,next],k=L.indexOf(document.activeElement);e.preventDefault();
+    if(e.key==='Tab'){var L=[skip,back,next].filter(function(b){return !b.hidden}),k=L.indexOf(document.activeElement);e.preventDefault();
       L[k<0?(e.shiftKey?L.length-1:0):(k+(e.shiftKey?-1:1)+L.length)%L.length].focus({preventScroll:true})}}
   skip.onclick=function(){end('skip')};
   next.onclick=function(){if(!dead)go(cur+1)};
+  back.onclick=function(){if(!dead&&cur>0)go(cur-1,true)};
   document.addEventListener('keydown',key);
   window.addEventListener('scroll',place,{passive:true});window.addEventListener('resize',place);
   if('ResizeObserver' in window)ro=new ResizeObserver(function(){place()});

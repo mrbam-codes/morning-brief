@@ -132,6 +132,9 @@ def check_stops(tag, stops, want):
         need(s["scrollW"] <= 390, f"{g}: no sideways scroll ({s['scrollW']})")
         need(s["live"].startswith("Step " + s["count"].split(" ")[0] + " of ") and s["label"].startswith("Step "), f"{g}: the step has a screen-reader label and live text")
         need(s["focusNext"], f"{g}: focus is on Next after the move")
+        need(s["ship"] == 1, f"{g}: the cat's ship is drawn on the card ({s['ship']} drawings)")
+        need(s["barFit"] and s["backShown"] == (s["count"][0] != "1"), f"{g}: Skip tour, Back, the dots and Next sit side by side inside 390 pixels, with Back on every stop but the first (Back {s['backBox']})")
+        need(not s["backBox"] or (s["backBox"]["w"] >= 44 and s["backBox"]["h"] >= 44), f"{g}: Back is at least 44 pixels each way ({s['backBox']})")
         if s["head"] in LIT:
             need(s["ringOn"] and s["lit"] == LIT[s["head"]], f"{g}: the ring lights the {LIT[s['head']]} part ({s['lit']}, ring {s['ring']})")
         else:
@@ -161,7 +164,7 @@ try:
         check_stops(f"{mode} with builds", A["stops"], SCRIPT)
         check_stops(f"{mode} no builds", P["stops"], [s for s in SCRIPT if s[0] != "Built in the wild"])
         need(A["stops"][0]["name"] == "Charlee" and P["stops"][0]["name"] == "Kimchi", f"{mode}: the cat is the one last on the share card: Charlee when saved, else Kimchi ({A['stops'][0]['name']}, {P['stops'][0]['name']})")
-        need(set(A.get("tabs") or ["x"]) <= {"tr-skip", "tr-next"}, f"{mode}: Tab stays on the tour's buttons ({A.get('tabs')})")
+        need(set(A.get("tabs") or ["x"]) == {"tr-skip", "tr-back", "tr-next"}, f"{mode}: Tab goes round Skip tour, Back and Next and stays there ({A.get('tabs')})")
         fl = A["flights"]
         if mode == "motion":
             need(all(x["transformAnims"] >= 1 and x["trails"] >= 1 for x in fl), f"{mode}: every move is a flight with a trail ({fl})")
@@ -178,6 +181,12 @@ try:
         need(P["flag"] == "1", f"{mode}: finishing on the day with no builds sets the flag")
         need(E["landedOn"]["head"] == "How the lessons are made" and E["landedOn"]["count"] == "3 of 7" and not E["stillFlying"] and E["landedOn"]["cardRing"] == 0, f"{mode}: a fast double tap on Next lands on stop 3 with nothing in flight ({E['landedOn']['count']})")
         need(E["closed"] and E["flag"] == "1" and "Tap Tour" in (E["toast"] or ""), f"{mode}: Skip closes the tour, sets the flag and says how to replay it")
+        H = R["back"]
+        need(H["at3"]["count"] == "3 of 7" and H["to2"]["head"] == "Learn" and H["to2"]["count"] == "2 of 7" and H["to2"]["dock"] == "top" and H["to2"]["cardRing"] == 0 and H["to2"]["focusBack"], f"{mode}: Back from stop 3 lands on stop 2 at its own dock, clear of the ring, focus still on Back ({H['to2']['count']}, {H['to2']['dock']})")
+        need(H["flew"] == (mode == "motion"), f"{mode}: going back is a flight in motion and a fade with reduced motion ({H['flew']})")
+        need(H["to1"]["count"] == "1 of 7" and not H["to1"]["backShown"] and H["to1"]["focusNext"] and H["to1"]["dock"] == "mid", f"{mode}: Back from stop 2 lands on stop 1, where Back is hidden and focus moves to Next ({H['to1']['count']})")
+        need(H["fast"]["count"] == "2 of 7" and not H["stillFlying"] and H["fast"]["cardRing"] == 0 and H["fast"]["live"].startswith("Step 2 "), f"{mode}: quick taps Next, Next, Back land on stop 2 with nothing in flight ({H['fast']['count']})")
+        need(H["flag"] is None and not H["errors"], f"{mode}: going back marks nothing seen and throws nothing ({H['errors']})")
         need(F["blockedReally"] and F["open"] and F["closed"] and F["quiz"] and not F["errors"], f"{mode}: with storage blocked the tour runs and closes and nothing throws ({F['errors']})")
         need(G["sheet"] and not G["openUnderSheet"] and G["openAfter"], f"{mode}: the tour waits while a sheet is open and starts once it closes")
         errs = A["errors"] + B["errors"] + P["errors"] + E["errors"] + G["errors"]

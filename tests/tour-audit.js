@@ -29,7 +29,7 @@ function measure(){const c=card(),ring=D.querySelector('.tr-ring'),ringOn=ring.c
     cardRing:ringOn?meet(cb,rb):0,cardSkip:meet(cb,sk),cardBar:meet(cb,bar),inView:cb.x>=0&&cb.r<=390.5&&cb.y>=0&&cb.b<=844.5,
     scrollable:c.scrollHeight>c.clientHeight+1,clipped,scrollW:D.documentElement.scrollWidth,next:D.querySelector('.tr-next').textContent,
     focusNext:D.activeElement===D.querySelector('.tr-next'),chips:[...c.querySelectorAll('.tr-chips span')].map(s=>s.textContent),
-    home:!!c.querySelector('.tr-home'),name:c.querySelector('.tr-name').textContent,
+    home:!!c.querySelector('.tr-home'),ship:c.querySelectorAll('.tr-ship svg').length,backShown:!D.querySelector('.tr-back').hidden,focusBack:D.activeElement===D.querySelector('.tr-back'),barFit:(()=>{const b=[...D.querySelectorAll('.tr-bar>*')].filter(e=>!e.hidden).map(box);return b.every(x=>x.x>=0&&x.r<=390.5&&x.w>0)&&b.every((x,j)=>!j||x.x>=b[j-1].r-.5)})(),backBox:D.querySelector('.tr-back').hidden?null:box(D.querySelector('.tr-back')),name:c.querySelector('.tr-name').textContent,
     lit:ringOn?(()=>{const e=D.elementFromPoint((rb.x+rb.r)/2,Math.min(rb.b-8,rb.y+40));const p=e&&e.closest('[data-tour]');return p?p.dataset.tour:null})():null}}
 /* go through every stop with Next, measuring each once it has landed; in motion, check a flight happens */
 async function walk(R){R.stops=[];R.flights=[];
@@ -66,6 +66,14 @@ async function run(){const R={reduce:matchMedia('(prefers-reduced-motion: reduce
   const nx=D.querySelector('.tr-next');nx.click();await sleep(40);nx.click();await sleep(30);E.flyingRightAfter=!!D.querySelector('.tr-trail')||card().getAnimations().length>0;
   await until(landed,4000);await sleep(400);E.landedOn=measure();E.stillFlying=!!D.querySelector('.tr-trail')||card().getAnimations().length>0;
   D.querySelector('.tr-skip').click();await sleep(400);E.closed=!open()&&!D.querySelector('.tr');E.flag=localStorage.getItem('mb-tour-v1');E.toast=(D.querySelector('.tr-toast')||{}).textContent;E.errors=errs();
+  /* H: Back. From stop 3 back to 2, then to 1 (no Back there); then Next, Next, Back in quick taps lands on stop 2 */
+  localStorage.clear();let H=R.back={loaded:await load(BUILDS)};await until(open,6000);await until(landed,4000);H.at1=measure();
+  const bk=()=>D.querySelector('.tr-back'),nxt=()=>D.querySelector('.tr-next');
+  nxt().click();await sleep(150);await until(landed,4000);nxt().click();await sleep(150);await until(landed,4000);H.at3=measure();
+  bk().focus();bk().click();await sleep(120);H.flew=[...D.querySelectorAll('.tr-card,.tr-trail')].flatMap(e=>e.getAnimations()).some(a=>{const k=a.effect&&a.effect.getKeyframes?a.effect.getKeyframes():[];return k.some(x=>x.transform&&x.transform!=='none')});await until(landed,4000);await sleep(300);H.to2=measure();
+  bk().click();await sleep(150);await until(landed,4000);await sleep(300);H.to1=measure();
+  nxt().click();await sleep(40);nxt().click();await sleep(40);bk().click();await sleep(30);await until(landed,4000);await sleep(400);H.fast=measure();H.stillFlying=!!D.querySelector('.tr-trail')||card().getAnimations().length>0;
+  H.flag=localStorage.getItem('mb-tour-v1');D.querySelector('.tr-skip').click();await sleep(400);H.errors=errs();
   /* F: storage blocked: the page and the tour still work, nothing throws */
   localStorage.clear();let F=R.blocked={loaded:await load(BUILDS,'&block=1')};F.blockedReally=(()=>{try{W.localStorage.getItem('x');return false}catch(e){return true}})();
   F.open=await until(open,6000);await until(landed,4000);D.querySelector('.tr-next').click();await sleep(900);D.querySelector('.tr-skip').click();await sleep(400);
