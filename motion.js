@@ -649,7 +649,7 @@ window.startHero=function(c,b,force){
   c.width=Math.round(W*d);c.height=Math.round(H*d);const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);
   const f=D.make(x,W,H);let t=2,raf=0,on=true,last=performance.now();
   for(let i=0;i<(still?90:24);i++){t+=1/60;f(t,1/60)}
-  if(!still){const loop=n=>{const dt=Math.min((n-last)/1000,.05);last=n;if(on){t+=dt;f(t,dt)}raf=requestAnimationFrame(loop)};raf=requestAnimationFrame(loop)}
+  if(!still){const loop=n=>{const dt=Math.max(0,Math.min((n-last)/1000,.05));last=n;if(on){t+=dt;f(t,dt)}raf=requestAnimationFrame(loop)};raf=requestAnimationFrame(loop)}
   const io=new IntersectionObserver(e=>{on=e[0].isIntersecting;last=performance.now()},{threshold:.05});io.observe(c);
   stop=()=>{cancelAnimationFrame(raf);io.disconnect()};
   if(document.fonts&&document.fonts.ready&&!still)document.fonts.ready.then(()=>{});

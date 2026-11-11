@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-EfjnEBSwExVRn6OGf2HJUZMbYfo7WPa4sM4bQ/iwHl4='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-nEVRP++RXuNrywhQvD/teXAbcBuMPKok698rfzkbGbw='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -472,6 +472,20 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 .bw-lk{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .bw-lk a{min-height:44px;min-width:72px;display:inline-flex;align-items:center;justify-content:center;padding:0 16px;font-weight:700;text-decoration:none;border:2px solid var(--ai);color:#fff;border-radius:4px;box-shadow:0 0 10px rgba(255,46,110,.35)}
 @media (prefers-reduced-motion:reduce){.bw-marq,.bw-play-c,.bw-scr-c.boot,.bw-cart.ins,.bw-b.fresh,.bw-ldbar i{animation:none}.bw-cart{transition:none}}
+/* ---- plan 15 Part E: Just launched (builds.js), a compact strip after the Today deck ---- */
+.jl{padding:14px 16px 8px}
+.jl-h{font:700 13px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin:0 2px}
+.jl-note{font-size:13px;line-height:1.4;color:var(--lilac);margin:8px 2px 10px}
+.jl-list{list-style:none;display:grid;gap:8px}
+.jl-row{background:#160c3a;border:1px solid var(--line);border-radius:14px;padding:10px 12px 4px;min-width:0}
+.jl-top{display:flex;align-items:center;gap:8px;min-width:0}
+.jl-top .pill{flex:none}
+.jl-co{font-size:16px;line-height:1.25;color:#fff;min-width:0;overflow-wrap:anywhere}
+.jl-what{font-size:15px;line-height:1.4;color:#d6d0ec;margin-top:6px;overflow-wrap:anywhere}
+.jl-ft{display:flex;flex-wrap:wrap;align-items:center;column-gap:10px;margin-top:2px;min-width:0}
+.jl-claim{font:600 11px/1.3 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.04em;color:#ffb020;border:1px solid #ffb02099;border-radius:6px;padding:3px 7px}
+.jl-src{display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:700;color:#fff;min-width:0;overflow-wrap:anywhere}
+span.jl-src{color:var(--lilac);font-weight:500}
 /* ---- plan 17: first-visit tour (tour.js), ported from the approved Flight school mock-up ---- */
 .nav .tour-btn{border-color:#00f0ff;color:#00f0ff}
 .tr{--cyan:#00f0ff;--orb:"Orbitron",'Space Grotesk',system-ui,sans-serif;position:fixed;inset:0;z-index:18;pointer-events:none;transition:opacity .25s}
@@ -890,6 +904,8 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
   T.dk.prepend(radarCard(b,T,learnGo,L.items.length));T.number();L.number();
   app.append(L.sec);
   app.append(T.sec);
+  /* Just launched (builds.js): straight after the Today deck; no launches, no section */
+  if(window.Builds&&Builds.launched)try{const jl=Builds.launched(b);if(jl)app.append(jl)}catch(e){console.error(e)}
   const m=el('main','wrap');
   const chat=b.chatter||[],xs=chat.filter(c=>c.via==='X'),fs=chat.filter(c=>c.via!=='X');
   const chatCard=c=>{const k=el('article','card chat'+(c.via==='X'?' onx':'')),p=el('span','pill '+c.tag,c.tag),tr=el('span','trust '+c.trust,c.trust);k.append(p,tr);if(c.group)k.append(el('span','grp',c.group));k.append(el('h3',null,c.headline),el('p',null,c.summary),el('p','sw',c.via==='X'?(c.handle+' on X, '+c.thread.date):('Source: '+c.thread.name+', '+c.thread.date)));openC(k,c);m.append(k)};

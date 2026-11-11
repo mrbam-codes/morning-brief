@@ -100,5 +100,26 @@ function mount(app,b,pimg){
       timer=setTimeout(()=>drawScreen(x,true),700)}
     else drawScreen(x,false)}
   load(0,false);app.append(sec);return sec}
-window.Builds={mount,clean,VID};
+/* "Just launched" (plan 15, Part E): the optional top-level `launched` list of the day's brief (0 to 3).
+   Each launch is the company's own claim, and the strip says so. No list, or an empty one, means no section.
+   Same rules as above: text with textContent only, a link only if it starts with https://. No tour stop, on purpose. */
+const TAGS={AI:1,Tech:1,Cyber:1};
+function cleanLaunch(x){if(!x||typeof x!=='object'||Array.isArray(x))return null;const company=str(x.company),what=str(x.what);if(!company||!what)return null;
+  const src=x.source&&typeof x.source==='object'?x.source:{},tag=str(x.tag);
+  return{company,what,tag:TAGS[tag]?tag:'',name:str(src.name),url:httpsOnly(src.url)}}
+function launched(b){
+  const list=(Array.isArray(b&&b.launched)?b.launched:[]).map(cleanLaunch).filter(Boolean).slice(0,3);
+  if(!list.length)return null;
+  const sec=el('section','jl');sec.id='launched';sec.setAttribute('aria-labelledby','jl-title');
+  const h=el('h2','jl-h','Just launched');h.id='jl-title';
+  const ol=el('ol','jl-list');
+  list.forEach(x=>{const li=el('li','jl-row'),top=el('div','jl-top');
+    if(x.tag)top.append(el('span','pill '+x.tag,x.tag));top.append(el('b','jl-co',x.company));
+    const ft=el('div','jl-ft');ft.append(el('span','jl-claim',"Company's own claim"));
+    if(x.name)ft.append(x.url?out(x.url,x.name+' ↗','jl-src'):el('span','jl-src',x.name));
+    const a=ft.querySelector('a');if(a)a.rel='noopener noreferrer';
+    li.append(top,el('p','jl-what',x.what),ft);ol.append(li)});
+  sec.append(h,el('p','jl-note','Fresh from the companies themselves. Not checked independently.'),ol);
+  return sec}
+window.Builds={mount,clean,VID,launched};
 })();
