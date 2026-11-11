@@ -1,4 +1,4 @@
-"""Built in the wild test (plan 15, gate A). Run from the repository: python3 tests/test_builds.py [OUT_DIR]
+"""Built in the wild test (plan 15, gate A). Run from the repository: python3 tests/test_builds_page.py [OUT_DIR]
 
 Makes test editions with tests/fixture.py (news from the newest brief on origin/briefs), adds a
 `builds` list to some of them, stages a throwaway site with tests/stage.sh, then loads each edition in

@@ -1,4 +1,4 @@
-/* Built in the wild audit, loaded only into a test copy of index.html by tests/test_builds.py. Never shipped. */
+/* Built in the wild audit, loaded only into a test copy of index.html by tests/test_builds_page.py. Never shipped. */
 (function(){
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const loaded=im=>new Promise(r=>{if(im.complete)r(im.naturalWidth>0);else{im.onload=()=>r(true);im.onerror=()=>r(false)}});
