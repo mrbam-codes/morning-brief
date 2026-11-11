@@ -43,16 +43,24 @@ LICENCES = {"CC0", "Public domain", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC B
             "CC BY-SA 2.0", "CC BY-SA 2.5", "CC BY-SA 3.0", "CC BY-SA 4.0", "Unsplash Licence"}
 
 
+def photo(where, ph):
+    """A free-licence photo (stories, and builds from plan 16)."""
+    if not isinstance(ph, dict):
+        need(False, f"{where} photo: must be an object with src, page, credit, licence and alt")
+        return
+    src, page, lic = str(ph.get("src", "")), str(ph.get("page", "")), ph.get("licence")
+    need(PHOTO_SRC.match(src) is not None, f"{where} photo: src must be a .jpg on upload.wikimedia.org or thumb.wikimedia.org, or an images.unsplash.com photo with fm=jpg")
+    need(PHOTO_PAGE.match(page) is not None, f"{where} photo: page must be the photo's own Commons file page or unsplash.com/photos page")
+    need(lic in LICENCES, f"{where} photo: licence must be one of {sorted(LICENCES)}")
+    need(("unsplash.com" in src) == (lic == "Unsplash Licence") == ("unsplash.com" in page), f"{where} photo: Unsplash photos use the Unsplash Licence; Commons photos use their Commons licence")
+    text(f"{where} photo credit", ph.get("credit"), 80)
+    text(f"{where} photo alt", ph.get("alt"), 200)
+
+
 def media(where, s):
     ph = s.get("photo")
     if ph is not None:
-        src, page, lic = str(ph.get("src", "")), str(ph.get("page", "")), ph.get("licence")
-        need(PHOTO_SRC.match(src) is not None, f"{where} photo: src must be a .jpg on upload.wikimedia.org or thumb.wikimedia.org, or an images.unsplash.com photo with fm=jpg")
-        need(PHOTO_PAGE.match(page) is not None, f"{where} photo: page must be the photo's own Commons file page or unsplash.com/photos page")
-        need(lic in LICENCES, f"{where} photo: licence must be one of {sorted(LICENCES)}")
-        need(("unsplash.com" in src) == (lic == "Unsplash Licence") == ("unsplash.com" in page), f"{where} photo: Unsplash photos use the Unsplash Licence; Commons photos use their Commons licence")
-        text(f"{where} photo credit", ph.get("credit"), 80)
-        text(f"{where} photo alt", ph.get("alt"), 200)
+        photo(where, ph)
     fg = s.get("figure")
     if fg is not None:
         text(f"{where} figure value", fg.get("value"), 10)
@@ -84,8 +92,9 @@ MONTHS = {m: i + 1 for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "ju
 EDITION = {}
 
 
-def fresh(where, value):
-    """A story's source must be from the last 2 days (8 on Sunday, which covers the week)."""
+def fresh(where, value, days=None):
+    """A story's source must be from the last 2 days (8 on Sunday, which covers the week).
+    A build passes days=7: builds stay interesting longer than news."""
     day = EDITION.get("day")
     if not day or day.isoformat() < NEW_RULES:
         return
@@ -101,7 +110,7 @@ def fresh(where, value):
     except ValueError:
         need(False, f"{where}: source date {value!r} is not a real date")
         return
-    limit = 8 if day.weekday() == 6 else 2
+    limit = days if days else 8 if day.weekday() == 6 else 2
     need(-1 <= (day - d).days <= limit, f"{where}: source is dated {value}, more than {limit} days before this brief")
 
 
@@ -148,6 +157,10 @@ def evidence(b):
         return
     for k in ("searches", "kept"):
         need(isinstance(ev.get(k), int) and 0 <= ev[k] <= 300, f"evidence {k}: a whole number from 0 to 300")
+    # Plan 16: optional counts for the build search. Rejected builds go in "rejected", their "what" starting "Build: ".
+    for k in ("build_searches", "builds_kept"):
+        if k in ev:
+            need(isinstance(ev[k], int) and not isinstance(ev[k], bool) and 0 <= ev[k] <= 300, f"evidence {k}: a whole number from 0 to 300")
     rj = ev.get("rejected", [])
     need(isinstance(rj, list) and len(rj) <= 8, "evidence rejected: a list of 8 at most")
     for i, r in enumerate(rj if isinstance(rj, list) else []):
@@ -228,7 +241,11 @@ def diagram(where, d):
         need(False, f"{where}: needs a diagram with alt and svg")
         return
     text(f"{where} diagram alt", d.get("alt"), 300)
-    svg = str(d.get("svg", ""))
+    svg_rules(where, str(d.get("svg", "")))
+
+
+def svg_rules(where, svg):
+    """The safety and readability rules for one drawn diagram (lessons, and builds from plan 16)."""
     low = svg.lower()
     need(svg.lstrip().startswith("<svg") and 'xmlns="http://www.w3.org/2000/svg"' in svg, f"{where} diagram: must be one inline svg with the svg xmlns")
     for bad in SVG_BAD:
@@ -424,6 +441,148 @@ def check_v1_lesson(b, day, date):
     length_tell(quiz, date)
 
 
+# ---------- Built in the wild and Just launched (plan 16) ----------
+# Editions dated before BUILDS_FROM must not carry builds or launched, so older
+# published briefs are never re-judged. BUILDS_FROM moves to the go-live date,
+# the day the routine prompt change is approved and live.
+BUILDS_FROM = "2026-11-14"
+PROOFS = ("Shown working", "Code published", "Claim only")
+LEVELS = ("An evening", "A weekend", "A serious project")
+VIDEO_CODE = re.compile(r"[A-Za-z0-9_-]{11}")
+HANDLE = re.compile(r"@[A-Za-z0-9_.-]+")
+BUILD_LIMITS = {"what": 70, "who": 40, "reach": 60, "label": 12, "step": 110, "tool": 22,
+                "proof_note": 160, "level_note": 120, "first_step": 160, "source_name": 80}
+LAUNCH_LIMITS = {"company": 40, "what": 90, "source_name": 80}
+# A build's source must be a page that confirms it, not the post itself or a site this run cannot open.
+NOT_CONFIRMING = ("x.com", "twitter.com", "reddit.com")
+
+
+def build(where, x, seen):
+    if not isinstance(x, dict):
+        need(False, f"{where}: must be an object")
+        return
+    L = BUILD_LIMITS
+    text(f"{where} what", x.get("what"), L["what"])
+    text(f"{where} who", x.get("who"), L["who"])
+    need(HANDLE.fullmatch(str(x.get("who", ""))) is not None, f"{where}: who must be a public handle starting @, such as @name, with no spaces")
+    if "reach" in x:
+        text(f"{where} reach", x.get("reach"), L["reach"])
+        need(not re.search(r"\d", str(x.get("reach"))) or "at the time of writing" in str(x.get("reach")),
+             f"{where}: reach quotes a number, so it must say \"at the time of writing\"")
+    text(f"{where} label", x.get("label"), L["label"])
+    steps = x.get("steps")
+    need(isinstance(steps, list) and 2 <= len(steps) <= 4, f"{where}: needs 2 to 4 steps")
+    for j, s in enumerate(steps if isinstance(steps, list) else []):
+        text(f"{where} step {j + 1}", s, L["step"])
+    tools = x.get("tools")
+    need(isinstance(tools, list) and 1 <= len(tools) <= 5, f"{where}: needs 1 to 5 tools")
+    for j, t in enumerate(tools if isinstance(tools, list) else []):
+        text(f"{where} tool {j + 1}", t, L["tool"])
+    proof = x.get("proof")
+    need(proof in PROOFS, f"{where}: proof must be exactly one of Shown working, Code published or Claim only")
+    if "proof_note" in x:
+        text(f"{where} proof_note", x.get("proof_note"), L["proof_note"])
+    need(x.get("level") in LEVELS, f"{where}: level must be exactly one of An evening, A weekend or A serious project")
+    text(f"{where} level_note", x.get("level_note"), L["level_note"])
+    text(f"{where} first_step", x.get("first_step"), L["first_step"])
+    links = x.get("links")
+    if not isinstance(links, dict):
+        need(False, f"{where}: links must be an object with post, video or code")
+        links = {}
+    extra = sorted(set(links) - {"post", "video", "code"})
+    need(not extra, f"{where} links: only post, video and code are allowed, not {', '.join(extra)}")
+    need(any(links.get(k) for k in ("post", "video", "code")), f"{where}: links needs at least one of post, video or code")
+    for k, v in links.items():
+        need(isinstance(v, str) and v.startswith("https://") and not re.search(r"[\s\"'<>]", v),
+             f"{where} links.{k}: must be a web address starting https://")
+    visuals = [k for k in ("video", "diagram", "photo") if k in x]
+    need(len(visuals) <= 1, f"{where}: one visual at most (video, diagram or photo), not {' and '.join(visuals)}")
+    if "video" in x:
+        need(isinstance(x["video"], str) and VIDEO_CODE.fullmatch(x["video"]) is not None,
+             f"{where} video: must be the 11-character YouTube video code only (letters, digits, - and _), never an address")
+    if "diagram" in x:
+        need(isinstance(x["diagram"], str), f"{where} diagram: must be one inline svg, as a string")
+        if isinstance(x["diagram"], str):
+            svg_rules(where, x["diagram"])
+    if "photo" in x:
+        photo(where, x["photo"])
+    if proof == "Shown working":
+        need(bool(x.get("video") or links.get("video")), f"{where}: Shown working needs a video (the video code, or links.video)")
+    if proof == "Code published":
+        need(bool(links.get("code")), f"{where}: Code published needs links.code, the public code you opened")
+    src = x.get("source")
+    if src is None and proof == "Claim only":
+        pass
+    elif not isinstance(src, dict) or not src:
+        need(False, f"{where}: needs a source naming the page you opened to confirm the build (only Claim only may leave it out)")
+    else:
+        text(f"{where} source name", src.get("name"), L["source_name"])
+        text(f"{where} source date", src.get("date"))
+        fresh(where, src.get("date"), 7)
+        need(str(src.get("url", "")).startswith("https://"), f"{where}: source url must be https")
+        h = host(src.get("url"))
+        need(not any(h == d or h.endswith("." + d) for d in NOT_CONFIRMING),
+             f"{where}: source is {h}, which cannot confirm a build. Name the video page, the code or independent coverage you opened, or rate it Claim only")
+    w, p = norm(x.get("what") or ""), str(links.get("post") or "").rstrip("/")
+    need(not w or w not in seen, f"{where}: same build as the {seen.get(w)} brief. Never repeat a build")
+    need(not p or p not in seen, f"{where}: same post as the {seen.get(p)} brief. Never repeat a build")
+
+
+def launch(where, x):
+    if not isinstance(x, dict):
+        need(False, f"{where}: must be an object")
+        return
+    L = LAUNCH_LIMITS
+    text(f"{where} company", x.get("company"), L["company"])
+    text(f"{where} what", x.get("what"), L["what"])
+    need(x.get("claim") is True, f"{where}: claim must be true: a launch is the company's own claim, and the page says so")
+    need(x.get("tag") in TAGS, f"{where}: tag must be AI, Tech or Cyber")
+    src = x.get("source")
+    if not isinstance(src, dict):
+        need(False, f"{where}: needs a source with name and url")
+        return
+    text(f"{where} source name", src.get("name"), L["source_name"])
+    need(str(src.get("url", "")).startswith("https://"), f"{where}: source url must be https")
+    trusted(where, [src.get("url")])
+
+
+def builds_and_launches(b, date):
+    if date < BUILDS_FROM:
+        for k in ("builds", "launched"):
+            need(k not in b, f"{k}: not allowed in editions dated before {BUILDS_FROM}. Leave it out")
+        return
+    bs, ls = b.get("builds", []), b.get("launched", [])
+    need(isinstance(bs, list) and len(bs) <= 4, "builds: a list of 0 to 4 builds. Never pad")
+    need(isinstance(ls, list) and len(ls) <= 3, "launched: a list of 0 to 3 launches. Never pad")
+    bs, ls = (bs if isinstance(bs, list) else []), (ls if isinstance(ls, list) else [])
+    claims = sum(1 for x in bs if isinstance(x, dict) and x.get("proof") == "Claim only")
+    need(claims <= 1, f"builds: {claims} are Claim only; at most 1 a day")
+    # Never repeat (BRIEF.md "Built in the wild"): the same build or post as one of the last 7 briefs.
+    try:
+        earlier = sorted(d for d in json.loads((ROOT / "briefs" / "index.json").read_text()) if d < date)[-7:]
+    except (OSError, ValueError):
+        earlier = []
+    seen = {}
+    for d in earlier:
+        try:
+            old_b = json.loads((ROOT / "briefs" / f"{d}.json").read_text())
+        except (OSError, ValueError):
+            continue
+        for x in old_b.get("builds") or []:
+            if isinstance(x, dict):
+                if x.get("what"):
+                    seen.setdefault(norm(x["what"]), d)
+                p = str((x.get("links") or {}).get("post") or "").rstrip("/")
+                if p:
+                    seen.setdefault(p, d)
+    for i, x in enumerate(bs):
+        build(f"build {i + 1}", x, seen)
+    whats = [norm(x.get("what") or "") for x in bs if isinstance(x, dict)]
+    need(len(whats) == len(set(whats)), "builds: two builds have the same what line")
+    for i, x in enumerate(ls):
+        launch(f"launch {i + 1}", x)
+
+
 def check(date):
     b = json.loads((ROOT / "briefs" / f"{date}.json").read_text())
     need(b.get("date") == date, "date does not match the filename")
@@ -520,6 +679,7 @@ def check(date):
             need(str(x["original"].get("url", "")).startswith("https://"), f"{w}: original url must be https")
             text(f"{w} original name", x["original"].get("name"))
     evidence(b)
+    builds_and_launches(b, date)
     iv = b.get("interview")
     need(bool(iv) or b.get("type") != "sunday", "Sunday needs an interview question")
     if iv:
