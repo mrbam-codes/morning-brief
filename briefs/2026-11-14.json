@@ -1,0 +1,528 @@
+{
+ "date": "2026-11-14",
+ "dayLabel": "Saturday 14 November 2026",
+ "type": "daily",
+ "verdict": "Google's top model opens up, Chrome patches a live attack, chips slip past export rules",
+ "posters": [
+  {
+   "tag": "AI",
+   "headline": "Google opens its strongest model",
+   "big": "",
+   "summary": "Gemini 4 Carbon, first limited to cyber defenders, is now on sale to every paying developer. Google's own tests put it top, at a lower cost per task.",
+   "soWhat": "Work: a new top-tier option for long, multi-step agent work, at $2 per 1M input tokens",
+   "source": {
+    "name": "Google (The Keyword)",
+    "date": "10 Nov 2026",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/"
+   },
+   "figure": {
+    "value": "$2 to $4",
+    "label": "per 1M input tokens"
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 170\" font-family=\"Arial,sans-serif\"><text x=\"10\" y=\"20\" font-size=\"13\" fill=\"#222\" font-weight=\"bold\">Gemini 4 Carbon price per 1M tokens</text><text x=\"10\" y=\"51\" font-size=\"12\" fill=\"#333\">Input now</text><rect x=\"140\" y=\"38\" width=\"16\" height=\"18\" fill=\"#3b5bdb\"/><text x=\"162\" y=\"52\" font-size=\"12\" fill=\"#222\">$2</text><text x=\"10\" y=\"83\" font-size=\"12\" fill=\"#333\">Input from 30 Nov</text><rect x=\"140\" y=\"70\" width=\"32\" height=\"18\" fill=\"#3b5bdb\"/><text x=\"178\" y=\"84\" font-size=\"12\" fill=\"#222\">$4</text><text x=\"10\" y=\"115\" font-size=\"12\" fill=\"#333\">Output now</text><rect x=\"140\" y=\"102\" width=\"80\" height=\"18\" fill=\"#3b5bdb\"/><text x=\"226\" y=\"116\" font-size=\"12\" fill=\"#222\">$10</text><text x=\"10\" y=\"147\" font-size=\"12\" fill=\"#333\">Output from 30 Nov</text><rect x=\"140\" y=\"134\" width=\"160\" height=\"18\" fill=\"#3b5bdb\"/><text x=\"306\" y=\"148\" font-size=\"12\" fill=\"#222\">$20</text><text x=\"10\" y=\"166\" font-size=\"11\" fill=\"#555\">Source: Google, 10 Nov 2026</text></svg>",
+   "drawingAlt": "Bar chart of Gemini 4 Carbon prices per 1M tokens: input $2 now and $4 from 30 November, output $10 now and $20 from 30 November.",
+   "read": {
+    "what": "On 10 November Google made Gemini 4 Carbon generally available. Two weeks earlier it was open only to cyber defenders in its Fairwind Program. Developers and businesses can now use it through the application programming interface (API, the way software calls the model) in Google AI Studio. It costs $2 per 1M input tokens and $10 per 1M output tokens until 30 November 2026, then $4 and $20. Google says it ranks first on CursorBench 4.0, Perplexity's WANDR and Zapier's AutomationBench, and second on a new Multimodal Knowledge Agent benchmark at more than 6X lower average cost per task than the leader.",
+    "how": "Carbon is built for long tasks. It spends more tokens (chunks of text the model reads and writes) checking its own work in loops before it answers. Google says its cheaper sibling, Argon, is still the better pick for most coding and office work. A preview feature called /swarm in Google Antigravity lets several Carbon agents split a job between them (multi-agent work).",
+    "why": "This is a top model aimed at hard, slow work: security reviews, research and long agent runs. Google also reports a 0% success rate for indirect prompt injection (hidden instructions planted in content an agent reads) on the Gray Swan test, and says its safeguards blocked 99% of simulated cyberattack attempts. Teams buying AI for security or analysis now have another serious option.",
+    "take": "Opinion: most of the numbers are Google's own and no full technical report came with them. The independent check so far is Artificial Analysis, which at the October limited launch scored Carbon 59 on its Intelligence Index, just ahead of rivals at 58 and 57, and also measured its hallucination rate rising from 4% on Argon to 11%. Treat the 0% prompt injection result as one benchmark, not a guarantee. Watch real cost per finished task once the price doubles on 30 November."
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "Chrome patches 8th live attack",
+   "big": "8th",
+   "summary": "Google fixed a Chrome flaw that attackers were already using: the eighth such Chrome zero-day of 2026. Update and restart your browser.",
+   "soWhat": "Work: check your managed browsers have restarted onto Chrome 157.0.8103.50 or later",
+   "source": {
+    "name": "BleepingComputer",
+    "date": "10 Nov 2026",
+    "url": "https://www.bleepingcomputer.com/news/security/google-patches-eighth-chrome-zero-day-exploited-in-attacks-this-year/"
+   },
+   "figure": {
+    "value": "8",
+    "label": "Chrome zero-days used in 2026"
+   },
+   "read": {
+    "what": "Google released Chrome 157.0.8103.50/.51 to fix CVE-2026-125350, a high-severity bug in Chrome's Extensible Markup Language (XML) component. Google said it is aware that an exploit for it exists in the wild. BleepingComputer counts this as the eighth Chrome zero-day (a flaw attacked before a fix exists) exploited this year. Google fixed eight in all of 2025.",
+    "how": "It is a use-after-free bug (the browser keeps using memory it has already handed back). The XML reader frees an object but keeps a pointer to it. An attacker who controls a web page can fill that freed memory with their own data, then steer the browser into running their code.",
+    "why": "Browsers are the front door of most offices. One bad page can be enough to start an attack. Chrome updates itself, but the fix only works after the browser restarts, and many people leave theirs open for weeks.",
+    "take": "Opinion: Google has not said who found the flaw or who is using it, which usually means it is still investigating. I could not open Google's own release note today, so the version numbers come from BleepingComputer's reading of it. Eight zero-days in one year matches last year's total with weeks still to go. The practical fix is dull but vital: force browser restarts across your estate."
+   }
+  },
+  {
+   "tag": "Tech",
+   "headline": "TSMC buys into the AI labs",
+   "big": "$1bn",
+   "summary": "The world's biggest contract chipmaker approved up to $500m for Anthropic shares at its listing price and up to $500m for OpenAI stock.",
+   "soWhat": "Curious: the firm that makes everyone's AI chips now owns a slice of two of its customers",
+   "source": {
+    "name": "TSMC",
+    "date": "10 Nov 2026",
+    "url": "https://pr.tsmc.com/english/news/3352"
+   },
+   "figure": {
+    "value": "$1bn",
+    "label": "into Anthropic and OpenAI"
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 170\" font-family=\"Arial,sans-serif\"><text x=\"10\" y=\"20\" font-size=\"13\" fill=\"#222\" font-weight=\"bold\">TSMC board approvals, 10 Nov 2026</text><text x=\"10\" y=\"49\" font-size=\"12\" fill=\"#333\">Anthropic shares</text><rect x=\"140\" y=\"36\" width=\"90\" height=\"18\" fill=\"#c2255c\"/><text x=\"236\" y=\"50\" font-size=\"12\" fill=\"#222\">up to $500m</text><text x=\"10\" y=\"79\" font-size=\"12\" fill=\"#333\">OpenAI preferred</text><rect x=\"140\" y=\"66\" width=\"90\" height=\"18\" fill=\"#c2255c\"/><text x=\"236\" y=\"80\" font-size=\"12\" fill=\"#222\">up to $500m</text><text x=\"10\" y=\"109\" font-size=\"12\" fill=\"#333\">New investment arm</text><rect x=\"140\" y=\"96\" width=\"90\" height=\"18\" fill=\"#c2255c\"/><text x=\"236\" y=\"110\" font-size=\"12\" fill=\"#222\">up to $500m</text><text x=\"10\" y=\"140\" font-size=\"12\" fill=\"#333\">Also approved: about US$40.9bn of spending</text><text x=\"10\" y=\"162\" font-size=\"11\" fill=\"#555\">Source: TSMC board resolutions</text></svg>",
+   "drawingAlt": "Three equal bars showing TSMC's board approvals: up to $500m each for Anthropic shares, OpenAI preferred stock and a new investment arm, plus about $40.9bn of spending.",
+   "read": {
+    "what": "On 10 November the board of Taiwan Semiconductor Manufacturing Company (TSMC) approved up to US$500 million to buy Anthropic common shares at its initial public offering (IPO, a company's first sale of shares to the public) price, and up to US$500 million of OpenAI preferred stock. It also approved up to US$500 million to set up a new investment company for the chip industry, and about US$40,926.70 million of capital spending.",
+    "how": "TSMC makes the chips that other firms design, including the processors that train and run AI models. Buying shares ties its fortunes more closely to two of the biggest buyers of AI computing. Preferred stock usually gets paid before ordinary shares if things go wrong.",
+    "why": "Money now flows in a loop: AI labs buy chips, chipmakers buy into AI labs. That can secure supply and demand, but it also links the risks. If AI spending slows, more of the industry feels it at once.",
+    "take": "Opinion: $1bn is small next to TSMC's quarter, which showed NT$763.06 billion of net income, so this is a signal more than a bet. The amounts come straight from TSMC's own board notice. Watch whether other suppliers follow, and how regulators view chipmakers owning parts of their biggest customers."
+   }
+  }
+ ],
+ "stories": [
+  {
+   "tag": "Tech",
+   "headline": "Blacklisted military-linked university bought Nvidia H200 chips",
+   "summary": "A Chinese university on the US export blacklist bought 2 Nvidia H200 AI chips through a local supplier in October, a Reuters review of records found.",
+   "soWhat": "Work: export controls leak through resellers and rented computing, not only direct sales",
+   "source": {
+    "name": "Al Jazeera, with Reuters",
+    "date": "11 Nov 2026",
+    "url": "https://aljazeera.com/news/2026/11/11/chinese-university-buys-nvidia-ai-h200-chips-despite-us-ban-records-show"
+   },
+   "figure": {
+    "value": "$123,000",
+    "label": "for two H200 chips"
+   },
+   "read": {
+    "what": "Northwestern Polytechnical University in Xi'an, which researches military aircraft, missiles and satellites, bought 2 Nvidia H200 chips for 874,700 yuan (about $123,000). The purchase is on an October 21 procurement record that Reuters reviewed, along with 26 other Chinese records from this year. The university also signed 5 contracts to rent computing power that gave it access to H200 and other Nvidia chips.",
+    "how": "It did not buy from Nvidia. It bought from a Chinese company, Shaanxi Bosuan Network Technology. The US Commerce Department put the university on its Entity List (a blacklist that needs a licence for most exports) in 2001 and tightened it in 2019.",
+    "why": "The US has allowed some H200 sales to China case by case since January, but that does not lift Entity List limits. Members of Congress from both parties want stronger controls, including tracking where chips end up. A briefing has been requested for November 18.",
+    "take": "Opinion: two chips will not build a frontier model, but the rental contracts matter more, because renting computing power is much harder to police than shipping boxes. This rests on Reuters' review of public records; I read Al Jazeera's version, which carries that reporting, and the article gave no Nvidia comment on these sales. Watch whether chip tracking becomes law."
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "Public iPhone flaw lets apps read other apps' files",
+   "summary": "A flaw called worse_query lets a malicious app read other apps' data on 3 iOS versions. A working tool is public, and Apple has not confirmed a fix.",
+   "soWhat": "Work: tell staff to update iPhones now and delete apps they do not need",
+   "source": {
+    "name": "BleepingComputer",
+    "date": "10 Nov 2026",
+    "url": "https://www.bleepingcomputer.com/news/security/binance-warns-of-ios-flaw-that-could-leak-crypto-wallet-secrets/"
+   },
+   "figure": {
+    "value": "3",
+    "label": "iOS versions confirmed hit"
+   },
+   "read": {
+    "what": "The crypto exchange Binance warned of worse_query, a flaw in iOS 26.7.1, 27.0.1 and 27.2. A malicious app can read files that belong to other apps, such as wallet seed phrases, private keys and logins. A proof-of-concept tool (a working demonstration) called WQ Files was published and works on all three versions without jailbreaking the phone. No crypto losses have been confirmed.",
+    "how": "Every iPhone app is meant to live in its own locked room (a sandbox). This is a sandbox escape: a way for one app to reach into another's room. The bad app must first be installed, for example sideloaded (installed from outside the App Store).",
+    "why": "Many people keep banking, password and work apps on the same phone as games. Apple shipped iOS 27.2.1, 26.7.3 and 18.7.12 on 9 November with fixes for 9 flaws, but has not said whether worse_query is one of them.",
+    "take": "Opinion: the warning comes from a crypto firm, but BleepingComputer confirmed the public tool works, so this is more than marketing. Until Apple says otherwise, assume the update may not fully fix it: update anyway, remove apps you do not trust, and avoid sideloading. Watch for an Apple security note naming it."
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "Phone spyware is now hitting ordinary people, a vendor says",
+   "summary": "Security firm iVerify says criminals, not governments, were behind 75% of the iPhone spyware it found this year, using leaked attack kits.",
+   "soWhat": "Work: rank-and-file staff phones are targets too, not only the executives'",
+   "source": {
+    "name": "The Record",
+    "date": "10 Nov 2026",
+    "url": "https://therecord.media/spyware-cyber-crime-iverify"
+   },
+   "figure": {
+    "value": "1.07",
+    "label": "infections per 1,000 scans"
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 150\" font-family=\"Arial,sans-serif\"><text x=\"10\" y=\"20\" font-size=\"13\" fill=\"#222\" font-weight=\"bold\">Spyware found per 1,000 iPhone scans</text><text x=\"10\" y=\"55\" font-size=\"12\" fill=\"#333\">Consumer</text><rect x=\"100\" y=\"40\" width=\"182\" height=\"20\" fill=\"#e8590c\"/><text x=\"288\" y=\"55\" font-size=\"12\" fill=\"#222\">1.07</text><text x=\"10\" y=\"95\" font-size=\"12\" fill=\"#333\">Enterprise</text><rect x=\"100\" y=\"80\" width=\"119\" height=\"20\" fill=\"#adb5bd\"/><text x=\"225\" y=\"95\" font-size=\"12\" fill=\"#222\">0.7</text><text x=\"10\" y=\"135\" font-size=\"11\" fill=\"#555\">Vendor figures from iVerify, 10 Nov 2026</text></svg>",
+   "drawingAlt": "Bar chart: 1.07 spyware infections per 1,000 consumer iPhone scans against 0.7 per 1,000 enterprise scans, from iVerify's report.",
+   "read": {
+    "what": "iVerify's Advanced Mobile Threat Report 2026 found 1.07 spyware infections per 1,000 consumer scans and 0.7 per 1,000 on company phones. About 75% of detections were criminals using the Coruna or DarkSword exploit kits; 25% were mercenary spyware such as Pegasus. It says Coruna has been used to steal cryptocurrency from over 42,000 iOS devices.",
+    "how": "An exploit kit is a packaged set of attacks for known flaws, sold or leaked so that less skilled criminals can use it. Some attacks reached people through ordinary web adverts. Owners of phones infected with DarkSword and Coruna did not get Apple's threat warnings.",
+    "why": "Spyware used to mean governments targeting journalists and officials. If it is now a criminal tool for stealing logins and crypto, anyone with a phone is in range. iVerify says many infected company devices belonged to ordinary staff, not top bosses.",
+    "take": "Opinion: this is a vendor's report about a problem it sells protection against, and its data comes from people who chose to scan their phones, so it is not a fair sample. CyberScoop notes there is no independent check. The direction still fits other evidence. Keep phones updated, and treat staff phones as part of your attack surface."
+   }
+  },
+  {
+   "tag": "AI",
+   "headline": "ChatGPT lets brands run their own sales agents",
+   "summary": "OpenAI opened Businesses in ChatGPT in beta: firms claim a profile, see how often ChatGPT mentions them and, in the US, run their own agent.",
+   "soWhat": "Work: AI answers are becoming a shop window; brands will start managing how they appear",
+   "source": {
+    "name": "The Next Web",
+    "date": "10 Nov 2026",
+    "url": "https://thenextweb.com/news/openai-businesses-in-chatgpt-business-agents"
+   },
+   "figure": {
+    "value": "1.2bn",
+    "label": "weekly users (OpenAI figure)"
+   },
+   "read": {
+    "what": "OpenAI launched Businesses in ChatGPT in beta. Through a tool called Business Hub, verified companies get a blue check, can update details, prices and stock, and see how often ChatGPT mentions them, click-throughs and common topics. Eligible US online shops and services can publish a Business Agent that answers customer questions. OpenAI says about 1.2 billion people use ChatGPT each week.",
+    "how": "A Business Agent is a chatbot the company sets up inside ChatGPT. Chats with it are labelled and kept apart from ChatGPT's own answers. Buyers are sent to the brand's website to pay for now. Agents can also be sold as adverts.",
+    "why": "This is the start of brands managing their presence inside AI answers, much as they manage search results today. It also shows OpenAI's advertising business growing.",
+    "take": "Opinion: OpenAI says it does not share people's chats with businesses and that paying does not change what ChatGPT recommends. Those are its claims, not tested. OpenAI's own post would not load for me, so this rests on The Next Web's report. Watch whether paid agents start to crowd out ChatGPT's independent answers."
+   }
+  }
+ ],
+ "lessons": [
+  {
+   "n": 10,
+   "tag": "Tech",
+   "title": "AlphaGo and learning by self-play",
+   "idea": "AlphaGo got good at Go by playing itself and keeping what won (reinforcement learning). Move 37 showed a machine finding a move experts had not imagined.",
+   "steps": [
+    "First it studied records of expert human games to guess good moves (supervised learning).",
+    "Then it played games against versions of itself (self-play).",
+    "Each win nudged its choices up; each loss nudged them down (reinforcement learning).",
+    "Before each move, a search looked ahead through likely replies (tree search).",
+    "In game 2 against Lee Sedol in March 2016 it played move 37, which stunned experts. It won 4-1."
+   ],
+   "analogy": "Think of a chess club teenager who first reads books of grandmaster games, then plays thousands of games against a mirror image of themself. Nobody tells them why a move is good. They only learn who won, and slowly favour the moves that led to wins. Do that enough and they find ideas no book contained.",
+   "breaks": "Go has fixed rules, a clear winner and endless free practice. Real life rarely does. A business cannot replay a product launch a million times, and 'winning' is often unclear. When the reward is vague or easy to game, a learner can chase the score instead of the goal.",
+   "why": "AlphaGo's paper in Nature (2016) reported it won 99.8% of games against other Go programs and beat the European champion 5-0, before the 4-1 win in Seoul from 9 to 15 March 2016. Lee won only game 4. Learning from a reward signal is now used to train AI agents to finish tasks. When a vendor says its agent 'learned by trial and error', ask: what was the reward, and could it be gamed?",
+   "diagram": {
+    "alt": "A Go board with a ringed stone labelled move 37 from game 2 in March 2016, beside a loop: play, win or lose, update, labelled self-play. AlphaGo won 4-1.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 220\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"10\" y=\"20\" font-size=\"14\">Go board</text><rect x=\"10\" y=\"30\" width=\"120\" height=\"120\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><line x1=\"30\" y1=\"30\" x2=\"30\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"10\" y1=\"50\" x2=\"130\" y2=\"50\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"50\" y1=\"30\" x2=\"50\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"10\" y1=\"70\" x2=\"130\" y2=\"70\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"70\" y1=\"30\" x2=\"70\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"10\" y1=\"90\" x2=\"130\" y2=\"90\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"90\" y1=\"30\" x2=\"90\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"10\" y1=\"110\" x2=\"130\" y2=\"110\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"110\" y1=\"30\" x2=\"110\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"10\" y1=\"130\" x2=\"130\" y2=\"130\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><circle cx=\"50\" cy=\"110\" r=\"8\" fill=\"#fff\" opacity=\"0.5\"/><circle cx=\"70\" cy=\"90\" r=\"8\" fill=\"#fff\" opacity=\"0.5\"/><circle cx=\"90\" cy=\"110\" r=\"8\" fill=\"#fff\" opacity=\"0.5\"/><circle cx=\"90\" cy=\"50\" r=\"9\" fill=\"#fff\"/><circle cx=\"90\" cy=\"50\" r=\"15\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"10\" y=\"172\" font-size=\"14\" font-weight=\"bold\">Move 37</text><text x=\"10\" y=\"194\" font-size=\"14\">Game 2, March 2016</text><circle cx=\"235\" cy=\"100\" r=\"52\" fill=\"none\" stroke=\"#fff\" stroke-width=\"4\"/><path d=\"M228 44 l10 4 l-10 4 z\" fill=\"#fff\"/><path d=\"M287 104 l-4 10 l-4 -10 z\" fill=\"#fff\"/><path d=\"M182 96 l4 -10 l4 10 z\" fill=\"#fff\"/><text x=\"235\" y=\"40\" font-size=\"14\" text-anchor=\"middle\">Play</text><text x=\"268\" y=\"132\" font-size=\"14\" text-anchor=\"middle\">Win/lose</text><text x=\"200\" y=\"160\" font-size=\"14\" text-anchor=\"middle\">Update</text><text x=\"235\" y=\"105\" font-size=\"14\" text-anchor=\"middle\" opacity=\"0.8\">self-play</text><text x=\"160\" y=\"212\" font-size=\"14\">AlphaGo won 4-1</text></svg>"
+   }
+  },
+  {
+   "n": 11,
+   "tag": "Cyber",
+   "title": "Risk as likelihood times impact",
+   "idea": "Score a risk as likelihood times impact, each 1 to 5. The grid ranks risks quickly, but equal scores can hide very different risks.",
+   "steps": [
+    "Rate likelihood from 1 (rare) to 5 (almost certain).",
+    "Rate impact from 1 (minor) to 5 (severe).",
+    "Multiply them: likelihood 4 x impact 2 = 8; likelihood 1 x impact 5 = 5.",
+    "Plot each risk on the 5 by 5 grid. High scores sit top right and look red.",
+    "Check the corners: a rare disaster scoring 5 may matter more than a frequent nuisance scoring 8."
+   ],
+   "analogy": "It is like rating restaurants by multiplying taste by price out of 5. Quick and useful for a shortlist. But a 2 x 4 and a 4 x 2 both score 8 and they are very different meals.",
+   "breaks": "The scores are labels, not real measurements. 'Impact 4' is not twice 'impact 2', so multiplying them is shaky maths. The grid also hides detail: a once-in-a-decade event that would end the business can score lower than a weekly annoyance.",
+   "why": "The US National Institute of Standards and Technology (NIST) treats risk as a function of likelihood and impact in its Guide for Conducting Risk Assessments (Special Publication 800-30 Revision 1, September 2012), using scales such as very low to very high. It warns these assessments are not precise instruments. Risk registers on programmes use this grid every day, so always read the corners, not just the colours.",
+   "diagram": {
+    "alt": "A 5 by 5 heat map, impact across and likelihood up. Risk A (4 x 2 = 8), risk C (2 x 4 = 8) and risk B (1 x 5 = 5) are plotted: same scores, different risks.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 250\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><rect x=\"40\" y=\"166\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.1\"/><rect x=\"74\" y=\"166\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.13\"/><rect x=\"108\" y=\"166\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.15\"/><rect x=\"142\" y=\"166\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.18\"/><rect x=\"176\" y=\"166\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.2\"/><rect x=\"40\" y=\"132\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.13\"/><rect x=\"74\" y=\"132\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.18\"/><rect x=\"108\" y=\"132\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.22\"/><rect x=\"142\" y=\"132\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.27\"/><rect x=\"176\" y=\"132\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.32\"/><rect x=\"40\" y=\"98\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.15\"/><rect x=\"74\" y=\"98\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.22\"/><rect x=\"108\" y=\"98\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.3\"/><rect x=\"142\" y=\"98\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.37\"/><rect x=\"176\" y=\"98\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.44\"/><rect x=\"40\" y=\"64\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.18\"/><rect x=\"74\" y=\"64\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.27\"/><rect x=\"108\" y=\"64\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.37\"/><rect x=\"142\" y=\"64\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.46\"/><rect x=\"176\" y=\"64\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.56\"/><rect x=\"40\" y=\"30\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.2\"/><rect x=\"74\" y=\"30\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.32\"/><rect x=\"108\" y=\"30\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.44\"/><rect x=\"142\" y=\"30\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.56\"/><rect x=\"176\" y=\"30\" width=\"32\" height=\"32\" fill=\"#fff\" fill-opacity=\"0.68\"/><circle cx=\"90\" cy=\"80\" r=\"11\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"90\" y=\"85\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">A</text><circle cx=\"192\" cy=\"182\" r=\"11\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"192\" y=\"187\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">B</text><circle cx=\"158\" cy=\"148\" r=\"11\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"158\" y=\"153\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">C</text><text x=\"40\" y=\"222\" font-size=\"14\">Impact 1 to 5</text><text x=\"20\" y=\"190\" font-size=\"14\" transform=\"rotate(-90 20 190)\">Likelihood 1 to 5</text><text x=\"220\" y=\"40\" font-size=\"14\">A: 4 x 2 = 8</text><text x=\"220\" y=\"64\" font-size=\"14\">C: 2 x 4 = 8</text><text x=\"220\" y=\"88\" font-size=\"14\">B: 1 x 5 = 5</text><text x=\"220\" y=\"130\" font-size=\"14\" font-weight=\"bold\">Same 8,</text><text x=\"220\" y=\"150\" font-size=\"14\" font-weight=\"bold\">different</text><text x=\"220\" y=\"170\" font-size=\"14\" font-weight=\"bold\">risks</text><text x=\"10\" y=\"244\" font-size=\"14\" opacity=\"0.85\">B is lowest but could be a disaster</text></svg>"
+   }
+  },
+  {
+   "n": 12,
+   "tag": "Tech",
+   "title": "Bytes, hexadecimal and sizes",
+   "idea": "A byte is 8 bits. Split it into two halves of 4 bits and each half is one hex digit, so 11111111 = FF = 255.",
+   "steps": [
+    "A bit is 0 or 1. A byte is 8 bits, so it can hold 256 values: 0 to 255.",
+    "Hexadecimal (base 16) counts 0 to 9, then A to F, where F means 15.",
+    "Four bits make one hex digit: 1111 = F, 1010 = A, 0000 = 0.",
+    "So a byte is two hex digits: FF = 15 x 16 + 15 = 255.",
+    "Colour #FF0000 is three bytes: red 255, green 0, blue 0. That is pure red.",
+    "Sizes: a kilobyte (kB) is 1,000 bytes; a kibibyte (KiB) is 1,024 bytes."
+   ],
+   "analogy": "Hex is a shorthand, like writing a long phone number in pairs so it is easier to read aloud. The phone number does not change; you just group it. Eight 0s and 1s become two hex characters.",
+   "breaks": "A phone number never changes meaning, but the same bytes can mean a number, a letter or a colour depending on what reads them. And sizes are messy: some software counts a kilobyte as 1,000 bytes, some as 1,024, which is why a drive can look smaller than the box says.",
+   "why": "Harvard's CS50 notes show 255 written as FF and say hex numbers often start with 0x. You will meet hex in colour codes, error codes and security reports. The US National Institute of Standards and Technology notes that kilo means 1,000 while kibi means 1,024 (2 to the power 10), names approved in December 1998.",
+   "diagram": {
+    "alt": "Eight boxes each holding 1, grouped into two halves of four bits that each become F, giving 11111111 = FF = 255, and the colour #FF0000 as three bytes: red FF, green 00, blue 00.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 250\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"10\" y=\"20\" font-size=\"14\">One byte = 8 bits</text><rect x=\"10\" y=\"30\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"26\" y=\"52\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"46\" y=\"30\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"62\" y=\"52\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"82\" y=\"30\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"98\" y=\"52\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"118\" y=\"30\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"134\" y=\"52\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"162\" y=\"30\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"178\" y=\"52\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"198\" y=\"30\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"214\" y=\"52\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"234\" y=\"30\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"250\" y=\"52\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"270\" y=\"30\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"286\" y=\"52\" font-size=\"16\" text-anchor=\"middle\">1</text><path d=\"M12 72 L150 72 L81 92 Z\" fill=\"#fff\" opacity=\"0.35\"/><path d=\"M164 72 L302 72 L233 92 Z\" fill=\"#fff\" opacity=\"0.35\"/><text x=\"81\" y=\"114\" font-size=\"22\" text-anchor=\"middle\" font-weight=\"bold\">F</text><text x=\"233\" y=\"114\" font-size=\"22\" text-anchor=\"middle\" font-weight=\"bold\">F</text><text x=\"160\" y=\"140\" font-size=\"14\" text-anchor=\"middle\">11111111 = FF = 255</text><text x=\"10\" y=\"170\" font-size=\"14\">#FF0000 is three bytes:</text><rect x=\"60\" y=\"182\" width=\"200\" height=\"14\" fill=\"#fff\"/><text x=\"10\" y=\"195\" font-size=\"14\">R FF</text><rect x=\"60\" y=\"202\" width=\"4\" height=\"14\" fill=\"#fff\"/><text x=\"10\" y=\"215\" font-size=\"14\">G 00</text><rect x=\"60\" y=\"222\" width=\"4\" height=\"14\" fill=\"#fff\"/><text x=\"10\" y=\"235\" font-size=\"14\">B 00</text><text x=\"290\" y=\"210\" font-size=\"14\" text-anchor=\"end\" opacity=\"0.85\">= red</text></svg>"
+   }
+  },
+  {
+   "n": 13,
+   "tag": "AI",
+   "title": "A model is a function with dials",
+   "idea": "A model is a function such as y = w x + b. Its dials (parameters) w and b start as guesses and are turned by data until outputs fit.",
+   "steps": [
+    "An input x goes in, such as house size. An output y comes out: a predicted price.",
+    "The rule y = w x + b has two dials: w, the weight (slope), and b, the bias (starting point).",
+    "With toy values w = 2 and b = 1, an input of 3 gives 2 x 3 + 1 = 7.",
+    "Measure the error: how far predictions are from real prices (a cost function).",
+    "Nudge w and b slightly in the direction that shrinks the error (gradient descent), and repeat."
+   ],
+   "analogy": "Picture an old radio with two knobs. You hear static, turn one knob a little, listen, then the other. You keep the turns that make the sound clearer. Training is that, done by a computer, using data as the ears.",
+   "breaks": "A radio has one right station. A model can fit past data perfectly yet guess badly on new data (overfitting). And big models have vastly more knobs than two, so nobody can say what each one does.",
+   "why": "Stanford's CS229 notes use 47 houses in Portland, Oregon. Fitting price (in $1000s) to living area gives dials of 71.27 and 0.1345. Every AI model, from that line to a chatbot, is the same idea at a larger scale. When someone says a model was 'trained', they mean its dials were tuned on data, so its answers can only be as good as that data.",
+   "diagram": {
+    "alt": "A box with y = w x + b and two dials set to w = 2 and b = 1. House size goes in, price comes out. Beside it, five dots with a solid line fitted through them and a dashed line before tuning.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 240\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"10\" y=\"20\" font-size=\"14\">size x</text><line x1=\"20\" y1=\"30\" x2=\"20\" y2=\"52\" stroke=\"#fff\" stroke-width=\"3\"/><rect x=\"10\" y=\"55\" width=\"140\" height=\"40\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"80\" y=\"80\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">y = w x + b</text><circle cx=\"40\" cy=\"125\" r=\"16\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><line x1=\"40\" y1=\"125\" x2=\"50\" y2=\"113\" stroke=\"#fff\" stroke-width=\"3\"/><circle cx=\"110\" cy=\"125\" r=\"16\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><line x1=\"110\" y1=\"125\" x2=\"100\" y2=\"113\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"40\" y=\"160\" font-size=\"14\" text-anchor=\"middle\">w = 2</text><text x=\"110\" y=\"160\" font-size=\"14\" text-anchor=\"middle\">b = 1</text><text x=\"10\" y=\"190\" font-size=\"14\">dials (parameters)</text><text x=\"10\" y=\"225\" font-size=\"14\">price y comes out</text><line x1=\"175\" y1=\"190\" x2=\"310\" y2=\"190\" stroke=\"#fff\" stroke-width=\"2\"/><line x1=\"175\" y1=\"190\" x2=\"175\" y2=\"40\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"190\" cy=\"168\" r=\"5\" fill=\"#fff\"/><circle cx=\"210\" cy=\"150\" r=\"5\" fill=\"#fff\"/><circle cx=\"232\" cy=\"140\" r=\"5\" fill=\"#fff\"/><circle cx=\"255\" cy=\"112\" r=\"5\" fill=\"#fff\"/><circle cx=\"285\" cy=\"92\" r=\"5\" fill=\"#fff\"/><line x1=\"180\" y1=\"178\" x2=\"305\" y2=\"80\" stroke=\"#fff\" stroke-width=\"3\"/><line x1=\"180\" y1=\"150\" x2=\"305\" y2=\"120\" stroke=\"#fff\" stroke-width=\"2\" stroke-dasharray=\"5 4\" opacity=\"0.5\"/><text x=\"185\" y=\"210\" font-size=\"14\">house size</text><text x=\"185\" y=\"35\" font-size=\"14\">price</text><text x=\"185\" y=\"228\" font-size=\"14\" opacity=\"0.85\">turn dials to fit</text></svg>"
+   }
+  },
+  {
+   "n": 14,
+   "tag": "Cyber",
+   "title": "Quantitative risk: annualised loss expectancy",
+   "idea": "Annualised loss expectancy (ALE) is the cost of one incident times how often it happens a year. A control is worth it if it saves more than it costs.",
+   "steps": [
+    "Single loss expectancy (SLE) = asset value x exposure factor: the cost of one bad event.",
+    "Annual rate of occurrence (ARO): expected events per year. 0.2 means once in five years.",
+    "ALE = SLE x ARO. With SLE £400,000 and ARO 0.2, ALE is £80,000 a year.",
+    "A control costing £50,000 a year that removes the risk saves £80,000: a £30,000 gain.",
+    "If it only halves the risk, it saves £40,000 but costs £50,000: accepting the risk is cheaper."
+   ],
+   "analogy": "It is like deciding on phone insurance. If a new phone costs £400 and you break one every five years, you lose about £80 a year on average. Paying £50 a year for cover is worth it. Paying £100 is not.",
+   "breaks": "Phone breakages are common enough to count. Cyber attacks are rarer and messier, so the ARO is often a guess. One bad year can cost far more than the average, and an average says nothing about whether you could survive that year.",
+   "why": "The formulas SLE = asset value x exposure factor and ALE = SLE x ARO are standard in the Certified Information Systems Security Professional (CISSP) exam, whose first domain, Security and Risk Management, covers risk analysis. As one study guide puts it, controls that cost more than the risk they reduce are poor business. This turns a risk debate into a budget conversation.",
+   "diagram": {
+    "alt": "Two bars: expected loss of £80,000 a year (£400,000 x 0.2) against a control costing £50,000 a year, with a £30,000 gap.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 200\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"10\" y=\"22\" font-size=\"14\">ALE = SLE x ARO</text><text x=\"10\" y=\"44\" font-size=\"14\" opacity=\"0.85\">= £400,000 x 0.2</text><rect x=\"10\" y=\"60\" width=\"288\" height=\"34\" fill=\"#fff\" opacity=\"0.9\"/><text x=\"10\" y=\"114\" font-size=\"14\" font-weight=\"bold\">Expected loss £80,000 a year</text><rect x=\"10\" y=\"128\" width=\"180\" height=\"34\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"10\" y=\"182\" font-size=\"14\" font-weight=\"bold\">Control £50,000 a year</text><line x1=\"190\" y1=\"120\" x2=\"190\" y2=\"170\" stroke=\"#fff\" stroke-width=\"1\" stroke-dasharray=\"4 3\"/><text x=\"300\" y=\"150\" font-size=\"14\" text-anchor=\"end\">gap</text><text x=\"300\" y=\"196\" font-size=\"14\" text-anchor=\"end\" opacity=\"0.85\">£30,000</text></svg>"
+   }
+  }
+ ],
+ "fact": {
+  "text": "The Apollo Guidance Computer had just 2,048 words of erasable memory and 36,864 words of fixed rope memory, its software woven into wire.",
+  "source": {
+   "name": "Ken Shirriff's blog: Inside the Apollo Guidance Computer's core memory",
+   "url": "https://www.righto.com/2019/01/inside-apollo-guidance-computers-core.html"
+  }
+ },
+ "quiz": [
+  {
+   "kind": "lesson",
+   "tag": "Tech",
+   "n": 10,
+   "q": "What let AlphaGo improve by playing itself?",
+   "options": [
+    "Programmers wrote a rule for every board",
+    "It copied Lee Sedol's moves",
+    "A win or loss signal nudged its choices",
+    "It searched every game to the end"
+   ],
+   "answer": 2,
+   "why": "Reinforcement learning only needs a reward. Self-play gave AlphaGo endless games, and wins and losses shifted its choices. No one could write rules for every Go position."
+  },
+  {
+   "kind": "lesson",
+   "tag": "Cyber",
+   "n": 11,
+   "q": "Risk A is likelihood 4, impact 2. Risk B is likelihood 1, impact 5. What does the grid hide?",
+   "options": [
+    "A and B are the same risk",
+    "Likelihood always beats impact",
+    "Scores above 5 are always red",
+    "B scores lower yet could be a disaster"
+   ],
+   "answer": 3,
+   "why": "A scores 8 and B scores 5, but B is a rare event with severe impact. Multiplying flattens that difference, so always read the corners of the grid, not just the score."
+  },
+  {
+   "kind": "lesson",
+   "tag": "Tech",
+   "n": 12,
+   "q": "What is the byte 11110000 in hexadecimal?",
+   "options": [
+    "0F",
+    "F0",
+    "FF",
+    "15"
+   ],
+   "answer": 1,
+   "why": "Split the byte into two halves of 4 bits: 1111 is F and 0000 is 0. Read left to right, that gives F0, which is 15 x 16 = 240."
+  },
+  {
+   "kind": "lesson",
+   "tag": "AI",
+   "n": 13,
+   "q": "In y = w x + b, what does training change?",
+   "options": [
+    "The house size you put in",
+    "The dials w and b",
+    "The real prices in the data",
+    "The shape of the formula"
+   ],
+   "answer": 1,
+   "why": "Inputs and real answers are fixed data. Training turns the parameters w and b, step by step, so predictions land closer to the real prices."
+  },
+  {
+   "kind": "lesson",
+   "tag": "Cyber",
+   "n": 14,
+   "q": "SLE is £400,000 and ARO is 0.2. A £50,000 a year control removes the risk. What is the yearly gain?",
+   "options": [
+    "£30,000",
+    "£80,000",
+    "£350,000",
+    "Nothing at all"
+   ],
+   "answer": 0,
+   "why": "ALE is £400,000 x 0.2 = £80,000 a year. Removing it saves £80,000 and the control costs £50,000, so the gain is £30,000 a year."
+  },
+  {
+   "kind": "review",
+   "tag": "Tech",
+   "n": 8,
+   "title": "Counting in binary",
+   "q": "What is the binary number 1011 in decimal?",
+   "options": [
+    "11",
+    "13",
+    "9",
+    "1,011"
+   ],
+   "answer": 0,
+   "why": "Binary columns are worth 8, 4, 2 and 1 from left to right. 1011 means 8 + 0 + 2 + 1, which is 11."
+  },
+  {
+   "kind": "review",
+   "tag": "Cyber",
+   "n": 2,
+   "title": "The CIA triad: confidentiality, integrity, availability",
+   "q": "Ransomware locks a hospital's records so staff cannot open them. Which property broke first?",
+   "options": [
+    "Confidentiality",
+    "Integrity",
+    "Availability",
+    "Authentication"
+   ],
+   "answer": 2,
+   "why": "Availability means people can reach what they need when they need it. Locking records breaks that first, which is why backups and recovery plans matter so much."
+  }
+ ],
+ "terms": [
+  {
+   "term": "Reinforcement learning",
+   "plain": "Learning by trial and error from a reward, such as a win or a loss, rather than from labelled answers."
+  },
+  {
+   "term": "Zero-day",
+   "plain": "A software flaw that attackers use before the maker has shipped a fix."
+  },
+  {
+   "term": "Use-after-free",
+   "plain": "A bug where a program keeps using memory it has already given back, which attackers can fill with their own data."
+  },
+  {
+   "term": "Sandbox escape",
+   "plain": "A way for an app to break out of its locked area on a device and reach other apps' data."
+  },
+  {
+   "term": "Hexadecimal",
+   "plain": "Counting in base 16, using 0 to 9 then A to F. Two hex digits describe one byte."
+  },
+  {
+   "term": "Parameter",
+   "plain": "An adjustable number inside a model, a dial that training turns to make outputs fit the data."
+  },
+  {
+   "term": "Annualised loss expectancy",
+   "plain": "The expected yearly cost of a risk: the cost of one incident times how many you expect a year."
+  }
+ ],
+ "build": {
+  "title": "A risk scorer that shows its own blind spots",
+  "idea": "A small web page where you enter risks with likelihood, impact, cost per incident and yearly frequency. It plots them on a 5 by 5 grid, works out the expected yearly loss, and flags rare high-impact risks.",
+  "first": "Ask an AI coding assistant for a single HTML page with a form for one risk and a 5 by 5 grid that shows the dot. Add the money maths after that works."
+ },
+ "chatter": [
+  {
+   "via": "X",
+   "group": "Company",
+   "handle": "@GoogleDeepMind",
+   "tag": "AI",
+   "headline": "Google DeepMind: Carbon is for long, checked work",
+   "summary": "Google DeepMind pitched Gemini 4 Carbon for long tasks with repeated self-checking across coding, security, office work and science.",
+   "insight": "The selling point is not raw speed but stamina: running long checking loops before it answers, which suits audits and research.",
+   "dissent": "Most of the benchmark wins are Google's own numbers, and one independent test found its rate of made-up answers rose from 4% to 11%.",
+   "trust": "Confirmed",
+   "trustNote": "The launch and prices match Google's own post. Artificial Analysis independently scored the model at its October preview. Benchmark claims beyond that are Google's.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "10 Nov",
+    "url": "https://x.com/GoogleDeepMind/status/2120219371473617099"
+   },
+   "original": {
+    "name": "Google: Gemini 4 Carbon is now available",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/"
+   }
+  },
+  {
+   "via": "X",
+   "group": "Company",
+   "handle": "@binance",
+   "tag": "Cyber",
+   "headline": "Binance warns of an iPhone file-reading flaw",
+   "summary": "Binance said a flaw called worse_query lets malicious apps read other apps' files on three iOS versions, putting wallet keys at risk.",
+   "insight": "This is an operating system problem, not a Binance one: any app storing secrets on the phone is exposed if a bad app gets installed.",
+   "dissent": "Replies point out there is no confirmation that Apple's latest update fixes this flaw, so 'just update' may not be enough.",
+   "trust": "Confirmed",
+   "trustNote": "BleepingComputer independently reported the flaw, the three versions and a public tool that works on them. Whether Apple has fixed it is still unconfirmed.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "10 Nov",
+    "url": "https://x.com/binance/status/2120093246399430770"
+   },
+   "original": {
+    "name": "BleepingComputer",
+    "url": "https://www.bleepingcomputer.com/news/security/binance-warns-of-ios-flaw-that-could-leak-crypto-wallet-secrets/"
+   }
+  },
+  {
+   "via": "X",
+   "group": "Independent",
+   "handle": "@DanielMiessler",
+   "tag": "AI",
+   "headline": "A big AI jump is one date; adoption is another",
+   "summary": "A security writer argued that even a huge jump in AI capability does not mean fast change, because getting it into real organisations takes years.",
+   "insight": "Many companies still refuse AI or use it only as a chatbot, so the gap between what models can do and what firms do keeps growing.",
+   "dissent": "Faster, cheaper agents could shorten adoption time, because firms can try them without big projects.",
+   "trust": "Plausible",
+   "trustNote": "This is an opinion, not a finding. It fits today's news of top models opening up while firms are still deciding how to use them.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "11 Nov",
+    "url": "https://x.com/DanielMiessler/status/2120329012279206180"
+   }
+  }
+ ],
+ "builds": [],
+ "launched": [
+  {
+   "company": "Anthropic",
+   "what": "Claude Whiteboards and Sheets in beta, Claude Data now generally available on paid plans",
+   "claim": true,
+   "tag": "AI",
+   "source": {
+    "name": "Claude: Claude Whiteboards, Claude Sheets, and Claude Data",
+    "url": "https://claude.com/resources/articles/sheets-whiteboards-data"
+   }
+  }
+ ],
+ "evidence": {
+  "searches": 21,
+  "kept": 7,
+  "build_searches": 6,
+  "builds_kept": 0,
+  "rejected": [
+   {
+    "what": "OpenSSH flaw SSHole exploited on Linux systems",
+    "why": "First reported 9 November, outside the 36-hour window."
+   },
+   {
+    "what": "Vanderbilt University ransomware attack",
+    "why": "First reported 9 November, outside the 36-hour window."
+   },
+   {
+    "what": "US soldier arrested in the UK on suspicion of spying for Russia",
+    "why": "Espionage case with no cyber angle."
+   },
+   {
+    "what": "Fireworks AI says hackers stole customer data",
+    "why": "An update on October breaches with no count of customers affected."
+   },
+   {
+    "what": "Outlook zero-day in Microsoft's November patches",
+    "why": "Already covered in a recent brief."
+   },
+   {
+    "what": "Study: AI agents overstate their research results",
+    "why": "Published in October, too old."
+   },
+   {
+    "what": "Build: no-code app videos on YouTube",
+    "why": "Undated tutorials and course sellers, not real builds."
+   },
+   {
+    "what": "Build: Show HN tools made with Claude Code",
+    "why": "Posted before 7 November, too old for this edition."
+   }
+  ],
+  "note": "A quiet day for builds: none could be confirmed from the last 7 days. Free-licence photo pages would not load, so stories use drawings."
+ }
+}
