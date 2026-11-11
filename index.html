@@ -21,10 +21,10 @@ html{-webkit-text-size-adjust:100%}
 body{background:var(--ink);color:#fff;font-family:'Space Grotesk',system-ui,sans-serif;overflow-x:hidden}
 a{color:inherit}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.hero{position:relative;min-height:88svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 18px 34px;overflow:hidden}
+.hero{--art:58svh;position:relative;padding:calc(100px + env(safe-area-inset-top) + var(--art) + 16px) 18px 34px;overflow:hidden}
 .hero canvas{position:absolute;inset:0;width:100%;height:100%}
-/* the canvas starts below the buttons and score badge, so its readout is never covered */
-.hero>canvas{top:calc(100px + env(safe-area-inset-top));height:calc(100% - 100px - env(safe-area-inset-top))}
+/* the canvas starts below the buttons and score badge, and the date and headline sit below the canvas, never on it */
+.hero>canvas{top:calc(100px + env(safe-area-inset-top));height:var(--art)}
 .hero>*:not(canvas){position:relative}
 .date{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--lilac);text-transform:uppercase}
 .verdict{font-size:38px;line-height:1.05;font-weight:700;margin-top:10px}
@@ -140,7 +140,7 @@ button.cue{background:none;border:0;padding:4px 0;font-family:inherit;text-align
 .xitem .cue{color:var(--c)}
 .xnote{padding:10px 15px;border-top:1px solid #2f3336;font-size:12px;color:#8b8fa0}
 .grp{display:inline-block;margin-left:8px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;background:#16b8f022;color:#7fdcff}
-.hero::before{content:'';position:absolute;left:0;right:0;bottom:0;height:52%;background:linear-gradient(rgba(11,6,32,0),rgba(11,6,32,.94) 62%);z-index:1;pointer-events:none}
+.hero::before{content:'';position:absolute;left:0;right:0;top:calc(100px + env(safe-area-inset-top) + var(--art) - 56px);height:56px;background:linear-gradient(rgba(11,6,32,0),var(--ink));z-index:1;pointer-events:none}
 .hero>canvas{z-index:0}.hero>*:not(canvas){z-index:2}
 .pv{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;font-size:13px;font-weight:700}
 .pv button{width:40px;height:40px;border-radius:99px;border:1px solid var(--line);background:#160c3acc;font-size:21px;line-height:1}
