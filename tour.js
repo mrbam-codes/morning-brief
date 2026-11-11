@@ -69,7 +69,7 @@ function toast(msg){var t=document.querySelector('.tr-toast');if(!t){t=el('p','t
 
 function run(stops){
   var n=stops.length,rm=reduce(),cat=window.MBScores&&MBScores.pilotNow?MBScores.pilotNow():'kimchi';
-  var ov=el('div','tr');ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Tour of the page, '+n+' steps. Press Escape to close it.');
+  var ov=el('div','tr');ov.setAttribute('role','dialog');ov.setAttribute('aria-label','Tour of the page, '+n+' steps. Press Escape to close it.');
   var safe=el('div','tr-safe'),blk=[0,1,2,3].map(function(){return el('div','tr-blk')}),ring=el('div','tr-ring');
   var card=el('div','tr-card');card.setAttribute('role','group');
   var top=el('div','tr-top'),ship=el('div','tr-ship');ship.setAttribute('aria-hidden','true');

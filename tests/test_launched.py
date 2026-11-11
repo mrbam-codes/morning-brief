@@ -10,6 +10,8 @@ motion, with every address except this computer blocked. Asserts:
   "Company's own claim", then the source name; the heading and the one-line note are exact;
 - a link is drawn only for an https:// address, opens in a new tab with rel="noopener noreferrer"; any other
   address shows the name as plain text; text holding <script> shows as text;
+- a tag outside AI, Tech and Cyber drops the chip, and a source with a name but no address shows the name
+  with no link; the rest of the row is drawn and nothing breaks;
 - a 90-character `what` and a 40-character company at 390 pixels: no sideways scroll, nothing clipped;
 - the strip sits straight after the Today deck and before Built in the wild; the quiz block is still last;
 - the tour neither rings nor counts the strip (7 stops with builds, 6 without); nothing fetched from outside;
@@ -56,8 +58,13 @@ THREE = [
     launch("<script>alert(1)</script>", "Text with <script>alert(2)</script> inside (test)", "<b>Bold</b> blog (test)", "http://example.org/plain", "Cyber"),
     launch("Third Sample Co (test)", "A test release with no https link", "Third Sample newsroom", "javascript:alert(3)", "AI"),
 ]
+NO_URL = launch("Fourth Sample Co (test)", "A test launch whose source has a name but no address", "Fourth Sample newsroom", "")
+del NO_URL["source"]["url"]
+ODD = [launch("Odd Tag Co (test)", "A test launch tagged outside the three subjects", "Odd Tag newsroom (test)", "https://example.org/launch-odd", "Robotics"), NO_URL]
 # date: (launched, builds); None means the field is left out
-CASES = {"2026-11-14": ([], None), "2026-11-15": (None, None), "2026-11-16": (ONE, [build("ONE")]), "2026-11-17": (THREE, [build("TWO"), build("THREE")])}
+CASES = {"2026-11-14": ([], None), "2026-11-15": (None, None), "2026-11-16": (ONE, [build("ONE")]), "2026-11-17": (THREE, [build("TWO"), build("THREE")]),
+         "2026-11-18": (ODD, [build("FOUR")])}
+TAGS = {"AI", "Tech", "Cyber"}
 
 dates = sorted((p[7:17] for p in git("ls-tree", "--name-only", "origin/briefs", "briefs/").split() if p[7:11].isdigit()), reverse=True)
 work = pathlib.Path(tempfile.mkdtemp())
@@ -141,16 +148,18 @@ try:
             need(not E["clipped"], f"{tag}: nothing in the strip is clipped or sticks out ({E['clipped']})")
             for i, (row, want) in enumerate(zip(E["rows"], ln)):
                 g = f"{tag} row {i + 1}"
-                need(row["company"] == want["company"] and row["companyBold"] and row["what"] == want["what"] and row["tag"] == want["tag"], f"{g}: tag, company in bold and what, as text and in order ({row['company']!r})")
+                chip = want["tag"] in TAGS
+                need(row["company"] == want["company"] and row["companyBold"] and row["what"] == want["what"] and row["tag"] == (want["tag"] if chip else None),
+                     f"{g}: {'tag,' if chip else 'no chip for the tag ' + repr(want['tag']) + ','} company in bold and what, as text and in order ({row['company']!r}, chip {row['tag']!r})")
                 need(row["claim"] == CLAIM, f"{g}: the label reads exactly {CLAIM!r} ({row['claim']!r})")
-                need(row["order"] == ["pill", "jl-co", "jl-what", "jl-claim", "jl-src"], f"{g}: chip, company, what, claim label, source, in that order ({row['order']})")
-                https = want["source"]["url"].startswith("https://")
+                need(row["order"] == ["pill"] * chip + ["jl-co", "jl-what", "jl-claim", "jl-src"], f"{g}: {'chip, ' if chip else ''}company, what, claim label, source, in that order ({row['order']})")
+                https = want["source"].get("url", "").startswith("https://")
                 if https:
                     need(row["href"] == want["source"]["url"] and row["target"] == "_blank" and row["rel"] == "noopener noreferrer" and row["src"] == want["source"]["name"] + " ↗",
                          f"{g}: the source is a link that opens in a new tab with noopener noreferrer ({row['href']}, {row['rel']})")
                     need(row["linkH"] >= 44, f"{g}: the link is at least 44px tall ({row['linkH']})")
                 else:
-                    need(row["href"] is None and row["src"] == want["source"]["name"], f"{g}: an address that is not https:// shows the name as plain text ({want['source']['url']}, {row['href']})")
+                    need(row["href"] is None and row["src"] == want["source"]["name"], f"{g}: an address that is missing or not https:// shows the name as plain text ({want['source'].get('url', 'no address')}, {row['href']})")
             if ln is THREE:
                 need("<script>alert(1)</script>" in E["text"] and "<b>Bold</b> blog (test)" in E["text"], f"{tag}: text holding <script> or <b> shows as text")
 finally:

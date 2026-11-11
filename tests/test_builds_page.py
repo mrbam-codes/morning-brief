@@ -150,6 +150,8 @@ try:
             need(all(not x["small"] for x in B), f"{tag}: every button and link is at least 44px ({[x['small'] for x in B if x['small']]})")
             need(all(not x["wide"] for x in B), f"{tag}: nothing in the section sticks out ({[x['wide'] for x in B if x['wide']]})")
             need(all(h.startswith("https://") for x in B for h in x["allHrefs"]), f"{tag}: every link starts with https:// ({[h for x in B for h in x['allHrefs'] if not h.startswith('https://')]})")
+            rels = [r for x in B for r in x["rels"]]
+            need(rels and all(t == "_blank" and set((r or "").split()) >= {"noopener", "noreferrer"} for t, r in rels), f"{tag}: every build link opens a new tab with rel noopener noreferrer ({len(rels)} links; {[r for r in rels if not set((r[1] or '').split()) >= {'noopener', 'noreferrer'}]})")
             need(all(x["pressed"].split(",")[x["i"]] == "true" and x["pressed"].count("true") == 1 for x in B), f"{tag}: tapping a cartridge marks it, and only it, as loaded")
             if bl is THREE:
                 v, dg, tx = B

@@ -133,6 +133,7 @@ def check_stops(tag, stops, want):
         need(s["live"].startswith("Step " + s["count"].split(" ")[0] + " of ") and s["label"].startswith("Step "), f"{g}: the step has a screen-reader label and live text")
         need(s["focusNext"], f"{g}: focus is on Next after the move")
         need(s["ship"] == 1, f"{g}: the cat's ship is drawn on the card ({s['ship']} drawings)")
+        need(s["cat"] == 1, f"{g}: the cat is drawn in the ship's dome ({s['cat']} drawn cats in .kpod)")
         need(s["barFit"] and s["backShown"] == (s["count"][0] != "1"), f"{g}: Skip tour, Back, the dots and Next sit side by side inside 390 pixels, with Back on every stop but the first (Back {s['backBox']})")
         need(not s["backBox"] or (s["backBox"]["w"] >= 44 and s["backBox"]["h"] >= 44), f"{g}: Back is at least 44 pixels each way ({s['backBox']})")
         if s["head"] in LIT:
@@ -159,7 +160,7 @@ try:
         A, B, P, E, F, G = R["first"], R["second"], R["plain"], R["skip"], R["blocked"], R["sheet"]
         need(R["reduce"] == (mode == "reduced"), f"{mode}: reduced motion is {'on' if mode == 'reduced' else 'off'}")
         need(A["loaded"] and A["openedAt"] and A["flagBefore"] is None, f"{mode}: a first visit shows the tour, and nothing is marked seen until it ends")
-        need(A["dialog"] and A["dialog"]["role"] == "dialog" and A["dialog"]["modal"] == "true" and A["dialog"]["live"] == "polite", f"{mode}: the tour is a dialog with a live region ({A['dialog']})")
+        need(A["dialog"] and A["dialog"]["role"] == "dialog" and A["dialog"]["modal"] is None and A["dialog"]["live"] == "polite", f"{mode}: the tour is a dialog with a live region, not marked modal because the lit-up part stays tappable ({A['dialog']})")
         need(A["tourBtn"] and A["navOrder"][:4] == ["Progress", "Review", "Glossary", "Tour"], f"{mode}: a Tour button sits beside Progress, Review and Glossary ({A['navOrder']})")
         check_stops(f"{mode} with builds", A["stops"], SCRIPT)
         check_stops(f"{mode} no builds", P["stops"], [s for s in SCRIPT if s[0] != "Built in the wild"])

@@ -244,6 +244,13 @@ def diagram(where, d):
     svg_rules(where, str(d.get("svg", "")))
 
 
+# Editions dated before LABELS_FROM skip the label-size refusals below (style, a
+# font-size off a <text>, shrinking transforms, an svg inside the svg), so older
+# published briefs are never re-judged. No past brief uses any of them.
+LABELS_FROM = "2026-11-13"
+MOVES = {"translate", "rotate"}
+
+
 def svg_rules(where, svg):
     """The safety and readability rules for one drawn diagram (lessons, and builds from plan 16)."""
     low = svg.lower()
@@ -269,6 +276,27 @@ def svg_rules(where, svg):
     need(shapes >= 3, f"{where} diagram: needs at least 3 shapes, so it shows a mechanism")
     labels = 0
     parents = {c: p for p in root.iter() for c in p}
+    day = EDITION.get("day")
+    if day and day.isoformat() >= LABELS_FROM:
+        # The size loop below reads only font-size attributes on <text> and its parents,
+        # so refuse every other way of making a label smaller than it looks.
+        styled, nested, sizes, shrinks = False, False, [], []
+        for e in root.iter():
+            tag = e.tag.split("}")[-1]
+            styled = styled or e.get("style") is not None
+            nested = nested or (tag == "svg" and e is not root)
+            fs = e.get("font-size")
+            if fs is not None and tag != "text" and (re.fullmatch(r"\d+(\.\d+)?(px)?", fs.strip()) is None or float(fs.strip().replace("px", "")) < 14):
+                sizes.append((tag, fs))
+            tf = e.get("transform")
+            if tf is not None and set(re.findall(r"([A-Za-z-]+)\s*\(", tf)) - MOVES:
+                shrinks.append(tf)
+        need(not styled, f"{where} diagram: no style attributes. Set the size with the font-size attribute, such as font-size=\"14\", and colours with fill and stroke")
+        need(not nested, f"{where} diagram: no svg inside the svg. Draw everything in the one svg that is 320 wide")
+        if sizes:
+            need(False, f"{where} diagram: font-size {sizes[0][1]!r} on a <{sizes[0][0]}> is not allowed. Every font-size, on any element, must be a plain number, 14 or larger")
+        if shrinks:
+            need(False, f"{where} diagram: transform {shrinks[0]!r} can shrink labels. Use only translate(...) or rotate(...), and set the size with font-size")
 
     def inherited(e, k):
         while e is not None:

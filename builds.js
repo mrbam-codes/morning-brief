@@ -21,7 +21,7 @@ const reduce=()=>!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: redu
 const str=v=>typeof v==='string'?v.trim():'';
 const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n};
 const httpsOnly=u=>typeof u==='string'&&HTTPS.test(u)?u:null;
-const out=(u,t,cls)=>{const a=el('a',cls||null,t);a.href=u;a.target='_blank';a.rel='noopener';return a};
+const out=(u,t,cls)=>{const a=el('a',cls||null,t);a.href=u;a.target='_blank';a.rel='noopener noreferrer';return a};
 const restart=(n,c)=>{n.classList.remove(c);void n.offsetWidth;n.classList.add(c)};
 /* small fixed icons, drawn with DOM calls (not markup strings) */
 const ICON={ok:[['M2.5 8.5l3.5 3.5 7.5-8']],code:[['M5.5 3.5L1.8 8l3.7 4.5M10.5 3.5L14.2 8l-3.7 4.5']],

@@ -1,15 +1,20 @@
 """Checker test. Run: python3 tests/test_check.py GOOD_BRIEF.json [DATE]
 Copies the site to a temporary folder, then proves that the good brief PASSES and that
 each deliberately broken copy FAILS with the expected message. Prints CHECKER OK or the misses.
+The date is always the good brief's own date. A broken copy identical to the good brief is a
+miss ("mutation changed nothing"), so a case can never pass by luck of the day's content.
+The label cases move LABELS_FROM in the copy only (as tests/test_builds.py does for BUILDS_FROM):
+to the brief's date to prove the new refusals, and to the day after to prove older editions still pass.
 """
-import copy, json, pathlib, shutil, subprocess, sys, tempfile
+import copy, datetime, json, pathlib, shutil, subprocess, sys, tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 good = json.loads(open(sys.argv[1], encoding="utf-8").read())
 date = good["date"]
+GATE = 'LABELS_FROM = "2026-11-13"'
 
 
-def run(b):
+def run(b, labels_from=None):
     with tempfile.TemporaryDirectory() as t:
         t = pathlib.Path(t)
         for f in ROOT.iterdir():
@@ -19,6 +24,10 @@ def run(b):
         (t / "briefs").mkdir()
         (t / "briefs" / "index.json").write_text("[]")
         (t / "briefs" / f"{date}.json").write_text(json.dumps(b, ensure_ascii=False))
+        if labels_from:
+            ck = (t / "check.py").read_text()
+            assert ck.count(GATE) == 1, "LABELS_FROM line not found once in check.py"
+            (t / "check.py").write_text(ck.replace(GATE, f'LABELS_FROM = "{labels_from}"'))
         r = subprocess.run([sys.executable, "-I", str(t / "check.py"), date], capture_output=True, text=True, timeout=180)
         return r.stdout + r.stderr
 
@@ -28,6 +37,13 @@ def broke(fn):
 
 
 L = lambda b: b["lessons"]
+
+
+def add(svg_bit):
+    """Put svg_bit at the end of lesson 1's diagram, whatever the day's drawing holds."""
+    return lambda b: L(b)[0]["diagram"].update(svg=L(b)[0]["diagram"]["svg"].replace("</svg>", svg_bit + "</svg>"))
+
+
 CASES = [
     ("a lesson missing", lambda b: L(b).pop(), "lessons must be today's from course.json"),
     ("lessons in the wrong order", lambda b: L(b).reverse(), "lessons must be today's from course.json"),
@@ -38,7 +54,7 @@ CASES = [
     ("diagram is not SVG", lambda b: L(b)[0]["diagram"].update(svg="<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 200\"><rect"), "not valid SVG"),
     ("diagram has a script", lambda b: L(b)[0]["diagram"].update(svg=L(b)[0]["diagram"]["svg"].replace("</svg>", "<script>alert(1)</script></svg>")), "must not contain <script"),
     ("diagram loads a web address", lambda b: L(b)[0]["diagram"].update(svg=L(b)[0]["diagram"]["svg"].replace("</svg>", '<a href="https://x.test"><text x="5" y="190" font-size="14">go</text></a></svg>')), "must not contain"),
-    ("diagram label too small", lambda b: L(b)[0]["diagram"].update(svg=L(b)[0]["diagram"]["svg"].replace('font-size="15"', 'font-size="9"', 1)), "below 14"),
+    ("diagram label too small", add('<text x="10" y="190" font-size="9">tiny words</text>'), "below 14"),
     ("diagram label runs off the edge", lambda b: L(b)[0]["diagram"].update(svg=L(b)[0]["diagram"]["svg"].replace("</svg>", '<text x="200" y="190" font-size="16">A label far too long to fit</text></svg>')), "runs outside the 320 width"),
     ("diagram is decorative (no shapes)", lambda b: L(b)[0]["diagram"].update(svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200"><text x="10" y="30" font-size="16">a</text><text x="10" y="60" font-size="16">b</text><text x="10" y="90" font-size="16">c</text></svg>'), "needs at least 3 shapes"),
     ("quiz one short", lambda b: b["quiz"].pop(), "quiz needs"),
@@ -60,17 +76,35 @@ if cd.get("try"):
     CASES.append(("Try it missing", lambda b: b.pop("try"), "today is a Try it day"))
 else:
     CASES.append(("Try it on the wrong day", lambda b: b.update(try_={}) or b.update({"try": {"title": "x"}}), "only on the Try it days"))
+# Label-size gaps (audit 11 Nov): (name, mutation, expected message or None to PASS, LABELS_FROM in the copy).
+LIVE = date
+BEFORE = (datetime.date.fromisoformat(date) + datetime.timedelta(days=1)).isoformat()
+STYLE = add('<text x="10" y="190" style="font-size:6px">tiny words</text>')
+LABEL_CASES = [
+    ("label sized with style", STYLE, "no style attributes", LIVE),
+    ("small tspan inside a 14 label", add('<text x="10" y="190" font-size="14">ok <tspan font-size="6">tiny words</tspan></text>'), "on a <tspan> is not allowed", LIVE),
+    ("label shrunk by scale", add('<g transform="scale(0.3)"><text x="10" y="190" font-size="14">tiny words</text></g>'), "can shrink labels", LIVE),
+    ("label shrunk by matrix", add('<g transform="matrix(0.3 0 0 0.3 0 0)"><text x="10" y="190" font-size="14">tiny words</text></g>'), "can shrink labels", LIVE),
+    ("label shrunk by an svg inside the svg", add('<svg viewBox="0 0 3200 2000" width="320" height="200"><text x="10" y="190" font-size="14">tiny words</text></svg>'), "no svg inside the svg", LIVE),
+    ("translate and rotate still pass", add('<g transform="translate(5,0) rotate(-10 20 190)"><text x="10" y="190" font-size="14">turned</text></g>'), None, LIVE),
+    ("an edition before LABELS_FROM is not re-judged", STYLE, None, BEFORE),
+]
 misses = []
 out = run(good)
 print(f"good brief {date}:", out.strip().splitlines()[0] if out.strip() else out)
 if not out.strip().startswith("PASSED"):
     misses.append("good brief did not pass:\n" + out)
-for name, fn, want in CASES:
-    o = run(broke(fn))
-    ok = o.startswith("FAILED") and want in o
-    print(("  caught  " if ok else "  MISSED  ") + name)
+for name, fn, want, gate in [(n, f, w, None) for n, f, w in CASES] + LABEL_CASES:
+    b = broke(fn)
+    if b == good:
+        print("  MISSED  " + name)
+        misses.append(f"{name}: mutation changed nothing, so this case proves nothing on {date}")
+        continue
+    o = run(b, gate)
+    ok = (o.startswith("FAILED") and want in o) if want else o.startswith("PASSED")
+    print(("  caught  " if want and ok else "  passes  " if ok else "  MISSED  ") + name)
     if not ok:
-        misses.append(f"{name}: expected FAILED with {want!r}, got:\n{o[:600]}")
+        misses.append(f"{name}: expected {'FAILED with ' + repr(want) if want else 'PASSED'}, got:\n{o[:600]}")
 if misses:
     print("CHECKER FAILED"); print("\n".join(misses)); sys.exit(1)
-print(f"CHECKER OK: good brief passes, {len(CASES)} broken briefs fail")
+print(f"CHECKER OK: good brief passes, {len(CASES) + len(LABEL_CASES)} cases, 0 misses")

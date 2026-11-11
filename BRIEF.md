@@ -43,6 +43,7 @@ Run `python3 course.py YYYY-MM-DD`. It prints today's lessons from `course.json`
 - Start with `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" font-family="Arial,sans-serif" fill="#fff">`. The width must be 320; the height may be 160 to 420.
 - It sits on a pink-to-blue gradient, so draw in white with no background. Use thick and thin lines, opacity and size to show meaning. Use at least 3 shapes and at least 3 text labels.
 - Every label is 14 or larger, written as `font-size="14"`. A character is about 0.55 of the font size wide, so measure every label and keep it inside the 320 width. The checker measures this.
+- Set sizes only with the `font-size` attribute, never a `style` attribute. Every `font-size`, on any element including a `<tspan>`, is a plain number 14 or larger. A `transform` may use only `translate(...)` or `rotate(...)`, never `scale`, `matrix` or `skew`, and there is never an `<svg>` inside the `<svg>`. The checker refuses all of these from 13 Nov.
 - No scripts, styles, links, images or web addresses. `alt` (up to 300) says what the diagram shows.
 
 `fact`: `{ "text", "source": { "name", "url" } }`. Start from the fun fact `course.py` prints, check it on a page you open today, correct any figure that has changed, and cite that page. `text` up to 260 characters.

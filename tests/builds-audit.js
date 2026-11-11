@@ -30,7 +30,7 @@ async function run(){await sleep(1800);const R={};
       B.tile4=[...sec.querySelectorAll('.bw-hud div')].map(d=>[d.querySelector('b').textContent,d.querySelector('span').textContent])[3];
       B.title=sec.querySelector('.bw-b h3').textContent;B.tagsInText=sec.querySelectorAll('.bw-b h3 *, .bw-b li *, .bw-cart em *').length;
       B.links=[...sec.querySelectorAll('.bw-b .bw-lk a')].map(a=>a.getAttribute('href'));B.outLinks=[...sec.querySelectorAll('.bw-scr a,.bw-cap a')].map(a=>[a.textContent,a.getAttribute('href')]);
-      B.allHrefs=[...sec.querySelectorAll('a')].map(a=>a.getAttribute('href'));
+      B.allHrefs=[...sec.querySelectorAll('a')].map(a=>a.getAttribute('href'));B.rels=[...sec.querySelectorAll('a')].map(a=>[a.getAttribute('target'),a.getAttribute('rel')]);
       B.play=!!scr.querySelector('.bw-play');B.frames=frames();B.titleScreen=!!scr.querySelector('.bw-title');
       const dg=scr.querySelector('.bw-dg img');B.diagram=dg?{src:dg.getAttribute('src').slice(0,40),loaded:await loaded(dg)}:null;
       B.markerAsText=document.body.innerText.includes('DIAGRAM-MARKER')||[...document.querySelectorAll('svg text')].some(t=>t.textContent.includes('DIAGRAM-MARKER'));

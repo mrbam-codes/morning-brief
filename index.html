@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-nEVRP++RXuNrywhQvD/teXAbcBuMPKok698rfzkbGbw='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-MmkMIrn3mRjAIvx+1IDic/PE1Pqp2SbYXo+INlt/VPY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -555,7 +555,7 @@ span.jl-src{color:var(--lilac);font-weight:500}
 <script>
 const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n};
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
-const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener';return a};
+const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener noreferrer';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
 const BUILD='2026-11-16.2';
 /* ---------- saved progress (this phone only) ---------- */
@@ -618,7 +618,7 @@ function kimchiReward(bd,b){if(!window.KIMCHI)return;const sk=streak(),r=el('div
   ov.append(el('b',null,sk>1?sk+'-day streak':'Quiz done'),el('span',null,sk>1?'Kimchi is proud of you. Same time tomorrow?':'Kimchi approves. Come back tomorrow to start a streak.'));
   r.append(stage,ov);bd.append(r);KIMCHI.mount(stage,KIMCHI.forDay(briefDay(b.date)))}
 function openStory(st,onDone){
-  const{bd}=sheet(st.tag),r=st.read||{};const hp=pimg(st,'shero');if(hp){const c=el('figcaption');const cl=el('a',null,'Photo: '+st.photo.credit+', '+st.photo.licence+' ↗');cl.href=safe(st.photo.page);cl.target='_blank';cl.rel='noopener';c.append(cl);hp.append(c);bd.append(hp)}
+  const{bd}=sheet(st.tag),r=st.read||{};const hp=pimg(st,'shero');if(hp){const c=el('figcaption');const cl=el('a',null,'Photo: '+st.photo.credit+', '+st.photo.licence+' ↗');cl.href=safe(st.photo.page);cl.target='_blank';cl.rel='noopener noreferrer';c.append(cl);hp.append(c);bd.append(hp)}
   bd.append(el('h2',null,st.headline),el('div','meta','Source: '+st.source.name+', '+st.source.date));
   if(st.figure){const f=el('div','sfig');f.append(el('b',null,st.figure.value),el('span',null,st.figure.label));bd.append(f)}
   if(st.drawing){const i=document.createElement('img');i.className='diagram sdraw';i.alt=st.drawingAlt||'';i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(st.drawing);bd.append(i)}
@@ -627,7 +627,7 @@ function openStory(st,onDone){
   if(KSTORY&&st===KSTORY.st)try{bd.append(kimchiCameo(KSTORY.b))}catch(e){}
   bd.append(el('h3',null,'So what'),el('p',null,st.soWhat.replace(/^[A-Za-z]+:\s*/,'').replace(/^./,ch=>ch.toUpperCase())));
   if(r.take){const t=el('div','take');t.append(el('h3',null,'Claude’s take'),el('p',null,r.take));bd.append(t)}
-  const o=el('a','orig','Read the original at '+st.source.name+' ↗');o.href=safe(st.source.url);o.target='_blank';o.rel='noopener';bd.append(o);doneBar(bd,onDone)}
+  const o=el('a','orig','Read the original at '+st.source.name+' ↗');o.href=safe(st.source.url);o.target='_blank';o.rel='noopener noreferrer';bd.append(o);doneBar(bd,onDone)}
 /* the card is clickable with a mouse or finger; keyboards and screen readers use its real button, so no control sits inside another */
 const cueBtn=f=>{const b=el('button','cue','Read the short version →');b.type='button';b.onclick=e=>{e.stopPropagation();f()};return b};
 const open=(n,st)=>{n.onclick=e=>{if(e.target.closest('a,button'))return;openStory(st)};n.append(cueBtn(()=>openStory(st)))};
@@ -635,8 +635,8 @@ function openChatter(c){
   const{bd}=sheet(c.tag);bd.append(el('h2',null,c.headline),el('div','meta','Forum: '+c.thread.name+', '+c.thread.date+'. This is opinion, not reporting.'));
   bd.append(el('h3',null,'What people are discussing'),el('p',null,c.summary),el('h3',null,'The best insight'),el('p',null,c.insight),el('h3',null,'The other side'),el('p',null,c.dissent));
   const t=el('div','take');t.append(el('h3',null,'How far to trust it: '+c.trust),el('p',null,c.trustNote));bd.append(t);
-  const a=el('a','orig','Read the discussion at '+c.thread.name+' ↗');a.href=safe(c.thread.url);a.target='_blank';a.rel='noopener';bd.append(a);
-  if(c.original){const o=el('a','orig','Read the original: '+c.original.name+' ↗');o.href=safe(c.original.url);o.target='_blank';o.rel='noopener';bd.append(o)}}
+  const a=el('a','orig','Read the discussion at '+c.thread.name+' ↗');a.href=safe(c.thread.url);a.target='_blank';a.rel='noopener noreferrer';bd.append(a);
+  if(c.original){const o=el('a','orig','Read the original: '+c.original.name+' ↗');o.href=safe(c.original.url);o.target='_blank';o.rel='noopener noreferrer';bd.append(o)}}
 const openC=(n,c)=>{n.onclick=e=>{if(e.target.closest('a,button'))return;openChatter(c)};n.append(cueBtn(()=>openChatter(c)))};
 /* ---------- quiz engine ---------- */
 /* scoring: shared rules in scorecore.js, re-scored from history; every day counts */
@@ -870,10 +870,10 @@ function openLesson(l,total,onDone){const{bd}=sheet(null,'Lesson '+l.n);
   lessonArt(bd,l.diagram);(l.more||[]).forEach(d=>lessonArt(bd,d));
   if(l.steps&&l.steps.length){bd.append(el('h3',null,'How it works'));const ol=el('ol');l.steps.forEach(t=>ol.append(el('li',null,t)));bd.append(ol)}
   [['Think of it like',l.analogy],['Where that breaks',l.breaks],['Why it matters',l.why]].forEach(([a,t])=>{if(t)bd.append(el('h3',null,a),el('p',null,t))});
-  if(l.verified){const v=el('div','chk');v.append(el('b',null,'Checked today: '),l.verified.note);if(l.verified.source){v.append(' ');const a=el('a',null,l.verified.source.name+' ↗');a.href=safe(l.verified.source.url);a.target='_blank';a.rel='noopener';v.append(a)}bd.append(v)}
-  if(l.source&&/^https:\/\//.test(l.source)){const a=el('a','orig','Go deeper: the course source ↗');a.href=l.source;a.target='_blank';a.rel='noopener';bd.append(a)}
+  if(l.verified){const v=el('div','chk');v.append(el('b',null,'Checked today: '),l.verified.note);if(l.verified.source){v.append(' ');const a=el('a',null,l.verified.source.name+' ↗');a.href=safe(l.verified.source.url);a.target='_blank';a.rel='noopener noreferrer';v.append(a)}bd.append(v)}
+  if(l.source&&/^https:\/\//.test(l.source)){const a=el('a','orig','Go deeper: the course source ↗');a.href=l.source;a.target='_blank';a.rel='noopener noreferrer';bd.append(a)}
   doneBar(bd,onDone)}
-function openFact(f,onDone){const{bd}=sheet(null,'Fun fact');bd.append(el('h2',null,'Fun fact'),el('p',null,f.text));if(f.source){const a=el('a','orig','Source: '+f.source.name+' ↗');a.href=safe(f.source.url);a.target='_blank';a.rel='noopener';bd.append(a)}doneBar(bd,onDone)}
+function openFact(f,onDone){const{bd}=sheet(null,'Fun fact');bd.append(el('h2',null,'Fun fact'),el('p',null,f.text));if(f.source){const a=el('a','orig','Source: '+f.source.name+' ↗');a.href=safe(f.source.url);a.target='_blank';a.rel='noopener noreferrer';bd.append(a)}doneBar(bd,onDone)}
 function openTry(t,onDone){const{bd}=sheet(null,'Try it');bd.append(el('div','meta','Try it · 10 to 20 minutes with Claude Code'),el('h2',null,t.title),el('p',null,t.task));
   if(t.needs)bd.append(el('p','meta','Builds on: '+t.needs));if(t.steps){bd.append(el('h3',null,'Steps'));const ol=el('ol');t.steps.forEach(s=>ol.append(el('li',null,s)));bd.append(ol)}doneBar(bd,onDone)}
 function openBuild(x,onDone){const{bd}=sheet(null,'Build idea');bd.append(el('div','meta','You could build this'),el('h2',null,x.title),el('p',null,x.idea),el('h3',null,'First step'),el('p',null,x.first));doneBar(bd,onDone)}
