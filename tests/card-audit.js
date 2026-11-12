@@ -52,7 +52,7 @@ async function copy(){const R={};const mv=await moveBlock();R.found=!!mv;if(!mv)
   R.inSheet=!!mv.closest('.cc-over .cc-sheet');R.onPage=document.querySelectorAll('#app .gcard.move').length;
   const [cp]=mv.querySelectorAll('.mv-row button');cp.click();await until(()=>mv.querySelector('.mv-code').value,3000);await sleep(200);
   R.code=mv.querySelector('.mv-code').value;R.boxShown=!mv.querySelector('.mv-code').hidden;R.status=mv.querySelector('.mv-status').textContent;
-  R.points=MBScores&&JSON.parse(localStorage.getItem('mb-v1')).points;R.badge=document.querySelector('.cc-badge').getAttribute('aria-label');return R}
+  R.points=MBScores&&JSON.parse(localStorage.getItem('mb-v1')).points;const pv=(s,q)=>{const e=document.querySelector(s);return e?e.style.getPropertyValue(q).trim():null};R.ring=pv('.cc-over .cc-hero .rg','--p');R.badgeRing=pv('.cc-badge .rg','--p');R.bar=pv('.cc-over .cc-bar i','width');R.badge=document.querySelector('.cc-badge').getAttribute('aria-label');return R}
 async function paste(code){const R={};const mv=await moveBlock(),[,ps]=mv.querySelectorAll('.mv-row button');
   const before=localStorage.getItem('mb-v1');R.before=JSON.parse(before||'null');R.badgeBefore=document.querySelector('.cc-badge').getAttribute('aria-label');
   ps.click();await sleep(50);const inp=mv.querySelector('.mv-in'),use=mv.querySelector('.mv-paste button');R.pasteShown=!mv.querySelector('.mv-paste').hidden;

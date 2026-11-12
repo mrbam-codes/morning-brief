@@ -162,6 +162,13 @@ else:
     need(bool(dst.get("days")) and dst.get("points", 0) > 0 and len(dst["days"]) == 3, f"move: after Yes the browser holds {dst.get('points')} points over {len(dst.get('days') or {})} days")
     need(C.get("points") == dst.get("points"), f"move: points copied {C.get('points')} but loaded {dst.get('points')}")
     need(C.get("badge") == P.get("badgeAfter"), f"move: score badge after loading is {P.get('badgeAfter')!r}, expected {C.get('badge')!r}")
+    # the rank dial, the badge ring and the bar all show progress to the next rank, never progress to the top rank
+    lv = [int(x) for x in re.findall(r"\[(\d+),'", re.search(r"const LEVELS=(\[\[.*?\]\]);", idx).group(1))]
+    pts = C.get("points") or 0
+    fl, up = max(x for x in lv if x <= pts), [x for x in lv if x > pts]
+    want = f"{int(100 * (pts - fl) / (up[0] - fl) + 0.5)}%" if up else "100%"
+    need(pts > 0 and C.get("ring") == want and C.get("badgeRing") == want and C.get("bar") == want,
+         f"scores: at {pts} points the rank dial, the badge ring and the bar all show {want} of the way to the next rank (dial {C.get('ring')!r}, badge {C.get('badgeRing')!r}, bar {C.get('bar')!r})")
 
 
 

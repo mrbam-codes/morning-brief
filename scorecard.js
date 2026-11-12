@@ -14,11 +14,13 @@
     var pv = ScoreCore.preview(S.days, t, cfg.mode), dd = S.days[t] ? R.day[t] : null;
     return { S: S, t: t, R: R, rk: rk, pv: pv, td: dd, tdRaw: S.days[t], run: ScoreCore.run(S.days, t, cfg.mode), best: ScoreCore.best(S.days, cfg.mode) };
   }
+  /* the dial and the bar both show how far through the current rank you are, towards the next one */
+  function ring(rk) { return rk.next ? Math.max(0, Math.min(100, Math.round(100 * (rk.ceil - rk.floor - rk.toNext) / (rk.ceil - rk.floor)))) : 100; }
   var badge = null;
   function paint(bump) {
     if (!badge) { badge = el('<button class="cc-badge" type="button"><span class="rg"><span></span></span><span class="pill"></span></button>'); badge.addEventListener('click', panel); document.body.appendChild(badge); }
     var m = stats();
-    badge.querySelector('.rg').style.setProperty('--p', Math.round(m.rk.toTop * 100) + '%');
+    badge.querySelector('.rg').style.setProperty('--p', ring(m.rk) + '%');
     badge.querySelector('.rg span').textContent = '🔥' + m.run;
     badge.querySelector('.pill').textContent = fmt(m.S.points) + ' pts';
     badge.setAttribute('aria-label', 'My scores: ' + fmt(m.S.points) + ' points, rank ' + m.rk.name + ', ' + m.run + '-day streak');
@@ -37,7 +39,7 @@
     if (onOpen) onOpen(o, close);
   }
   function panel(msg) {
-    var m = stats(), rk = m.rk, pct = rk.next ? Math.round(100 * (m.S.points - rk.floor) / (rk.ceil - rk.floor)) : 100;
+    var m = stats(), rk = m.rk, pct = ring(rk);
     var acc = m.R.asked ? Math.round(100 * m.R.right / m.R.asked) + '%' : '–', strip = '', first = Object.keys(m.S.days).filter(function (k) { return /^\d{4}-\d{2}-\d{2}$/.test(k); }).sort()[0] || m.t;
     for (var i = 27; i >= 0; i--) {
       var d = new Date(ScoreCore.parse(m.t)); d.setDate(d.getDate() - i); var k = ScoreCore.iso(d), x = m.R.day[k];
@@ -48,7 +50,7 @@
     if (m.S.rescored) { delete m.S.rescored; cfg.save(); }
     var sheet = el('<div class="cc-sheet" aria-labelledby="ccPanelH">' +
       '<div class="cc-top"><h3 id="ccPanelH">My scores</h3><button class="cc-x" data-close aria-label="Close">×</button></div>' +
-      '<div class="cc-hero"><div class="rg" style="--p:' + Math.round(rk.toTop * 100) + '%"><b>' + rk.name.toUpperCase() + '</b></div>' +
+      '<div class="cc-hero"><div class="rg" style="--p:' + ring(rk) + '%"><b>' + rk.name.toUpperCase() + '</b></div>' +
       '<div><div class="tot">' + fmt(m.S.points) + '</div><small>total points · rank ' + rk.index + ' of ' + rk.of + '</small><small>' + (rk.next ? fmt(rk.toNext) + ' to ' + rk.next : 'Top rank reached') + '</small></div></div>' +
       '<div class="cc-bar" aria-hidden="true"><i style="width:' + pct + '%"></i></div>' + note +
       '<div class="cc-stats"><div><b>' + m.run + '🔥</b><span>Day streak</span></div><div><b>×' + m.pv.mult + '</b><span>Multiplier</span></div><div><b>' + m.best + '</b><span>Best streak</span></div>' +
@@ -81,7 +83,7 @@
       week += '<i class="' + (x ? (x.perfect ? 'p' : 'd') : (i && k > first ? 'm' : '')) + (i ? '' : ' t') + '">' + DAY[d.getDay()] + '</i>';
     }
     var name = (m.S.name || 'anonymous').toLowerCase().slice(0, 16);
-    return '<div class="sharecard e cfront" style="--p:' + Math.round(rk.toTop * 100) + '%" aria-label="Share card: ' + rk.name + ', ' + (td ? big + ' in today\'s quiz, ' : '') + pts + ' points today">' +
+    return '<div class="sharecard e cfront" style="--p:' + ring(rk) + '%" aria-label="Share card: ' + rk.name + ', ' + (td ? big + ' in today\'s quiz, ' : '') + pts + ' points today">' +
       '<canvas data-net></canvas><div class="hd"><span>' + esc(cfg.label) + ' // DAY ' + cfg.day() + '</span><span>' + when + '</span></div>' +
       '<div>&gt; whoami<br>' + esc(name) + ' <span class="ok">AUTH OK</span></div><div class="lbl">&gt; status --today</div>' +
       '<div class="mid"><div class="ring"><div><b>' + rk.name.toUpperCase() + '</b><span>RANK ' + rk.index + '/' + rk.of + '</span></div></div><div class="sbig' + (big.length > 4 ? ' xs' : big.length > 2 ? ' sm' : '') + '">' + big + '<small>' + bigLbl + '</small></div></div>' +
