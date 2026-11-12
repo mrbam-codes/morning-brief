@@ -1,0 +1,408 @@
+{
+ "date": "2026-11-12",
+ "dayLabel": "Thursday 12 November 2026",
+ "type": "daily",
+ "verdict": "Nvidia's leadership crisis deepens, Maersk is hacked and AI reads DNA cell by cell.",
+ "posters": [
+  {
+   "tag": "Tech",
+   "headline": "Nvidia board weighs ousting Huang",
+   "big": "-33%",
+   "summary": "Nvidia's board met on Wednesday to decide whether to remove chief executive Jensen Huang, a source told Reuters. Shares fell over 8% after hours. No decision yet.",
+   "soWhat": "Work: one leader's conduct can move a $4 trillion firm. Key-person risk is real.",
+   "source": {
+    "name": "ABC News (Australia), carrying Reuters and FT reports",
+    "date": "12 Nov",
+    "url": "https://www.abc.net.au/news/2026-11-12/asx-markets-business-news-live-updates-thursday-12-november/107374826"
+   },
+   "figure": {
+    "value": "-33%",
+    "label": "from early-October peak"
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 200\" font-family=\"Arial,sans-serif\"><rect x=\"60\" y=\"40\" width=\"80\" height=\"120\" fill=\"#76b900\"/><rect x=\"200\" y=\"80\" width=\"80\" height=\"80\" fill=\"#c0392b\"/><line x1=\"40\" y1=\"160\" x2=\"310\" y2=\"160\" stroke=\"#333\" stroke-width=\"2\"/><text x=\"100\" y=\"32\" font-size=\"14\" text-anchor=\"middle\" fill=\"#111\">$237.47</text><text x=\"240\" y=\"72\" font-size=\"14\" text-anchor=\"middle\" fill=\"#111\">$158.78</text><text x=\"100\" y=\"180\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333\">Early Oct peak</text><text x=\"240\" y=\"180\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333\">After hours, 11 Nov</text><text x=\"170\" y=\"196\" font-size=\"12\" text-anchor=\"middle\" fill=\"#c0392b\">Down 33%</text></svg>",
+   "drawingAlt": "Bar chart: Nvidia shares fell from an early-October peak of $237.47 to $158.78 after hours on 11 November, down 33%.",
+   "read": {
+    "what": "Nvidia's board met late on Wednesday 11 November to decide whether to oust chief executive Jensen Huang, a source told Reuters. The Wall Street Journal first reported Nvidia was preparing to fire him. Shares fell more than 8% in after-hours trading. By then they were 33% below their early-October peak of $237.47, at $158.78. No decision had been announced by early Thursday UK time. Nvidia did not comment. Its quarterly results are due on 17 November.",
+    "how": "On 8 November the board opened an independent investigation after reports that Huang was the target of a foreign intelligence effort, through a relationship with a businesswoman alleged to be a Chinese agent. Huang admitted being unfaithful to his wife. On 11 November the New York Times reported a second affair, with a senior employee; Reuters could not verify it. Under Nvidia's rules (bylaws), the 11 directors can remove him by majority vote, with or without cause.",
+    "why": "Nvidia makes most of the chips that train AI, so its leadership touches every AI programme. Huang founded the firm, owns about 3.6% of it and has no obvious successor. Lawmakers are also pushing harder on chip sales to China. The Information reports the US Commerce Department is finalising a rule to stop Chinese firms renting top chips in overseas data centres.",
+    "take": "Opinion: the facts so far are a board meeting and falling shares, not a sacking. The spy link is alleged and China denies it; the board said it had no reason to think secrets were lost. Watch for a board statement, the 17 November results and any change to US chip rules. The lesson for any programme: name your key people and plan for losing one."
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "Maersk hacked via an old system",
+   "big": "$5m",
+   "summary": "Shipping giant Maersk says attackers got into a legacy system it inherited through an acquisition. A new gang claims 100 GB of data and wants $5m in bitcoin.",
+   "soWhat": "Work: systems inherited in a takeover are a classic way in. Audit them first.",
+   "source": {
+    "name": "BankInfoSecurity",
+    "date": "11 Nov",
+    "url": "https://www.bankinfosecurity.com/maersk-probes-ransomware-claim-tied-to-legacy-system-a-33362"
+   },
+   "figure": {
+    "value": "100 GB",
+    "label": "data the gang claims it took"
+   },
+   "photo": {
+    "src": "https://images.unsplash.com/photo-1634638022845-1ab614a94128?w=960&q=70&fm=jpg",
+    "page": "https://unsplash.com/photos/a-large-cargo-ship-loaded-with-lots-of-containers-WqZwkrBuZIE",
+    "credit": "Mika Baumeister, Unsplash",
+    "licence": "Unsplash Licence",
+    "alt": "A large container ship, not a Maersk vessel, being pulled into harbour, with seagulls in front of the hull."
+   },
+   "read": {
+    "what": "A.P. Moller-Maersk is investigating unauthorised access to a legacy system it inherited from an earlier acquisition. On 11 November it said its findings so far show no sensitive data stolen and it expects no disruption to shipping. A new gang, WhiteArmor, claims about 100 GB, including driver records, staff accounts and delivery addresses, and demands $5 million in bitcoin within 30 days. Cybernews reports the gang also claims over 16,000 driver passwords stored in plain text.",
+    "how": "The attackers reached a local system Maersk took on when it bought another business, not its main network. Old systems from a takeover are often left running on separate, older security. Cybernews researchers linked the breach to LF Logistics, bought in 2022; Maersk has not confirmed that. The gang publishes victims on a leak site to add pressure (double extortion).",
+    "why": "Maersk is one of the world's largest container shippers, with over 700 vessels. In 2017 the NotPetya attack shut its network for 10 days and cost about $300 million. Any firm that grows by acquisition carries the same risk: systems nobody fully owns, still connected and still holding data.",
+    "take": "Opinion: the data claims are the gang's own and unproven, and Maersk's 'no sensitive data' is an early finding. Plain-text passwords, if true, are the worrying detail. Watch whether files get published when the 30 days end. Lesson for any merger: list inherited systems on day one and isolate or retire them fast."
+   }
+  },
+  {
+   "tag": "AI",
+   "headline": "AI reads DNA cell by cell",
+   "big": "30%",
+   "summary": "Google DeepMind's AlphaGenome 2 predicts how a DNA change affects specific cell types. In an immune-cell test it pinpointed the cause 30% of the time, against 16%.",
+   "soWhat": "Curious: the same DNA acts differently in heart, brain and blood. AI can now model that.",
+   "source": {
+    "name": "Google DeepMind",
+    "date": "11 Nov",
+    "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/"
+   },
+   "figure": {
+    "value": "107m",
+    "label": "cell profiles used to train it"
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 210\" font-family=\"Arial,sans-serif\"><line x1=\"30\" y1=\"160\" x2=\"320\" y2=\"160\" stroke=\"#333\" stroke-width=\"2\"/><rect x=\"45\" y=\"112\" width=\"45\" height=\"48\" fill=\"#999\"/><rect x=\"95\" y=\"112\" width=\"45\" height=\"0\" fill=\"#4285f4\"/><rect x=\"95\" y=\"64\" width=\"45\" height=\"96\" fill=\"#4285f4\"/><rect x=\"195\" y=\"86\" width=\"45\" height=\"74\" fill=\"#999\"/><rect x=\"245\" y=\"22\" width=\"45\" height=\"138\" fill=\"#4285f4\"/><text x=\"67\" y=\"106\" font-size=\"13\" text-anchor=\"middle\" fill=\"#111\">16%</text><text x=\"117\" y=\"58\" font-size=\"13\" text-anchor=\"middle\" fill=\"#111\">30%</text><text x=\"217\" y=\"80\" font-size=\"13\" text-anchor=\"middle\" fill=\"#111\">23%</text><text x=\"267\" y=\"16\" font-size=\"13\" text-anchor=\"middle\" fill=\"#111\">43%</text><text x=\"92\" y=\"178\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333\">Causal variant found</text><text x=\"242\" y=\"178\" font-size=\"12\" text-anchor=\"middle\" fill=\"#333\">Direction found</text><text x=\"120\" y=\"200\" font-size=\"12\" text-anchor=\"middle\" fill=\"#999\">Older tools</text><text x=\"230\" y=\"200\" font-size=\"12\" text-anchor=\"middle\" fill=\"#4285f4\">AlphaGenome 2</text></svg>",
+   "drawingAlt": "Bar chart from Google DeepMind's own test: causal variants found 30% versus 16% for older tools, and direction of effect 43% versus 23%.",
+   "read": {
+    "what": "Google DeepMind released AlphaGenome 2 on 11 November. It predicts how a single-letter DNA change affects particular cell types. It was trained on over 107 million individual cell profiles across 68 tissues. On a set covering 28 immune cell types, DeepMind says it identified the causal variant in 30% of cases versus 16% for the best earlier tools, and the direction of the gene effect in 43% versus 23%.",
+    "how": "You give it 1 million letters of DNA plus a label for the cell type or state. It predicts readouts such as how strongly genes switch on (gene expression) and how tightly DNA is packed (chromatin accessibility). It can adapt to a new cell state from data on just a few dozen cells, without retraining.",
+    "why": "Most disease-linked DNA changes sit outside genes and only matter in some cells. Knowing which cell is affected narrows the search for causes and treatments. It is free for non-commercial research through an application programming interface (API); commercial access is in private preview.",
+    "take": "Opinion: these results are DeepMind's own. Nature's news team covered the launch but I could not open that report, so I have no independent check. DeepMind says the model is for research only and is not approved for clinical use. Watch for outside labs testing it on their own data."
+   }
+  }
+ ],
+ "stories": [
+  {
+   "tag": "AI",
+   "headline": "US and China agree an AI incident hotline",
+   "summary": "US Treasury Secretary Scott Bessent said the two powers agreed a direct line to warn each other of serious AI incidents, and will start talks on 'superintelligence'.",
+   "soWhat": "Work: AI incident reporting is becoming a diplomatic norm, not just a company policy.",
+   "source": {
+    "name": "Reuters, via Yahoo News",
+    "date": "11 Nov",
+    "url": "https://www.yahoo.com/news/politics/articles/us-china-stay-clear-eyed-012505986.html"
+   },
+   "figure": {
+    "value": "18-19 Nov",
+    "label": "APEC summit in Shenzhen"
+   },
+   "read": {
+    "what": "Speaking in New York on 10 November, Scott Bessent said the US and China agreed to set up a direct channel to alert each other to serious AI incidents. Presidents Trump and Xi first agreed the idea in September. A new dialogue on 'superintelligence' will move forward at a meeting in Shenzhen, alongside the 18 to 19 November Asia-Pacific Economic Cooperation (APEC) summit.",
+    "how": "Planned topics include sharing how each side tests advanced AI models before release, and keeping humans in control of the technology. It works like the old military hotlines: a fast, trusted line so one side's accident is not mistaken for an attack.",
+    "why": "The two biggest AI powers are rivals in chips and models. A shared channel is a small but real step towards managing risks that cross borders, such as an AI system causing harm at scale.",
+    "take": "Opinion: an agreed hotline is concrete; the superintelligence dialogue is still a plan. Bessent himself said 'our interests will not always coincide'. Watch what Shenzhen produces: a named channel, testing standards, or just a statement."
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "Barracuda email gateway flaws now under attack",
+   "summary": "Two Barracuda flaws patched on 2 November are being exploited. Chained, they can give an attacker full control (root) of email and web security appliances.",
+   "soWhat": "Work: security boxes are prime targets. Ask suppliers if Barracuda kit is patched.",
+   "source": {
+    "name": "SecurityWeek",
+    "date": "11 Nov",
+    "url": "https://www.securityweek.com/recently-patched-barracuda-vulnerabilities-exploited-in-attacks/"
+   },
+   "figure": {
+    "value": "9.3",
+    "label": "severity score out of 10"
+   },
+   "read": {
+    "what": "Barracuda says two flaws it fixed on 2 November are being exploited against a small number of organisations. CVE-2026-116606 (severity 9.3 out of 10) lets an attacker bypass login checks on the Email Security Gateway. CVE-2026-111560 (8.6) lets an admin-level user run commands as root on several products. The US Cybersecurity and Infrastructure Security Agency (CISA) told federal agencies to patch within three days.",
+    "how": "An attacker who reaches the admin page can restore a crafted backup file to change settings, then use the second flaw to run any command. Together they give full control. One security firm saw 17 attempts from 15 internet addresses between 9 and 11 November.",
+    "why": "Email gateways sit in front of an organisation's inbox and see every message. Taking one over gives an attacker a quiet, trusted position.",
+    "take": "Opinion: no attacker has been named, and the attempt counts are small, but CISA's three-day deadline shows the concern. The simplest control is the old one: never leave admin pages open to the internet."
+   }
+  },
+  {
+   "tag": "Tech",
+   "headline": "IBM plans a 1,040-qubit quantum system for 2027",
+   "summary": "IBM unveiled its Nighthawk r3 quantum chip, with 520 usable qubits, and plans to link two of them into one 1,040-qubit system next year.",
+   "soWhat": "Curious: quantum progress now means linking chips, much like early supercomputers.",
+   "source": {
+    "name": "The Quantum Insider",
+    "date": "11 Nov",
+    "url": "https://thequantuminsider.com/2026/11/11/ibm-nighthawk-r3-processor-520-programmable-qubits/"
+   },
+   "figure": {
+    "value": "1,040",
+    "label": "qubits planned for 2027"
+   },
+   "read": {
+    "what": "IBM announced Nighthawk r3 on 11 November: 520 programmable quantum bits (qubits), 2,034 physical qubits and up to 10,000 quantum operations. In 2027 it plans to link two r3 chips into one system of 1,040 qubits. Its current chip, Nighthawk r2, runs over 7,500 operations on 120 qubits.",
+    "how": "Instead of building one giant chip, IBM joins chips with links it calls l-couplers. Its test linked chips with 99.3% fidelity in moving quantum states; its target is 99.9%. It has also joined two super-cold cabinets, below 15 millikelvin, into one system.",
+    "why": "Useful quantum computers need many reliable qubits. Linking chips is how IBM plans to grow, and partners report speed-ups on tasks such as energy grid optimisation.",
+    "take": "Opinion: every specification and the 2027 date are IBM's own claims, and partner speed-ups are reported by the partners. The 99.3% link figure is below IBM's own target. Watch whether the 2027 system ships and whether outside groups confirm the results."
+   }
+  }
+ ],
+ "lessons": [
+  {
+   "n": 4,
+   "tag": "Tech",
+   "title": "Shannon and the bit",
+   "idea": "Information is surprise. A bit answers one fair yes-or-no question, and predictable messages carry fewer bits, which is why they compress.",
+   "steps": [
+    "In 1948 Claude Shannon measured information as surprise: the less likely an outcome, the more it tells you.",
+    "A fair coin has two equal outcomes. Learning the result answers one yes-or-no question: 1 bit.",
+    "Average surprise is entropy (H). For two outcomes, H = -p log2 p - q log2 q. At 50/50, H is exactly 1.",
+    "A coin that lands heads 90% of the time: H = -0.9 log2 0.9 - 0.1 log2 0.1, about 0.47 bits.",
+    "Compression: predictable data carries less than 1 bit per symbol, so a clever code can use fewer bits.",
+    "Error correction: add planned spare bits. Below a channel's capacity, errors can be made as rare as you like."
+   ],
+   "analogy": "Think of the game Twenty Questions. Each good yes-or-no question halves the possibilities, and each answer is worth one bit. If your friend nearly always picks 'dog', you learn very little when they say 'dog' again. A surprising answer, like 'platypus', tells you far more. Shannon turned that feeling into a number.",
+   "breaks": "In the game, information feels like meaning. Shannon's measure ignores meaning completely. A random string of letters scores very high, though it says nothing useful. Entropy measures how unpredictable a source is, not whether the message matters.",
+   "why": "This is why a zip file shrinks a long report but not a photo that is already compressed, and why mobile data still arrives intact over a noisy signal. Shannon's paper, in the Bell System Technical Journal in 1948, also gave the word 'bit', which he credited to J. W. Tukey. For AI, the same maths sits under how models are trained to predict the next word.",
+   "diagram": {
+    "alt": "Two coin-flip trees. A fair coin splits 50/50 with equal branches and carries 1 bit. A biased coin has a thick 90% heads branch and a thin 10% tails branch and carries 0.47 bits. Below, a channel from sender to receiver with noise, fixed by spare bits.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 300\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"80\" y=\"24\" font-size=\"14\" text-anchor=\"middle\">Fair coin</text><text x=\"240\" y=\"24\" font-size=\"14\" text-anchor=\"middle\">Biased coin</text><circle cx=\"80\" cy=\"50\" r=\"8\"/><circle cx=\"240\" cy=\"50\" r=\"8\"/><line x1=\"80\" y1=\"50\" x2=\"40\" y2=\"120\" stroke=\"#fff\" stroke-width=\"5\"/><line x1=\"80\" y1=\"50\" x2=\"120\" y2=\"120\" stroke=\"#fff\" stroke-width=\"5\"/><line x1=\"240\" y1=\"50\" x2=\"200\" y2=\"120\" stroke=\"#fff\" stroke-width=\"10\"/><line x1=\"240\" y1=\"50\" x2=\"280\" y2=\"120\" stroke=\"#fff\" stroke-width=\"1.5\" opacity=\"0.7\"/><text x=\"40\" y=\"142\" font-size=\"14\" text-anchor=\"middle\">H 50%</text><text x=\"120\" y=\"142\" font-size=\"14\" text-anchor=\"middle\">T 50%</text><text x=\"200\" y=\"142\" font-size=\"14\" text-anchor=\"middle\">H 90%</text><text x=\"280\" y=\"142\" font-size=\"14\" text-anchor=\"middle\">T 10%</text><text x=\"80\" y=\"172\" font-size=\"18\" text-anchor=\"middle\" font-weight=\"bold\">1 bit</text><text x=\"240\" y=\"172\" font-size=\"18\" text-anchor=\"middle\" font-weight=\"bold\">0.47 bits</text><line x1=\"20\" y1=\"232\" x2=\"300\" y2=\"232\" stroke=\"#fff\" stroke-width=\"3\"/><path d=\"M120 232 l8 -12 l8 24 l8 -24 l8 24 l8 -24 l8 12\" stroke=\"#fff\" stroke-width=\"2\" fill=\"none\" opacity=\"0.8\"/><text x=\"20\" y=\"222\" font-size=\"14\" text-anchor=\"start\">sender</text><text x=\"300\" y=\"222\" font-size=\"14\" text-anchor=\"end\">receiver</text><text x=\"160\" y=\"262\" font-size=\"14\" text-anchor=\"middle\">noise flips some bits</text><text x=\"160\" y=\"288\" font-size=\"14\" text-anchor=\"middle\">spare bits catch the errors</text></svg>"
+   }
+  },
+  {
+   "n": 5,
+   "tag": "AI",
+   "title": "AI, machine learning and deep learning: the nesting dolls",
+   "idea": "AI is the biggest doll: anything that seems smart. Machine learning learns from data, deep learning uses many-layered networks, and LLMs sit inside that.",
+   "steps": [
+    "Artificial intelligence (AI): any program that seems smart, including old rule-based chess programs.",
+    "Machine learning (ML): the part of AI where a program learns patterns from data instead of written rules.",
+    "Deep learning (DL): the part of ML that learns with neural networks stacked in many layers.",
+    "Large language models (LLMs): deep learning models trained on huge amounts of text, such as Claude or Gemini.",
+    "Each doll sits inside the bigger one. Not all AI is ML: a rule-based system is AI with no learning."
+   ],
+   "analogy": "Russian nesting dolls. The outer doll is AI. Open it and you find machine learning, a smaller doll. Inside that is deep learning, and inside that the LLMs everyone talks about today. Every inner doll is also an outer one: an LLM is deep learning, which is machine learning, which is AI.",
+   "breaks": "Real dolls have neat edges; these fields do not. Some systems mix written rules with learned parts. The dolls also suggest the inner ones are smaller in importance, when today the innermost doll, LLMs, gets most of the money and attention.",
+   "why": "Vendors use 'AI' for everything from a simple rules engine to a frontier model. Placing a product in the right doll tells you what to ask. If it learns from data, ask what data and who checked it. If it is rules, ask who maintains them. Cornell's Virtual Workshop puts it plainly: there are parts of AI that do not involve machine learning.",
+   "diagram": {
+    "alt": "Four nested circles. The outer circle is AI, anything that seems smart. Inside is machine learning, then deep learning, then LLMs at the centre. A note says an old rule-based chess program is AI but not machine learning.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 340\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><circle cx=\"160\" cy=\"150\" r=\"145\" fill=\"#fff\" fill-opacity=\"0.08\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"160\" cy=\"185\" r=\"110\" fill=\"#fff\" fill-opacity=\"0.1\" stroke=\"#fff\" stroke-width=\"3\"/><circle cx=\"160\" cy=\"220\" r=\"75\" fill=\"#fff\" fill-opacity=\"0.12\" stroke=\"#fff\" stroke-width=\"4\"/><circle cx=\"160\" cy=\"255\" r=\"38\" fill=\"#fff\" fill-opacity=\"0.3\" stroke=\"#fff\" stroke-width=\"5\"/><text x=\"160\" y=\"36\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">AI: seems smart</text><text x=\"160\" y=\"104\" font-size=\"14\" text-anchor=\"middle\">Machine learning</text><text x=\"160\" y=\"170\" font-size=\"14\" text-anchor=\"middle\">Deep learning</text><text x=\"160\" y=\"260\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">LLMs</text><text x=\"160\" y=\"330\" font-size=\"14\" text-anchor=\"middle\">Old rule-based chess: AI, not ML</text></svg>"
+   }
+  },
+  {
+   "n": 6,
+   "tag": "Cyber",
+   "title": "Assets, threats, vulnerabilities and controls",
+   "idea": "An asset is what you protect, a threat is who or what could harm it, a vulnerability is the weakness they use, and a control reduces the risk.",
+   "steps": [
+    "Asset: something of value, such as equipment, systems, services, software, information or processes.",
+    "Threat: who or what could cause harm, such as a criminal gang or a hostile state. The raider.",
+    "Vulnerability: a weakness in people, processes, places or technology. The unlocked gate.",
+    "Risk appears when a threat can use a vulnerability to harm an asset. Rate it by likelihood and impact.",
+    "Control: a technical or non-technical measure that lowers the risk. The guard on the gate."
+   ],
+   "analogy": "A castle. The treasure in the keep is the asset. The raider outside is the threat. The gate someone left unlocked is the vulnerability. The guard posted on the gate is the control. Today's Maersk story fits: data is the treasure, a gang is the raider, an old inherited system is the open gate.",
+   "breaks": "A castle has one wall and one gate. A modern organisation has thousands of doors, many it does not know about, and some raiders are already inside, such as a careless or angry insider. Controls are also not only guards: training, backups and insurance count too.",
+   "why": "Mixing these words up causes real confusion in risk meetings: 'ransomware' is a threat, 'unpatched server' is a vulnerability. The UK National Cyber Security Centre (NCSC) basic risk method follows this order: understand assets, assess threat, assess vulnerability, estimate likelihood, then plan controls. Using the words cleanly makes a risk register readable.",
+   "diagram": {
+    "alt": "A castle diagram. A raider outside labelled threat heads for an open gate labelled vulnerability. Inside, a treasure labelled asset is protected by a guard labelled control.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 310\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"8\" y=\"24\" font-size=\"14\" text-anchor=\"start\">Threat: attacker (raider)</text><circle cx=\"30\" cy=\"58\" r=\"12\"/><line x1=\"44\" y1=\"70\" x2=\"146\" y2=\"200\" stroke=\"#fff\" stroke-width=\"2\" stroke-dasharray=\"6 4\"/><rect x=\"90\" y=\"100\" width=\"180\" height=\"130\" fill=\"none\" stroke=\"#fff\" stroke-width=\"4\"/><rect x=\"80\" y=\"76\" width=\"30\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.3\" stroke=\"#fff\" stroke-width=\"2\"/><rect x=\"250\" y=\"76\" width=\"30\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.3\" stroke=\"#fff\" stroke-width=\"2\"/><rect x=\"150\" y=\"190\" width=\"40\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-dasharray=\"4 3\"/><circle cx=\"225\" cy=\"150\" r=\"16\" fill=\"#fff\" fill-opacity=\"0.9\"/><circle cx=\"205\" cy=\"200\" r=\"7\"/><line x1=\"205\" y1=\"207\" x2=\"205\" y2=\"226\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"225\" y=\"128\" font-size=\"14\" text-anchor=\"middle\">asset</text><text x=\"130\" y=\"150\" font-size=\"14\" text-anchor=\"middle\">gate</text><text x=\"160\" y=\"256\" font-size=\"14\" text-anchor=\"middle\">Gate: vulnerability (old system)</text><text x=\"160\" y=\"278\" font-size=\"14\" text-anchor=\"middle\">Guard: control (patch, isolate)</text><text x=\"160\" y=\"300\" font-size=\"14\" text-anchor=\"middle\">Treasure: asset (your data)</text></svg>"
+   }
+  }
+ ],
+ "fact": {
+  "text": "In 1958 the New York Times said the Navy expected Rosenblatt's perceptron to 'walk, talk, see, write'. The real machine used 400 photocells in a 20 by 20 grid, with weights in potentiometers turned by electric motors.",
+  "source": {
+   "name": "Wikipedia, Perceptron",
+   "url": "https://en.wikipedia.org/wiki/Perceptron"
+  }
+ },
+ "quiz": [
+  {
+   "kind": "lesson",
+   "tag": "Tech",
+   "n": 4,
+   "q": "A coin lands heads 90% of the time. Why does each toss carry less than 1 bit?",
+   "options": [
+    "Coins can only store half a bit of memory",
+    "The two sides of the coin are different sizes",
+    "You can mostly guess it, so it surprises you less",
+    "Noise on the line deletes part of every single toss"
+   ],
+   "answer": 2,
+   "why": "Shannon measured information as surprise. A predictable outcome tells you little, so its entropy is about 0.47 bits, not 1. That gap is what compression exploits."
+  },
+  {
+   "kind": "lesson",
+   "tag": "AI",
+   "n": 5,
+   "q": "A tool is sold as 'AI-powered' but only follows rules its staff wrote. Which is true?",
+   "options": [
+    "It can be called AI, but it is not machine learning",
+    "It must be deep learning, since it seems smart",
+    "It is a large language model with fewer layers",
+    "It cannot be AI unless it uses neural networks"
+   ],
+   "answer": 0,
+   "why": "AI is the outer doll and includes rule-based systems. Machine learning means the program learns its rules from data, which this tool does not do."
+  },
+  {
+   "kind": "lesson",
+   "tag": "Cyber",
+   "n": 6,
+   "q": "A firm leaves an old, unpatched system online. In the four nouns, what is that system's weakness?",
+   "options": [
+    "A threat: the actor who wants to cause harm",
+    "An asset: the thing of value being protected",
+    "A control: the measure that lowers the risk",
+    "A vulnerability: a gap a threat can use"
+   ],
+   "answer": 3,
+   "why": "The weakness is the vulnerability, the open gate. The gang is the threat, the data is the asset, and patching or isolating the system would be a control."
+  },
+  {
+   "kind": "review",
+   "tag": "Tech",
+   "n": 3,
+   "title": "Bits: why computers use two states",
+   "q": "Each extra bit doubles the number of patterns. How many different patterns can 3 bits hold?",
+   "options": [
+    "3",
+    "6",
+    "8",
+    "9"
+   ],
+   "answer": 2,
+   "why": "n bits give 2 to the power n patterns: 2 x 2 x 2 = 8, from 000 to 111. One more bit would give 16."
+  },
+  {
+   "kind": "review",
+   "tag": "AI",
+   "n": 1,
+   "title": "What \"learning from data\" means",
+   "q": "A spam filter gets 1,000 emails labelled spam or not spam. What does a learning program do next?",
+   "options": [
+    "A person writes a rule for each spam word",
+    "It finds the patterns that split the groups",
+    "It copies last year's filter rules exactly",
+    "It marks every email with a link as spam"
+   ],
+   "answer": 1,
+   "why": "In machine learning the program works out its own rules from labelled examples. Writing the rules by hand is the old way, and copying rules learns nothing."
+  }
+ ],
+ "terms": [
+  {
+   "term": "Entropy",
+   "plain": "How unpredictable a source of messages is, measured in bits. A fair coin has 1 bit; a 90/10 coin about 0.47."
+  },
+  {
+   "term": "Legacy system",
+   "plain": "An old system still in use, often inherited in a takeover and running on older security."
+  },
+  {
+   "term": "Double extortion",
+   "plain": "When a gang steals data and threatens to publish it, as well as or instead of locking files."
+  },
+  {
+   "term": "Causal variant",
+   "plain": "The single DNA change that actually drives an effect, rather than one that just sits near it."
+  },
+  {
+   "term": "Qubit",
+   "plain": "A quantum bit: the basic unit of a quantum computer, which can hold a mix of 0 and 1 until measured."
+  },
+  {
+   "term": "Key-person risk",
+   "plain": "The danger that losing one person, such as a founder, seriously harms an organisation."
+  }
+ ],
+ "build": {
+  "title": "A one-page risk register for a side project",
+  "idea": "Ask Claude to interview you about one small thing you run, such as a shared drive or a club website, and build a table of its assets, threats, vulnerabilities and controls.",
+  "first": "Open Claude and type: 'Interview me one question at a time to list the assets, threats, vulnerabilities and controls for my club website. Then give me a table.'"
+ },
+ "chatter": [
+  {
+   "via": "X",
+   "group": "Company",
+   "handle": "@claudeai",
+   "tag": "AI",
+   "headline": "Claude adds Sheets, Whiteboards and Data",
+   "summary": "Anthropic is rolling out shared spreadsheets, whiteboards and data dashboards inside Claude, plus apps such as Adobe and Atlassian that open within it.",
+   "insight": "The pitch is to work with the AI inside the document, not copy and paste answers out of a chat. It puts Claude in direct competition with Microsoft and Google office tools.",
+   "dissent": "Sheets and Whiteboards are in beta on paid plans, and Meetings is limited to Team and Enterprise plans on Google Meet. Early tools rarely match mature office software.",
+   "trust": "Confirmed",
+   "trustNote": "Checked Anthropic's own article (10 Nov) and independent TechCrunch coverage, which confirms the launches and beta status.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "10 Nov",
+    "url": "https://x.com/claudeai/status/2120206365759094857"
+   },
+   "original": {
+    "name": "TechCrunch",
+    "url": "https://techcrunch.com/2026/11/10/anthropic-launches-claude-meetings-to-turn-workplace-discussions-into-plans-and-tasks/"
+   }
+  },
+  {
+   "via": "X",
+   "group": "Independent",
+   "handle": "@DanielMiessler",
+   "tag": "AI",
+   "headline": "The 'Bitter Wall': AI can only build what you can describe",
+   "summary": "A security writer argues that as AI gets smarter, the limit moves from doing the task to knowing what you want. He calls the limit the Bitter Wall.",
+   "insight": "The bottleneck shifts from prompt engineering to intent engineering: stating clearly what good looks like. That is a project manager's skill, not a coder's.",
+   "dissent": "It is one person's framing, not research. Better AI may also get better at asking clarifying questions, which would soften the wall.",
+   "trust": "Plausible",
+   "trustNote": "Read the author's own blog post (10 Nov), which makes this argument. It is opinion, so there is nothing further to verify.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "11 Nov",
+    "url": "https://x.com/DanielMiessler/status/2120570215159447820"
+   },
+   "original": {
+    "name": "Daniel Miessler's blog",
+    "url": "https://danielmiessler.com/blog/bitter-wall"
+   }
+  }
+ ],
+ "evidence": {
+  "searches": 30,
+  "kept": 6,
+  "rejected": [
+   {
+    "what": "NCSC warns of AI-powered attacks on UK infrastructure",
+    "why": "Published on 3 November, outside the time window."
+   },
+   {
+    "what": "Chrome's eighth exploited zero-day of 2026",
+    "why": "Reported on 10 November, just outside the window."
+   },
+   {
+    "what": "N-able takes N-central offline after 30 zero-days",
+    "why": "First reported early on 10 November, outside the 36-hour window."
+   },
+   {
+    "what": "ChatGPT Lockdown Mode bypass",
+    "why": "Reported on 5 November and already patched in September."
+   },
+   {
+    "what": "AI proves a 17-year-old quantum computing conjecture",
+    "why": "Fascinating, but announced on 8 November, outside the window."
+   },
+   {
+    "what": "Memory chip shortage to worsen until mid-2027",
+    "why": "The chief executive's remarks were made on 2 November."
+   },
+   {
+    "what": "Google opens up Gemini 4 Carbon",
+    "why": "Released on 10 November and tied to yesterday's Signal story."
+   },
+   {
+    "what": "US rule to block China renting chips abroad",
+    "why": "A single paywalled report, so folded into the Nvidia story."
+   }
+  ],
+  "note": "Wikimedia Commons photo pages would not open today, so two stories use drawings instead of photos."
+ }
+}
