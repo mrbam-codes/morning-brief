@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-MmkMIrn3mRjAIvx+1IDic/PE1Pqp2SbYXo+INlt/VPY='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-nGWI8TDeZUJOh0uJbH8jiE96BefqQYbi/HBJfhkZ94E='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -557,7 +557,7 @@ const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=nu
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
 const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener noreferrer';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
-const BUILD='2026-11-16.2';
+const BUILD='2026-11-16.3';
 /* ---------- saved progress (this phone only) ---------- */
 const KEY='mb-v1',DAY=/^\d{4}-\d{2}-\d{2}$/;
 const fresh=()=>({days:{},tags:{AI:[0,0],Tech:[0,0],Cyber:[0,0]},lessons:{},points:0,badges:{},review:[],prog:{},sound:true});
@@ -617,8 +617,10 @@ function kimchiCameo(b){const box=el('div','kcam'),win=el('div','kwin'),lip=el('
 function kimchiReward(bd,b){if(!window.KIMCHI)return;const sk=streak(),r=el('div','kreward'),stage=el('div','kstage'),ov=el('div','kov');
   ov.append(el('b',null,sk>1?sk+'-day streak':'Quiz done'),el('span',null,sk>1?'Kimchi is proud of you. Same time tomorrow?':'Kimchi approves. Come back tomorrow to start a streak.'));
   r.append(stage,ov);bd.append(r);KIMCHI.mount(stage,KIMCHI.forDay(briefDay(b.date)))}
+/* the photo at the top of an opened story or fun fact, with its credit line linking to the photo's own page */
+function photoHero(bd,o){const hp=pimg(o,'shero');if(hp){const c=el('figcaption');const cl=el('a',null,'Photo: '+o.photo.credit+', '+o.photo.licence+' ↗');cl.href=safe(o.photo.page);cl.target='_blank';cl.rel='noopener noreferrer';c.append(cl);hp.append(c);bd.append(hp)}}
 function openStory(st,onDone){
-  const{bd}=sheet(st.tag),r=st.read||{};const hp=pimg(st,'shero');if(hp){const c=el('figcaption');const cl=el('a',null,'Photo: '+st.photo.credit+', '+st.photo.licence+' ↗');cl.href=safe(st.photo.page);cl.target='_blank';cl.rel='noopener noreferrer';c.append(cl);hp.append(c);bd.append(hp)}
+  const{bd}=sheet(st.tag),r=st.read||{};photoHero(bd,st);
   bd.append(el('h2',null,st.headline),el('div','meta','Source: '+st.source.name+', '+st.source.date));
   if(st.figure){const f=el('div','sfig');f.append(el('b',null,st.figure.value),el('span',null,st.figure.label));bd.append(f)}
   if(st.drawing){const i=document.createElement('img');i.className='diagram sdraw';i.alt=st.drawingAlt||'';i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(st.drawing);bd.append(i)}
@@ -873,7 +875,7 @@ function openLesson(l,total,onDone){const{bd}=sheet(null,'Lesson '+l.n);
   if(l.verified){const v=el('div','chk');v.append(el('b',null,'Checked today: '),l.verified.note);if(l.verified.source){v.append(' ');const a=el('a',null,l.verified.source.name+' ↗');a.href=safe(l.verified.source.url);a.target='_blank';a.rel='noopener noreferrer';v.append(a)}bd.append(v)}
   if(l.source&&/^https:\/\//.test(l.source)){const a=el('a','orig','Go deeper: the course source ↗');a.href=l.source;a.target='_blank';a.rel='noopener noreferrer';bd.append(a)}
   doneBar(bd,onDone)}
-function openFact(f,onDone){const{bd}=sheet(null,'Fun fact');bd.append(el('h2',null,'Fun fact'),el('p',null,f.text));if(f.source){const a=el('a','orig','Source: '+f.source.name+' ↗');a.href=safe(f.source.url);a.target='_blank';a.rel='noopener noreferrer';bd.append(a)}doneBar(bd,onDone)}
+function openFact(f,onDone){const{bd}=sheet(null,'Fun fact');photoHero(bd,f);bd.append(el('h2',null,'Fun fact'),el('p',null,f.text));if(f.source){const a=el('a','orig','Source: '+f.source.name+' ↗');a.href=safe(f.source.url);a.target='_blank';a.rel='noopener noreferrer';bd.append(a)}doneBar(bd,onDone)}
 function openTry(t,onDone){const{bd}=sheet(null,'Try it');bd.append(el('div','meta','Try it · 10 to 20 minutes with Claude Code'),el('h2',null,t.title),el('p',null,t.task));
   if(t.needs)bd.append(el('p','meta','Builds on: '+t.needs));if(t.steps){bd.append(el('h3',null,'Steps'));const ol=el('ol');t.steps.forEach(s=>ol.append(el('li',null,s)));bd.append(ol)}doneBar(bd,onDone)}
 function openBuild(x,onDone){const{bd}=sheet(null,'Build idea');bd.append(el('div','meta','You could build this'),el('h2',null,x.title),el('p',null,x.idea),el('h3',null,'First step'),el('p',null,x.first));doneBar(bd,onDone)}
@@ -898,7 +900,8 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
       pz=lessonPoster(l,readMin(l)+' min'+(nd?' · '+nd+' diagram'+(nd>1?'s':''):'')),
       n=sigCard({cls:'learn-card lcard',col:COL.Learn,txt:TXT.Learn,kicker:'Lesson '+l.n+(l.area?' · '+l.area:' · '+(l.tag||'')),title:l.title,text:hook(l.idea),photo:pz,cue:'Learn it →',open:()=>openLesson(l,total,()=>L.done(id))});onSeen(n,pz);
     L.add(n,{id,tag:'Learn',title:l.title,short:'L'+l.n,col:COL.Learn,txt:TXT.Learn})});
-  if(b.fact){const n=sigCard({cls:'learn-card fact',col:COL.Learn,txt:TXT.Learn,kicker:'Fun fact',title:'Did you know?',text:b.fact.text,cue:'Open the fact →',src:b.fact.source&&b.fact.source.name,open:()=>openFact(b.fact,()=>L.done('fact'))});L.add(n,{id:'fact',title:'Fun fact',short:'Fact',col:COL.Learn,txt:TXT.Learn})}
+  if(b.fact){const fp=pimg(b.fact,'ph'),n=sigCard({cls:'learn-card fact',col:COL.Learn,txt:TXT.Learn,kicker:'Fun fact',title:'Did you know?',text:b.fact.text,cue:'Open the fact →',src:b.fact.source&&b.fact.source.name,photo:fp,open:()=>openFact(b.fact,()=>L.done('fact'))});
+    if(fp)fp.title='Photo: '+b.fact.photo.credit+', '+b.fact.photo.licence;L.add(n,{id:'fact',title:'Fun fact',short:'Fact',col:COL.Learn,txt:TXT.Learn})}
   if(b.try){const n=sigCard({cls:'learn-card try',col:COL.Build,txt:TXT.Build,kicker:'Try it · 10 to 20 min',title:b.try.title,text:b.try.task,vz:['Hands on','In Claude Code'],cue:'Start the exercise →',open:()=>openTry(b.try,()=>L.done('try'))});L.add(n,{id:'try',title:b.try.title,short:'Try it',col:COL.Build,txt:TXT.Build})}
   if(b.build){const n=termCard({kicker:'You could build this',title:b.build.title,text:hook(b.build.idea),prompt:'to start today: 1 step',cue:'See the first step →',open:()=>openBuild(b.build,()=>L.done('build'))});L.add(n,{id:'build',title:b.build.title,short:'Build',col:COL.Build,txt:TXT.Build})}
   const learnGo=()=>{const f=L.items.find(x=>!x.node.hidden)||L.items[0];if(f)L.jump(f.id)};

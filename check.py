@@ -43,10 +43,26 @@ LICENCES = {"CC0", "Public domain", "CC BY 2.0", "CC BY 2.5", "CC BY 3.0", "CC B
             "CC BY-SA 2.0", "CC BY-SA 2.5", "CC BY-SA 3.0", "CC BY-SA 4.0", "Unsplash Licence"}
 
 
+COMMONS_FILE = re.compile(r"^https://commons\.wikimedia\.org/wiki/File:[^\s\"'<>?#/]+$")
+FULL_PHOTO = {"src", "page", "credit", "licence", "alt"}
+
+
 def photo(where, ph):
-    """A free-licence photo (stories, and builds from plan 16)."""
+    """A free-licence photo (stories, the fun fact, and builds from plan 16). Two forms:
+    short, a Commons file page and alt only (the publishing step looks up the licence and image), or
+    full, src, page, credit, licence and alt (Unsplash, and editions published before the short form)."""
     if not isinstance(ph, dict):
-        need(False, f"{where} photo: must be an object with src, page, credit, licence and alt")
+        need(False, f"{where} photo: must be an object with page and alt (a Commons file page), or src, page, credit, licence and alt")
+        return
+    if not set(ph) & (FULL_PHOTO - {"page", "alt"}):
+        extra = sorted(set(ph) - {"page", "alt"})
+        need(not extra, f"{where} photo: the short form has only page and alt, not {', '.join(extra)}")
+        need(COMMONS_FILE.match(str(ph.get("page", ""))) is not None, f"{where} photo: page must be a Commons file page, https://commons.wikimedia.org/wiki/File:...")
+        text(f"{where} photo alt", ph.get("alt"), 200)
+        return
+    missing = sorted(FULL_PHOTO - set(ph))
+    if missing:
+        need(False, f"{where} photo: use the short form (page and alt only) or the full form (src, page, credit, licence and alt); missing {', '.join(missing)}")
         return
     src, page, lic = str(ph.get("src", "")), str(ph.get("page", "")), ph.get("licence")
     need(PHOTO_SRC.match(src) is not None, f"{where} photo: src must be a .jpg on upload.wikimedia.org or thumb.wikimedia.org, or an images.unsplash.com photo with fm=jpg")
@@ -161,7 +177,8 @@ def evidence(b):
     for k in ("searches", "kept"):
         need(isinstance(ev.get(k), int) and 0 <= ev[k] <= 300, f"evidence {k}: a whole number from 0 to 300")
     # Plan 16: optional counts for the build search. Rejected builds go in "rejected", their "what" starting "Build: ".
-    for k in ("build_searches", "builds_kept"):
+    # Plan 21: optional counts for the photo search (Commons searches run, photos named).
+    for k in ("build_searches", "builds_kept", "photo_searches", "photos_kept"):
         if k in ev:
             need(isinstance(ev[k], int) and not isinstance(ev[k], bool) and 0 <= ev[k] <= 300, f"evidence {k}: a whole number from 0 to 300")
     rj = ev.get("rejected", [])
@@ -405,6 +422,8 @@ def check_learn(b, day, date):
     fs = fact.get("source") or {}
     text("fact source name", fs.get("name"))
     need(str(fs.get("url", "")).startswith("https://"), "fact: source url must be https")
+    if "photo" in fact:
+        photo("fact", fact["photo"])
     if cd.get("try"):
         t = b.get("try") or {}
         need(t.get("title") == cd["try"][0]["title"], f"try: today is a Try it day. title must be exactly {cd['try'][0]['title']!r}")
@@ -738,6 +757,7 @@ def check(date):
             need(str(x["original"].get("url", "")).startswith("https://"), f"{w}: original url must be https")
             text(f"{w} original name", x["original"].get("name"))
     evidence(b)
+    need("source_sha256" not in b, "source_sha256: written only by the publishing step, never in a brief")
     builds_and_launches(b, date)
     iv = b.get("interview")
     need(bool(iv) or b.get("type") != "sunday", "Sunday needs an interview question")

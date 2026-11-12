@@ -86,6 +86,26 @@ CASES = [
     ("no fun fact", lambda b: b.pop("fact"), "fact text: missing text"),
     ("em dash", lambda b: L(b)[0].update(idea="A test — idea."), "em dash"),
 ]
+# Plan 21: the short Commons photo form, on a story and on the fun fact. None means the copy must PASS.
+COMMONS = "https://commons.wikimedia.org/wiki/File:NVIDIA_Headquarters.jpg"
+P0 = lambda b: ((b.get("posters") or []) + (b.get("stories") or []))[0]
+EV = lambda b: b.setdefault("evidence", {"searches": 10, "kept": 3, "rejected": []})
+CASES += [
+    ("short Commons photo on a story passes", lambda b: P0(b).update(photo={"page": COMMONS, "alt": "Test: a headquarters building."}), None),
+    ("short photo with an Unsplash page", lambda b: P0(b).update(photo={"page": "https://unsplash.com/photos/abc", "alt": "Test."}), "page must be a Commons file page"),
+    ("short photo with a built file address", lambda b: P0(b).update(photo={"page": "https://commons.wikimedia.org/wiki/Special:FilePath/X.jpg", "alt": "Test."}), "page must be a Commons file page"),
+    ("short photo with no alt", lambda b: P0(b).update(photo={"page": COMMONS}), "photo alt: missing text"),
+    ("short photo with an extra field", lambda b: P0(b).update(photo={"page": COMMONS, "alt": "Test.", "width": 960}), "the short form has only page and alt"),
+    ("photo between the two forms", lambda b: P0(b).update(photo={"page": COMMONS, "alt": "Test.", "credit": "Someone, Wikimedia Commons"}), "use the short form (page and alt only) or the full form"),
+    ("short Commons photo on the fun fact passes", lambda b: b["fact"].update(photo={"page": COMMONS, "alt": "Test: a headquarters building."}), None),
+    ("fun fact photo between the two forms", lambda b: b["fact"].update(photo={"page": COMMONS, "alt": "Test.", "licence": "CC BY 4.0"}), "fact photo: use the short form"),
+    ("fun fact photo not an object", lambda b: b["fact"].update(photo=COMMONS), "fact photo: must be an object"),
+    ("fun fact full Unsplash photo passes", lambda b: b["fact"].update(photo={"src": "https://images.unsplash.com/photo-1?w=960&q=70&fm=jpg", "page": "https://unsplash.com/photos/abc", "credit": "Test, Unsplash", "licence": "Unsplash Licence", "alt": "Test."}), None),
+    ("photo counts in evidence pass", lambda b: EV(b).update(photo_searches=6, photos_kept=3), None),
+    ("photo count not a whole number", lambda b: EV(b).update(photo_searches=2.5), "evidence photo_searches: a whole number"),
+    ("photos kept below 0", lambda b: EV(b).update(photos_kept=-1), "evidence photos_kept: a whole number"),
+    ("publisher's source hash in a brief", lambda b: b.update(source_sha256="0" * 64), "source_sha256: written only by the publishing step"),
+]
 if date != "2026-11-11":
     CASES += [
         ("review of a future lesson", lambda b: [q.update(n=L(b)[-1]["n"] + 5) for q in b["quiz"] if q["kind"] == "review"][:1], "review n must be an earlier course lesson"),
