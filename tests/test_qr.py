@@ -38,8 +38,10 @@ idx = (ROOT / "index.html").read_text(encoding="utf-8")
 need('<script src="qr.js"></script>' in idx and idx.index('src="qr.js"') < idx.index('src="scorecard.js"'), "the page loads qr.js before scorecard.js")
 need("url:window.MBQR?MBQR.label:''" in idx, "the address on the share card comes from qr.js")
 host = build_qr.label(build_qr.SITE)
+# The link preview tags in the head must be full addresses; tests/test_address.py checks they use SITE.
+PREVIEW = re.compile(r'<meta (?:property="og:(?:url|image)"|name="twitter:image") content="[^"]*">\n')
 for f in ("index.html", "scorecard.js"):
-    need(host not in (ROOT / f).read_text(encoding="utf-8"), f"{f} has no typed-in copy of the address")
+    need(host not in PREVIEW.sub("", (ROOT / f).read_text(encoding="utf-8")), f"{f} has no typed-in copy of the address (link preview tags aside)")
 
 try:
     import segno

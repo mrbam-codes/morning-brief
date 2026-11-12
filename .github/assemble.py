@@ -280,6 +280,42 @@ def add_photos(out_dir, keep_days=120, api=None):
     return dropped
 
 
+# ---------- link preview ----------
+# The cats take turns flying the link preview, one each day: Kimchi on even
+# days of the year, Charlee on odd ones, counted from the newest published
+# edition. index.html carries Kimchi as the default; this swaps the published
+# copy only if every tag it expects is there, so any surprise leaves the
+# default in place. It never fails a deploy.
+OG_DEFAULT = "kimchi"
+OG_ALT = {
+    "kimchi": "Kimchi the cat pilots a neon spaceship beside the words Morning brief",
+    "charlee": "Charlee the cat pilots a neon spaceship beside the words Morning brief",
+}
+
+
+def og_cat(date):
+    """Which cat flies the link preview on this edition's date."""
+    import datetime
+    return "kimchi" if datetime.date.fromisoformat(date).timetuple().tm_yday % 2 == 0 else "charlee"
+
+
+def set_link_preview(out_dir, date):
+    """Point the published index.html's picture and alt text at the day's cat. Returns the cat."""
+    path = os.path.join(out_dir, "index.html")
+    s = open(path, "rb").read().decode("utf-8")
+    cat = og_cat(date)
+    swaps = [(f"{SITE}og/{OG_DEFAULT}.png", f"{SITE}og/{cat}.png"),
+             (f'content="{OG_ALT[OG_DEFAULT]}"', f'content="{OG_ALT[cat]}"')]
+    for old, _ in swaps:
+        if s.count(old) != 2:
+            raise ValueError(f"expected 2 of {old!r}, found {s.count(old)}")
+    if cat != OG_DEFAULT:
+        for old, new in swaps:
+            s = s.replace(old, new)
+        open(path, "wb").write(s.encode("utf-8"))
+    return cat
+
+
 def main(SRC, OUT):
     tracked = [p for p in git("ls-files").stdout.splitlines() if p and not p.startswith(".github/")]
     if os.path.exists(OUT):
@@ -341,6 +377,11 @@ def main(SRC, OUT):
     final = sorted((m.group(1) for f in os.listdir(os.path.join(OUT, "briefs")) if (m := DATED.match("briefs/" + f))), reverse=True)
     open(os.path.join(OUT, "briefs", "index.json"), "w").write(json.dumps(final))
     say("Dates published: " + ", ".join(final[:5]) + (" ..." if len(final) > 5 else ""))
+    try:
+        if final:
+            say(f"Link preview: {set_link_preview(OUT, final[0])} for {final[0]}")
+    except Exception as x:
+        say(f"Link preview step failed ({type(x).__name__}: {x}); default picture kept")
 
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
