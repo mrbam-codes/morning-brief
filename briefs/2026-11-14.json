@@ -2,186 +2,122 @@
  "date": "2026-11-14",
  "dayLabel": "Saturday 14 November 2026",
  "type": "daily",
- "verdict": "Google's strongest AI ships, AI-built apps leak, and the EU takes aim at online tricks",
+ "verdict": "Nvidia's founder quits; spies hand an AI agent the keys. A thin day for AI research.",
  "posters": [
   {
-   "tag": "AI",
-   "headline": "Google ships its strongest AI yet",
-   "big": "",
-   "summary": "Gemini 4 Carbon is Google's top model for long, multi-step work. Google says it leads bug-finding tests, and a /swarm tool turns one prompt into a team of agents.",
-   "soWhat": "Work: AI that finds and patches flaws will change cyber programme plans.",
+   "tag": "Tech",
+   "headline": "Nvidia's founder quits as boss",
+   "big": "-11%",
+   "summary": "Jensen Huang resigned as Nvidia's chief executive officer (CEO) after weeks of reports about his private life and links to chip sales to China.",
+   "soWhat": "Work: key-person risk just hit the main supplier of AI chips.",
    "source": {
-    "name": "Google (The Keyword blog)",
-    "date": "10 Nov",
-    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/"
+    "name": "TechCrunch",
+    "date": "12 Nov",
+    "url": "https://techcrunch.com/2026/11/12/nvidia-ceo-jensen-huangs-affair-with-alleged-chinese-spy-a-timeline/"
    },
    "figure": {
-    "value": "$2 to $4",
-    "label": "Input price, per 1M tokens"
+    "value": "-11%",
+    "label": "Shares over five days"
    },
+   "photo": {
+    "page": "https://commons.wikimedia.org/wiki/File:NVIDIA_Headquarters.jpg",
+    "alt": "Nvidia's headquarters building in Santa Clara, California."
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 130\" font-family=\"Arial,sans-serif\"><line x1=\"20\" y1=\"60\" x2=\"320\" y2=\"60\" stroke=\"#333\" stroke-width=\"3\"/><circle cx=\"30\" cy=\"60\" r=\"6\" fill=\"#333\"/><text x=\"30\" y=\"40\" font-size=\"13\" text-anchor=\"middle\" fill=\"#333\">29 Oct</text><text x=\"30\" y=\"88\" font-size=\"13\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"normal\">NYT report</text><circle cx=\"120\" cy=\"60\" r=\"6\" fill=\"#333\"/><text x=\"120\" y=\"40\" font-size=\"13\" text-anchor=\"middle\" fill=\"#333\">8 Nov</text><text x=\"120\" y=\"88\" font-size=\"13\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"normal\">Apology</text><circle cx=\"210\" cy=\"60\" r=\"9\" fill=\"#c2185b\"/><text x=\"210\" y=\"40\" font-size=\"13\" text-anchor=\"middle\" fill=\"#333\">11 Nov</text><text x=\"210\" y=\"88\" font-size=\"13\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"bold\">Resigns</text><circle cx=\"305\" cy=\"60\" r=\"6\" fill=\"#333\"/><text x=\"305\" y=\"40\" font-size=\"13\" text-anchor=\"middle\" fill=\"#333\">17 Nov</text><text x=\"305\" y=\"88\" font-size=\"13\" text-anchor=\"middle\" fill=\"#333\" font-weight=\"normal\">Results</text><text x=\"170\" y=\"118\" font-size=\"12\" text-anchor=\"middle\" fill=\"#666\">Shares down 11% over five days</text></svg>",
+   "drawingAlt": "Timeline: press report 29 October, staff apology 8 November, resignation 11 November, results due 17 November. Shares down 11% over five days.",
    "read": {
-    "what": "Google released Gemini 4 Carbon on 10 Nov to paying developers and Google AI Ultra subscribers, after giving it to cyber defenders two weeks earlier. Launch price is $2 per million input tokens and $10 per million output tokens, rising to $4 and $20 from 30 Nov. Google says it ranks first on CursorBench 4.0, WANDR and AutomationBench at more than 2x lower cost per task than the next best outside model, and that in simulated attacks it let 0.8% of attempts through, down from 3.1% for Gemini 4 Argon.",
-    "how": "Carbon spends more word pieces (tokens) thinking and checking its own work in repeated loops (verification loops) before it answers. The new /swarm preview in Google Antigravity splits one request across a team of agents: Carbon plans, coordinates and audits, faster lighter models work in parallel in separate sandboxes (isolated workspaces), and adversarial checkers test each change.",
-    "why": "Google pitches Carbon at cyber security first: it claims 100% recall when scanning and 95% precision when sorting findings on its own internal test. If tools like this find flaws faster than teams can patch them, defenders, auditors and suppliers all face more fixes, sooner. Budget holders should also note the price doubles on 30 Nov.",
-    "take": "Opinion: treat the numbers as Google's claims. Every benchmark here is Google's own or built with partners, and 9to5Google's report ran no independent tests. Google itself says resisting hidden instructions in content (prompt injection) still needs work, which matters for any agent swarm. Watch for independent results and real costs after 30 Nov."
+    "what": "Nvidia said on 12 November that Jensen Huang had resigned as president, CEO and board member, effective immediately. A filing showed the board accepted it on 11 November. Chief financial officer Colette Kress is interim CEO and keeps her finance role. Harvey C. Jones becomes the company's first chair of the board. TechCrunch reported shares fell about 8% after hours on 11 November and were down 11% over five days. Nvidia reports results on 17 November.",
+    "how": "It followed two weeks of press reports. On 29 October The New York Times reported a close relationship between Mr Huang and an executive at Megaspeed, a Singapore firm investigated over suspected diversion of Nvidia chips to China. On 8 November he apologised to staff in a letter and the board began an independent investigation. On 11 November The Wall Street Journal reported the board was preparing to remove him. Nvidia's own release gives no reason.",
+    "why": "Nvidia makes most of the chips that train and run today's AI systems, and Mr Huang led it for 33 years. A sudden change at the top, plus US congressional questions about chips reaching China, adds uncertainty for every AI programme that depends on its supply and roadmap. It also puts export-control compliance in the chip supply chain under a brighter light.",
+    "take": "Opinion: products and contracts do not change overnight, so the near-term risk is slower decisions and closer scrutiny of China sales, not a supply shock. The claims about chip diversion are press reports, not findings, and Nvidia has said it had no reason to believe products were diverted. Watch the 17 November results call and who the board chooses."
    }
   },
   {
    "tag": "Cyber",
-   "headline": "35,000 AI-built apps left open",
-   "big": "35,578",
-   "summary": "Researchers found 35,578 apps made with xAI's Grok Build open to anyone. About 1 in 10 held private material, from staff rosters to an ICU patient's test results.",
-   "soWhat": "Work: Ask who builds apps with AI tools and who checks their sharing settings.",
+   "headline": "Spies let an AI agent run the hack",
+   "big": "2,000+",
+   "summary": "A spy group linked to Kazakhstan used a self-hosted AI agent to search, steal and clean up inside Tajik government systems, an exposed server shows.",
+   "soWhat": "Work: attackers now give agents the keys. Add that to your threat model.",
    "source": {
-    "name": "The Hacker News",
-    "date": "11 Nov",
-    "url": "https://thehackernews.com/2026/11/over-35000-grok-built-apps-exposed.html"
+    "name": "The Record",
+    "date": "12 Nov",
+    "url": "https://therecord.media/kazakhstan-hackers-central-asia"
    },
    "figure": {
-    "value": "94.7%",
-    "label": "Apps open without sign-in"
+    "value": "2,000+",
+    "label": "Unique documents stolen"
    },
-   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 150\" font-family=\"Arial,sans-serif\"><text x=\"10\" y=\"22\" font-size=\"13\" fill=\"#222\">Grok Build apps checked: 43,551</text><rect x=\"10\" y=\"34\" width=\"320\" height=\"30\" fill=\"#ddd\"/><rect x=\"10\" y=\"34\" width=\"261\" height=\"30\" fill=\"#c0392b\"/><text x=\"16\" y=\"54\" font-size=\"13\" fill=\"#fff\">35,578 open to anyone</text><text x=\"10\" y=\"90\" font-size=\"12\" fill=\"#222\">94.7% of apps that answered needed no sign-in</text><text x=\"10\" y=\"112\" font-size=\"12\" fill=\"#222\">About 1 in 10 open apps held private material</text><text x=\"10\" y=\"134\" font-size=\"12\" fill=\"#555\">Source: Claroc report, 10 Nov</text></svg>",
-   "drawingAlt": "Bar chart: of 43,551 Grok Build apps checked, 35,578 were open to anyone. 94.7% of apps that answered needed no sign-in.",
+   "photo": {
+    "page": "https://commons.wikimedia.org/wiki/File:Dushanbe_Railway_Station_-_panoramio.jpg",
+    "alt": "Dushanbe railway station in Tajikistan. Hackers had access to the national railway network for weeks."
+   },
    "read": {
-    "what": "Security firm Claroc loaded 43,551 apps built with Grok Build and found 35,578 open with no account, 94.7% of those that answered. 24 were built by staff at SpaceXSI (formerly xAI) and X, including a confidential advertising proposal to a US federal agency. It found data from 30 other organisations, 6 in the Fortune 500, and hand-confirmed 150 exposures. One timesheet app stored 18 accounts' passwords in plain text.",
-    "how": "Each published app gets its own web address under grok.me. Visiting one leaves a trace in public records of web address lookups (passive DNS), so the names can be listed. The researchers say 'Anyone with the link' was preselected when publishing, and that in one test the generated sign-in code let an uninvited account in before checking membership.",
-    "why": "AI app builders let people with no coding background publish tools that hold real data in minutes. The weak point is not the AI's code alone but defaults and sharing settings nobody reviews. Any organisation whose staff use these tools has a new route for data to leak.",
-    "take": "Opinion: Claroc sells tools for securing AI-built apps, so it has an interest. But independent reporting carried the findings, and SpaceXSI took down its own 24 staff apps, which supports the core claim. The sensitive-app counts rest partly on AI grading; Claroc estimates roughly 650 to 800 truly high-risk apps. Watch whether SpaceXSI changes the default to private."
+    "what": "Security firm CloudSEK found an exposed server used by a group it calls Silent Lynx and published its report on 11 November. The server held more than a dozen gigabytes across hundreds of thousands of files, including more than 2,000 unique stolen documents, mostly correspondence to or through Tajikistan's Ministry of Defence. The hackers had access to the national railway network from at least mid-August to early October, and used one employee's login to reach a national document system.",
+    "how": "The operator ran a self-hosted AI agent called Hermes (an AI that runs tools on its own), mainly on a DeepSeek model reached through OpenRouter, a model marketplace. It did reconnaissance, gathered data and wiped logs. Its allowed-commands list let destructive commands run without a human approving them, and its stop-after-repeated-failures limit was switched off. Orders went in Russian through a Telegram bot, so it could be run from a phone. The clean-up missed the exposed folder.",
+    "why": "It is a rare look at a real spy operation handing routine hacking work to an AI agent. The agent sped up the dull parts rather than inventing new attacks. It also shows the same safety settings defenders debate, approval steps and stop limits, being switched off by attackers. For any large organisation, it is a reminder that one stolen login can open a national system.",
+    "take": "Opinion: the evidence is strong because it comes from the attacker's own logs, but it is one firm's report. CloudSEK rates the Kazakhstan link only medium confidence, and The Record notes the research shows no link to the Kazakh government. The root causes are old ones: stolen logins and weak monitoring. Watch for other security firms reporting agents in state hacking."
    }
   },
   {
-   "tag": "Tech",
-   "headline": "EU moves to ban online tricks",
-   "big": "6%",
-   "summary": "The European Commission proposed a Digital Fairness Act against trap subscriptions, fake scarcity and addictive design, with fines of up to 6% of global turnover.",
-   "soWhat": "Work: Apps sold in the EU may need easy cancelling and a human to talk to.",
+   "tag": "AI",
+   "headline": "United bars AI agents from booking",
+   "big": "",
+   "summary": "United Airlines will block unauthorised personal AI assistants from booking flights or managing trips, warning that sharing logins with them exposes data.",
+   "soWhat": "Build: agents that log in as the user will meet more locked doors.",
    "source": {
-    "name": "Eunews",
-    "date": "11 Nov",
-    "url": "https://www.eunews.it/en/2026/11/11/eu-unveils-digital-fairness-act-tighter-rules-on-influencers-targeted-advertising-and-trap-subscriptions/"
-   },
-   "figure": {
-    "value": "€13.7bn",
-    "label": "Yearly consumer benefit (EC)"
+    "name": "TechCrunch",
+    "date": "12 Nov",
+    "url": "https://techcrunch.com/2026/11/12/united-airlines-blocks-ai-agents-from-booking-flights-citing-cybersecurity-risks/"
    },
    "photo": {
-    "src": "https://images.unsplash.com/photo-1594810205183-18a8b0ce6c13?w=960&q=70&fm=jpg",
-    "page": "https://unsplash.com/photos/row-of-european-union-flags-0NRkVddA2fw",
-    "credit": "Guillaume Périgois, Unsplash",
-    "licence": "Unsplash Licence",
-    "alt": "A row of European Union flags outside the European Commission's Berlaymont building in Brussels."
+    "page": "https://commons.wikimedia.org/wiki/File:United_Airlines_Boeing_787-9_Dreamliner_(33047122154).jpg",
+    "alt": "A United Airlines Boeing 787-9 Dreamliner."
    },
    "read": {
-    "what": "On 11 Nov the Commission presented the Digital Fairness Act. It would ban using personal weaknesses to raise prices, curb fake 'only 2 left' claims and hidden costs, let users switch off autoplay and endless scrolling, make cancelling easy, stop free trials turning paid without informed consent, and give a right to speak to a human. Fines could reach 6% of global annual turnover. The Commission estimates consumer benefits of up to €13.7 billion a year.",
-    "how": "Manipulative screen designs (dark patterns) would be named and banned. The old Unfair Commercial Practices Directive would become a regulation that applies directly in every member state. The Commission could investigate large cross-border breaches itself, and companies outside the EU would need a legal representative inside it. It also sets clearer rights when AI agents buy things for you.",
-    "why": "This reaches far beyond big platforms: any website or app selling to EU consumers, including UK firms, would be covered. The AI agent clause matters for anyone building assistants that shop or book on a user's behalf. Subscription businesses would need to redesign sign-up and cancel flows.",
-    "take": "Opinion: this is a proposal, not law. The European Parliament and member states must agree it, and no start date was given. The €13.7 billion is the Commission's own estimate. The Commission's press page opened but its full text did not load, so details come from Eunews. Expect heavy lobbying from advertisers and gaming firms."
+    "what": "TechCrunch reported on 12 November that United will restrict AI agents that book flights and manage reservations for users. The block covers its own website and app, and travel agencies and aggregators. United said the aim is to 'prohibit use by unauthorized, third-party personal AI agents or assistants'. It is updating its booking, ticketing and distribution policies.",
+    "how": "Many personal AI agents work by taking the user's password and acting inside their account (credential sharing). United gave no technical detail on how it will spot them; the stated tool is a policy change. It named three risks: exposed account details, accidental purchases or spent MileagePlus miles, and federal aviation rules, such as a passenger personally confirming at check-in that bags hold no banned items.",
+    "why": "Booking travel is one of the flagship jobs AI agents are sold for. If big firms block agents that act on a user's login, agent makers will need approved routes, such as official partner connections (application programming interfaces, APIs). TechCrunch notes Bank of America recently urged customers not to share banking passwords with AI assistants.",
+    "take": "Opinion: this is sound security, not hostility to AI. Giving an agent your password gives it every power you have, with no record of who did what. Expect more firms to split agents into approved ones, connected officially with limits, and the rest. Unknown: how United will tell an agent from a person. Watch whether other airlines follow."
    }
   }
  ],
  "stories": [
   {
-   "tag": "Tech",
-   "headline": "Blacklisted Chinese university bought Nvidia AI chips",
-   "summary": "Records show a university tied to China's military bought two Nvidia H200 chips in October through a local supplier, despite being on a US blacklist.",
-   "soWhat": "Curious: Export controls leak through resellers and rented computing.",
+   "tag": "Cyber",
+   "headline": "Fireworks AI breach exposed Notion AI chat transcripts",
+   "summary": "Hackers who got into AI model host Fireworks through its cloud provider took chat transcripts from about 1% of Notion's customers who used one AI feature.",
+   "soWhat": "Work: your AI supplier's suppliers now sit in your data's path.",
    "source": {
-    "name": "Al Jazeera (with Reuters)",
-    "date": "11 Nov",
-    "url": "https://www.aljazeera.com/news/2026/11/11/chinese-university-buys-nvidia-ai-h200-chips-despite-us-ban-records-show"
+    "name": "TechCrunch",
+    "date": "12 Nov",
+    "url": "https://techcrunch.com/2026/11/12/cyberattack-on-fireworks-ai-allowed-hackers-to-access-notion-customers-chat-transcripts/"
    },
    "figure": {
-    "value": "$123,000",
-    "label": "Paid for two H200 chips"
+    "value": "1%",
+    "label": "Notion customers affected"
    },
    "read": {
-    "what": "Northwestern Polytechnical University in Xi'an bought two Nvidia H200 chips for 874,700 yuan (about $123,000), per a 21 Oct procurement record found by Reuters. A local firm, Shaanxi Bosuan Network Technology, supplied them. The university also signed five contracts this year to rent computing that gives it access to H200 and other Nvidia chips. Reuters reviewed 26 Chinese records showing similar buying or renting.",
-    "how": "The US put the university on its export blacklist (the Entity List) in 2001 and tightened it in 2019, so licences for controlled US technology are normally refused. Chips sold legally into China can still change hands inside the country. Renting time on someone else's chips (cloud computing) sidesteps owning them at all.",
-    "why": "It shows how hard it is to control where powerful AI chips end up once they leave the factory. It lands as Nvidia is already under pressure in Washington, with lawmakers seeking a briefing with its chief executive on 18 Nov.",
-    "take": "Opinion: two chips is tiny; the rental contracts are the bigger signal, because they need no shipment at all. The article carried no response from Nvidia or the US Commerce Department about these purchases. Watch whether Washington moves to cover cloud rental, not just chip sales."
+    "what": "TechCrunch reported on 12 November that Notion confirmed hackers took chat transcripts from Notion AI customers who used its 'Insights' feature, about 1% of its customers. Fireworks AI, which runs AI models for other companies, said attackers took billing information and some datasets. It is Fireworks' second breach in about two months. Notion cut all connections to Fireworks on 3 November and deleted data stored there.",
+    "how": "An attacker breached Fireworks' cloud provider and used that access to reach a Fireworks development system holding customer data. Notion sent some AI requests through Fireworks (a model hosting provider), so the transcripts, which include anything typed into or produced by the chat, sat in that chain. Fireworks believes the attackers want to sell stolen access to AI models (tokens) to people who will not pay for their own.",
+    "why": "When you buy an AI feature, your words may pass through the vendor's model host and that host's cloud. Each link is a further supplier you never signed with. Notion says much of the data cannot be tied to particular customers, but chat transcripts often hold sensitive work content.",
+    "take": "Opinion: this is AI supply chain risk in plain sight. Ask suppliers which model hosts see your prompts, how long they keep them and how fast you will be told of a breach. Fireworks, which says it has tens of thousands of customers, has not said how many were affected. Watch for that number."
    }
   },
   {
    "tag": "Cyber",
-   "headline": "Published bugs force N-able to pull its remote tool offline",
-   "summary": "N-able took its cloud N-Central service offline after a researcher posted dozens of unpatched flaws, and told customers to shut down their own copies too.",
-   "soWhat": "Work: Check whether your suppliers use N-Central and if it is switched off.",
+   "headline": "Unpatched Windows flaw published with working attack code",
+   "summary": "A researcher released code that turns a 2025 Windows log-protection feature into a route to full SYSTEM control. Microsoft has issued no fix yet.",
+   "soWhat": "Work: ask IT how they will watch for this until Microsoft patches it.",
    "source": {
-    "name": "TechCrunch",
-    "date": "10 Nov",
-    "url": "https://techcrunch.com/2026/11/10/n-able-takes-its-remote-access-service-offline-after-researcher-publishes-dozens-of-zero-day-bugs"
+    "name": "The Hacker News",
+    "date": "12 Nov",
+    "url": "https://thehackernews.com/2026/11/new-signdrop-zero-day-exploit-turns.html"
    },
    "read": {
-    "what": "A security researcher published dozens of flaws in N-able's N-Central, naming them Able2Shell. He says they can steal passwords, create new administrator accounts and take full control (root access). N-able took its hosted service offline and urged customers to shut down self-hosted versions. It says it has no evidence of any customer being hacked. The researcher said he went public because N-able had not fixed flaws he reported in another product.",
-    "how": "N-Central is remote monitoring and management (RMM) software: IT providers use it to run many clients' computers from one console. Flaws published before a fix exists are called zero-days, so attackers can use them straight away. Full public release without warning the vendor is known as full disclosure.",
-    "why": "One remote management console can open the door to hundreds of client networks, which is why attackers prize these tools. Any organisation whose managed service provider uses N-Central faces an outage now and possible exposure later.",
-    "take": "Opinion: N-able's 'no evidence' line is weak until it says whether its logs could show an attack. We did not open the researcher's own disclosure, so the flaw details rest on TechCrunch's report. Watch for patches, and for whether attackers use the public code before customers can update."
-   }
-  },
-  {
-   "tag": "AI",
-   "headline": "Editing under 10 neurons can plant a hidden AI backdoor",
-   "summary": "Microsoft researchers showed an AI agent model can be turned into a sleeper agent by changing fewer than 10 neurons, and that AI auditors can spot the edits.",
-   "soWhat": "Build: Only download model files from sources you trust and can check.",
-   "source": {
-    "name": "Microsoft Security blog",
-    "date": "10 Nov",
-    "url": "https://www.microsoft.com/en-us/security/blog/2026/11/10/detecting-sleeper-agents-hiding-in-ai-model-neurons/"
-   },
-   "figure": {
-    "value": "<10",
-    "label": "Neurons edited for a backdoor"
-   },
-   "read": {
-    "what": "Microsoft says a capable agent model can be given a hidden trigger by editing fewer than 10 neurons. The altered model passes all evaluations, but when a trigger phrase appears it runs the attacker's command with whatever access the agent has. Microsoft says Claude Code with Opus 4.5 discovered most of this threat on its own, and that it has not seen attackers use the technique.",
-    "how": "A model is a huge set of numbers (weights). Changing a handful of them can plant a dormant behaviour (a backdoor) without harming normal answers. Doing it needs only the computing power to run the model, not to train one. To catch it, compare the file with the original model (weight diffing), flag odd changes, and let frontier AI agents act as auditors.",
-    "why": "Organisations increasingly download open models and give them tools and access. A tampered model could pass every test and still act for an attacker later. It turns model files into a supply chain risk, like any other software you install.",
-    "take": "Opinion: this is Microsoft's own research, and the blog gives no detection rates or count of models tested; we did not open the full research paper. The core idea, small weight edits as backdoors, fits earlier work it cites. Watch for the paper's numbers and for model hubs adding weight checks."
-   }
-  }
- ],
- "chatter": [
-  {
-   "via": "X",
-   "group": "Company",
-   "handle": "@GoogleDeepMind",
-   "tag": "AI",
-   "headline": "Google pitches Carbon for long, self-checking tasks",
-   "summary": "Google DeepMind launched Gemini 4 Carbon on X as its strongest model for long tasks across software, cyber security, knowledge work and science.",
-   "insight": "The pitch is less about raw smarts and more about time: the model explores longer and checks itself repeatedly before handing work back.",
-   "dissent": "Every result in the launch is Google's or a partner's, and no independent tests were available at launch.",
-   "trust": "Plausible",
-   "trustNote": "Checked against Google's own blog post and 9to5Google's report. Availability and prices match; performance claims are not independently confirmed.",
-   "thread": {
-    "name": "X, via Grok",
-    "date": "10 Nov",
-    "url": "https://x.com/GoogleDeepMind/status/2120219371473617099"
-   },
-   "original": {
-    "name": "Google (The Keyword blog)",
-    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/"
-   }
-  },
-  {
-   "via": "X",
-   "group": "Independent",
-   "handle": "@annmarie",
-   "tag": "Tech",
-   "headline": "Reuters scoop on blacklisted buyer of Nvidia chips spreads",
-   "summary": "A markets journalist shared Reuters' finding that a military-linked Chinese university bought Nvidia H200 chips despite a US blacklist.",
-   "insight": "The gap is not at the factory gate but inside China, where local resellers and rented computing can reach blacklisted buyers.",
-   "dissent": "Two chips is a very small purchase, so the scale of leakage is still unclear.",
-   "trust": "Confirmed",
-   "trustNote": "Checked against Al Jazeera's report, which carries Reuters and gives the university, price and record date.",
-   "thread": {
-    "name": "X, via Grok",
-    "date": "11 Nov",
-    "url": "https://x.com/annmarie/status/2120509013586526378"
-   },
-   "original": {
-    "name": "Al Jazeera (with Reuters)",
-    "url": "https://www.aljazeera.com/news/2026/11/11/chinese-university-buys-nvidia-ai-h200-chips-despite-us-ban-records-show"
+    "what": "On 10 November, the day of Microsoft's monthly updates, a researcher calling themselves MSNightmare posted proof-of-concept code and a write-up called SignDrop. The Hacker News reported on 12 November that it has no tracking number (CVE), advisory or patch. There are no reported attacks, and it is not on the US Cybersecurity and Infrastructure Security Agency (CISA) list of exploited flaws.",
+    "how": "In October 2025 Microsoft added a signing check to its Common Log File System driver (CLFS) to stop log tampering. SignDrop abuses it: when a privileged program opens a log the attacker prepared, Windows writes a side file with top-level (SYSTEM) rights, and a redirect (symbolic link) sends it where the attacker chooses. The ordinary user can still write to that file, which can be chained into full control (privilege escalation). The demo uses Microsoft Defender as the privileged program.",
+    "why": "It needs an attacker already on the machine as a normal user, so it is a second-stage tool, the kind used after a phishing click. It was tested on Windows 11 26H2 and Windows Server 2025 test builds. The researcher says systems with the CLFS check switched off fall outside it.",
+    "take": "Opinion: serious but not a panic. An independent tester found it works but not reliably, needs Defender running and changes every User Account Control (UAC) prompt, so it is noisy. Do not switch off the protection on your own. Watch for a Microsoft advisory and an out-of-cycle fix."
    }
   }
  ],
@@ -190,111 +126,116 @@
    "n": 10,
    "tag": "Tech",
    "title": "AlphaGo and learning by self-play",
-   "idea": "AlphaGo got strong at Go by playing itself and keeping what won (reinforcement learning), and found a move experts had dismissed.",
+   "idea": "AlphaGo learned Go by reinforcement learning: it played itself, scored each game as a win or loss, and shifted towards moves that won.",
    "steps": [
-    "First it copied moves from human expert games to learn likely good moves (a policy network).",
-    "Then it played versions of itself thousands of times (self-play).",
-    "A win nudged its choices up and a loss nudged them down. That reward loop is reinforcement learning.",
-    "A second network learned to judge who is winning from any board (a value network).",
-    "In a game, a search looked ahead through likely moves (Monte Carlo tree search).",
-    "Seoul, March 2016: it beat Lee Sedol 4-1. Its move 37 in game 2 was rated a 1 in 10,000 choice."
+    "First it copied moves from expert human games (supervised learning).",
+    "Then it played different versions of itself thousands of times (self-play).",
+    "Each game ends in a win or a loss: the only score it gets (the reward).",
+    "It nudges its move-picker (policy network) towards moves that led to wins.",
+    "A second network (value network) learns to guess who is winning from a position.",
+    "In a match, a look-ahead search (Monte Carlo tree search) uses both networks."
    ],
-   "analogy": "Think of a chess student who first studies grandmasters' games, then plays thousands of games against a copy of themselves every night. After each game they keep the habits that led to wins and drop the ones that led to losses. Over time they develop moves no teacher showed them.",
-   "breaks": "A human student understands why a move works and can explain it. AlphaGo only adjusts numbers until wins become more likely; it has no reasons to give. It also relied on a perfectly clear score at the end of each game. Most real work has no clean win or loss signal, which makes this kind of learning much harder outside games.",
-   "why": "The 2016 Nature paper reported a 99.8% win rate against other Go programs and a 5-0 win over the European champion, before the Lee Sedol match. The same reward-loop idea is now used to tune AI assistants and agents. Move 37 is the lesson for work: an AI's best option may look wrong to experts, so judge it on evidence, not on whether it looks familiar.",
+   "analogy": "Picture a tennis player with no coach who plays thousands of practice sets against a copy of themselves. Nobody tells them which shot was good. They only see who won each set, and slowly they play more of the shots that turned up in winning sets. Some of those shots look odd to watching experts, because the player was never taught what 'normal' looks like.",
+   "breaks": "A person learns from a handful of games and from explanations. AlphaGo needed huge numbers of games, a perfectly clear score and a world with fixed rules. Real work rarely gives a clean win or loss at the end, and you cannot replay a client meeting thousands of times. That is why self-play shines in games and code, where results are easy to check.",
+   "why": "In March 2016 AlphaGo beat Lee Sedol 4-1 in Seoul, a match DeepMind says over 200 million people watched. In game two, move 37 had, by DeepMind's account, a 1 in 10,000 chance of being played, and it helped win the game. It showed that learning from outcomes can find ideas outside human data. The same idea, rewarding results, helps explain why coding agents improve fast: tests give a clear pass or fail.",
    "diagram": {
-    "alt": "A small Go board with a highlighted stone marking move 37, beside a loop: play itself, win or lose, update, back to play. Caption: Seoul, March 2016, AlphaGo won 4-1.",
-    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 220\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><line x1=\"10\" y1=\"30\" x2=\"10\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"10\" y1=\"30\" x2=\"130\" y2=\"30\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"34\" y1=\"30\" x2=\"34\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"10\" y1=\"54\" x2=\"130\" y2=\"54\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"58\" y1=\"30\" x2=\"58\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"10\" y1=\"78\" x2=\"130\" y2=\"78\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"82\" y1=\"30\" x2=\"82\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"10\" y1=\"102\" x2=\"130\" y2=\"102\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"106\" y1=\"30\" x2=\"106\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"10\" y1=\"126\" x2=\"130\" y2=\"126\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"130\" y1=\"30\" x2=\"130\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"10\" y1=\"150\" x2=\"130\" y2=\"150\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><circle cx=\"34\" cy=\"78\" r=\"9\" fill=\"#fff\"/><circle cx=\"82\" cy=\"102\" r=\"9\" fill=\"#fff\"/><circle cx=\"58\" cy=\"54\" r=\"9\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"106\" cy=\"126\" r=\"9\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"106\" cy=\"54\" r=\"12\" fill=\"#fff\" opacity=\"0.9\"/><circle cx=\"106\" cy=\"54\" r=\"17\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"10\" y=\"20\" font-size=\"14\">Move 37, game 2</text><text x=\"10\" y=\"175\" font-size=\"14\" opacity=\"0.85\">1 in 10,000 move</text><rect x=\"168\" y=\"20\" width=\"120\" height=\"34\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"228\" y=\"42\" font-size=\"14\" text-anchor=\"middle\">Play itself</text><rect x=\"168\" y=\"86\" width=\"120\" height=\"34\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"228\" y=\"108\" font-size=\"14\" text-anchor=\"middle\">Win or lose</text><rect x=\"168\" y=\"152\" width=\"120\" height=\"34\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"228\" y=\"174\" font-size=\"14\" text-anchor=\"middle\">Update</text><path d=\"M228 54 L228 84\" stroke=\"#fff\" stroke-width=\"3\"/><path d=\"M228 120 L228 150\" stroke=\"#fff\" stroke-width=\"3\"/><path d=\"M290 169 Q314 103 290 37\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\" opacity=\"0.7\"/><text x=\"10\" y=\"208\" font-size=\"14\">Seoul, March 2016: AlphaGo won 4-1</text></svg>"
+    "alt": "A simplified Go board with one ringed stone marked as move 37, which had a 1 in 10,000 chance. Beside it a loop: play itself, win or lose, update, and back to play. Caption: beat Lee Sedol 4-1, March 2016.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 290\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"160\" y=\"22\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">Learning by self-play</text><rect x=\"20\" y=\"40\" width=\"140\" height=\"140\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><line x1=\"40\" y1=\"40\" x2=\"40\" y2=\"180\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"20\" y1=\"60\" x2=\"160\" y2=\"60\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"60\" y1=\"40\" x2=\"60\" y2=\"180\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"20\" y1=\"80\" x2=\"160\" y2=\"80\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"80\" y1=\"40\" x2=\"80\" y2=\"180\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"20\" y1=\"100\" x2=\"160\" y2=\"100\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"100\" y1=\"40\" x2=\"100\" y2=\"180\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"20\" y1=\"120\" x2=\"160\" y2=\"120\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"120\" y1=\"40\" x2=\"120\" y2=\"180\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"20\" y1=\"140\" x2=\"160\" y2=\"140\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"140\" y1=\"40\" x2=\"140\" y2=\"180\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"20\" y1=\"160\" x2=\"160\" y2=\"160\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><circle cx=\"60\" cy=\"80\" r=\"8\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"80\" cy=\"100\" r=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"100\" cy=\"80\" r=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"60\" cy=\"120\" r=\"8\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"100\" cy=\"140\" r=\"8\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"120\" cy=\"100\" r=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"80\" cy=\"140\" r=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"140\" cy=\"60\" r=\"8\" fill=\"#fff\"/><circle cx=\"140\" cy=\"60\" r=\"15\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"10\" y=\"204\" font-size=\"14\">Move 37: 1 in 10,000</text><rect x=\"190\" y=\"50\" width=\"120\" height=\"36\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"250\" y=\"73\" font-size=\"14\" text-anchor=\"middle\">Play itself</text><rect x=\"190\" y=\"115\" width=\"120\" height=\"36\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"250\" y=\"138\" font-size=\"14\" text-anchor=\"middle\">Win or lose</text><rect x=\"190\" y=\"180\" width=\"120\" height=\"36\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"250\" y=\"203\" font-size=\"14\" text-anchor=\"middle\">Update</text><line x1=\"250\" y1=\"86\" x2=\"250\" y2=\"109\" stroke=\"#fff\" stroke-width=\"2\"/><polygon points=\"244,105 256,105 250,114\" fill=\"#fff\"/><line x1=\"250\" y1=\"151\" x2=\"250\" y2=\"174\" stroke=\"#fff\" stroke-width=\"2\"/><polygon points=\"244,170 256,170 250,179\" fill=\"#fff\"/><path d=\"M310 198 Q 318 198 318 120 Q 318 68 312 68\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.7\"/><polygon points=\"314,62 314,74 306,68\" fill=\"#fff\"/><text x=\"160\" y=\"248\" font-size=\"14\" text-anchor=\"middle\">Thousands of games against itself</text><text x=\"160\" y=\"276\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">Beat Lee Sedol 4-1, March 2016</text></svg>"
    }
   },
   {
    "n": 11,
    "tag": "Cyber",
    "title": "Risk as likelihood times impact",
-   "idea": "Score a risk by multiplying likelihood (1 to 5) by impact (1 to 5), then check the grid, because equal scores can hide very different risks.",
+   "idea": "Score a risk as likelihood (1 to 5) times impact (1 to 5) on a 5 by 5 grid, but know that equal scores can hide very different risks.",
    "steps": [
     "Rate how likely the event is, from 1 (rare) to 5 (almost certain).",
     "Rate how bad it would be, from 1 (minor) to 5 (severe).",
-    "Multiply: likelihood 4 x impact 2 = 8. Likelihood 1 x impact 5 = 5. Likelihood 5 x impact 1 = 5.",
-    "Plot each risk on a 5 by 5 grid (heat map). The top right corner is the danger zone.",
-    "Read the cell, not just the score: a rare disaster and a daily nuisance can both score 5."
+    "Multiply: likelihood 4 x impact 2 = 8; likelihood 1 x impact 5 = 5.",
+    "Plot each risk on the 5 by 5 grid; darker squares get attention first.",
+    "Then ask what the score hides: a rare disaster can score below a common nuisance."
    ],
-   "analogy": "It is like deciding whether to take an umbrella: you weigh the chance of rain against how much getting wet would ruin your day. A light shower that is almost certain and a storm that rarely comes might feel about equally worth planning for, but you would prepare for them in very different ways.",
-   "breaks": "The 1 to 5 numbers are labels, not real measurements, so multiplying them is a convention rather than true maths. A 4 is not twice as bad as a 2. People also rate the same risk differently, and a single cell hides how uncertain the guess is and how risks can combine into something worse.",
-   "why": "The US National Institute of Standards and Technology (NIST) guide SP 800-30 Revision 1, published in September 2012, has risk determined from likelihood and impact, using plain levels such as low, moderate and high or banded scores. Heat maps sit in almost every risk register. In a steering meeting, ask whether a 5 is a rare disaster or a frequent nuisance, because the plan differs.",
+   "analogy": "It is like a weather forecast that multiplies the chance of rain by how wet you would get. Light drizzle that is very likely and a rare cloudburst can come out with similar numbers, yet you would pack very differently for each.",
+   "breaks": "Weather has decades of data behind each number. Cyber risk scores are usually expert guesses on a short scale. The US National Institute of Standards and Technology (NIST) guide SP 800-30 Revision 1 (September 2012) warns that such scales have a small range, which makes ranking risks hard, and that different experts may reach very different results unless each level is clearly defined.",
+   "why": "Almost every risk register you will meet uses this grid, and NIST describes risk as typically a function of impact and likelihood. Use it to start a conversation, not to end one. When two risks score 8, ask which one could end the business. Rare, severe risks (likelihood 1, impact 5) often deserve more than their score of 5 suggests, such as a tested recovery plan.",
    "diagram": {
-    "alt": "A 5 by 5 heat map, likelihood across and impact up, getting brighter to the top right. Three dots: likelihood 4 impact 2 scores 8; likelihood 1 impact 5 scores 5; likelihood 5 impact 1 scores 5.",
-    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 260\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><rect x=\"70\" y=\"20\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.12\"/><rect x=\"70\" y=\"56\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.11\"/><rect x=\"70\" y=\"92\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.10\"/><rect x=\"70\" y=\"128\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.10\"/><rect x=\"70\" y=\"164\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.09\"/><rect x=\"106\" y=\"20\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.16\"/><rect x=\"106\" y=\"56\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.14\"/><rect x=\"106\" y=\"92\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.13\"/><rect x=\"106\" y=\"128\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.11\"/><rect x=\"106\" y=\"164\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.10\"/><rect x=\"142\" y=\"20\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.20\"/><rect x=\"142\" y=\"56\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.18\"/><rect x=\"142\" y=\"92\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.15\"/><rect x=\"142\" y=\"128\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.13\"/><rect x=\"142\" y=\"164\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.10\"/><rect x=\"178\" y=\"20\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.24\"/><rect x=\"178\" y=\"56\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.21\"/><rect x=\"178\" y=\"92\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.18\"/><rect x=\"178\" y=\"128\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.14\"/><rect x=\"178\" y=\"164\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.11\"/><rect x=\"214\" y=\"20\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.28\"/><rect x=\"214\" y=\"56\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.24\"/><rect x=\"214\" y=\"92\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.20\"/><rect x=\"214\" y=\"128\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.16\"/><rect x=\"214\" y=\"164\" width=\"34\" height=\"34\" fill=\"#fff\" opacity=\"0.12\"/><circle cx=\"195\" cy=\"145\" r=\"9\" fill=\"#fff\"/><text x=\"195\" y=\"150\" font-size=\"14\" text-anchor=\"middle\" fill=\"#333\">8</text><circle cx=\"87\" cy=\"37\" r=\"9\" fill=\"#fff\"/><text x=\"87\" y=\"42\" font-size=\"14\" text-anchor=\"middle\" fill=\"#333\">5</text><circle cx=\"231\" cy=\"181\" r=\"9\" fill=\"#fff\"/><text x=\"231\" y=\"186\" font-size=\"14\" text-anchor=\"middle\" fill=\"#333\">5</text><text x=\"62\" y=\"80\" font-size=\"14\" text-anchor=\"end\">Impact</text><text x=\"160\" y=\"218\" font-size=\"14\" text-anchor=\"middle\">Likelihood 1 to 5</text><text x=\"10\" y=\"242\" font-size=\"14\">Same score 5: rare disaster</text><text x=\"10\" y=\"258\" font-size=\"14\">vs frequent nuisance</text></svg>"
+    "alt": "A 5 by 5 grid, likelihood across and impact up, shading darker towards the top right. Risk A sits at 4 by 2 = 8, risk C at 2 by 4 = 8, and risk B at 1 by 5 = 5, showing equal scores can be different risks.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 332\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"8\" y=\"124\" font-size=\"14\">Impact</text><rect x=\"70\" y=\"180\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.07\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"70\" y=\"140\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.09\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"70\" y=\"100\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.12\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"70\" y=\"60\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.14\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"70\" y=\"20\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.16\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"110\" y=\"180\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.09\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"110\" y=\"140\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.14\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"110\" y=\"100\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.18\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"110\" y=\"60\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.23\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"110\" y=\"20\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.27\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"150\" y=\"180\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.12\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"150\" y=\"140\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.18\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"150\" y=\"100\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.25\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"150\" y=\"60\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.31\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"150\" y=\"20\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.38\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"190\" y=\"180\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.14\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"190\" y=\"140\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.23\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"190\" y=\"100\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.31\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"190\" y=\"60\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.4\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"190\" y=\"20\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.49\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"230\" y=\"180\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.16\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"230\" y=\"140\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.27\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"230\" y=\"100\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.38\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"230\" y=\"60\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.49\" stroke=\"#fff\" stroke-width=\"1\"/><rect x=\"230\" y=\"20\" width=\"40\" height=\"40\" fill=\"#fff\" fill-opacity=\"0.6\" stroke=\"#fff\" stroke-width=\"1\"/><text x=\"90\" y=\"238\" font-size=\"14\" text-anchor=\"middle\">1</text><text x=\"62\" y=\"205\" font-size=\"14\" text-anchor=\"end\">1</text><text x=\"130\" y=\"238\" font-size=\"14\" text-anchor=\"middle\">2</text><text x=\"62\" y=\"165\" font-size=\"14\" text-anchor=\"end\">2</text><text x=\"170\" y=\"238\" font-size=\"14\" text-anchor=\"middle\">3</text><text x=\"62\" y=\"125\" font-size=\"14\" text-anchor=\"end\">3</text><text x=\"210\" y=\"238\" font-size=\"14\" text-anchor=\"middle\">4</text><text x=\"62\" y=\"85\" font-size=\"14\" text-anchor=\"end\">4</text><text x=\"250\" y=\"238\" font-size=\"14\" text-anchor=\"middle\">5</text><text x=\"62\" y=\"45\" font-size=\"14\" text-anchor=\"end\">5</text><text x=\"170\" y=\"258\" font-size=\"14\" text-anchor=\"middle\">Likelihood</text><circle cx=\"210\" cy=\"160\" r=\"13\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"210\" y=\"165\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">A</text><circle cx=\"130\" cy=\"80\" r=\"13\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"130\" y=\"85\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">C</text><circle cx=\"90\" cy=\"40\" r=\"13\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"90\" y=\"45\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">B</text><text x=\"10\" y=\"282\" font-size=\"14\">A: 4 x 2 = 8, a common nuisance</text><text x=\"10\" y=\"302\" font-size=\"14\">C: 2 x 4 = 8, the same score</text><text x=\"10\" y=\"322\" font-size=\"14\">B: 1 x 5 = 5, a rare disaster</text></svg>"
    }
   },
   {
    "n": 12,
    "tag": "Tech",
    "title": "Bytes, hexadecimal and sizes",
-   "idea": "A byte is 8 bits. Split it into two 4-bit halves and each half becomes one hex digit, so 11111111 is FF, which is 255.",
+   "idea": "A byte is 8 bits. Split it into two 4-bit halves and each half is one hex digit, so 11111111 = FF = 255, and #FF0000 is pure red.",
    "steps": [
-    "A bit is 0 or 1. A byte is 8 bits, so it holds 256 values, from 0 to 255.",
-    "Hexadecimal (base 16) uses 0 to 9, then A to F, where A is 10 and F is 15.",
-    "Split a byte into two 4-bit halves (nibbles). Each half is one hex digit: 1111 is F.",
-    "So 11111111 is FF, which is 15 x 16 + 15 = 255.",
-    "Colour #FF0000 means red 255, green 0, blue 0: pure red in just 6 hex digits.",
-    "Sizes: 1 kilobit is 1,000 bits, but 1 kibibit is 1,024. A mebi is 1,048,576."
+    "A byte is 8 bits, so it can hold 256 values: 0 to 255.",
+    "Split the byte into two 4-bit halves (nibbles); each half holds 0 to 15.",
+    "Hexadecimal (base 16) counts 0 to 9, then A to F, so one digit covers one nibble: 1111 = F.",
+    "So 11111111 = FF = 15 x 16 + 15 = 255. The 0x prefix marks hex, as in 0xFF.",
+    "A web colour #RRGGBB is three bytes: #FF0000 is red full on, green and blue off.",
+    "Sizes: a megabyte (MB) is 1,000,000 bytes; a mebibyte (MiB) is 1,048,576."
    ],
-   "analogy": "Hex is like writing a long card number in groups of four so your eye can follow it. The number does not change; it is just easier to read. Each group of four bits squeezes neatly into a single symbol.",
-   "breaks": "Grouping digits on a card is only for looks, while hex is a real number system with its own maths. And hex never changes the data itself: the computer still stores 1s and 0s. File sizes add a twist the analogy misses: different software may count a 'megabyte' as 1,000,000 bytes or as 1,048,576, so the same file can show two sizes.",
-   "why": "Hex turns up in colour codes, error codes, security fingerprints (hashes) and network card addresses. Knowing that FF means 255 helps you read logs and specs. The binary prefixes (kibi, mebi) were approved as an international standard in December 1998, per NIST, which helps when a storage or cloud bill does not match what a laptop shows.",
+   "analogy": "Think of a byte as an eight-digit combination lock where each wheel shows only 0 or 1. Hex is shorthand that reads the lock in two halves, giving each half a single symbol from 0 to F, so eight wheels become two characters.",
+   "breaks": "A lock combination means nothing by itself, while a byte's meaning depends on how a program reads it: the same FF could be the number 255, part of a colour or part of a letter. Hex is only a way of writing bits for humans; the computer still stores 1s and 0s.",
+   "why": "Hex turns up in colour codes, memory addresses, security hashes and error codes. Harvard's CS50 notes that hex is used because it shows information more compactly. File sizes matter when you set upload limits or budget cloud storage: the International Electrotechnical Commission set binary prefixes such as mebi in 1998 because 'megabyte' was being used for both 1,000,000 and 1,048,576 bytes.",
    "diagram": {
-    "alt": "Eight boxes each holding 1, split into two groups of four. Each group points to the letter F. Below: FF equals 15 times 16 plus 15 equals 255, and a colour square labelled #FF0000 is red 255, green 0, blue 0.",
-    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 220\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><rect x=\"14\" y=\"20\" width=\"26\" height=\"34\" rx=\"4\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"27\" y=\"43\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"44\" y=\"20\" width=\"26\" height=\"34\" rx=\"4\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"57\" y=\"43\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"74\" y=\"20\" width=\"26\" height=\"34\" rx=\"4\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"87\" y=\"43\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"104\" y=\"20\" width=\"26\" height=\"34\" rx=\"4\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"117\" y=\"43\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"148\" y=\"20\" width=\"26\" height=\"34\" rx=\"4\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"161\" y=\"43\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"178\" y=\"20\" width=\"26\" height=\"34\" rx=\"4\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"191\" y=\"43\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"208\" y=\"20\" width=\"26\" height=\"34\" rx=\"4\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"221\" y=\"43\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"238\" y=\"20\" width=\"26\" height=\"34\" rx=\"4\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"251\" y=\"43\" font-size=\"16\" text-anchor=\"middle\">1</text><path d=\"M74 58 L74 86\" stroke=\"#fff\" stroke-width=\"3\"/><path d=\"M208 58 L208 86\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"74\" y=\"112\" font-size=\"24\" text-anchor=\"middle\">F</text><text x=\"208\" y=\"112\" font-size=\"24\" text-anchor=\"middle\">F</text><text x=\"160\" y=\"140\" font-size=\"14\" text-anchor=\"middle\">1111 = F = 15 in each half</text><text x=\"160\" y=\"164\" font-size=\"16\" text-anchor=\"middle\">FF = 15 x 16 + 15 = 255</text><rect x=\"20\" y=\"180\" width=\"30\" height=\"30\" fill=\"#fff\" opacity=\"0.9\"/><text x=\"60\" y=\"201\" font-size=\"14\">#FF0000 = red 255, green 0, blue 0</text></svg>"
+    "alt": "Eight boxes each holding 1, split into two groups of four. Each group becomes the hex digit F, and FF = 15 x 16 + 15 = 255. Below, a swatch labelled #FF0000: red FF, green 00, blue 00.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 250\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"160\" y=\"24\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">One byte = 8 bits</text><rect x=\"20\" y=\"40\" width=\"28\" height=\"34\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"34\" y=\"63\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"50\" y=\"40\" width=\"28\" height=\"34\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"64\" y=\"63\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"80\" y=\"40\" width=\"28\" height=\"34\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"94\" y=\"63\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"110\" y=\"40\" width=\"28\" height=\"34\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"124\" y=\"63\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"170\" y=\"40\" width=\"28\" height=\"34\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"184\" y=\"63\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"200\" y=\"40\" width=\"28\" height=\"34\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"214\" y=\"63\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"230\" y=\"40\" width=\"28\" height=\"34\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"244\" y=\"63\" font-size=\"16\" text-anchor=\"middle\">1</text><rect x=\"260\" y=\"40\" width=\"28\" height=\"34\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"274\" y=\"63\" font-size=\"16\" text-anchor=\"middle\">1</text><line x1=\"78\" y1=\"80\" x2=\"78\" y2=\"100\" stroke=\"#fff\" stroke-width=\"3\"/><line x1=\"228\" y1=\"80\" x2=\"228\" y2=\"100\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"78\" y=\"128\" font-size=\"28\" text-anchor=\"middle\" font-weight=\"bold\">F</text><text x=\"228\" y=\"128\" font-size=\"28\" text-anchor=\"middle\" font-weight=\"bold\">F</text><text x=\"153\" y=\"96\" font-size=\"14\" text-anchor=\"middle\">4 + 4 bits</text><text x=\"160\" y=\"160\" font-size=\"14\" text-anchor=\"middle\">FF = 15 x 16 + 15 = 255</text><rect x=\"20\" y=\"182\" width=\"60\" height=\"50\" rx=\"6\" fill=\"#fff\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"95\" y=\"202\" font-size=\"16\" font-weight=\"bold\">#FF0000</text><text x=\"95\" y=\"226\" font-size=\"14\">red FF, green 00, blue 00</text></svg>"
    }
   },
   {
    "n": 13,
    "tag": "AI",
    "title": "A model is a function with dials",
-   "idea": "A model is a formula with adjustable numbers called parameters, and training means turning those dials until its outputs match the data.",
+   "idea": "A model is a function, such as price = w x size + b, whose adjustable numbers (parameters) are turned until its output fits real examples.",
    "steps": [
-    "Pick a formula shape. For house prices: price = w x size + b.",
-    "w (a weight) and b (a bias) are the dials. Together they are the model's parameters.",
-    "With toy values w = 2 and b = 1, a size of 3 gives 2 x 3 + 1 = 7.",
-    "Measure the error: the gaps between predicted and real prices, squared and added up (least squares).",
-    "Nudge each dial a little in the direction that shrinks the error (gradient descent), then repeat.",
-    "Stanford's CS229 notes fit 47 Portland houses this way and get 71.27 and 0.1345 as the dials."
+    "Choose the rule's shape: y = w x + b, a straight line.",
+    "x is the input (house size) and y is the output (predicted price).",
+    "w (a weight) sets the slope; b (a bias) sets where the line starts.",
+    "With toy dials w = 2 and b = 1, a size of 3 gives 2 x 3 + 1 = 7.",
+    "Measure the error against real examples (a cost function, such as least squares).",
+    "Turn the dials a little to shrink the error, and repeat (gradient descent)."
    ],
-   "analogy": "It is like tuning an old radio with two knobs. One knob shifts the frequency, the other fine-tunes it. You turn them a little at a time, listening, until the music is clear. The radio's circuit never changes; only the knob settings do.",
-   "breaks": "A radio has two knobs, while modern AI models have billions of parameters, and no person turns them: a computer adjusts them all at once using maths. A clear signal on a radio also means you found the real station, but a model that fits past data well can still fail on new cases it has never seen.",
-   "why": "When a vendor quotes a model's parameter count, it is counting dials. 'Fine-tuning' means nudging those dials further with your own data, and biased data pushes the dials in a biased direction. Stanford's CS229 notes start exactly here, with 47 houses from Portland, Oregon, living area in and price out.",
+   "analogy": "It is like tuning an old radio with two knobs. One knob moves the needle quickly, the other shifts the starting point. You listen, turn a little, listen again, until the station is clear. The station is the pattern in the data.",
+   "breaks": "A radio has one right station and you can hear when you have found it. A model only ever gets close on the examples it saw, and it can fit them well yet still be wrong on new cases. Large models also have vastly more dials than two, and nobody turns them by hand.",
+   "why": "Stanford's CS229 notes start with exactly this: 47 houses in Portland, Oregon, price predicted from living area. Gradient descent tuned the two parameters to 71.27 and 0.1345 (price in $1000s). The language models you use are the same idea at enormous scale: a fixed shape, and parameters tuned by data. When someone says a model 'learned', they mean its dials moved.",
    "diagram": {
-    "alt": "A box reading y = w x + b, with size going in and price coming out. Two dials below set w = 2 and b = 1. Underneath, five dots on a chart with a solid line through them and a faint dashed line, showing turning the dials moves the line.",
-    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 240\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><rect x=\"90\" y=\"20\" width=\"140\" height=\"44\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"160\" y=\"48\" font-size=\"16\" text-anchor=\"middle\">y = w x + b</text><text x=\"10\" y=\"47\" font-size=\"14\">size in</text><path d=\"M66 42 L88 42\" stroke=\"#fff\" stroke-width=\"2\"/><path d=\"M232 42 L250 42\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"254\" y=\"47\" font-size=\"14\">price</text><circle cx=\"125\" cy=\"92\" r=\"16\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><path d=\"M125 92 L135 80\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"125\" y=\"128\" font-size=\"14\" text-anchor=\"middle\">w = 2</text><circle cx=\"195\" cy=\"92\" r=\"16\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><path d=\"M195 92 L185 80\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"195\" y=\"128\" font-size=\"14\" text-anchor=\"middle\">b = 1</text><line x1=\"40\" y1=\"225\" x2=\"290\" y2=\"225\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"40\" y1=\"140\" x2=\"40\" y2=\"225\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><circle cx=\"70\" cy=\"212\" r=\"5\" fill=\"#fff\"/><circle cx=\"110\" cy=\"196\" r=\"5\" fill=\"#fff\"/><circle cx=\"150\" cy=\"190\" r=\"5\" fill=\"#fff\"/><circle cx=\"200\" cy=\"168\" r=\"5\" fill=\"#fff\"/><circle cx=\"250\" cy=\"160\" r=\"5\" fill=\"#fff\"/><line x1=\"50\" y1=\"220\" x2=\"285\" y2=\"150\" stroke=\"#fff\" stroke-width=\"3\"/><line x1=\"50\" y1=\"205\" x2=\"285\" y2=\"175\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.4\" stroke-dasharray=\"5 4\"/><text x=\"50\" y=\"150\" font-size=\"14\">Turn dials, line moves</text></svg>"
+    "alt": "A box reading y = w x + b with two dials, w = 2 and b = 1. Below, a chart of house size against price with five dots and a straight line running through them.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 310\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><rect x=\"90\" y=\"10\" width=\"140\" height=\"40\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"160\" y=\"36\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">y = w x + b</text><circle cx=\"55\" cy=\"80\" r=\"22\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><line x1=\"55\" y1=\"80\" x2=\"70\" y2=\"66\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"55\" y=\"124\" font-size=\"14\" text-anchor=\"middle\">w = 2</text><circle cx=\"265\" cy=\"80\" r=\"22\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><line x1=\"265\" y1=\"80\" x2=\"280\" y2=\"70\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"265\" y=\"124\" font-size=\"14\" text-anchor=\"middle\">b = 1</text><line x1=\"77\" y1=\"70\" x2=\"90\" y2=\"40\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"243\" y1=\"70\" x2=\"230\" y2=\"40\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"40\" y1=\"280\" x2=\"310\" y2=\"280\" stroke=\"#fff\" stroke-width=\"2\"/><line x1=\"40\" y1=\"280\" x2=\"40\" y2=\"150\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"90\" cy=\"245\" r=\"6\" fill=\"#fff\"/><circle cx=\"140\" cy=\"234\" r=\"6\" fill=\"#fff\"/><circle cx=\"190\" cy=\"206\" r=\"6\" fill=\"#fff\"/><circle cx=\"240\" cy=\"193\" r=\"6\" fill=\"#fff\"/><circle cx=\"290\" cy=\"168\" r=\"6\" fill=\"#fff\"/><line x1=\"65\" y1=\"260\" x2=\"310\" y2=\"162\" stroke=\"#fff\" stroke-width=\"3\" opacity=\"0.8\"/><text x=\"46\" y=\"160\" font-size=\"14\">price out</text><text x=\"300\" y=\"300\" font-size=\"14\" text-anchor=\"end\">house size in</text></svg>"
    }
   },
   {
    "n": 14,
    "tag": "Cyber",
    "title": "Quantitative risk: annualised loss expectancy",
-   "idea": "Annualised loss expectancy is one incident's cost times how often it happens each year; compare it with what a control costs each year.",
+   "idea": "Annualised loss expectancy (ALE) is the cost of one incident times how often it happens a year; compare it with what a control costs a year.",
    "steps": [
-    "Single loss expectancy (SLE) = asset value x exposure factor, the share of value lost in one incident.",
-    "Annual rate of occurrence (ARO): how many times a year you expect it. 0.2 means once in 5 years.",
-    "Annualised loss expectancy (ALE) = ARO x SLE.",
-    "Example: SLE £400,000 and ARO 0.2 give an ALE of £80,000 a year.",
-    "A £50,000-a-year control pays off only if it cuts the ALE by more than £50,000."
+    "Asset value (AV): what the thing at risk is worth.",
+    "Exposure factor (EF): the share of that value one incident destroys.",
+    "Single loss expectancy: SLE = AV x EF, the cost of one incident.",
+    "Annual rate of occurrence (ARO): incidents a year; once in five years = 0.2.",
+    "ALE = SLE x ARO: £400,000 x 0.2 = £80,000 a year.",
+    "Compare with the control: £50,000 a year is worth it if it removes enough loss."
    ],
-   "analogy": "It works like an insurer setting a premium. If a £400,000 loss is expected once every five years, the average cost per year is £80,000. Paying £50,000 a year to prevent most of that looks like a good deal.",
-   "breaks": "An insurer spreads risk across thousands of customers, so averages hold. One organisation does not: it either has a £400,000 year or a £0 year. For rare cyber events, the yearly rate is often a guess, and the formula leaves out harm to reputation and trust that is hard to price.",
-   "why": "ALE turns security into the language finance teams use, so you can defend or challenge a control's cost. Risk analysis sits in the first domain of the Certified Information Systems Security Professional (CISSP) exam outline from ISC2, effective 15 April 2024. A common textbook example: a $100,000 asset with 25% exposure gives an SLE of $25,000.",
+   "analogy": "It is like deciding whether to insure a phone. If a broken screen costs £200 and you break one about every two years, you expect to lose £100 a year. A cover costing £60 a year looks good; one costing £150 does not.",
+   "breaks": "With phones you have years of your own history. With cyber events, the rate is often a guess and one bad year can be far worse than the average. ALE also treats a likely small loss and a rare huge loss the same if they multiply to the same number, which is the grid's blind spot again.",
+   "why": "Boards and finance teams think in money, not colours. ALE lets you say 'this control costs £50,000 and should save about £80,000 a year'. Be honest: compare the control's cost with how much it reduces the ALE, not the whole ALE. A worked example from Destination Certification: a $2,000 camera system, 10% damage per voltage spike, 3 spikes a year, gives an ALE of $600.",
    "diagram": {
-    "alt": "Two bars compare a control costing £50,000 a year with an expected loss (ALE) of £80,000 a year, from 0.2 x £400,000. The gap is £30,000 a year.",
-    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 220\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"10\" y=\"24\" font-size=\"14\">ALE = ARO x SLE</text><text x=\"10\" y=\"44\" font-size=\"14\">0.2 x £400,000 = £80,000 a year</text><rect x=\"20\" y=\"80\" width=\"175\" height=\"38\" fill=\"#fff\" opacity=\"0.5\"/><text x=\"203\" y=\"104\" font-size=\"14\">£50,000</text><text x=\"20\" y=\"74\" font-size=\"14\">Control cost a year</text><rect x=\"20\" y=\"152\" width=\"280\" height=\"38\" fill=\"#fff\" opacity=\"0.9\"/><text x=\"290\" y=\"176\" font-size=\"14\" text-anchor=\"end\" fill=\"#333\">£80,000</text><text x=\"20\" y=\"146\" font-size=\"14\">Expected loss a year (ALE)</text><line x1=\"20\" y1=\"70\" x2=\"20\" y2=\"200\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"20\" y=\"214\" font-size=\"14\" opacity=\"0.85\">Gap of £30,000 a year</text></svg>"
+    "alt": "Two bars: a control costing £50,000 a year, and a longer bar for ALE of 0.2 x £400,000 = £80,000. If the control stops all of it, you are £30,000 ahead; if it stops half, £10,000 behind.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 220\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"20\" y=\"40\" font-size=\"14\">Control: £50,000 a year</text><rect x=\"20\" y=\"48\" width=\"125\" height=\"34\" fill=\"#fff\" fill-opacity=\"0.5\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"20\" y=\"112\" font-size=\"14\" font-weight=\"bold\">ALE: 0.2 x £400,000 = £80,000</text><rect x=\"20\" y=\"120\" width=\"200\" height=\"34\" fill=\"#fff\" fill-opacity=\"0.9\" stroke=\"#fff\" stroke-width=\"2\"/><line x1=\"145\" y1=\"44\" x2=\"145\" y2=\"160\" stroke=\"#fff\" stroke-width=\"2\" stroke-dasharray=\"4 4\"/><text x=\"20\" y=\"186\" font-size=\"14\">If it stops it all: £30,000 ahead</text><text x=\"20\" y=\"208\" font-size=\"14\" opacity=\"0.8\">If it stops half: £10,000 behind</text></svg>"
    }
   }
  ],
  "fact": {
-  "text": "The Apollo Guidance Computer had 2,048 words of erasable memory and 36,864 words of read-only core rope memory, made by weaving wires through and around magnetic cores. Each word was 16 bits.",
+  "text": "The Apollo Guidance Computer had 2,048 words of erasable core memory and 36,864 words of fixed core rope memory, its software woven into wire threaded through tiny magnetic cores.",
   "source": {
-   "name": "Wikipedia: Apollo Guidance Computer",
-   "url": "https://en.wikipedia.org/wiki/Apollo_Guidance_Computer"
+   "name": "Ken Shirriff's blog, Inside the Apollo Guidance Computer's core memory",
+   "url": "https://www.righto.com/2019/01/inside-apollo-guidance-computers-core.html"
+  },
+  "photo": {
+   "page": "https://commons.wikimedia.org/wiki/File:Agc_rope.jpg",
+   "alt": "A section of Apollo Guidance Computer core rope memory, wires woven through magnetic cores."
   }
  },
  "quiz": [
@@ -302,71 +243,71 @@
    "kind": "lesson",
    "tag": "Tech",
    "n": 10,
-   "q": "In AlphaGo's self-play, what made it change how it chose moves?",
+   "q": "When AlphaGo played against itself, what feedback did it get?",
    "options": [
-    "Whether each game ended in a win or a loss",
-    "A human coach marking each move right or wrong",
-    "Copying the moves Lee Sedol played in the match",
-    "Picking moves at random until one looked familiar"
+    "A human coach marking each move",
+    "Only whether each game ended in a win or a loss",
+    "A list of the strongest opening moves from Go books",
+    "The number of stones captured on every turn"
    ],
-   "answer": 0,
-   "why": "Reinforcement learning runs on a reward signal. Self-play gave AlphaGo a clear win or loss after each game, and it nudged its choices towards what won."
+   "answer": 1,
+   "why": "Self-play gives one clear signal at the end: win or lose. Reinforcement learning shifts the networks towards moves that led to wins, which is how odd but strong moves like 37 appear."
   },
   {
    "kind": "lesson",
    "tag": "Cyber",
    "n": 11,
-   "q": "Risk A is likelihood 5, impact 1. Risk B is likelihood 1, impact 5. Both score 5. What does the score hide?",
+   "q": "Risk A is likelihood 4, impact 2. Risk C is likelihood 2, impact 4. What does the 5 by 5 grid hide?",
    "options": [
-    "Nothing: equal scores mean equal risks",
-    "B is rare but severe, so it needs a different plan",
-    "A is always worse because it happens more often",
-    "The scores are wrong and should be added instead"
+    "C scores 16 because impact counts double on the grid",
+    "Both score 8, but one is frequent and minor, one rarer and worse",
+    "Likelihood always matters more than impact, so A wins",
+    "Equal scores mean the two risks need exactly the same response plan"
    ],
    "answer": 1,
-   "why": "Multiplying squeezes two questions into one number. A frequent nuisance and a rare disaster can share a score but call for very different controls."
+   "why": "4 x 2 and 2 x 4 both make 8, so the grid ranks them equally. But a frequent nuisance and a rarer, more damaging event usually need different responses."
   },
   {
    "kind": "lesson",
    "tag": "Tech",
    "n": 12,
-   "q": "What is the byte 11110000 written in hexadecimal?",
+   "q": "In the web colour code #00FF00, what does the FF tell the screen?",
    "options": [
-    "0F",
-    "FF",
-    "F0",
-    "15"
+    "Turn red fully on and leave the others off",
+    "Turn blue to half strength",
+    "Turn green fully on, 255 out of 255",
+    "Make the colour 255% brighter"
    ],
    "answer": 2,
-   "why": "Split it into halves: 1111 is F and 0000 is 0, so it is F0. That is 15 x 16 + 0 = 240."
+   "why": "#RRGGBB is three bytes. The middle pair is green, and FF is 15 x 16 + 15 = 255, the most one byte holds. So #00FF00 is pure green."
   },
   {
    "kind": "lesson",
    "tag": "AI",
    "n": 13,
-   "q": "In price = w x size + b, what does training change?",
+   "q": "In y = w x + b, starting from w = 2 and b = 1, what does training change?",
    "options": [
-    "The house sizes in the data",
-    "The values of w and b",
-    "The real prices people paid",
-    "The shape of the formula itself"
+    "The input x, until it matches the price",
+    "The formula's shape, from a line to a curve",
+    "Nothing at all, because a programmer sets the dials by hand",
+    "The dials w and b, until the line fits the examples"
    ],
-   "answer": 1,
-   "why": "Training adjusts the parameters, the dials w and b, to shrink the error. The data stays fixed, and the formula's shape is chosen before training starts."
+   "answer": 3,
+   "why": "x is the data you feed in. Training keeps the shape and turns the parameters w and b to shrink the error, for example by gradient descent."
   },
   {
    "kind": "lesson",
    "tag": "Cyber",
    "n": 14,
-   "q": "An incident would cost £400,000 and is expected once every 5 years. What is the annualised loss expectancy?",
+   "q": "One breach would cost £400,000 and is expected once every five years. What is the annualised loss expectancy?",
    "options": [
-    "£400,000",
-    "£2,000,000",
-    "£80,000",
-    "£20,000"
+    "£80,000 a year",
+    "£400,000 a year",
+    "£50,000 a year",
+    "£2,000,000 a year"
    ],
-   "answer": 2,
-   "why": "Once every 5 years is an annual rate of 0.2. ALE = 0.2 x £400,000 = £80,000 a year, which you then compare with a control's yearly cost."
+   "answer": 0,
+   "why": "Once in five years is a yearly rate of 0.2. ALE = £400,000 x 0.2 = £80,000 a year, which you then compare with what a control costs and saves."
   },
   {
    "kind": "review",
@@ -375,13 +316,13 @@
    "title": "Counting in binary",
    "q": "What is the binary number 1011 in decimal?",
    "options": [
+    "1,011",
     "13",
-    "9",
-    "1011",
-    "11"
+    "11",
+    "4"
    ],
-   "answer": 3,
-   "why": "Place values from the right are 1, 2, 4 and 8. 1011 has 8 + 0 + 2 + 1, which makes 11."
+   "answer": 2,
+   "why": "Read the columns from the right as 1, 2, 4 and 8. 1011 has an 8, no 4, a 2 and a 1: 8 + 2 + 1 = 11."
   },
   {
    "kind": "review",
@@ -392,168 +333,188 @@
    "options": [
     "Confidentiality",
     "Integrity",
-    "Availability",
-    "Authentication"
+    "Authenticity",
+    "Availability"
    ],
-   "answer": 2,
-   "why": "Availability means people can reach what they need when they need it. Locking or wiping systems so staff cannot work breaks it, which is why backups matter."
+   "answer": 3,
+   "why": "Staff cannot reach what they need, so availability broke. Gangs that also steal files hit confidentiality too, but locking people out is an attack on availability."
   }
  ],
  "terms": [
   {
    "term": "Reinforcement learning",
-   "plain": "Learning by trial and reward: actions that lead to a win are made more likely, losses less likely."
+   "plain": "Learning by trying things and being rewarded for good outcomes, such as winning a game."
   },
   {
    "term": "Self-play",
-   "plain": "An AI improving by playing games against copies of itself."
+   "plain": "A program improving by playing against copies of itself."
   },
   {
-   "term": "Heat map (risk)",
-   "plain": "A grid of likelihood against impact, coloured so the worst risks stand out."
+   "term": "Risk matrix",
+   "plain": "A 5 by 5 grid that scores a risk as likelihood times impact."
   },
   {
    "term": "Hexadecimal",
-   "plain": "Counting in base 16, using 0 to 9 then A to F. Two hex digits describe one byte."
+   "plain": "Base 16 counting with 0 to 9 and A to F. Two hex digits describe one byte."
   },
   {
    "term": "Parameter",
-   "plain": "An adjustable number inside a model, like a dial, set during training."
+   "plain": "An adjustable number inside a model, tuned by data. Also called a weight."
   },
   {
    "term": "Annualised loss expectancy",
-   "plain": "Expected loss per year from a risk: cost of one incident times how often it happens a year."
+   "plain": "Expected yearly cost of a risk: the cost of one incident times how often it happens a year."
   },
   {
-   "term": "Dark pattern",
-   "plain": "A screen design that tricks people, such as a fake 'only 2 left' or a hidden cancel button."
+   "term": "AI agent",
+   "plain": "An AI system that runs tools and takes steps on its own towards a goal."
   },
   {
-   "term": "Remote monitoring and management",
-   "plain": "Software IT providers use to run many clients' computers from one console."
+   "term": "Privilege escalation",
+   "plain": "Turning limited access on a computer into higher, often full, control."
   }
  ],
  "build": {
-  "title": "A one-page risk cost calculator",
-  "idea": "A simple web page where you type an asset's value, the share lost per incident and how often it happens a year. It shows SLE and ALE, and a bar comparing ALE with a control's cost.",
-  "first": "Ask Claude: build a single HTML page that works out ALE = ARO x SLE from three inputs, plus a control cost box, and draws two bars to compare them."
+  "title": "A risk scorer that shows its blind spots",
+  "idea": "A one-page web tool where you enter a risk's likelihood, impact, single loss and yearly rate. It shows the 5 by 5 grid score and the yearly money loss side by side, and flags rare, severe risks the grid underrates.",
+  "first": "Ask Claude to build one HTML page with four number boxes that calculates likelihood times impact and single loss times yearly rate, then test it with the 4 x 2 and 1 x 5 examples."
  },
- "builds": [
+ "chatter": [
   {
-   "what": "A beep finder that uses several devices to locate a hidden alarm",
-   "who": "@simonw",
-   "label": "BEEP HUNT",
-   "steps": [
-    "Each device listens in its web browser and keeps the last 60 seconds of sound (WebAudio).",
-    "A detector spots the beep with a sound filter (FFT and high-pass filter) and reports it.",
-    "The server has the nearest device chirp, gathers clips from all, and works out the spot (triangulation).",
-    "Claude Code pushed new code to the listeners while they ran, so no device needed touching."
-   ],
-   "tools": [
-    "Claude Code",
-    "Python",
-    "WebAudio",
-    "WebSockets"
-   ],
-   "proof": "Code published",
-   "proof_note": "Opened the public code: 11 commits, Apache-2.0 licence, README partly written by Claude. The write-up says it found the beep within about 40 cm.",
-   "level": "A weekend",
-   "level_note": "Free software, but you need several phones, tablets or laptops to act as listeners.",
-   "first_step": "Ask Claude Code to write a problem.md that describes your problem before any code, and to research how others have solved it.",
-   "links": {
-    "post": "https://simonwillison.net/2026/Nov/9/mysterious-beeps/",
-    "code": "https://github.com/simonw/beep-locator"
+   "via": "X",
+   "group": "Company",
+   "handle": "@nvidia",
+   "tag": "Tech",
+   "headline": "Nvidia's open car AI decides in under 0.2 seconds, it says",
+   "summary": "Nvidia released Alpamayo 2 Edge, an open model that plans a car's path on board and can explain its choices. People are weighing whether a small model can be safe enough.",
+   "insight": "Nvidia says the 2 billion parameter model goes from camera pixels to a planned path in 160 to 190 milliseconds on its DRIVE AGX Thor computer, small enough to run inside the car.",
+   "dissent": "All results come from Nvidia's own simulator, and one write-up quoted 40 times fewer errors where Nvidia's blog says about 60 times. Real-road safety is unproven.",
+   "trust": "Plausible",
+   "trustNote": "Opened Nvidia's developer blog (10 Nov): 2B parameters, 160 to 190 ms, about 60 times the distance between at-fault incidents in its own simulator. No independent test found.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "10 Nov",
+    "url": "https://x.com/nvidia/status/2120186778384499073"
    },
-   "source": {
-    "name": "simonw/beep-locator on GitHub",
-    "date": "9 Nov",
-    "url": "https://github.com/simonw/beep-locator"
-   },
-   "diagram": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 240\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><rect x=\"135\" y=\"95\" width=\"50\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-dasharray=\"4 3\"/><text x=\"160\" y=\"155\" font-size=\"14\" text-anchor=\"middle\">beep</text><circle cx=\"160\" cy=\"115\" r=\"6\" fill=\"#fff\"/><rect x=\"24\" y=\"28\" width=\"32\" height=\"24\" rx=\"4\" fill=\"#fff\" opacity=\"0.85\"/><line x1=\"40\" y1=\"40\" x2=\"160\" y2=\"115\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.6\"/><text x=\"40\" y=\"22\" font-size=\"14\" text-anchor=\"middle\">iPad</text><rect x=\"264\" y=\"28\" width=\"32\" height=\"24\" rx=\"4\" fill=\"#fff\" opacity=\"0.85\"/><line x1=\"280\" y1=\"40\" x2=\"160\" y2=\"115\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.6\"/><text x=\"280\" y=\"22\" font-size=\"14\" text-anchor=\"middle\">phone</text><rect x=\"24\" y=\"188\" width=\"32\" height=\"24\" rx=\"4\" fill=\"#fff\" opacity=\"0.85\"/><line x1=\"40\" y1=\"200\" x2=\"160\" y2=\"115\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.6\"/><text x=\"40\" y=\"230\" font-size=\"14\" text-anchor=\"middle\">laptop</text><rect x=\"264\" y=\"188\" width=\"32\" height=\"24\" rx=\"4\" fill=\"#fff\" opacity=\"0.85\"/><line x1=\"280\" y1=\"200\" x2=\"160\" y2=\"115\" stroke=\"#fff\" stroke-width=\"2\" opacity=\"0.6\"/><text x=\"280\" y=\"230\" font-size=\"14\" text-anchor=\"middle\">iPad</text><text x=\"160\" y=\"20\" font-size=\"14\" text-anchor=\"middle\">Each hears it at a</text><text x=\"160\" y=\"38\" font-size=\"14\" text-anchor=\"middle\">slightly different time</text><text x=\"160\" y=\"185\" font-size=\"14\" text-anchor=\"middle\">Server triangulates</text></svg>"
+   "original": {
+    "name": "NVIDIA Technical Blog",
+    "url": "https://developer.nvidia.com/blog/running-av-reasoning-models-within-onboard-compute-and-latency-limits/"
+   }
   },
   {
-   "what": "A smart home run by Claude Code living inside the hub",
-   "who": "@marcelo_sqe",
-   "label": "SMART HOME",
+   "via": "X",
+   "group": "Independent",
+   "handle": "@emollick",
+   "tag": "AI",
+   "headline": "Coding is changing faster than any profession before it",
+   "summary": "A business school professor argues coding is the exception to slow AI adoption: the profession is being transformed less than a year after working coding agents arrived.",
+   "insight": "Coding has clear checks, such as tests that pass or fail, which makes agents easier to trust and adopt than in fields where good work is harder to judge.",
+   "dissent": "It is an opinion with no data in the post. Fast tool adoption is not the same as a transformed profession, and other fields may simply lack measurable checks.",
+   "trust": "Unverified",
+   "trustNote": "A single opinion post with no source to open. Read it as one informed view, not a finding.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "11 Nov",
+    "url": "https://x.com/emollick/status/2120641914206892424"
+   }
+  }
+ ],
+ "builds": [
+  {
+   "what": "A bridge that lets Claude Code ask Antigravity agents for reviews",
+   "who": "@kulaone",
+   "label": "CODE REVIEW",
    "steps": [
-    "Claude Code runs as an add-on inside a Home Assistant Green box and edits its settings files.",
-    "The settings live in git (version control), so every change can be reviewed and undone.",
-    "A CLAUDE.md file of house rules, plus notes and memory files, guides each session.",
-    "A Python script builds a 10-tab dashboard and pushes it over a live connection (websocket)."
+    "You ask Claude Code for a review; it writes the code and runs the tests first.",
+    "It starts a reviewer agent in Google Antigravity through a small server (an MCP server).",
+    "The reviewer reads the project, runs tests and returns a structured list of findings.",
+    "Claude fixes what it agrees with, disputes the rest, and they repeat until they agree."
    ],
    "tools": [
     "Claude Code",
-    "Home Assistant",
-    "Python",
-    "Gemini"
+    "Google Antigravity",
+    "MCP",
+    "Python"
    ],
-   "proof": "Claim only",
-   "proof_note": "The write-up lists 580 commits, 129 automations and 147 devices. The public code opened is a side integration and does not show the AI work.",
-   "level": "A serious project",
-   "level_note": "Built up since June 2026 on a home hub running 147 devices.",
-   "first_step": "Put your Home Assistant config folder under git before letting any AI tool edit it, so you can undo mistakes.",
+   "proof": "Code published",
+   "proof_note": "Opened the public GitHub repository: MIT licence, 11 commits, and a note that it is not affiliated with Google or Anthropic.",
+   "level": "An evening",
+   "level_note": "Free code, but you need Claude Code and Antigravity set up and some comfort typing terminal commands.",
+   "first_step": "Read the four setup commands in the README, then try one review on a small practice project, not on real work.",
    "links": {
-    "post": "https://dev.to/marcelo_sqe/how-i-built-my-entire-home-assistant-with-claude-code-running-inside-it-26ch",
-    "code": "https://github.com/mcello23/ha-alfred-smart"
+    "post": "https://dev.to/gde/take-claude-code-above-average-let-antigravity-review-it-1f3g",
+    "code": "https://github.com/kulaone/agy-bridge"
    },
    "source": {
-    "name": "DEV Community write-up",
-    "date": "8 Nov",
-    "url": "https://dev.to/marcelo_sqe/how-i-built-my-entire-home-assistant-with-claude-code-running-inside-it-26ch"
+    "name": "DEV Community post by the maker, with the code it links",
+    "date": "9 Nov",
+    "url": "https://dev.to/gde/take-claude-code-above-average-let-antigravity-review-it-1f3g"
    }
   }
  ],
  "launched": [
   {
-   "company": "Cursor",
-   "what": "Projects goes multiplayer: teammates and their coding agents share one workspace (beta)",
+   "company": "Google",
+   "what": "Gemini 4 Hydrogen now powers AI Mode in Google Search for everyone, worldwide",
    "claim": true,
+   "tag": "AI",
    "source": {
-    "name": "Cursor blog: Cursor Projects is now multiplayer",
-    "url": "https://cursor.com/blog/projects-multiplayer"
-   },
-   "tag": "AI"
+    "name": "Google blog: Google Search gets a major upgrade with Gemini 4 Hydrogen",
+    "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/"
+   }
+  },
+  {
+   "company": "Google",
+   "what": "Gemini app and Gemini Live conversations arrive on Apple CarPlay, rolling out globally",
+   "claim": true,
+   "tag": "Tech",
+   "source": {
+    "name": "Google blog: Talk it through with Gemini, now on Apple CarPlay",
+    "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-on-apple-carplay/"
+   }
   }
  ],
  "evidence": {
-  "searches": 22,
-  "kept": 6,
-  "build_searches": 16,
-  "builds_kept": 2,
+  "searches": 19,
+  "kept": 5,
   "rejected": [
    {
-    "what": "AI-aided hack of a German web host",
-    "why": "Reported 9 Nov, outside the time window, and the AI role is only the company's claim"
+    "what": "Gemini Robotics 2.5 scores 96% in a car factory trial",
+    "why": "Announced on 10 November, outside the 36-hour window."
    },
    {
-    "what": "UK cyber chief warns of record attacks",
-    "why": "Published 3 Nov, too old for today"
+    "what": "UK rejects EU AI rules",
+    "why": "The only report found was paywalled and could not be opened."
    },
    {
-    "what": "Chrome's eighth exploited zero-day of 2026",
-    "why": "Routine patch with no attack details; left out to keep the brief tight"
+    "what": "OpenAI's GPT-6 Cyber model for security teams",
+    "why": "First reported on 6 November, too old."
    },
    {
-    "what": "Anthropic share sale heavily oversubscribed",
-    "why": "Already covered on 11 Nov; the new detail is unconfirmed reporting"
+    "what": "TSMC sees surging AI chip demand",
+    "why": "Paywalled, with no figures or named speaker visible."
    },
    {
-    "what": "Nvidia chief faces inquiries",
-    "why": "Covered on 9 Nov, with no new fact we could confirm"
+    "what": "Microsoft Outlook outage",
+    "why": "Still unfolding, with no cause, scale or duration given yet."
    },
    {
-    "what": "OpenAI lets businesses claim ChatGPT profiles",
-    "why": "OpenAI's own page would not open, so the launch could not be confirmed"
+    "what": "Build: Claude Code and Codex add-ons for Home Assistant",
+    "why": "Posted on 24 October, older than 7 days."
    },
    {
-    "what": "Build: walkable 3D house made in Blender",
-    "why": "Posted in September, too old, and the post promotes a paid workshop"
+    "what": "Build: wisen, a tool that reviews coding agent sessions",
+    "why": "First released on 30 October, older than 7 days."
    },
    {
-    "what": "Build: five projects made with Gemini 4 Carbon",
-    "why": "The maker mentions an employer that may be Google, and the video could not be checked"
+    "what": "Build: Enigma machine made with AI-generated 3D parts",
+    "why": "Could not find it again by search, so nothing to open."
    }
   ],
-  "note": "Wikimedia Commons photo pages would not open today, so only one story has a photo."
+  "note": "Every poster story was checked on a page opened today. Two Grok leads repeated stories from earlier briefs.",
+  "build_searches": 13,
+  "builds_kept": 1,
+  "photo_searches": 4,
+  "photos_kept": 4
  }
 }
