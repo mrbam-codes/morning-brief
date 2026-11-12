@@ -33,7 +33,10 @@ function measure(){const c=card(),ring=D.querySelector('.tr-ring'),ringOn=ring.c
     lit:ringOn?(()=>{const e=D.elementFromPoint((rb.x+rb.r)/2,Math.min(rb.b-8,rb.y+40));const p=e&&e.closest('[data-tour]');return p?p.dataset.tour:null})():null}}
 /* go through every stop with Next, measuring each once it has landed; in motion, check a flight happens */
 async function walk(R){R.stops=[];R.flights=[];
-  for(let i=0;i<9&&open();i++){await until(landed,4000);R.stops.push(measure());
+  for(let i=0;i<9&&open();i++){await until(landed,4000);
+    /* the cat is drawn a frame or two after the card lands (scorecard.js mounts it in an animation frame): wait for it, up to 2 seconds */
+    if(i===0)await until(()=>card().querySelector('.tr-ship .kpod>.kscene>*'),2000);
+    R.stops.push(measure());
     /* Tab three times from Next: focus must stay on the tour's own buttons */
     if(i===1){const seenF=[];for(let k=0;k<3;k++){D.dispatchEvent(new W.KeyboardEvent('keydown',{key:'Tab',bubbles:true,cancelable:true}));seenF.push(D.activeElement.className)}R.tabs=seenF;D.querySelector('.tr-next').focus()}
     const was=card().getBoundingClientRect().top;D.querySelector('.tr-next').click();await sleep(120);
