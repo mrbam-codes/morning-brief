@@ -18,6 +18,8 @@
      goes in with textContent only. */
 (function(){
 'use strict';
+/* Home is drawn as the cats' bed ('bed'). 'house' brings back the first house, its drawing and its words, exactly. */
+var HOME_ART='bed',BED=HOME_ART!=='house';
 var L='ABCD',TAGC={AI:'#ff2e6e',Tech:'#ffe600',Cyber:'#9a7bff'},NAME={kimchi:'Kimchi',charlee:'Charlee'},SAFE=96;
 var MONO="'IBM Plex Mono',ui-monospace,Menlo,monospace",DISP="Anton,Impact,'Arial Narrow',sans-serif";
 var FLAME='<svg viewBox="0 0 24 30" aria-hidden="true"><path d="M12 1c2 7 9 10 9 18a9 9 0 0 1-18 0c0-5 3-7 4-11 1 3 2 4 4 5-1-4 0-8 1-12z" fill="#ff7a1a"/><path d="M12 14c1 4 5 5 5 9a5 5 0 0 1-10 0c0-3 2-4 2-6 1 1 2 2 3 1-1-2 0-3 0-4z" fill="#ffe600"/></svg>';
@@ -33,9 +35,9 @@ function scrollNear(e,keep){var r=e.getBoundingClientRect();if(r.bottom<=innerHe
 var HOMEOF=function(n){return n>=3?n-1:n};
 function endFor(n,total){var H=HOMEOF(total);return n>=total?'full':n>=H?'last':n===H-1&&n>0?'sight':n>=1?'stop':'tow'}
 var ENDS={
- full:{kick:'Ending · home with a full tank',head:'Home with a full tank',lines:function(P){return 'Every ring charged. '+P+' lands with a spare cell in the tank, and the whole sky lights up for the crew.'}},
- last:{kick:'Ending · home on the last cell',head:'Just made it home',lines:function(P,O,n){return n+' rings charged: exactly enough. The engine coughs on the final approach, then '+P+' touches down right outside the door.'}},
- sight:{kick:'Ending · one cell short',head:'Home is in sight',lines:function(P,O,n){return plural(n,'ring','rings')+' charged, one cell short. '+P+' docks at the lookout moon for the night, close enough to see the porch light. Tomorrow starts with a fresh tank.'}},
+ full:{kick:'Ending · home with a full tank',head:'Home with a full tank',lines:function(P){return BED?'Every ring charged. '+P+' lands with a spare cell in the tank, the whole sky lights up, and the cat bed is warm and waiting.':'Every ring charged. '+P+' lands with a spare cell in the tank, and the whole sky lights up for the crew.'}},
+ last:{kick:'Ending · home on the last cell',head:'Just made it home',lines:function(P,O,n){return n+' rings charged: exactly enough. The engine coughs on the final approach, then '+P+(BED?' touches down right beside the cat bed.':' touches down right outside the door.')}},
+ sight:{kick:'Ending · one cell short',head:'Home is in sight',lines:function(P,O,n){return plural(n,'ring','rings')+' charged, one cell short. '+P+' docks at the lookout moon for the night, close enough to see '+(BED?'the night light by the cat bed':'the porch light')+'. Tomorrow starts with a fresh tank.'}},
  stop:{kick:'Ending · overnight stop',head:'Overnight at the fuel stop',lines:function(P,O,n){return plural(n,'ring','rings')+' charged: enough to reach the all-night fuel stop. Warm milk, a soft bunk, and a full tank waiting for tomorrow’s run.'}},
  tow:{kick:'Ending · a friendly tow',head:'A friendly tow for the night',lines:function(P,O){return 'No rings charged today, and that happens to every pilot. The tow tug hooks on and hums '+P+' and '+O+' to the depot, both asleep in the back. The rings are back tomorrow.'}}};
 
@@ -102,16 +104,30 @@ function mount(host,o){
   function sky(top,bot){var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,top);g.addColorStop(1,bot);ctx.fillStyle=g;ctx.fillRect(0,0,W,H)}
   function drawStars(w,dt,still){var rm=reduce();stars.forEach(function(s){if(!rm&&!still){s.x-=(.0016+w*.035)*s.z*dt;if(s.x<0){s.x+=1;s.y=Math.random()}}var X=s.x*W,Y=s.y*H;ctx.fillStyle=ctx.strokeStyle='rgba(220,230,255,'+(.3+s.z*.6)+')';if(w>.05){ctx.lineWidth=s.z*1.6;ctx.beginPath();ctx.moveTo(X,Y);ctx.lineTo(X+w*80*s.z,Y);ctx.stroke()}else ctx.fillRect(X,Y,s.z*2,s.z*2)})}
   /* scenery for the endings */
-  function house(x,y,sc,lit){ctx.save();ctx.translate(x,y);ctx.scale(sc,sc);ctx.fillStyle='#2a1a5e';ctx.fillRect(-13,-16,26,16);ctx.fillStyle='#ff3df2';ctx.beginPath();ctx.moveTo(-16,-16);ctx.lineTo(0,-29);ctx.lineTo(16,-16);ctx.closePath();ctx.fill();ctx.fillStyle=lit;ctx.shadowColor=lit;ctx.shadowBlur=14;ctx.fillRect(-9,-12,7,7);ctx.fillRect(3,-12,6,12);ctx.restore()}
+  /* the cats' bed: a round cushioned bed with a neon rim, a cyan blanket and a little night light behind it.
+     Drawn upright on the ground at (x,y), tilted by rot to sit on a curved planet. */
+  function bed(x,y,sc,rot,lit){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.scale(sc,sc);
+    ctx.fillStyle='#8a7fb0';ctx.fillRect(25,-42,3,24);ctx.fillStyle=lit;ctx.shadowColor=lit;ctx.shadowBlur=18;ctx.beginPath();ctx.arc(26.5,-44,5.5,0,7);ctx.fill();
+    ctx.shadowBlur=0;ctx.fillStyle='#a8287f';ctx.beginPath();ctx.ellipse(0,-18,31,14,0,0,7);ctx.fill();
+    ctx.fillStyle='#2a1660';ctx.beginPath();ctx.ellipse(0,-19,24,9.5,0,0,7);ctx.fill();
+    ctx.fillStyle='#d9ccff';ctx.beginPath();ctx.ellipse(0,-17.5,21,7.5,0,0,7);ctx.fill();
+    ctx.fillStyle='#ffffff';ctx.beginPath();if(ctx.roundRect)ctx.roundRect(-18,-25,13,7,3.5);else ctx.rect(-18,-25,13,7);ctx.fill();
+    ctx.fillStyle='#3de6ff';ctx.beginPath();ctx.moveTo(-2,-21);ctx.quadraticCurveTo(9,-24,21,-19);ctx.lineTo(18,-11.5);ctx.quadraticCurveTo(7,-10,-4,-12.5);ctx.closePath();ctx.fill();
+    ctx.strokeStyle='#bff7ff';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(1,-17);ctx.quadraticCurveTo(9,-18.5,17,-16);ctx.stroke();
+    ctx.shadowColor='#ff3df2';ctx.shadowBlur=14;ctx.fillStyle='#ff3df2';ctx.beginPath();ctx.moveTo(31,-18);ctx.lineTo(29,-5);ctx.ellipse(0,-5,29,7,0,0,Math.PI,false);ctx.lineTo(-31,-18);ctx.ellipse(0,-18,31,14,0,Math.PI,0,true);ctx.closePath();ctx.fill();ctx.shadowBlur=0;
+    ctx.strokeStyle='#ffd1fb';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(0,-18,31,14,0,.15,Math.PI-.15);ctx.stroke();
+    ctx.fillStyle='#5a0f52';ctx.beginPath();ctx.ellipse(0,-2.5,3.8,3,0,0,7);ctx.fill();[[-4.6,-7.4],[0,-9.2],[4.6,-7.4]].forEach(function(t){ctx.beginPath();ctx.arc(t[0],t[1],1.8,0,7);ctx.fill()});
+    ctx.restore();root.dataset.drawn='bed'}
+  function house(x,y,sc,lit){root.dataset.drawn='house';ctx.save();ctx.translate(x,y);ctx.scale(sc,sc);ctx.fillStyle='#2a1a5e';ctx.fillRect(-13,-16,26,16);ctx.fillStyle='#ff3df2';ctx.beginPath();ctx.moveTo(-16,-16);ctx.lineTo(0,-29);ctx.lineTo(16,-16);ctx.closePath();ctx.fill();ctx.fillStyle=lit;ctx.shadowColor=lit;ctx.shadowBlur=14;ctx.fillRect(-9,-12,7,7);ctx.fillRect(3,-12,6,12);ctx.restore()}
   function planet(cx,cy,r,c1,c2,glow){ctx.save();ctx.shadowColor=glow;ctx.shadowBlur=30;var g=ctx.createRadialGradient(cx-r*.3,cy-r*.35,r*.1,cx,cy,r);g.addColorStop(0,c1);g.addColorStop(1,c2);ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,r,0,7);ctx.fill();ctx.restore()}
   function surf(cx,cy,r,x){return cy-Math.sqrt(Math.max(0,r*r-(x-cx)*(x-cx)))}
   function scene(now){var E=S.end,k=E.k,rm=reduce(),t=rm?0:now,j;
     if(k==='full'||k==='last'){var full=k==='full';sky(full?'#1a0b45':'#2a0f3a',full?'#3a1670':'#5a2340');drawStars(0,0,true);
       if(full){for(j=0;j<3;j++){ctx.save();ctx.globalAlpha=.18;ctx.strokeStyle=['#3ddc97','#3de6ff','#ff3df2'][j];ctx.lineWidth=16;ctx.beginPath();for(var x=0;x<=W;x+=10){var y=40+j*18+Math.sin(x/40+t/900+j)*10;if(x)ctx.lineTo(x,y);else ctx.moveTo(x,y)}ctx.stroke();ctx.restore()}}
       else{ctx.fillStyle='#ffb86b33';ctx.beginPath();ctx.arc(40,H-10,70,0,7);ctx.fill()}
-      var cx=W-80,cy=H*.74,r=70;planet(cx,cy,r,full?'#7dffc8':'#ffb86b',full?'#127a6a':'#6b2a5e',full?'#3ddc97':'#ff9a6b');house(cx+40,surf(cx,cy,r,cx+40)+3,1,full?'#ffe600':'#ffd28a');
+      var cx=W-80,cy=H*.74,r=70;planet(cx,cy,r,full?'#7dffc8':'#ffb86b',full?'#127a6a':'#6b2a5e',full?'#3ddc97':'#ff9a6b');if(BED){var bx=cx+10;bed(bx,surf(cx,cy,r,bx)+3,1,0,full?'#ffe600':'#ffd28a')}else house(cx+40,surf(cx,cy,r,cx+40)+3,1,full?'#ffe600':'#ffd28a');
       if(!full&&E.p>=1){ctx.fillStyle='rgba(220,220,240,.35)';for(j=0;j<3;j++){ctx.beginPath();ctx.arc(E.x-50-j*10+(t/60)%6,E.y+14-j*7,6+j*2,0,7);ctx.fill()}}}
-    else if(k==='sight'){sky('#0b0a2e','#1f1450');drawStars(0,0,true);var hx=48,hy=50;planet(hx,hy,22,'#7dffc8','#127a6a','#3ddc97');house(hx+4,surf(hx,hy,22,hx+4)+2,.55,'#ffe600');
+    else if(k==='sight'){sky('#0b0a2e','#1f1450');drawStars(0,0,true);var hx=48,hy=50;if(BED){planet(hx,hy,24,'#7dffc8','#127a6a','#3ddc97');bed(hx,hy-24+3,.62,0,'#ffe600')}else{planet(hx,hy,22,'#7dffc8','#127a6a','#3ddc97');house(hx+4,surf(hx,hy,22,hx+4)+2,.55,'#ffe600')}
       var mx=W*.62,my=H+112,mr=170;planet(mx,my,mr,'#8f86b8','#3a3260','#c9b8ff');ctx.fillStyle='#2a2450';[[-60,8],[30,14],[-10,4]].forEach(function(z){ctx.beginPath();ctx.arc(mx+z[0],surf(mx,my,mr,mx+z[0])+z[1]+4,z[1],0,7);ctx.fill()});
       var bx=mx-78,by=surf(mx,my,mr,bx);ctx.fillStyle='#c9b8ff';ctx.fillRect(bx-2,by-34,4,34);ctx.fillStyle=(rm||Math.sin(t/300)>0)?'#ffe600':'#6b5a00';ctx.beginPath();ctx.arc(bx,by-37,5,0,7);ctx.fill();
       var sx=E.x-40,sy=E.y-18;ctx.save();ctx.setLineDash([5,6]);ctx.strokeStyle='#ffe60099';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(hx+26,hy+8);ctx.stroke();ctx.restore();
@@ -196,8 +212,8 @@ function mount(host,o){
       run.res.append(lg,nx);focusEl(nx);scrollNear(nx,fuel)},T(ok?1250:650))}
   function next(skip){if(!skip)run.i++;if(run.i<run.items.length){question();return}keyPick=null;S.ring=null;
     if(run.mode==='missed')coda();else if(run.mode==='replay')ending(null);else finish()}
-  function endScene(k){var now=performance.now(),F={full:{x:W-104,y:0,s:.8,rot:-4},last:{x:W-104,y:0,s:.8,rot:6,jit:1},sight:{x:W*.68,y:0,s:.72,rot:0,flip:1},stop:{x:W*.3,y:H-44-30,s:.78,rot:0},tow:{x:W*.36,y:H*.58,s:.8,rot:-12}}[k];
-    if(k==='full'||k==='last')F.y=surf(W-80,H*.74,70,W-104)-24;if(k==='sight')F.y=surf(W*.62,H+112,170,W*.68)-22;
+  function endScene(k){var now=performance.now(),F={full:{x:W-(BED?140:104),y:0,s:.8,rot:-4},last:{x:W-(BED?140:104),y:0,s:.8,rot:6,jit:1},sight:{x:W*.68,y:0,s:.72,rot:0,flip:1},stop:{x:W*.3,y:H-44-30,s:.78,rot:0},tow:{x:W*.36,y:H*.58,s:.8,rot:-12}}[k];
+    if(k==='full'||k==='last')F.y=surf(W-80,H*.74,70,F.x)-24;if(k==='sight')F.y=surf(W*.62,H+112,170,W*.68)-22;
     S.end=Object.assign({k:k,t0:now,dur:k==='tow'?2600:1900,x0:k==='tow'?40:k==='sight'?W+70:-70,y0:k==='tow'?H*.6:H*.4,s0:1,p:reduce()?1:0},F);redraw()}
   function streakRow(sk,mult){var r=h('div','streak'+(sk>0?' flame-on':'')),f=h('span');f.innerHTML=FLAME;r.append(f,h('b',null,sk>0?sk+'-day streak':'No streak yet'));r.append(mult>1?h('span','chip','×'+mult+' multiplier on'):h('span','chip off','×1.5 from day 5'));return r}
   function revise(list,scored){if(!list.length)return null;var d=h('div','rvbox');d.append(h('span','rk','To revise'));list.forEach(function(m){var r=h('div','rv');r.append(h('b',null,m.q),h('p',null,'Answer: '+m.options[m.answer]+'. '+m.why));d.append(r)});if(scored)d.append(h('p','rn','Missed questions come back in Review over the next days.'));return d}

@@ -54,6 +54,11 @@ idx = (site / "index.html").read_text(encoding="utf-8")
 assert idx.count('<script src="motion.js"></script>') == 1 and idx.count("</body>") == 1
 test = idx.replace('<script src="motion.js"></script>', '<script src="wp-errs.js"></script>\n<script src="motion.js"></script>', 1)
 (site / "warp-test.html").write_text(test.replace("</body>", '<script src="warp-audit.js"></script></body>', 1), encoding="utf-8")
+# the one-word revert: a copy of warp.js with HOME_ART set to 'house', and a test page that loads it (phases with house=1)
+wj = (site / "warp.js").read_text(encoding="utf-8")
+assert wj.count("var HOME_ART='bed'") == 1 and test.count('<script src="warp.js"></script>') == 1
+(site / "warp-house.js").write_text(wj.replace("var HOME_ART='bed'", "var HOME_ART='house'", 1), encoding="utf-8")
+(site / "warp-test-house.html").write_text(test.replace('<script src="warp.js"></script>', '<script src="warp-house.js"></script>', 1).replace("</body>", '<script src="warp-audit.js"></script></body>', 1), encoding="utf-8")
 shutil.copy(here / "warp-audit.js", site / "warp-audit.js")
 (site / "wp-errs.js").write_text(
     "window.__wpErrs=[];addEventListener('error',e=>{if(e instanceof ErrorEvent)__wpErrs.push('error: '+e.message)},true);"
@@ -119,7 +124,7 @@ def run(date, phase, seed="streak4", reduced=False, shot=None):
             "--host-resolver-rules=MAP * ~NOTFOUND , EXCLUDE 127.0.0.1", "--enable-logging=stderr", "--v=0"]
     if reduced:
         args.append("--force-prefers-reduced-motion")
-    url = f"{base}/wp-frame-{rid}.html?id={rid}&seed={seed}&page=" + urllib.parse.quote(f"warp-test.html?d={date}#{phase}", safe="")
+    url = f"{base}/wp-frame-{rid}.html?id={rid}&seed={seed}&page=" + urllib.parse.quote(f"{'warp-test-house.html' if 'house=1' in phase else 'warp-test.html'}?d={date}#{phase}", safe="")
     p = subprocess.run(args + ([f"--screenshot={shot}"] if shot else ["--dump-dom"]) + [url], capture_output=True, text=True, timeout=500)
     (site / f"wp-frame-{rid}.html").unlink(missing_ok=True)
     for l in p.stderr.splitlines():
@@ -153,18 +158,24 @@ jobs = {
     # reopened, review, no quiz
     "reopen motion": (D, "reopen", "done3", False), "reopen reduced": (D, "reopen", "done3", True),
     "review": (D, "review", "review", True), "noquiz": (NOQUIZ, "noquiz", "streak4", False),
+    # HOME_ART='house' still draws the house, with its own words
+    "house full": (D, "play=rrrrr&house=1", "streak4", False), "house last": (D, "play=rrrrw&house=1", "streak4", True),
+    "house sight": (D, "play=rwrwr&prac=1&house=1", "streak4", False),
 }
 ONLY = [k for k in os.environ.get("WARP_ONLY", "").split(",") if k]  # for debugging: run only these jobs, no screenshots
 if ONLY:
     jobs = {k: v for k, v in jobs.items() if k in ONLY}
-shots = {"full": "play=rrrrr&shot=1", "last": "play=rrrrw&shot=1", "sight": "play=rwrwr&shot=1", "stop": "play=wrwwr&shot=1", "tow": "play=wwwww&shot=1"}
+if os.environ.get("WARP_SHOTS"):  # for looking at the art: screenshots only
+    jobs = {}
+shots = {"bed-full": "play=rrrrr&shot=1", "bed-last": "play=rrrrw&shot=1", "bed-sight": "play=rwrwr&shot=1", "stop": "play=wrwwr&shot=1", "tow": "play=wwwww&shot=1", "house-full": "play=rrrrr&house=1&shot=1"}
 results = {}
 try:
     t0 = time.time()
     with concurrent.futures.ThreadPoolExecutor(int(os.environ.get("WARP_WORKERS", "3"))) as ex:
         fut = {ex.submit(run, *v): k for k, v in jobs.items()}
         sfut = [] if ONLY else [ex.submit(run, D, ph, "streak4", False, str(out / f"warp-390-{k}.png")) for k, ph in shots.items()]
-        sfut += [] if ONLY else [ex.submit(run, D, "play=rwrwr&prac=1&shot2=1", "streak4", False, str(out / "warp-390-practice-home.png")),
+        sfut += [] if ONLY else [ex.submit(run, D, "play=rwrwr&prac=1&shot2=1", "streak4", False, str(out / "warp-390-bed-practice-home.png")),
+                 ex.submit(run, D, "play=rwrwr&kb=1&shot=1", "streak4", True, str(out / "warp-390-bed-sight-reduced.png")),
                  ex.submit(run, D, "play=wwwww&kb=1&shot=1", "streak4", True, str(out / "warp-390-tow-reduced.png")),
                  ex.submit(run, WEEKEND, "play=rrrrrrw&shot=1", "streak4", False, str(out / "warp-390-weekend-last.png"))]
         for f in concurrent.futures.as_completed(fut):
@@ -213,6 +224,13 @@ for name in jobs:
         need(not E["issues"] and not E["tiny"] and not E["small"], f"{t}: ending: no clipped or overlapping text, nothing under 12px, buttons 44px ({E['issues']}, {E['tiny']}, {E['small']})")
         need(E["head"] in E["live"] and f"{right} out of {n}" in E["live"], f"{t}: the ending is announced ({E['live']!r})")
         need(("Practise the missed ones" in E["buttons"]) == (right < home) and "Play the whole quiz again (practice)" in E["buttons"], f"{t}: practice offered only short of home ({E['buttons']})")
+        if want in ("full", "last", "sight"):
+            art = "house" if "house=1" in phase else "bed"
+            need(E.get("drawn") == art, f"{t}: home is drawn as the {art} ({E.get('drawn')})")
+            words = {("bed", "full"): "the cat bed is warm and waiting", ("bed", "last"): "right beside the cat bed", ("bed", "sight"): "the night light by the cat bed",
+                     ("house", "full"): "the whole sky lights up for the crew", ("house", "last"): "right outside the door", ("house", "sight"): "close enough to see the porch light"}[(art, want)]
+            gone = ("porch", "door") if art == "bed" else ("cat bed",)
+            need(words in E["lines"] and not any(g in E["lines"] for g in gone), f"{t}: the {art} words ({E['lines']!r})")
         if red:
             need(not E["endless"], f"{t}: nothing loops under reduced motion ({E['endless']})")
         if "prac" in phase:
@@ -222,6 +240,7 @@ for name in jobs:
             need(all(x.endswith("/np") for x in P.get("log", []) if x[:1] in "rw" and "/" in x), f"{t}: every practice question says no points")
             if "prac=mix" in phase:
                 need(any("practice-short" in x for x in P.get("log", [])) and any("to go" in x for x in P.get("log", [])), f"{t}: a miss in practice shows cells to go and Practise the rest ({P.get('log')})")
+            need(P.get("drawn") == ("house" if "house=1" in phase else "bed"), f"{t}: home after practice is drawn as the {'house' if 'house=1' in phase else 'bed'} ({P.get('drawn')})")
             need(not P.get("issues") and not P.get("tiny"), f"{t}: practice coda text fits ({P.get('issues')}, {P.get('tiny')})")
         need(R["scrollWidth"] <= 390 and E["scrollWidth"] <= 390, f"{t}: no sideways scroll ({R['scrollWidth']})")
         need(not R["errs"], f"{t}: no errors in the page ({R['errs']})")
@@ -240,10 +259,10 @@ if "older edition" in jobs:
     need((older.get("end") or {}).get("saved", {}).get("score") == 4, "the older edition saves under its own date")
 errors = [c for c in consoles if ERR.search(c[1])]
 need(not errors, f"no console errors in any run ({errors[:4]})")
-for k in ([] if ONLY else list(shots) + ["practice-home", "tow-reduced", "weekend-last"]):
+for k in ([] if ONLY else list(shots) + ["bed-practice-home", "bed-sight-reduced", "tow-reduced", "weekend-last"]):
     f = out / f"warp-390-{k}.png"
     need(f.exists() and f.stat().st_size > 20000, f"screenshot {f.name}")
-for f in ("warp-test.html", "warp-audit.js", "wp-errs.js", "wp-frame.js"):
+for f in ("warp-test.html", "warp-test-house.html", "warp-house.js", "warp-audit.js", "wp-errs.js", "wp-frame.js"):
     (site / f).unlink(missing_ok=True)
 print("screenshots and audit in", out)
 print("WARP PAGE OK" if not misses else "MISSES: " + str(len(misses)))

@@ -26,6 +26,8 @@ const tiny=(root,skip)=>{const out=[],w=document.createTreeWalker(root,NodeFilte
 const small=root=>[...root.querySelectorAll('button')].filter(e=>e.offsetParent).map(e=>({t:e.textContent.trim().slice(0,24),w:e.offsetWidth,h:e.offsetHeight})).filter(x=>x.w<44||x.h<44);
 const endless=root=>document.getAnimations().filter(a=>a.playState==='running'&&a.effect&&a.effect.target&&root.contains(a.effect.target)&&a.effect.getTiming().iterations===Infinity).map(a=>a.animationName||'anim').slice(0,10);
 function settle(root){document.getAnimations().forEach(a=>{const t=a.effect&&a.effect.target;if(t&&root.contains(t)&&a.effect.getTiming().iterations!==Infinity)try{a.finish()}catch(e){}})}
+/* screenshots: put the quiz at the top, wait for any smooth scroll to finish, and put it there again */
+async function steady(root,rm){root.scrollIntoView({block:'start',behavior:'instant'});await sleep(rm?150:900);root.scrollIntoView({block:'start',behavior:'instant'});await sleep(300)}
 const errs=()=>(window.__wpErrs||[]).slice(0,10);
 const store=()=>localStorage.getItem('mb-v1');
 const badgeR=()=>{const b=document.querySelector('.cc-badge');return b?b.getBoundingClientRect():null};
@@ -62,9 +64,9 @@ async function play(o){const R={phase:'play',pattern:o.play,kb:!!o.kb,steps:[]},
     gauge:gauge(root),status:root.querySelector('.f-status').textContent,issues:textIssues(root,'.w-sr,.w-ov'),tiny:tiny(root,'.w-sr'),small:small(root),
     headClear:clear(fin),gaugeClear:clear(root.querySelector('.fuel')),focusHead:document.activeElement===fin,live:root.querySelector('.w-sr').textContent,
     saved:S.days[key],progGone:!(key in S.prog),badge:document.querySelector('.cc-badge').getAttribute('aria-label'),buttons:[...root.querySelectorAll('.w-fin button')].map(b=>b.textContent),
-    endless:R.reduce?endless(root):null,scrollWidth:document.documentElement.scrollWidth};
+    drawn:root.dataset.drawn||null,endless:R.reduce?endless(root):null,scrollWidth:document.documentElement.scrollWidth};
   R.end.pointsInBadge=new RegExp(Number(S.points).toLocaleString('en-GB')+' points').test(R.end.badge);
-  if(o.shot){root.scrollIntoView({block:'start'});await sleep(R.reduce?100:900);return R}
+  if(o.shot){await steady(root,R.reduce);return R}
   if(o.prac){const after=store(),log=[];
     for(let guard=0;guard<6;guard++){const pb=root.querySelector('[data-act=practise]');if(!pb)break;pb.click();log.push('start '+(+root.querySelector('.cells').dataset.cells));
       for(let g=0;g<10;g++){const x=await until(()=>{const y=root.querySelectorAll('.w-opt');return y.length&&!y[0].disabled?y:null},5000);if(!x)break;
@@ -73,9 +75,9 @@ async function play(o){const R={phase:'play',pattern:o.play,kb:!!o.kb,steps:[]},
         nx.click();await sleep(60);if(root.querySelector('.w-fin'))break}
       await sleep(R.reduce?100:400);log.push('end '+root.dataset.ending+' '+(root.querySelector('.w-fin h2,.coda b')||{}).textContent)}
     await sleep(R.reduce?200:1800);settle(root);
-    const coda=root.querySelector('.coda');R.prac={log,coda:coda?coda.textContent:null,ending:root.dataset.ending,same:store()===after,gauge:gauge(root),issues:textIssues(root,'.w-sr,.w-ov'),tiny:tiny(root,'.w-sr'),badge:document.querySelector('.cc-badge').getAttribute('aria-label')};
+    const coda=root.querySelector('.coda');R.prac={log,drawn:root.dataset.drawn||null,coda:coda?coda.textContent:null,ending:root.dataset.ending,same:store()===after,gauge:gauge(root),issues:textIssues(root,'.w-sr,.w-ov'),tiny:tiny(root,'.w-sr'),badge:document.querySelector('.cc-badge').getAttribute('aria-label')};
     R.prac.badgeSame=R.prac.badge===R.end.badge;
-    if(o.shot2){root.scrollIntoView({block:'start'});await sleep(R.reduce?100:900)}}
+    if(o.shot2)await steady(root,R.reduce)}
   R.errs=errs();R.scrollWidth=document.documentElement.scrollWidth;R.untouchedBefore=before!==null;return R}
 
 async function reopen(){const R={phase:'reopen'},root=await until(()=>document.querySelector('.gcard.quiz .wr'),8000);const before=store();
