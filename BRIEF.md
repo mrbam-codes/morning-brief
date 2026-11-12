@@ -103,13 +103,14 @@ The page keeps scores, streaks, badges and the review queue on the reader's phon
 
 Open the original source for every claim before using it: the company's own post, the research paper, the advisory, the court filing or the regulator's page, not only the news article about it. Where the claim comes from a company, say so and look for independent confirmation. If the original cannot be opened, say that in the story's `take` and do not state the claim as fact.
 
-When a page will not open. Some sites refuse the page reader every time, so do not spend a step on them: nature.com (every article redirects to a sign-in cookie check), techmeme.com, qz.com and reddit.com. Some pages are built by script and open with no text (course.elementsofai.com). When any page fails, never retry the same address. Do this instead, in order:
+When a page will not open. Some sites refuse the page reader every time, so do not spend a step on them: nature.com (every article redirects to a sign-in cookie check), cnbc.com, bloomberg.com, washingtonpost.com, digitimes.com, techmeme.com, qz.com, x.com and reddit.com. Some pages are built by script and open with no text (course.elementsofai.com). When any page fails, never retry the same address. Do this instead, in order:
 
 1. Search for the article's exact headline in quotes and open a copy on another site that your search returns (a wire story republished elsewhere, or the publisher's press page).
 2. If the missing page was your only independent report, search twice more for independent views: the story's subject with "expert reaction" (the Science Media Centre publishes named scientists' comments on research news), then the subject with "researchers say" or "analysis". Open up to two results from outlets that did their own reporting. A rewrite of the company's announcement is not independent.
-3. If nothing independent opens, say so in the `take` in plain words: name the outlet whose report you could not read and why, for example "Nature's report sits behind a sign-in check". You may quote that report's headline from your search results, as a headline only. Never say what an unread article contains.
+3. If the missing page is an organisation's own post and your searches have not returned its address, search twice more with the organisation's site name and the post's title. If it still does not appear, say "my searches did not return the company's own post", because that is a different gap from a site that refused.
+4. If nothing independent opens, say so in the `take` in plain words: name the outlet whose report you could not read and why, for example "Nature's report sits behind a sign-in check". You may quote that report's headline from your search results, as a headline only. Never say what an unread article contains.
 
-Name every site that would not open in your closing line, so the list above stays up to date.
+In the `evidence` block, if there is one, add `"unopened"`: a list of up to 12 site names that refused a page today, each once, in lower case, for example `["cnbc.com", "nature.com"]`. Leave out Wikimedia Commons. Name the same sites in your closing line, so the list above stays up to date.
 
 Never force a topic. If AI, Tech or Cyber has no real story that day, leave it out and say so in the verdict. Never give a story the wrong tag to fill a gap. Little-known sites are leads only, so never rest a poster story on one.
 

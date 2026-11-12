@@ -104,6 +104,10 @@ CASES += [
     ("photo counts in evidence pass", lambda b: EV(b).update(photo_searches=6, photos_kept=3), None),
     ("photo count not a whole number", lambda b: EV(b).update(photo_searches=2.5), "evidence photo_searches: a whole number"),
     ("photos kept below 0", lambda b: EV(b).update(photos_kept=-1), "evidence photos_kept: a whole number"),
+    ("unopened sites in evidence pass", lambda b: EV(b).update(unopened=["cnbc.com", "nature.com"]), None),
+    ("unopened site given as an address", lambda b: EV(b).update(unopened=["https://www.cnbc.com/a"]), "evidence unopened: a list of up to 12"),
+    ("unopened site listed twice", lambda b: EV(b).update(unopened=["cnbc.com", "cnbc.com"]), "evidence unopened: a list of up to 12"),
+    ("unopened is not a list", lambda b: EV(b).update(unopened="cnbc.com"), "evidence unopened: a list of up to 12"),
     ("publisher's source hash in a brief", lambda b: b.update(source_sha256="0" * 64), "source_sha256: written only by the publishing step"),
 ]
 if date != "2026-11-11":

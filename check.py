@@ -181,6 +181,12 @@ def evidence(b):
     for k in ("build_searches", "builds_kept", "photo_searches", "photos_kept"):
         if k in ev:
             need(isinstance(ev[k], int) and not isinstance(ev[k], bool) and 0 <= ev[k] <= 300, f"evidence {k}: a whole number from 0 to 300")
+    # Optional: sites that refused the page reader today (BRIEF.md "When a page will not open").
+    if "unopened" in ev:
+        uo = ev["unopened"]
+        need(isinstance(uo, list) and len(uo) <= 12 and len(set(map(str, uo))) == len(uo)
+             and all(isinstance(x, str) and re.fullmatch(r"[a-z0-9-]+(\.[a-z0-9-]+)+", x) and len(x) <= 40 for x in uo),
+             "evidence unopened: a list of up to 12 different site names such as cnbc.com")
     rj = ev.get("rejected", [])
     need(isinstance(rj, list) and len(rj) <= 8, "evidence rejected: a list of 8 at most")
     for i, r in enumerate(rj if isinstance(rj, list) else []):
