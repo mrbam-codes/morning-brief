@@ -6,7 +6,7 @@ miss ("mutation changed nothing"), so a case can never pass by luck of the day's
 The label cases move LABELS_FROM in the copy only (as tests/test_builds.py does for BUILDS_FROM):
 to the brief's date to prove the new refusals, and to the day after to prove older editions still pass.
 """
-import copy, datetime, json, pathlib, shutil, subprocess, sys, tempfile
+import copy, datetime, json, pathlib, re, shutil, subprocess, sys, tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 good = json.loads(open(sys.argv[1], encoding="utf-8").read())
@@ -42,6 +42,30 @@ L = lambda b: b["lessons"]
 def add(svg_bit):
     """Put svg_bit at the end of lesson 1's diagram, whatever the day's drawing holds."""
     return lambda b: L(b)[0]["diagram"].update(svg=L(b)[0]["diagram"]["svg"].replace("</svg>", svg_bit + "</svg>"))
+
+
+PLAIN = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 150"><rect x="10" y="20" width="90" height="60" fill="none" stroke="#111"/>'
+         '<text x="20" y="55" font-size="12">before</text><text x="130" y="55" font-size="12">then</text><text x="230" y="55" font-size="12">after</text></svg>')
+
+
+def S(b):
+    """The first story with a drawing. A day with none gets a plain one, so these cases always test something."""
+    its = (b.get("posters") or []) + (b.get("stories") or [])
+    for s in its:
+        if s.get("drawing"):
+            return s
+    its[0].update(drawing=PLAIN, drawingAlt="Three labels in a row: before, then, after.")
+    return its[0]
+
+
+def draw(svg_bit):
+    """Put svg_bit at the end of a story drawing."""
+    return lambda b: (lambda s: s.update(drawing=s["drawing"].replace("</svg>", svg_bit + "</svg>")))(S(b))
+
+
+def wide(b):
+    s = S(b)
+    s.update(drawing=re.sub(r'viewBox="[^"]*"', 'viewBox="0 0 1000 600"', s["drawing"], count=1))
 
 
 CASES = [
@@ -88,6 +112,15 @@ LABEL_CASES = [
     ("label shrunk by an svg inside the svg", add('<svg viewBox="0 0 3200 2000" width="320" height="200"><text x="10" y="190" font-size="14">tiny words</text></svg>'), "no svg inside the svg", LIVE),
     ("translate and rotate still pass", add('<g transform="translate(5,0) rotate(-10 20 190)"><text x="10" y="190" font-size="14">turned</text></g>'), None, LIVE),
     ("an edition before LABELS_FROM is not re-judged", STYLE, None, BEFORE),
+    ("lesson label squeezed with textLength", add('<text x="10" y="190" font-size="14" textLength="20">tiny words</text>'), "no textLength or lengthAdjust", LIVE),
+    ("drawing label sized with style", draw('<text x="10" y="140" style="font-size:5px">tiny words</text>'), "drawing: no style attributes", LIVE),
+    ("drawing with a style block", draw('<style>text{font-size:5px}</style>'), "drawing: no <style>", LIVE),
+    ("drawing shrunk by scale", draw('<g transform="scale(0.3)"><text x="10" y="140" font-size="12">tiny words</text></g>'), "drawing: transform", LIVE),
+    ("drawing shrunk by an svg inside the svg", draw('<svg viewBox="0 0 3400 1500" width="340" height="150"><text x="10" y="140" font-size="12">tiny words</text></svg>'), "drawing: no svg inside the svg", LIVE),
+    ("drawing shrunk by a wide viewBox", wide, "viewBox must be 320 to 360 wide", LIVE),
+    ("drawing label squeezed with textLength", draw('<text x="10" y="140" font-size="12" textLength="20">tiny words</text>'), "drawing: no textLength or lengthAdjust", LIVE),
+    ("drawing with translate and rotate still passes", draw('<g transform="translate(5,0) rotate(-10 20 140)"><text x="10" y="140" font-size="12">turned</text></g>'), None, LIVE),
+    ("a drawing in an edition before LABELS_FROM is not re-judged", wide, None, BEFORE),
 ]
 misses = []
 out = run(good)

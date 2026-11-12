@@ -79,6 +79,9 @@ def media(where, s):
                 fs = e.get("font-size")
                 if fs:
                     need(re.fullmatch(r"\d+(\.\d+)?(px)?", fs.strip()) is not None and float(re.sub("px", "", fs)) >= 11, f"{where} drawing: font-size {fs} is below 11")
+            day = EDITION.get("day")
+            if day and day.isoformat() >= LABELS_FROM:
+                drawing_labels(where, root, low)
         except ET.ParseError:
             need(False, f"{where} drawing: not valid SVG")
         text(f"{where} drawingAlt", s.get("drawingAlt"), 200)
@@ -251,6 +254,32 @@ LABELS_FROM = "2026-11-13"
 MOVES = {"translate", "rotate"}
 
 
+def drawing_labels(where, root, low):
+    """Story drawings, from LABELS_FROM: refuse every way of making a label smaller than its font-size says."""
+    vb = (root.get("viewBox") or "").replace(",", " ").split()
+    try:
+        x0, y0, W, H = map(float, vb)
+    except ValueError:
+        need(False, f"{where} drawing: needs a viewBox of four numbers, such as viewBox=\"0 0 340 160\"")
+        return
+    need(320 <= W <= 360, f"{where} drawing: viewBox must be 320 to 360 wide (340 is usual), so labels keep their size on a phone")
+    need(100 <= H <= 420, f"{where} drawing: viewBox height must be 100 to 420")
+    need("<style" not in low, f"{where} drawing: no <style>. Set the size with the font-size attribute, such as font-size=\"12\", and colours with fill and stroke")
+    styled, inner, squeezed, shrinks = False, False, False, []
+    for e in root.iter():
+        styled = styled or e.get("style") is not None
+        inner = inner or (e.tag.split("}")[-1] == "svg" and e is not root)
+        squeezed = squeezed or e.get("textLength") is not None or e.get("lengthAdjust") is not None
+        tf = e.get("transform")
+        if tf is not None and set(re.findall(r"([A-Za-z-]+)\s*\(", tf)) - MOVES:
+            shrinks.append(tf)
+    need(not styled, f"{where} drawing: no style attributes. Set the size with the font-size attribute, such as font-size=\"12\", and colours with fill and stroke")
+    need(not inner, f"{where} drawing: no svg inside the svg. Draw everything in the one svg")
+    need(not squeezed, f"{where} drawing: no textLength or lengthAdjust. They squeeze the letters, so shorten the label instead")
+    if shrinks:
+        need(False, f"{where} drawing: transform {shrinks[0]!r} can shrink labels. Use only translate(...) or rotate(...), and set the size with font-size")
+
+
 def svg_rules(where, svg):
     """The safety and readability rules for one drawn diagram (lessons, and builds from plan 16)."""
     low = svg.lower()
@@ -280,11 +309,12 @@ def svg_rules(where, svg):
     if day and day.isoformat() >= LABELS_FROM:
         # The size loop below reads only font-size attributes on <text> and its parents,
         # so refuse every other way of making a label smaller than it looks.
-        styled, nested, sizes, shrinks = False, False, [], []
+        styled, nested, squeezed, sizes, shrinks = False, False, False, [], []
         for e in root.iter():
             tag = e.tag.split("}")[-1]
             styled = styled or e.get("style") is not None
             nested = nested or (tag == "svg" and e is not root)
+            squeezed = squeezed or e.get("textLength") is not None or e.get("lengthAdjust") is not None
             fs = e.get("font-size")
             if fs is not None and tag != "text" and (re.fullmatch(r"\d+(\.\d+)?(px)?", fs.strip()) is None or float(fs.strip().replace("px", "")) < 14):
                 sizes.append((tag, fs))
@@ -293,6 +323,7 @@ def svg_rules(where, svg):
                 shrinks.append(tf)
         need(not styled, f"{where} diagram: no style attributes. Set the size with the font-size attribute, such as font-size=\"14\", and colours with fill and stroke")
         need(not nested, f"{where} diagram: no svg inside the svg. Draw everything in the one svg that is 320 wide")
+        need(not squeezed, f"{where} diagram: no textLength or lengthAdjust. They squeeze the letters, so shorten the label instead")
         if sizes:
             need(False, f"{where} diagram: font-size {sizes[0][1]!r} on a <{sizes[0][0]}> is not allowed. Every font-size, on any element, must be a plain number, 14 or larger")
         if shrinks:
