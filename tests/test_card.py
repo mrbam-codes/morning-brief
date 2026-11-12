@@ -10,7 +10,7 @@ Headless Chrome will not open a window narrower than 500px, so the page runs ins
 - once settled, the QR read back from the canvas pixels equals qr.js, pure black on pure white,
   whole-pixel modules no wider than 246px with the margin, nothing on top of it, nothing faded or tinted;
 - with reduced motion both ways are an instant swap;
-- Move my progress: Copy code gives a code; in an empty browser, bad codes are refused and change nothing,
+- Move my progress (in the My scores sheet since plan 22): Copy code gives a code; in an empty browser, bad codes are refused and change nothing,
   Cancel changes nothing, and Yes loads the same days, points and topics;
 - no console errors anywhere.
 """
@@ -153,7 +153,7 @@ C, P = results.get("copy") or {}, results.get("paste") or {}
 if "crash" in C or "crash" in P:
     fails.append(f"move: audit crashed: {C.get('crash') or P.get('crash')}")
 else:
-    need(C.get("found") and C.get("aboveQuiz"), "move: Move my progress is missing or not above the quiz")
+    need(C.get("found") and C.get("inSheet") and C.get("onPage") == 0, "move: Move my progress is missing from the My scores sheet, or still a card on the page")
     need(re.fullmatch(r"MB\.1[zj]\.[A-Za-z0-9_-]+\.[0-9a-z]{7}", C.get("code") or "") is not None and C.get("boxShown"), f"move: Copy code gave {C.get('code')!r}")
     need(all(b["status"] and not b["asked"] for b in P.get("bad", [])) and P.get("unchangedAfterBad") and P.get("imgs") == 0, f"move: bad codes: {P.get('bad')}, unchanged {P.get('unchangedAfterBad')}")
     need(P.get("asked") and P.get("goodStatus") == "" and "loads the progress in the code" in (P.get("ask") or "") and P.get("unchangedAfterCancel") and P.get("afterCancel") == "Nothing changed.", f"move: confirm and Cancel: {P.get('ask')!r} {P.get('afterCancel')!r} status {P.get('goodStatus')!r}")

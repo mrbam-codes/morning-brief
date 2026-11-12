@@ -1,5 +1,6 @@
 /* Morning brief: score badge (top right), My scores panel, the Terminal x Neon
-   share card (which flips over to a QR code from qr.js) and Move my progress.
+   share card (which flips over to a QR code from qr.js) and Move my progress
+   (inside My scores; a browser with no saved progress also gets a Paste prompt).
    Scoring itself is ScoreCore (scorecore.js); the page passes in its saved state
    through MBScores.init. Nothing leaves this browser. */
 (function () {
@@ -35,7 +36,7 @@
     var f = inner.querySelector('[data-close]'); if (f) f.focus();
     if (onOpen) onOpen(o, close);
   }
-  function panel() {
+  function panel(msg) {
     var m = stats(), rk = m.rk, pct = rk.next ? Math.round(100 * (m.S.points - rk.floor) / (rk.ceil - rk.floor)) : 100;
     var acc = m.R.asked ? Math.round(100 * m.R.right / m.R.asked) + '%' : '–', strip = '', first = Object.keys(m.S.days).filter(function (k) { return /^\d{4}-\d{2}-\d{2}$/.test(k); }).sort()[0] || m.t;
     for (var i = 27; i >= 0; i--) {
@@ -56,10 +57,15 @@
       '<div style="display:grid;gap:8px"><div class="cc-tag">The last four weeks</div><div class="cc-strip">' + strip + '</div>' +
       '<div class="cc-key"><span><i style="background:#2a7a4c"></i>done</span><span><i style="background:#ff3df2"></i>perfect</span><span><i style="border:1px dashed #ff6f91"></i>missed</span><span><i style="outline:2px solid #3de6ff"></i>today</span></div></div>' +
       '<div class="cc-row"><button class="cc-btn" data-share>Show my share card</button><button class="cc-btn ghost" data-prog>Badges and progress</button></div></div>');
+    /* Move my progress sits at the foot of the sheet; after a code loads, the sheet opens again with the new numbers */
+    var shut = null, mv = moveBox({ loaded: function (t) { if (shut) shut(); panel(t); } });
+    sheet.appendChild(mv);
     overlay(sheet, function (o, close) {
+      shut = close;
       sheet.querySelector('[data-share]').addEventListener('click', function () { close(); share(); });
       sheet.querySelector('[data-prog]').addEventListener('click', function () { close(); cfg.openProgress && cfg.openProgress(); });
     });
+    if (typeof msg === 'string') setTimeout(function () { mv.querySelector('.mv-status').textContent = msg; }, 60);
   }
   function cardHTML(m) {
     var rk = m.rk, td = m.td, pts = td ? td.points : 0, mult = td ? td.mult : m.pv.mult;
@@ -383,17 +389,29 @@
     return fmt(s.points || 0) + ' points from ' + n + (n === 1 ? ' quiz day' : ' quiz days');
   }
   function node(t, c, x) { var n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; }
-  function moveBox() {
-    var box = node('section', 'gcard move'), st = node('p', 'mv-status'), out = node('textarea', 'mv-code'), inp = node('textarea', 'mv-in');
-    box.setAttribute('aria-label', 'Move my progress');
-    box.append(node('span', 'lab', 'Move my progress'), node('h2', null, 'Keep your streak on a new address or phone'),
-      node('p', null, 'Your streak and points are saved in this browser only. Copy your code here, then paste it on the new page. The code is never sent anywhere.'));
-    var row = node('div', 'mv-row'), cp = node('button', 'btn', 'Copy code'), ps = node('button', 'btn alt', 'Paste code');
-    cp.type = ps.type = 'button'; row.append(cp, ps); box.append(row);
+  /* moveBox() is the block in the My scores sheet: Copy code and Paste code.
+     moveBox({ pasteOnly: true }) is the prompt for a browser with no saved progress: Paste it and Not now.
+     o.loaded(message) runs after a code is loaded; without it the message shows in the block. */
+  function moveBox(o) {
+    o = o || {};
+    var only = !!o.pasteOnly, B = only ? ['btn', 'btn alt'] : ['cc-btn', 'cc-btn ghost'];
+    var box = node(only ? 'section' : 'div', only ? 'mv-got move' : 'cc-move move'), st = node('p', 'mv-status'), out = node('textarea', 'mv-code'), inp = node('textarea', 'mv-in');
+    if (only) {
+      box.setAttribute('aria-label', 'Got a progress code?');
+      box.append(node('b', null, 'Switching phone or address?'), node('p', null, 'Got a progress code? Paste it to bring your streak with you.'));
+    } else {
+      var h = node('h4', null, 'Keep your streak on a new address or phone'); h.id = 'ccMoveH';
+      box.setAttribute('role', 'group'); box.setAttribute('aria-labelledby', 'ccMoveH');
+      box.append(node('span', 'cc-tag', 'Move my progress'), h,
+        node('p', null, 'Your streak and points are saved in this browser only. Copy your code here, then paste it on the new page. The code is never sent anywhere.'));
+    }
+    var row = node('div', 'mv-row'), cp = node('button', B[0], 'Copy code'), ps = node('button', only ? B[0] : B[1], only ? 'Paste it' : 'Paste code');
+    cp.type = ps.type = 'button'; if (!only) row.append(cp); row.append(ps); box.append(row);
+    if (only) { var later = node('button', B[1], 'Not now'); later.type = 'button'; later.addEventListener('click', function () { box.remove(); }); row.append(later); }
     out.readOnly = true; out.rows = 3; out.hidden = true; out.setAttribute('aria-label', 'Your progress code');
     var pa = node('div', 'mv-paste'); pa.hidden = true;
     inp.rows = 3; inp.placeholder = 'Paste a progress code here'; inp.setAttribute('aria-label', 'Progress code to paste in'); inp.setAttribute('spellcheck', 'false');
-    var use = node('button', 'btn', 'Use this code'); use.type = 'button'; pa.append(inp, use);
+    var use = node('button', B[0], 'Use this code'); use.type = 'button'; pa.append(inp, use);
     var ask = node('div', 'mv-ask'); ask.hidden = true;
     st.setAttribute('role', 'status'); st.setAttribute('aria-live', 'polite');
     box.append(out, pa, ask, st);
@@ -423,18 +441,25 @@
         var now = cfg.state(), had = Object.keys(now.days || {}).length || now.points;
         ask.append(node('p', null, had ? 'This replaces the progress in this browser (' + describe(now) + ') with the progress in the code (' + describe(r.s) + ').'
           : 'This loads the progress in the code (' + describe(r.s) + ').'));
-        var yes = node('button', 'btn', had ? 'Yes, replace it' : 'Yes, load it'), no = node('button', 'btn alt', 'Cancel');
+        var yes = node('button', B[0], had ? 'Yes, replace it' : 'Yes, load it'), no = node('button', B[1], 'Cancel');
         yes.type = no.type = 'button';
-        yes.addEventListener('click', function () { ask.hidden = true; ask.textContent = ''; inp.value = ''; pa.hidden = true; cfg.replace(r.s); paint(true); say('Done. This browser now has ' + describe(cfg.state()) + '.'); });
+        yes.addEventListener('click', function () {
+          ask.hidden = true; ask.textContent = ''; inp.value = ''; pa.hidden = true; cfg.replace(r.s); paint(true);
+          var done = 'Done. This browser now has ' + describe(cfg.state()) + '.';
+          if (o.loaded) o.loaded(done); else { if (only) row.hidden = true; say(done); }
+        });
         no.addEventListener('click', function () { ask.hidden = true; ask.textContent = ''; say('Nothing changed.'); });
         ask.append(yes, no); ask.hidden = false; say('');
       }, function (e) { say(e && e.keep ? e.message : 'That code did not work. Nothing was changed.'); });
     });
     return box;
   }
+  /* no saved progress: no quiz days and no points, so a pasted code has nothing to replace */
+  function noProgress() { var S = cfg && cfg.state(); return !!S && !Object.keys(S.days || {}).filter(function (k) { return ISO.test(k); }).length && !S.points; }
+  function gotCode() { return noProgress() ? moveBox({ pasteOnly: true }) : null; }
   /* the cat now in the share card's ship (Kimchi until the card has been opened); read only, never saved. Used by tour.js. */
   function pilotNow() { var S = cfg && cfg.state(); return S && S.pilot === 'charlee' && window.CHARLEE ? 'charlee' : 'kimchi'; }
-  window.MBScores = { init: function (c) { cfg = c; paint(false); }, paint: paint, panel: panel, share: share, moveBox: moveBox,
+  window.MBScores = { init: function (c) { cfg = c; paint(false); }, paint: paint, panel: panel, share: share, moveBox: moveBox, gotCode: gotCode, noProgress: noProgress,
     pilotNow: pilotNow, shipHTML: shipHTML, mountPilot: pilot,
     code: { make: makeCode, read: readCode, valid: validState } };
 })();

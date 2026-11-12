@@ -84,11 +84,13 @@ else:
         need(False, "progress code test ran: " + (out.stdout + out.stderr)[-600:])
 
 sc = (ROOT / "scorecard.js").read_text(encoding="utf-8")
-body = sc[sc.index("function moveBox()"):sc.index("window.MBScores =")]
+body = sc[sc.index("function moveBox(o)"):sc.index("window.MBScores =")]
 need("innerHTML" not in body and "eval(" not in sc and "new Function" not in sc, "Move my progress builds its controls with text only: no innerHTML, no eval")
 need("navigator.clipboard" in body and "out.select()" in body, "Copy code uses the clipboard inside the click, with a selectable box as the fallback")
 idx = (ROOT / "index.html").read_text(encoding="utf-8")
-need(idx.index("MBScores.moveBox()") < idx.index("drawQuiz();m2.append(qc);"), "Move my progress sits above the quiz")
+pnl = sc[sc.index("function panel(msg)"):sc.index("function cardHTML(")]
+need("moveBox({ loaded:" in pnl and "MBScores.moveBox(" not in idx, "Move my progress is in the My scores sheet, not a card on the page (plan 22)")
+need(0 < idx.index("MBScores.gotCode()") < idx.index("makeDeck(b,'news'"), "a browser with no saved progress gets the Paste prompt above the Today deck")
 
 print("PROGRESS OK" if not misses else "MISSES: " + str(len(misses)))
 sys.exit(1 if misses else 0)

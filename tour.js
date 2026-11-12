@@ -50,8 +50,8 @@ function part(s){if(!s.hook)return null;var n=document.querySelector('[data-tour
 /* a full-screen sheet, the score panel or the share card is open */
 function covered(){return !!document.querySelector('.sheet,.cc-over')}
 /* Move my progress is being used: typing in it, or its paste box or question is open */
-function moving(){var a=document.activeElement;if(a&&a.closest&&a.closest('.gcard.move'))return true;
-  return !!document.querySelector('.gcard.move .mv-paste:not([hidden]),.gcard.move .mv-ask:not([hidden])')}
+function moving(){var a=document.activeElement;if(a&&a.closest&&a.closest('.move'))return true;
+  return !!document.querySelector('.move .mv-paste:not([hidden]),.move .mv-ask:not([hidden])')}
 function tourBtn(){return document.querySelector('[data-tour-btn]')}
 /* the two home-screen icons, drawn with DOM calls */
 function icon(kind){var s=document.createElementNS(NS,'svg');s.setAttribute('viewBox','0 0 24 24');s.setAttribute('aria-hidden','true');s.setAttribute('focusable','false');

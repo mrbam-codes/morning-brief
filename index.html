@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-nGWI8TDeZUJOh0uJbH8jiE96BefqQYbi/HBJfhkZ94E='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-xUL3C13A+ob9NQE+EnQmEHozqVv3KPHxkeq++zY2me8='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -311,13 +311,79 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 .e .qrbox .qr{z-index:2;background:#fff}
 .e .qrbox .qa{z-index:3;visibility:hidden}
 .e .addr{flex:none;text-align:center;color:#bff7ff;letter-spacing:.03em;font-size:5cqw;white-space:nowrap}
-/* Move my progress (plan 14) */
-.gcard.move .mv-row{display:flex;gap:8px}.gcard.move .mv-row .btn{flex:1;margin-top:14px}
-.gcard.move textarea{display:block;width:100%;margin-top:12px;padding:12px;border-radius:12px;border:1px solid var(--line);background:#0b0620;color:#fff;font:14px/1.4 'IBM Plex Mono',ui-monospace,monospace;word-break:break-all}
-.gcard.move textarea[hidden],.gcard.move [hidden]{display:none}
-.gcard.move .mv-ask{margin-top:12px;padding:12px;border-radius:12px;border:1px solid #ffe600}
-.gcard.move .mv-ask p{color:#fff}
-.gcard.move .mv-status{margin-top:10px;color:#fff}.gcard.move .mv-status:empty{display:none}
+/* Move my progress (plan 14). Plan 22: it lives in the My scores sheet (.cc-move), and a browser with no
+   saved progress also gets a short Paste prompt under the headline (.mv-got), clear of the score badge. */
+.move .mv-row{display:flex;gap:8px}.move .mv-row>button{flex:1 1 0;min-width:0}
+.move textarea{display:block;width:100%;margin-top:12px;padding:12px;border-radius:12px;border:1px solid var(--line);background:#0b0620;color:#fff;font:14px/1.4 'IBM Plex Mono',ui-monospace,monospace;word-break:break-all;scroll-margin:100px 0 24px}
+.move [hidden]{display:none!important}
+.move .mv-ask{margin-top:12px;padding:12px;border-radius:12px;border:1px solid #ffe600}
+.move .mv-ask p{color:#fff;margin:0}
+.move .mv-status{margin-top:10px;color:#fff}.move .mv-status:empty{display:none}
+.cc-move{border-top:1px solid #26303d;padding-top:14px;display:grid;gap:8px}
+.cc-move h4{font:700 17px/1.25 'Space Grotesk',system-ui,sans-serif;margin:0}
+.cc-move>p{margin:0;font-size:14px;line-height:1.45;color:#c8d1dc}
+.cc-move .cc-btn{min-height:48px}.cc-move .mv-row{margin-top:4px}
+.cc-move .mv-paste .cc-btn,.cc-move .mv-ask .cc-btn{display:block;width:100%;margin-top:8px}
+.cc-move .mv-status{margin:0;font-size:14px}
+.mv-got{margin:20px 16px 0;padding:14px;border:1px solid var(--tech);border-radius:16px;background:linear-gradient(120deg,#2a1a00 0%,#160c3a 60%);scroll-margin-top:100px}
+.mv-got>b{display:block;font-size:16px;line-height:1.25}
+.mv-got>p{font-size:14px;line-height:1.45;color:var(--lilac);margin-top:2px}
+.mv-got .mv-row .btn{margin-top:12px;padding:13px}
+.mv-got .mv-ask .btn{padding:13px}
+/* How this brief was made: the Sieve card (sieve.js, plan 22) */
+.sieve{position:relative;padding:0;overflow:hidden;border-radius:20px;background:radial-gradient(130% 150% at 100% 0%,#22125c 0%,#110936 55%,#0d072a 100%);border:1px solid #3d2b92;box-shadow:0 14px 40px -24px #3dffa2}
+.sieve::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(110deg,transparent 30%,#3dffa2 45%,#3de6ff 50%,transparent 65%) 0 0/250% 100%;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:svedge 4.5s linear infinite paused;pointer-events:none}
+.sieve.live::before{animation-play-state:running}
+@keyframes svedge{from{background-position:120% 0}to{background-position:-120% 0}}
+.sv-card{display:block;width:100%;padding:13px 14px 12px;text-align:left;border-radius:20px;-webkit-tap-highlight-color:transparent}
+.sv-card:focus-visible{outline:3px solid #3de6ff;outline-offset:-4px}
+.sv-card>span{display:block}
+.sv-top{display:flex!important;justify-content:space-between;align-items:center;gap:8px}
+.sv-kick{font-size:12px;font-weight:700;line-height:1.2;letter-spacing:.12em;text-transform:uppercase;color:var(--tech)}
+.sv-cue{font-size:12px;font-weight:700;line-height:1;color:#3dffa2;white-space:nowrap}
+.sv-cue i{display:inline-block;font-style:normal;transition:transform .4s;margin-left:4px}
+.sieve.open .sv-cue i{transform:rotate(180deg)}
+.sv-cv{display:block;width:100%;height:40px;margin:6px 0 4px}
+.sv-nums{display:grid!important;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:6px;margin-top:4px}
+.sv-nums>span{display:flex;flex-direction:column;min-width:0}
+.sv-nums b{font:400 34px/1 Anton,Impact,sans-serif;color:#fff;font-variant-numeric:tabular-nums}
+.sv-nums em{font:600 12px/1.2 'IBM Plex Mono',ui-monospace,monospace;font-style:normal;color:#bdb3e3;margin-top:8px}
+.sv-nums .r b{color:#ff6b95}.sv-nums .g b{color:#3dffa2}.sv-nums .s b{color:#3de6ff}
+.sv-top+.sv-nums{margin-top:14px}
+.sv-old{font-size:13px;line-height:1.4;color:#bdb3e3;margin-top:8px}
+.sv-xp{display:grid;grid-template-rows:0fr;transition:grid-template-rows .65s cubic-bezier(.2,.8,.2,1)}
+.sieve.open .sv-xp{grid-template-rows:1fr}
+.sv-xp>div{min-height:0;overflow:hidden;visibility:hidden;transition:visibility 0s .65s}
+.sieve.open .sv-xp>div{visibility:visible;transition:visibility 0s}
+.sv-in{padding:2px 14px 14px}
+.sv-stages{position:relative}
+.sv-stages::before{content:"";position:absolute;left:17px;top:22px;bottom:12px;width:2px;background:linear-gradient(#c9b8ff,#ff6b95 30%,#3dffa2 55%,#3de6ff 80%,#ffe600);transform-origin:top;transform:scaleY(0);transition:transform 1.1s .15s cubic-bezier(.3,.7,.2,1)}
+.sieve.open .sv-stages::before{transform:none}
+.sv-st{display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;padding-top:16px;opacity:0;transform:translateY(12px);transition:opacity .45s,transform .45s;transition-delay:calc(var(--i)*120ms + .15s)}
+.sieve.open .sv-st{opacity:1;transform:none}
+.sv-dot{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#0b0620;border:2px solid var(--c);color:var(--c);font-size:16px;font-weight:700;line-height:1;box-shadow:0 0 16px -3px var(--c);position:relative;z-index:1}
+.sv-st h3{margin:0;font-size:16px;line-height:1.2}
+.sv-st h3 b{font:400 46px/.95 Anton,Impact,sans-serif;color:var(--c);margin-right:4px}
+.sv-st h3 span{font-size:16px;font-weight:700;line-height:1.2;color:#fff}
+.sv-st p{margin:12px 0 0;font-size:14px;line-height:1.45;color:#bdb3e3}
+.sv-st ol,.sv-st ul{list-style:none;margin:8px 0 0;padding:0}
+.sv-st li{padding:8px 0;border-top:1px solid #ffffff18}
+.sv-st li strong{display:block;font-size:15px;font-weight:600;line-height:1.3;color:#fff;overflow-wrap:anywhere}
+.sv-st li span{display:block;font-size:14px;line-height:1.4;color:#bdb3e3;margin-top:2px;overflow-wrap:anywhere}
+.sv-bar{display:flex;gap:3px;height:12px;margin-top:10px}.sv-bar:empty{display:none}
+.sv-bar i{flex:1;background:var(--c);border-radius:2px;box-shadow:0 0 8px -1px var(--c)}
+.sv-grp{margin-top:10px}
+.sv-grp h4{margin:0;font:600 12px/1.3 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.sv-grp ul{margin:2px 0 0}
+.sv-grp li{padding:3px 0;border:0;font-size:14px;line-height:1.4;color:#f4f0ff}
+.sv-key{margin-top:18px;padding:12px 14px;border-radius:14px;background:#0b0620;border:1px solid var(--line)}
+.sv-key dl{margin:0}.sv-key dl div{margin-top:10px}
+.sv-key dt{font:600 12px/1.3 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.sv-key dd{margin:2px 0 0;font-size:14px;line-height:1.45;color:#f4f0ff}
+.sv-meta{font-size:13px;line-height:1.45;margin:12px 0 0;color:#bdb3e3}
+.sv-less{display:flex;justify-content:center;align-items:center;min-height:48px;width:100%;margin-top:12px;border-radius:14px;border:1px solid #4a3a9a;font-size:15px;font-weight:700;color:#fff}
+.sv-less:focus-visible{outline:3px solid #3de6ff;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.sieve::before{animation:none;display:none}.sv-xp,.sv-xp>div,.sv-st,.sv-stages::before,.sv-cue i{transition:none}}
 /* ---- v2: Signal decks (Today and Learn), Radar card 00, Read rails ---- */
 :root{--learn:#3dffa2;--build:#16b8f0}
 .deckwrap{padding:22px 0 4px}
@@ -560,6 +626,7 @@ span.jl-src{color:var(--lilac);font-weight:500}
 <script src="scorecard.js"></script>
 <script src="keep.js"></script>
 <script src="evidence.js"></script>
+<script src="sieve.js"></script>
 <script src="done-fx.js"></script>
 <script src="builds.js"></script>
 <script src="tour.js"></script>
@@ -571,7 +638,7 @@ const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=nu
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
 const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener noreferrer';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
-const BUILD='2026-11-16.3';
+const BUILD='2026-11-16.4';
 /* ---------- saved progress (this phone only) ---------- */
 const KEY='mb-v1',DAY=/^\d{4}-\d{2}-\d{2}$/;
 const fresh=()=>({days:{},tags:{AI:[0,0],Tech:[0,0],Cyber:[0,0]},lessons:{},points:0,badges:{},review:[],prog:{},sound:true});
@@ -901,6 +968,8 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
   const h=el('header','hero'),c=document.createElement('canvas');const nav=el('div','nav');nav.setAttribute('data-tour','bar');h.append(c,nav,el('div','date',b.dayLabel),el('h1','verdict',b.verdict),el('div','more',(LS.length===1?'Today’s lesson':LS.length+' lessons')+' and '+news.length+' stories ↓'));if(KSTORY)h.append(kimchiHint(b));app.append(h);
   if(window.MBScores&&window.ScoreCore)MBScores.init({state:()=>S,save,today:todayStr,mode:MODE,ranks:RANKS,label:'BRIEF',foot:'AI × TECH × CYBER',url:window.MBQR?MBQR.label:'',day:()=>briefDay(todayStr()),openProgress,
     replace:o=>{S=Object.assign(fresh(),o);save();refreshNav()}});
+  /* a browser with no saved progress: a short Paste prompt under the headline (Copy and Paste live in My scores) */
+  if(window.MBScores&&window.ScoreCore&&MBScores.gotCode)try{const g=MBScores.gotCode();if(g)app.append(g)}catch(e){console.error(e)}
   /* Today deck */
   const T=makeDeck(b,'news','Today','Swipe sideways. Tap a card to read it, then Done to file it.');T.sec.setAttribute('data-tour','today');
   news.forEach(([st,lab],i)=>{const id='s'+i,ph=pimg(st,'ph'),vz=st.figure?[st.figure.value,st.figure.label]:st.big?[st.big,'Key figure']:null;
@@ -940,8 +1009,7 @@ function render(b,list){CUR=b.date;tagPhotos(b);const kp=kimchiPick(b);KSTORY=kp
     qc.append(el('span','lab','Today’s quiz'),el('h2',null,dn?'You scored '+dn.score+' out of '+dn.total:items.length+' questions'),el('p',null,dn?'+'+dn.points+' points earned. Replays are for practice and do not change your score.':pr?'You are '+pr+' questions in. Pick up where you left off.':'One question per lesson, plus revision. Points, streaks and badges for every day you play. Up to '+maxPoints(items.length)+' points today.'));
     const bt=el('button','btn',dn?'Practise again':pr?'Resume quiz':'Start quiz');bt.onclick=()=>startQuiz(b,items,qkey);qc.append(bt)};
   /* the quiz and the interview round go last on the page, after everything there is to read */
-  if(window.Evidence)Evidence.mount(m2,b,{cls:'gcard evidence',heading:'h2'});
-  if(window.MBScores&&window.ScoreCore&&MBScores.moveBox)m2.append(MBScores.moveBox());
+  if(window.Sieve)Sieve.mount(m2,b);else if(window.Evidence)Evidence.mount(m2,b,{cls:'gcard evidence',heading:'h2'});
   drawQuiz();m2.append(qc);
   if(b.interview){const ic=el('section','gcard'),idn=S.days[b.date+'-interview'];ic.append(el('span','lab','Interview round'),el('h2',null,'A question you might be asked'),el('p',null,idn?'Done. Replay for practice.':'One scenario, in a consultant’s voice. +15 points if you get it right.'));const bt=el('button','btn',idn?'Practise again':'Take the interview question');bt.onclick=()=>startInterview(b);ic.append(bt);m2.append(ic)}
   app.append(m2);

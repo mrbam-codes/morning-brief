@@ -46,23 +46,25 @@ async function card(reduced){const R={width:innerWidth,reduce:matchMedia('(prefe
   R.second.back=await turnAndWatch(s2,'click');R.second.tractor=await turnAndWatch(s2,'click');
   const pc=s2.querySelector('.slot .kpod canvas');R.second.pilotDrawn=!!pc&&[...pc.getContext('2d').getImageData(0,0,pc.width,pc.height).data].some((v,i)=>i%4===0&&v>0);
   return R}
-async function copy(){const R={};const mv=document.querySelector('.gcard.move');R.found=!!mv;if(!mv)return R;
-  const all=[...document.querySelectorAll('#app section, #app header, #app footer')];R.order=all.map(s=>s.className);
-  R.aboveQuiz=!!(mv.compareDocumentPosition(document.querySelector('.gcard.quiz'))&Node.DOCUMENT_POSITION_FOLLOWING);
-  const sections=[...document.querySelectorAll('#app main section.gcard')];R.lastSection=sections.length?sections[sections.length-1].className:null;
+/* plan 22: Move my progress lives in the My scores sheet that the score badge opens */
+const moveBlock=async()=>{let mv=document.querySelector('.cc-over .cc-move');if(!mv){document.querySelector('.cc-badge').click();await until(()=>document.querySelector('.cc-over .cc-move'),3000);await sleep(300);mv=document.querySelector('.cc-over .cc-move')}return mv};
+async function copy(){const R={};const mv=await moveBlock();R.found=!!mv;if(!mv)return R;
+  R.inSheet=!!mv.closest('.cc-over .cc-sheet');R.onPage=document.querySelectorAll('#app .gcard.move').length;
   const [cp]=mv.querySelectorAll('.mv-row button');cp.click();await until(()=>mv.querySelector('.mv-code').value,3000);await sleep(200);
   R.code=mv.querySelector('.mv-code').value;R.boxShown=!mv.querySelector('.mv-code').hidden;R.status=mv.querySelector('.mv-status').textContent;
   R.points=MBScores&&JSON.parse(localStorage.getItem('mb-v1')).points;R.badge=document.querySelector('.cc-badge').getAttribute('aria-label');return R}
-async function paste(code){const R={};const mv=document.querySelector('.gcard.move'),[,ps]=mv.querySelectorAll('.mv-row button');
+async function paste(code){const R={};const mv=await moveBlock(),[,ps]=mv.querySelectorAll('.mv-row button');
   const before=localStorage.getItem('mb-v1');R.before=JSON.parse(before||'null');R.badgeBefore=document.querySelector('.cc-badge').getAttribute('aria-label');
-  ps.click();await sleep(50);const inp=mv.querySelector('.mv-in'),use=mv.querySelector('.mv-paste .btn');R.pasteShown=!mv.querySelector('.mv-paste').hidden;
+  ps.click();await sleep(50);const inp=mv.querySelector('.mv-in'),use=mv.querySelector('.mv-paste button');R.pasteShown=!mv.querySelector('.mv-paste').hidden;
   const tryCode=async c=>{inp.value=c;use.click();await sleep(400);return{status:mv.querySelector('.mv-status').textContent,asked:!mv.querySelector('.mv-ask').hidden}};
   R.bad=[];for(const c of ['rubbish','<img src=x onerror=alert(1)>',code.slice(0,-3),'MEP'+code.slice(2)])R.bad.push(await tryCode(c));
-  R.unchangedAfterBad=localStorage.getItem('mb-v1')===before;R.imgs=document.querySelectorAll('.gcard.move img').length;
+  R.unchangedAfterBad=localStorage.getItem('mb-v1')===before;R.imgs=document.querySelectorAll('.move img').length;
   const a=await tryCode(code);R.ask=mv.querySelector('.mv-ask').innerText;R.asked=a.asked;R.goodStatus=a.status;
   const [yes,no]=mv.querySelectorAll('.mv-ask button');if(!no)return R;no.click();await sleep(100);R.afterCancel=mv.querySelector('.mv-status').textContent;R.unchangedAfterCancel=localStorage.getItem('mb-v1')===before;
   ps.click();await tryCode(code);mv.querySelectorAll('.mv-ask button')[0].click();await sleep(300);
-  R.after=JSON.parse(localStorage.getItem('mb-v1'));R.status=mv.querySelector('.mv-status').textContent;R.badgeAfter=document.querySelector('.cc-badge').getAttribute('aria-label');
+  /* after Yes the sheet opens again with the new numbers, and the message shows there */
+  await until(()=>{const s=document.querySelector('.cc-over .cc-move .mv-status');return s&&s.textContent},3000);
+  R.after=JSON.parse(localStorage.getItem('mb-v1'));R.status=document.querySelector('.cc-over .cc-move .mv-status').textContent;R.badgeAfter=document.querySelector('.cc-badge').getAttribute('aria-label');
   R.quizText=document.querySelector('.gcard.quiz').innerText;return R}
 async function run(){await sleep(1500);const h=decodeURIComponent(location.hash.slice(1)),R={phase:h.split('=')[0]};
   if(h==='card')Object.assign(R,await card(false));
