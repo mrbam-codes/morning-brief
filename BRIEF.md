@@ -14,8 +14,8 @@ These rules are for editions dated 11 November 2026 or later, which follow the 5
 - `stories`: the other stories, shown as cards (daily)
 - `themes`: Sunday only, exactly 3 of `{ "title": "...", "stories": [...] }`, used instead of `stories`
 - `lessons`, `fact`, `try` and `quiz`: see "The course" below
-- `builds`: 0 to 4 things people built with artificial intelligence (AI) tools, from 14 November 2026: see "Built in the wild" below
-- `launched`: 0 to 3 launches from the last 36 hours, from 14 November 2026: see "Just launched" below
+- `builds`: 0 to 4 things people built with artificial intelligence (AI) tools, from 13 November 2026: see "Built in the wild" below
+- `launched`: 0 to 3 launches from the last 36 hours, from 13 November 2026: see "Just launched" below
 
 ## A story
 
@@ -127,7 +127,7 @@ Grok saves a daily sweep of X to the private repository at `/home/claude/Inbox-/
 
 ## Built in the wild
 
-`builds`: 0 to 4 things people have built with an AI tool, shown as cartridges in a carousel. Only in editions dated 14 November 2026 or later: `check.py` refuses `builds` in earlier editions. Never pad. On a thin day use fewer, or none, and say so in the closing line.
+`builds`: 0 to 4 things people have built with an AI tool, shown as cartridges in a carousel. Only in editions dated 13 November 2026 or later: `check.py` refuses `builds` in earlier editions. Never pad. On a thin day use fewer, or none, and say so in the closing line.
 
 Each build is `{ "what", "who", "reach", "label", "steps", "tools", "proof", "proof_note", "level", "level_note", "first_step", "links", "source" }` plus at most one visual (`video`, `diagram` or `photo`).
 
@@ -165,7 +165,7 @@ Rules:
 
 ## Just launched
 
-`launched`: 0 to 3 products or models launched in the last 36 hours, each `{ "company", "what", "claim", "source": { "name", "url" }, "tag" }`. Only in editions dated 14 November 2026 or later: `check.py` refuses `launched` in earlier editions. Never pad: 0 is fine.
+`launched`: 0 to 3 products or models launched in the last 36 hours, each `{ "company", "what", "claim", "source": { "name", "url" }, "tag" }`. Only in editions dated 13 November 2026 or later: `check.py` refuses `launched` in earlier editions. Never pad: 0 is fine.
 
 - `company`: up to 40 characters. `what`: what launched, one line, up to 90 characters.
 - `claim`: exactly `true`. A launch is the company's own claim, and the page says so.
@@ -181,5 +181,5 @@ Rules:
 2. Read the article for each candidate.
 3. Open the original it rests on (company post, paper, advisory, regulator page) and compare the numbers. Record any mismatch in the story's `take`.
 4. Check forums for the best discussion of the biggest stories.
-5. Find builds (from 14 November 2026): search at least 4 times for things people built with AI in the last 7 days, for example "Show HN" (Hacker News) with an AI tool named, "built with Claude Code" this week, a YouTube demo of an AI-built project, or a trending public code project built by an AI agent. Take leads from Grok's Builds list too, but find each one again by searching its title or the maker's handle. Open the video, the code or independent coverage, set the proof rating from what you opened, and follow "Built in the wild".
-6. Just launched (from 14 November 2026): search each major AI and technology company's newsroom or blog for launches in the last 36 hours, and take leads from Grok's Launches list. Open the company's own post from your search results and follow "Just launched".
+5. Find builds (from 13 November 2026): search at least 4 times for things people built with AI in the last 7 days, for example "Show HN" (Hacker News) with an AI tool named, "built with Claude Code" this week, a YouTube demo of an AI-built project, or a trending public code project built by an AI agent. Take leads from Grok's Builds list too, but find each one again by searching its title or the maker's handle. Open the video, the code or independent coverage, set the proof rating from what you opened, and follow "Built in the wild".
+6. Just launched (from 13 November 2026): search each major AI and technology company's newsroom or blog for launches in the last 36 hours, and take leads from Grok's Launches list. Open the company's own post from your search results and follow "Just launched".

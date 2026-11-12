@@ -24,7 +24,7 @@ def git(*a):
 
 real = json.loads(git("show", f"origin/briefs:briefs/{date}.json"))
 OLD_CHECKER = git("show", "8daa907:check.py")
-GATE = 'BUILDS_FROM = "2026-11-14"'
+GATE = 'BUILDS_FROM = "2026-11-13"'
 
 
 def run(b, live=True, earlier=None, checker=None):
@@ -163,8 +163,8 @@ CASES = [
 ]
 SPECIAL = [
     ("a build repeated from 3 days before", lambda b: None, "same build as the " + earlier_day + " brief. Never repeat a build", {earlier_day: earlier_brief}, True),
-    ("builds before BUILDS_FROM", lambda b: b.pop("launched"), "builds: not allowed in editions dated before 2026-11-14", {}, False),
-    ("launched before BUILDS_FROM", lambda b: b.pop("builds"), "launched: not allowed in editions dated before 2026-11-14", {}, False),
+    ("builds before BUILDS_FROM", lambda b: b.pop("launched"), "builds: not allowed in editions dated before 2026-11-13", {}, False),
+    ("launched before BUILDS_FROM", lambda b: b.pop("builds"), "launched: not allowed in editions dated before 2026-11-13", {}, False),
     ("an empty builds list before BUILDS_FROM", lambda b: (b.pop("launched"), b.update(builds=[])), "builds: not allowed in editions dated before", {}, False),
 ]
 

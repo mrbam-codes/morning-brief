@@ -473,7 +473,7 @@ def check_v1_lesson(b, day, date):
 # Editions dated before BUILDS_FROM must not carry builds or launched, so older
 # published briefs are never re-judged. BUILDS_FROM moves to the go-live date,
 # the day the routine prompt change is approved and live.
-BUILDS_FROM = "2026-11-14"
+BUILDS_FROM = "2026-11-13"
 PROOFS = ("Shown working", "Code published", "Claim only")
 LEVELS = ("An evening", "A weekend", "A serious project")
 VIDEO_CODE = re.compile(r"[A-Za-z0-9_-]{11}")
