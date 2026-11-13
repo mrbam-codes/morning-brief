@@ -74,7 +74,8 @@ shutil.copy(here / "warp-audit.js", site / "warp-audit.js")
     "const back=n=>{const[y,m,d]=date.split('-').map(Number);return ds(new Date(y,m-1,d-n))};"
     "localStorage.clear();if(seed!=='none'){const days={};for(let i=4;i>=1;i--)days[back(i)]={score:4,total:5,points:0,at:1762800000000};"
     "if(seed==='done3')days[date]={score:3,total:5,points:0,at:1762900000000};"
-    "const S={days,tags:{AI:[5,6],Tech:[4,5],Cyber:[3,4]},lessons:{},points:0,badges:{},review:[],prog:{},sound:false,v2:1,bonus:0};"
+    "const prog=seed==='prog1'?{[date]:[0]}:{};"
+    "const S={days,tags:{AI:[5,6],Tech:[4,5],Cyber:[3,4]},lessons:{},points:0,badges:{},review:[],prog,sound:false,v2:1,bonus:0};"
     "if(seed==='review')S.review=[{q:'Which is a test review question?',options:['This one','Not this','Nor this','Nor that'],answer:0,why:'Test reason.',tag:'Tech',kind:'lesson',n:1,id:'2026-11-01-0',box:0,due:ds(new Date())}];"
     "localStorage.setItem('mb-v1',JSON.stringify(S))}"
     "try{localStorage.setItem('mb-tour-v1','1')}catch(e){}"
@@ -101,7 +102,7 @@ class Q(http.server.SimpleHTTPRequestHandler):
             if os.environ.get("WARP_DEBUG"):
                 print(round(time.time() - T0, 1), route, i, flush=True)
             if route == "/hold":
-                hold(i).wait(400)
+                hold(i).wait(800)
             else:
                 hold(i).set()
             self.send_response(200); self.send_header("Content-Type", "image/gif"); self.send_header("Content-Length", str(len(GIF))); self.end_headers(); self.wfile.write(GIF)
@@ -125,7 +126,7 @@ def run(date, phase, seed="streak4", reduced=False, shot=None):
     if reduced:
         args.append("--force-prefers-reduced-motion")
     url = f"{base}/wp-frame-{rid}.html?id={rid}&seed={seed}&page=" + urllib.parse.quote(f"{'warp-test-house.html' if 'house=1' in phase else 'warp-test.html'}?d={date}#{phase}", safe="")
-    p = subprocess.run(args + ([f"--screenshot={shot}"] if shot else ["--dump-dom"]) + [url], capture_output=True, text=True, timeout=500)
+    p = subprocess.run(args + ([f"--screenshot={shot}"] if shot else ["--dump-dom"]) + [url], capture_output=True, text=True, timeout=900)
     (site / f"wp-frame-{rid}.html").unlink(missing_ok=True)
     for l in p.stderr.splitlines():
         if "CONSOLE" in l:
@@ -161,6 +162,10 @@ jobs = {
     # HOME_ART='house' still draws the house, with its own words
     "house full": (D, "play=rrrrr&house=1", "streak4", False), "house last": (D, "play=rrrrw&house=1", "streak4", True),
     "house sight": (D, "play=rwrwr&prac=1&house=1", "streak4", False),
+    # a notched phone: the badge 47px lower must still clear the scene, gauge and headline; resuming after 1 answer
+    "inset sight": (D, "play=rwrwr&inset=1", "streak4", False), "resume one": (D, "intro", "prog1", True),
+    # the design audit of 13 Nov 2026: targets, small text, sheets, badge chip, footer, older edition, missing edition
+    "probe": (D, "probe", "streak4", False), "probe older": ("2026-11-10", "probe", "streak4", True), "missing edition": ("2026-01-01", "fail", "streak4", True),
 }
 ONLY = [k for k in os.environ.get("WARP_ONLY", "").split(",") if k]  # for debugging: run only these jobs, no screenshots
 if ONLY:
@@ -177,6 +182,9 @@ try:
         sfut += [] if ONLY else [ex.submit(run, D, "play=rwrwr&prac=1&shot2=1", "streak4", False, str(out / "warp-390-bed-practice-home.png")),
                  ex.submit(run, D, "play=rwrwr&kb=1&shot=1", "streak4", True, str(out / "warp-390-bed-sight-reduced.png")),
                  ex.submit(run, D, "play=wwwww&kb=1&shot=1", "streak4", True, str(out / "warp-390-tow-reduced.png")),
+                 ex.submit(run, D, "play=rwrwr&introshot=1", "streak4", False, str(out / "warp-390-intro.png")),
+                 ex.submit(run, D, "play=rwrwr&qshot=2", "streak4", False, str(out / "warp-390-question.png")),
+                 ex.submit(run, D, "play=rwrwr&ashot=1", "streak4", False, str(out / "warp-390-after-answer.png")),
                  ex.submit(run, WEEKEND, "play=rrrrrrw&shot=1", "streak4", False, str(out / "warp-390-weekend-last.png"))]
         for f in concurrent.futures.as_completed(fut):
             results[fut[f]] = f.result()
@@ -204,6 +212,11 @@ for name in jobs:
         need(st["last"], f"{t}: the quiz is still the last section")
         cat = "Kimchi" if date == "2026-11-11" else "Charlee"
         need(st["pilot"] == f"Pilot: {cat}" and st["cat"] > 0 and st["catW"] > 20, f"{t}: {cat} flies today, the real cat art is in the ship ({st['pilot']}, {st['cat']} nodes, {st['catW']}px)")
+        need(st["launch"] and st["launch"]["bottom"] <= st["vh"], f"{t}: Launch is on screen ({st['launch']})")
+        need(all(s["lastOpt"]["bottom"] <= 844 for s in R["steps"]), f"{t}: each question and all its answers fit one screen ({[s['lastOpt']['bottom'] for s in R['steps']]})")
+        need(all(s["next"] and 0 <= s["next"]["top"] and s["next"]["bottom"] <= 844 for s in R["steps"]), f"{t}: the next button is on screen after every answer ({[s['next'] for s in R['steps']]})")
+        need(all(s["stageH"] == 120 and s["shownOpts"] == (1 if s["ok"] else 2) for s in R["steps"]), f"{t}: compact scene while answering; only the right and picked answers stay ({[(s['stageH'], s['shownOpts']) for s in R['steps']]})")
+        need(all(not s["stageOver"] and not s["afterOver"] for s in R["steps"]), f"{t}: the badge never covers the scene or gauge while answering")
         need(not st["issues"] and not st["tiny"] and not st["small"], f"{t}: start: no clipped or overlapping text, nothing under 12px, buttons 44px ({st['issues']}, {st['tiny']}, {st['small']})")
         if not red:
             need(R["liveOn"] and not R["liveOff"] and R["liveBack"] and not R["liveHidden"] and R["liveShown"], f"{t}: the drawing runs only on screen with the page visible ({R['liveOn']}, {R['liveOff']}, {R['liveBack']}, {R['liveHidden']}, {R['liveShown']})")
@@ -220,6 +233,7 @@ for name in jobs:
         need(E["saved"] and E["saved"]["score"] == right and E["saved"]["total"] == n and E["progGone"] and E["pts"] == f"+{E['saved']['points']} points" and str(E["saved"]["points"]) == E["points"], f"{t}: saved {E['saved']}, progress cleared, {E['pts']} shown")
         need(re.fullmatch(rf"{right} right × 10( \+ 20 perfect)?(, × [\d.]+ streak)? = \+{E['saved']['points']} points", E["math"] or "") is not None, f"{t}: the points sum line shows ({E['math']!r})")
         need(E["gauge"]["cells"] == right and E["gauge"]["on"] == right and E["pointsInBadge"], f"{t}: ending gauge {E['gauge']['fnum']} and the badge has the new total ({E['badge']})")
+        need(E["stageH"] == 220 and not E["overScene"] and E["math2"]["bottom"] <= 844 and (not E["prac"] or E["prac"]["bottom"] <= 844), f"{t}: ending: full scene, badge clear of scene, gauge and headline, points line and practise button on screen ({E['math2']}, {E['prac']})")
         need(E["headClear"] and E["gaugeClear"] and E["focusHead"], f"{t}: the badge covers neither the gauge nor the headline; focus on the headline")
         need(not E["issues"] and not E["tiny"] and not E["small"], f"{t}: ending: no clipped or overlapping text, nothing under 12px, buttons 44px ({E['issues']}, {E['tiny']}, {E['small']})")
         need(E["head"] in E["live"] and f"{right} out of {n}" in E["live"], f"{t}: the ending is announced ({E['live']!r})")
@@ -252,6 +266,8 @@ for name in jobs:
         need(not R["issues"] and not R["tiny"] and not R["small"] and R["scrollWidth"] <= 390 and not R["errs"], f"{t}: text fits, no errors ({R['issues']}, {R['tiny']}, {R['small']}, {R['errs']})")
     elif R.get("phase") == "review":
         need(R.get("button") and R.get("sheet") == "Review" and R.get("why") and not R.get("errs"), f"{t}: the Review button still plays its own sheet ({R.get('sheet')}, {R.get('errs')})")
+    elif R.get("phase") == "intro":
+        need("You are 1 question in" in (R.get("text") or "") and "Resume quiz" in R["text"], f"{t}: one answer in reads 'You are 1 question in' ({(R.get('text') or '')[:60]!r})")
     elif R.get("phase") == "noquiz":
         need(R.get("found") and not R.get("warp") and R.get("cls") == "gcard quiz" and "0 questions" in (R.get("text") or "") and not R.get("errs"), f"{t}: an edition with no quiz keeps the old card ({R.get('text')!r})")
 older = results.get("older edition", {})
@@ -259,7 +275,7 @@ if "older edition" in jobs:
     need((older.get("end") or {}).get("saved", {}).get("score") == 4, "the older edition saves under its own date")
 errors = [c for c in consoles if ERR.search(c[1])]
 need(not errors, f"no console errors in any run ({errors[:4]})")
-for k in ([] if ONLY else list(shots) + ["bed-practice-home", "bed-sight-reduced", "tow-reduced", "weekend-last"]):
+for k in ([] if ONLY else list(shots) + ["bed-practice-home", "bed-sight-reduced", "tow-reduced", "weekend-last", "intro", "question", "after-answer"]):
     f = out / f"warp-390-{k}.png"
     need(f.exists() and f.stat().st_size > 20000, f"screenshot {f.name}")
 for f in ("warp-test.html", "warp-test-house.html", "warp-house.js", "warp-audit.js", "wp-errs.js", "wp-frame.js"):

@@ -386,7 +386,7 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 @media (prefers-reduced-motion:reduce){.sieve::before{animation:none;display:none}.sv-xp,.sv-xp>div,.sv-st,.sv-stages::before,.sv-cue i{transition:none}}
 /* Today's quiz as Warp Run (warp.js, plan 23), from the approved mock-up (quiz-warp-run.html) */
 .gcard.quiz[data-warp]{padding:0;background:none;border:0}
-.wr{position:relative;border-radius:22px;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,#0a0524,#150b38 60%,#1d0f4a);border:1px solid #2c1d6b;scroll-margin-top:96px;--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;--disp:Anton,Impact,'Arial Narrow',sans-serif}
+.wr{position:relative;border-radius:22px;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,#0a0524,#150b38 60%,#1d0f4a);border:1px solid #2c1d6b;scroll-margin-top:calc(96px + env(safe-area-inset-top,0px));--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;--disp:Anton,Impact,'Arial Narrow',sans-serif}
 .wr .kick{display:block;font:600 12px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--tech)}
 .wr .w-stage{position:relative;height:220px;background:#070418;overflow:hidden}
 .wr .w-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -460,16 +460,16 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 .wr .btnx.alt{background:transparent;color:#fff;border:1px solid #ffffff88}
 .wr .btnx.cy{background:#3de6ff;color:#03121f}
 .wr .btnx:disabled{opacity:.6;cursor:default}
-.wr .w-fin{text-align:center;scroll-margin-top:96px}
-.wr .w-fin h2{font:400 40px/1.12 var(--disp);text-transform:uppercase;margin:10px 0 8px;letter-spacing:.01em;outline:none;overflow-wrap:anywhere}
+.wr .w-fin{text-align:center;scroll-margin-top:calc(96px + env(safe-area-inset-top,0px))}
+.wr .w-fin h2{font:400 34px/1.12 var(--disp);text-transform:uppercase;margin:8px 0 6px;letter-spacing:.01em;outline:none;overflow-wrap:anywhere}
 .wr .w-fin .lines{margin:0 auto;max-width:34ch;font-size:16px;line-height:1.45;color:#f1ecff}
 .wr .e-full h2{color:var(--tech);text-shadow:0 0 18px #ffe60088}
 .wr .e-last h2{color:#ffd28a}
 .wr .e-sight h2{color:#bfe6ff}
 .wr .e-stop h2{color:#ff9ad0}
 .wr .e-tow h2{color:#c9b8ff}
-.wr .w-score{display:flex;justify-content:center;align-items:baseline;gap:14px;flex-wrap:wrap;margin:22px 0 10px}
-.wr .w-score b{font:400 84px/1.3 var(--disp);color:#fff}
+.wr .w-score{display:flex;justify-content:center;align-items:baseline;gap:14px;flex-wrap:wrap;margin:8px 0 6px}
+.wr .w-score b{font:400 56px/1.3 var(--disp);color:#fff}
 .wr .w-score span{font:700 28px/1.1 'Space Grotesk',system-ui,sans-serif;color:var(--tech)}
 .wr .w-math{color:var(--lilac);font-size:14px;line-height:1.4;margin:6px 0 0}
 .wr .w-new{color:#fff;font-size:15px;font-weight:700;margin:10px 0 0}
@@ -480,7 +480,7 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 .wr .chip.off{border-color:var(--line);color:#bdb3e3}
 .wr .flame-on svg{animation:wflare 1.2s ease-in-out infinite}
 @keyframes wflare{50%{transform:scale(1.15) translateY(-2px);filter:drop-shadow(0 0 8px #ff8a1a)}}
-.wr .prac{margin-top:16px;padding:14px;border-radius:14px;border:1px dashed #3de6ff;text-align:left}
+.wr .prac{margin-top:12px;padding:12px 14px;border-radius:14px;border:1px dashed #3de6ff;text-align:left}
 .wr .prac .lab{display:block;font:600 12px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#3de6ff}
 .wr .prac p{margin:6px 0 0;font-size:14px;line-height:1.45;color:#f1ecff}
 .wr .coda{margin-top:4px;padding:14px;border-radius:14px;background:#0f3a2e;border:1px solid #3ddc97;text-align:left}
@@ -494,6 +494,13 @@ footer a{display:inline-block;margin:4px 12px 4px 0;padding:4px 0}
 .wr .rvbox .rn{font-size:13px;color:#bdb3e3;margin:6px 0 0}
 .wr .in{animation:wrise .4s cubic-bezier(.2,.7,.2,1) backwards}
 @keyframes wrise{from{opacity:0;transform:translateY(12px)}}
+.wr.compact .w-stage{height:120px}
+.wr.compact .w-q{margin:8px 0 12px}
+.wr .w-opt[hidden],.wr .rvbox[hidden]{display:none}
+.wr .w-fin .lines{margin-top:14px}
+.wr .rvfold{margin-top:4px}
+/* during a quiz run the score badge steps aside, so the question and its answers fit one screen */
+body.wr-run .cc-badge{opacity:0;visibility:hidden;pointer-events:none}
 .wr .w-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0;padding:0}
 /* off screen or with the page hidden, nothing moves; with reduced motion, nothing animates at all */
 .wr:not(.live) *,.wr:not(.live) *::before,.wr:not(.live) *::after{animation-play-state:paused!important}

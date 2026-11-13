@@ -20,7 +20,7 @@
 'use strict';
 /* Home is drawn as the cats' bed ('bed'). 'house' brings back the first house, its drawing and its words, exactly. */
 var HOME_ART='bed',BED=HOME_ART!=='house';
-var L='ABCD',TAGC={AI:'#ff2e6e',Tech:'#ffe600',Cyber:'#9a7bff'},NAME={kimchi:'Kimchi',charlee:'Charlee'},SAFE=96;
+var L='ABCD',TAGC={AI:'#ff2e6e',Tech:'#ffe600',Cyber:'#9a7bff'},NAME={kimchi:'Kimchi',charlee:'Charlee'};
 var MONO="'IBM Plex Mono',ui-monospace,Menlo,monospace",DISP="Anton,Impact,'Arial Narrow',sans-serif";
 var FLAME='<svg viewBox="0 0 24 30" aria-hidden="true"><path d="M12 1c2 7 9 10 9 18a9 9 0 0 1-18 0c0-5 3-7 4-11 1 3 2 4 4 5-1-4 0-8 1-12z" fill="#ff7a1a"/><path d="M12 14c1 4 5 5 5 9a5 5 0 0 1-10 0c0-3 2-4 2-6 1 1 2 2 3 1-1-2 0-3 0-4z" fill="#ffe600"/></svg>';
 function h(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!=null)n.textContent=x;return n}
@@ -29,9 +29,14 @@ function plural(n,one,many){return n+' '+(n===1?one:many)}
 function ease(p){return p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2}
 function focusEl(e){try{e.focus({preventScroll:true})}catch(x){e.focus()}}
 /* scroll so the element sits clear of the floating score badge (top right, about 84px tall) */
-function toTop(e){var r=e.getBoundingClientRect();if(r.top<SAFE-4||r.top>innerHeight*.5)e.scrollIntoView({block:'start',behavior:reduce()?'auto':'smooth'})}
+/* the line nothing should sit above: just under the floating score badge, read from where it really is (it sits
+   lower on a notched phone), or just under the safe area when the badge is hidden during a run */
+var insetEl=null;
+function insetTop(){if(!insetEl){insetEl=document.createElement('div');insetEl.setAttribute('aria-hidden','true');insetEl.style.cssText='position:fixed;left:0;top:0;width:0;height:env(safe-area-inset-top,0px);visibility:hidden;pointer-events:none';document.body.append(insetEl)}return insetEl.getBoundingClientRect().height}
+function safeTop(){var b=document.querySelector('.cc-badge');if(b&&!document.body.classList.contains('wr-run')){var r=b.getBoundingClientRect();if(r.height)return Math.round(r.bottom)+8}return Math.round(insetTop())+8}
+function toTop(e,always){var r=e.getBoundingClientRect(),s=safeTop();if(always?Math.abs(r.top-s)>4:(r.top<s-4||r.top>innerHeight*.5))scrollBy({top:r.top-s,behavior:reduce()?'auto':'smooth'})}
 /* bring the next button into view, but never scroll the fuel gauge up under the badge: the scene may go, the gauge stays */
-function scrollNear(e,keep){var r=e.getBoundingClientRect();if(r.bottom<=innerHeight)return;var d=r.bottom-innerHeight+12;if(keep)d=Math.min(d,keep.getBoundingClientRect().top-SAFE);if(d>0)scrollBy({top:d,behavior:reduce()?'auto':'smooth'})}
+function scrollNear(e,keep){var r=e.getBoundingClientRect();if(r.bottom<=innerHeight)return;var d=r.bottom-innerHeight+12;if(keep)d=Math.min(d,keep.getBoundingClientRect().top-safeTop());if(d>0)scrollBy({top:d,behavior:reduce()?'auto':'smooth'})}
 var HOMEOF=function(n){return n>=3?n-1:n};
 function endFor(n,total){var H=HOMEOF(total);return n>=total?'full':n>=H?'last':n===H-1&&n>0?'sight':n>=1?'stop':'tow'}
 var ENDS={
@@ -90,13 +95,13 @@ function mount(host,o){
     if(a){var q=Math.min(1,(now-a.t0)/a.dur);
       if(a.k==='launch'){x=-70+154*ease(q);warp=(1-q)*.8}
       else if(a.k==='boost'){warp=Math.sin(Math.PI*q);x=q<.5?84+(W+100-84)*ease(q/.5):-90+174*ease((q-.5)/.5)}
-      else if(a.k==='detour'){var gx=S.ring?S.ring.tx:W-90;shield=q<.75?1:(1-q)/.25;if(q<.55){var u=q/.55;x=84+(gx+64-84)*ease(u);y-=Math.sin(u*Math.PI)*58}else if(q<.8)x=gx+64+(W+100-gx-64)*((q-.55)/.25);else x=-90+174*ease((q-.8)/.2)}
+      else if(a.k==='detour'){var gx=S.ring?S.ring.tx:W-90;shield=q<.75?1:(1-q)/.25;if(q<.55){var u=q/.55;x=84+(gx+64-84)*ease(u);y-=Math.sin(u*Math.PI)*58*H/220}else if(q<.8)x=gx+64+(W+100-gx-64)*((q-.55)/.25);else x=-90+174*ease((q-.8)/.2)}
       if(q>=1)S.anim=null}
     return{x:x,y:y,warp:warp,shield:shield,s:sc,rot:rot}}
   function place(sp){ship.style.transform='translate('+(sp.x-56).toFixed(1)+'px,'+(sp.y-33.5).toFixed(1)+'px) rotate('+sp.rot+'deg) scale('+(sp.flip?-sp.s:sp.s)+','+sp.s+')';ship.classList.toggle('boost',sp.warp>.25);
     if(S.end){ship.classList.toggle('off',S.end.k==='tow'||S.end.p>=1);ship.classList.toggle('sput',!!S.end.jit&&S.end.p<1)}else ship.classList.remove('off','sput')}
   function drawShield(sp){if(sp.shield<=0)return;ctx.save();ctx.globalAlpha=sp.shield*.75;ctx.strokeStyle='#7fd8ff';ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(sp.x,sp.y-4,64,42,0,0,7);ctx.stroke();ctx.globalAlpha=sp.shield*.12;ctx.fillStyle='#7fd8ff';ctx.fill();ctx.restore()}
-  function drawRing(now){var R=S.ring,rm=reduce(),p=rm?1:Math.min(1,(now-R.t0)/700),gx=R.tx+(W+40-R.tx)*(1-ease(p)),cy=H*.44,col=R.c,ry=62,rx=16,al=1,lw=3+(rm?0:Math.sin(now/220)*1.2);
+  function drawRing(now){var R=S.ring,rm=reduce(),p=rm?1:Math.min(1,(now-R.t0)/700),gx=R.tx+(W+40-R.tx)*(1-ease(p)),cy=H*.44,col=R.c,ry=Math.min(62,H*.4),rx=16,al=1,lw=3+(rm?0:Math.sin(now/220)*1.2);
     if(R.state==='clear'){var q=rm?1:Math.max(0,Math.min(1,(now-R.t1)/700));col='#3ddc97';ry=62+q*70;rx=16+q*26;al=1-q;lw=4+q*8}else if(R.state==='detour'){col='#ffb347';lw=3;al=.7}
     if(al<=.01)return;ctx.save();ctx.globalAlpha=al;ctx.strokeStyle=col;ctx.lineWidth=lw;ctx.shadowColor=col;ctx.shadowBlur=18;ctx.beginPath();ctx.ellipse(gx,cy,rx,ry,0,0,Math.PI*2);ctx.stroke();
     if(R.state==='wait'){ctx.fillStyle='#fff';for(var k=0;k<4;k++){var a=(rm?0:now/350)+k*Math.PI/2;ctx.beginPath();ctx.arc(gx+Math.cos(a)*rx,cy+Math.sin(a)*ry,2.6,0,7);ctx.fill()}}
@@ -155,10 +160,17 @@ function mount(host,o){
   function sync(){root.classList.toggle('live',running());if(running()){if(!looping){looping=true;last=performance.now();requestAnimationFrame(loop)}}else if(root.isConnected)draw(performance.now())}
   function redraw(){if(!looping)draw(performance.now())}
   fit();
-  if('IntersectionObserver' in window)new IntersectionObserver(function(es){es.forEach(function(e){onScreen=e.isIntersecting});sync()},{threshold:0}).observe(stage);else{onScreen=true;sync()}
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){es.forEach(function(e){onScreen=e.isIntersecting});if(onScreen&&stale)pilotIn();sync()},{threshold:0}).observe(stage);else{onScreen=true;sync()}
   document.addEventListener('visibilitychange',sync);try{var mq=matchMedia('(prefers-reduced-motion: reduce)');if(mq.addEventListener)mq.addEventListener('change',sync)}catch(e){}
   if('ResizeObserver' in window){var ro=new ResizeObserver(function(){if(!root.isConnected){ro.disconnect();return}fit();redraw()});ro.observe(stage)}
-  function pilotIn(){try{if(window.MBScores&&MBScores.mountPilot)MBScores.mountPilot(ship,cat)}catch(e){}}
+  function pilotIn(){stale=false;try{if(window.MBScores&&MBScores.mountPilot)MBScores.mountPilot(ship,cat)}catch(e){}}
+  /* one Kimchi runs at a time: the tour, the share card or the story he hides in stop this one. When that
+     overlay closes, he gets back in the ship (now, or when the quiz is next on screen) */
+  var stale=false;
+  if(cat==='kimchi'&&'MutationObserver' in window)new MutationObserver(function(ms){if(!root.isConnected)return;var gone=ms.some(function(m){return [].some.call(m.removedNodes,function(n){return n.nodeType===1&&/(^| )(sheet|cc-over|tr)( |$)/.test(n.className||'')})});
+    if(gone&&!document.querySelector('.sheet,.cc-over,.tr')){stale=true;if(onScreen)pilotIn()}}).observe(document.body,{childList:true});
+  /* during a run the scene is compact and the badge steps aside, so a question and its answers fit one screen */
+  function setRun(on){root.classList.toggle('compact',on);document.body.classList.toggle('wr-run',on);fit()}
   pilotIn();
   function ovShow(a,b,cls){ov.className='w-ov';ov.textContent='';ov.append(h('b','slam'+(cls?' '+cls:''),a));if(b){var y=h('span','slam',b);y.style.animationDelay='.12s';ov.append(y)}}
   function ovHide(ms){later(function(){ov.classList.add('fade');later(function(){ov.textContent='';ov.className='w-ov'},T(500))},T(ms))}
@@ -172,16 +184,16 @@ function mount(host,o){
   /* one run: the quiz itself, a practice replay of the whole quiz, or practice on the missed ones */
   var run=null;
   function reset(){tok++;keyPick=null;S.ring=null;S.anim=null;S.end=null;ov.textContent='';ov.className='w-ov';body.textContent='';delete root.dataset.ending;cells.classList.remove('party');cl.forEach(function(c){c.classList.remove('low','charge')})}
-  function intro(){reset();busy=false;var resume=o.resume().slice(0,N),done=resume.length;
+  function intro(){reset();setRun(false);busy=false;var resume=o.resume().slice(0,N),done=resume.length;
     var right=resume.filter(function(k,j){return k===items[j].answer}).length;setCells(right);status(done?N-done:null);
     var ul=h('ul','w-les'),rv=[];items.forEach(function(it){if(it.kind==='review'||it.kind==='recap'){if(it.n&&rv.indexOf(it.n)<0)rv.push(it.n);return}
       var li=h('li',null,it.tag+' · '+(it.kind==='news'?'news':it.n?'lesson '+it.n+(o.titles&&o.titles[it.n]?': '+o.titles[it.n]:''):'question'));li.style.setProperty('--c',TAGC[it.tag]||'#c9b8ff');ul.append(li)});
     if(rv.length){var r=h('li',null,'Revision: '+(rv.length===1?'lesson '+rv[0]:'lessons '+rv.slice(0,-1).join(', ')+' and '+rv[rv.length-1]));r.style.setProperty('--c','#c9b8ff');ul.append(r)}
     var b=btn(done?'Resume quiz':'Launch','','start',function(){launch(resume)});
-    body.append(h('span','kick','Today’s quiz'),h('h2','w-q',done?'You are '+done+' questions in':N+' charge rings between the cats and home'),
-      h('p','w-sub',done?'Pick up where you left off. '+plural(right,'cell is','cells are')+' already charged.':'Each right answer flies the ship through a ring and charges a fuel cell. '+HOME+' cells get '+P+' home. Up to '+o.maxPoints()+' points today.'),ul,b);
+    body.append(h('span','kick','Today’s quiz'),h('h2','w-q',done?'You are '+plural(done,'question','questions')+' in':N+' charge rings between the cats and home'),
+      h('p','w-sub',done?'Pick up where you left off. '+plural(right,'cell is','cells are')+' already charged.':'Each right answer flies the ship through a ring and charges a fuel cell. '+HOME+' cells get '+P+' home. Up to '+o.maxPoints()+' points today.'),b,ul);
     redraw()}
-  function launch(resume){var b=body.querySelector('[data-act=start]');if(b)b.disabled=true;busy=true;
+  function launch(resume){var b=body.querySelector('[data-act=start]');if(b)b.disabled=true;busy=true;setRun(true);toTop(root,true);
     var picks=resume.slice(),right=0,missed=[];picks.forEach(function(k,j){if(k===items[j].answer)right++;else missed.push(items[j])});
     run={mode:'quiz',items:items,i:picks.length,picks:picks,right:right,missed:missed,locked:true};
     go('launch',900);if(reduce()){begin();return}
@@ -193,13 +205,13 @@ function mount(host,o){
     var kick=run.mode==='missed'?'Practice · missed '+(i+1)+' of '+n+' · no points':(run.mode==='replay'?'Practice · ring ':'Ring ')+(i+1)+' of '+n+' · '+it.tag+(kindLine(it)?' · '+kindLine(it):'')+(run.mode==='replay'?' · no points':'');
     var sub=subLine(it);body.append(h('span','kick',kick));if(sub)body.append(h('p','w-sub',sub));body.append(q,list,run.res);
     run.bs=it.options.map(function(t,k){var b=h('button','w-opt');b.type='button';b.dataset.k=k;b.append(h('b','ol',L[k]),h('span','ot',t));b.addEventListener('click',function(){pick(k)});list.append(b);return b});
-    toTop(root);focusEl(q)}
+    toTop(root,true);focusEl(q)}
   function pick(k){if(!run||run.locked||!run.bs)return;var it=run.items[run.i];if(k<0||k>=it.options.length)return;run.locked=true;var ok=k===it.answer,pr=run.mode!=='quiz';
-    run.bs.forEach(function(b,j){b.disabled=true;var tg=b.querySelector('.ot');if(j===it.answer){b.classList.add('ok');tg.append(h('em','otag',k===j?'Your pick: right':'Right answer'))}else if(j===k){b.classList.add('no');tg.append(h('em','otag','Your pick'))}else b.classList.add('dim')});
+    run.bs.forEach(function(b,j){b.disabled=true;var tg=b.querySelector('.ot');if(j===it.answer){b.classList.add('ok');tg.append(h('em','otag',k===j?'Your pick: right':'Right answer'))}else if(j===k){b.classList.add('no');tg.append(h('em','otag','Your pick'))}else b.hidden=true});
     if(ok){run.right++;run.bs[k].classList.add('hit')}else run.missed.push(it);
     if(run.mode==='quiz'){run.picks[run.i]=k;o.each(run.picks.slice())}
     var nowCells=Math.min(N,S.cells+(ok?1:0));
-    say(ok?'Right. Ring charged: fuel '+nowCells+' of '+N+'.'+(pr?'':' Plus 10 points.'):'Not quite. The answer is '+L[it.answer]+': '+it.options[it.answer]+'. No charge this time.');
+    say((ok?'Right. Ring charged: fuel '+nowCells+' of '+N+'.'+(pr?'':' Plus 10 points.'):'Not quite. The answer is '+L[it.answer]+': '+it.options[it.answer]+'. No charge this time.')+' '+it.why);
     var R=S.ring;
     if(ok){R.state='clear';R.t1=performance.now()+300;go('boost',1300);ovShow('CHARGED',pr?'+1 cell · practice, no points':'+1 cell · +10 points');ovHide(1200);
       var target=cl[Math.min(N-1,S.cells)],left=run.items.length-run.i-1;
@@ -217,16 +229,21 @@ function mount(host,o){
     S.end=Object.assign({k:k,t0:now,dur:k==='tow'?2600:1900,x0:k==='tow'?40:k==='sight'?W+70:-70,y0:k==='tow'?H*.6:H*.4,s0:1,p:reduce()?1:0},F);redraw()}
   function streakRow(sk,mult){var r=h('div','streak'+(sk>0?' flame-on':'')),f=h('span');f.innerHTML=FLAME;r.append(f,h('b',null,sk>0?sk+'-day streak':'No streak yet'));r.append(mult>1?h('span','chip','×'+mult+' multiplier on'):h('span','chip off','×1.5 from day 5'));return r}
   function revise(list,scored){if(!list.length)return null;var d=h('div','rvbox');d.append(h('span','rk','To revise'));list.forEach(function(m){var r=h('div','rv');r.append(h('b',null,m.q),h('p',null,'Answer: '+m.options[m.answer]+'. '+m.why));d.append(r)});if(scored)d.append(h('p','rn','Missed questions come back in Review over the next days.'));return d}
-  function pracBox(missed,score){if(!missed.length||S.cells>=HOME)return null;var pb=h('div','prac');pb.append(h('span','lab','Practice refuel'),h('p',null,'Put the missed ones right in practice and each one charges a cell. Reach '+HOME+' and '+P+' flies home tonight. Practice adds no points.'));
+  function pracBox(missed,score){if(!missed.length||S.cells>=HOME)return null;var pb=h('div','prac');pb.append(h('span','lab','Practice refuel · no points'),h('p',null,'Each missed one you put right charges a cell. Reach '+HOME+' and '+P+' flies home tonight.'));
     pb.append(btn('Practise the missed ones','cy','practise',function(){practise(missed,score)}));return pb}
+  /* the missed questions, folded shut behind one row so the ending stays short */
+  function fold(rv,n){if(!rv)return null;var d=h('div','rvfold'),b=btn('See the ones you missed ('+n+')','alt','missed',function(){var open=rv.hidden;rv.hidden=!open;b.setAttribute('aria-expanded',String(open));b.textContent=open?'Hide the ones you missed':'See the ones you missed ('+n+')'});
+    rv.id='wrv'+(++fold.n);rv.hidden=true;b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls',rv.id);d.append(b,rv);return d}
+  fold.n=0;
   function againBtn(){return btn('Play the whole quiz again (practice)','alt','again',replay)}
   /* the scored finish: the page saves and scores (finishDay), this shows what it returns */
-  function finish(){busy=true;var res=o.finish(run.picks.slice())||{},right=run.right,k=endFor(right,N),E=ENDS[k],pts=res.gained,dl=o.dayLine()||{};
+  function finish(){busy=true;setRun(false);var res=o.finish(run.picks.slice())||{},right=run.right,k=endFor(right,N),E=ENDS[k],pts=res.gained,dl=o.dayLine()||{};
     var score={right:right,total:N,points:pts};root.dataset.score=right;root.dataset.points=pts;showEnd(k,right);
     var f=h('div','w-fin e-'+k),hd=h('h2',null,E.head);hd.tabIndex=-1;var sc=h('div','w-score'),pe=h('span',null,'+'+(reduce()?pts:0)+' points');sc.append(h('b',null,right+'/'+N),pe);
-    f.append(h('span','kick',E.kick),hd,h('p','lines',E.lines(P,O,right)),sc,h('p','w-math',res.math||('+'+pts+' points')),streakRow(dl.streak,dl.mult));
+    f.append(h('span','kick',E.kick),hd,sc,h('p','w-math',res.math||('+'+pts+' points')));var pb=pracBox(run.missed,score);if(pb)f.append(pb);
+    f.append(h('p','lines',E.lines(P,O,right)),streakRow(dl.streak,dl.mult));
     (res.badges||[]).forEach(function(n){f.append(h('p','w-new','New badge: '+n))});if(res.lvUp)f.append(h('p','w-new','Level up: '+res.lvUp+'!'));
-    var pb=pracBox(run.missed,score);if(pb)f.append(pb);var rv=revise(run.missed,true);if(rv)f.append(rv);
+    var rv=fold(revise(run.missed,true),run.missed.length);if(rv)f.append(rv);
     f.append(againBtn(),btn('See my progress','alt','progress',function(){o.progress()}));
     body.textContent='';body.append(f);toTop(root);focusEl(hd);say(E.head+'. '+right+' out of '+N+'. Plus '+pts+' points.');
     countUp(pe,pts);celebrate(k);
@@ -234,24 +251,23 @@ function mount(host,o){
   function countUp(e,to){if(reduce()){e.textContent='+'+to+' points';return}var t=tok,t0=performance.now();(function s(n){if(t!==tok)return;var p=Math.min(1,(n-t0)/1400),q=1-Math.pow(1-p,3);e.textContent='+'+Math.round(to*q)+' points';if(p<1)requestAnimationFrame(s);else e.textContent='+'+to+' points'})(t0);later(function(){e.textContent='+'+to+' points'},1600)}
   function celebrate(k){if(k==='full')later(function(){for(var j=0;j<12;j++)later(function(){fx.burst(30+Math.random()*(W-60),30+Math.random()*80,44,{speed:5,g:.06})},j*280)},T(1500));
     if(k==='last')later(function(){fx.burst(W-104,H*.4,24,{speed:3,g:.05,colors:['#ffd28a','#ffffff']})},T(1900))}
-  function showEnd(k,right){root.dataset.ending=k;setCells(right);endScene(k);stat.textContent='';stat.append(h('b',null,'Landed with '+right+' of '+N+' cells. '),right>=HOME?'Enough for home.':plural(HOME-right,'cell','cells')+' short of home tonight.');
+  function showEnd(k,right){root.dataset.ending=k;setCells(right);endScene(k);stat.textContent='';stat.append(h('b',null,'Landed with '+right+' of '+N+' cells'),right>=HOME?'. Enough for home.':', '+(HOME-right)+' short of home.');
     cells.classList.toggle('party',k==='full');if(cl[HOME-1])cl[HOME-1].classList.toggle('low',k==='last')}
   /* a practice replay of the whole quiz ends here (score null), and so does a reopened finished quiz */
-  function ending(saved){busy=!saved;var sv=saved||o.saved(),right=saved?saved.score:run.right,k=endFor(right,N),E=ENDS[k],dl=o.dayLine()||{},f=h('div','w-fin e-'+k),hd=h('h2',null,E.head);hd.tabIndex=-1;
+  function ending(saved){busy=!saved;setRun(false);var sv=saved||o.saved(),right=saved?saved.score:run.right,k=endFor(right,N),E=ENDS[k],dl=o.dayLine()||{},f=h('div','w-fin e-'+k),hd=h('h2',null,E.head);hd.tabIndex=-1;
     showEnd(k,right);root.dataset.score=right;
-    f.append(h('span','kick',saved?'Today’s quiz · finished':'Practice run: not scored'),hd,h('p','lines',E.lines(P,O,right)));
+    f.append(h('span','kick',saved?'Today’s quiz · finished':'Practice run: not scored'),hd);
     var sc=h('div','w-score');sc.append(h('b',null,right+'/'+N),h('span',null,saved?'+'+saved.points+' points':'Practice, no points'));f.append(sc);
-    if(saved){if(dl.math)f.append(h('p','w-math',dl.math));f.append(streakRow(dl.streak,dl.mult),h('p','w-math','+'+saved.points+' points earned. Replays are for practice and do not change your score.'))}
-    else if(sv)f.append(h('p','w-math','Today’s score stays '+sv.score+'/'+sv.total+' and +'+sv.points+' points.'));
-    if(!saved){var pb=pracBox(run.missed,null);if(pb)f.append(pb);var rv=revise(run.missed,false);if(rv)f.append(rv)}
+    if(saved){if(dl.math)f.append(h('p','w-math',dl.math));f.append(h('p','lines',E.lines(P,O,right)),streakRow(dl.streak,dl.mult),h('p','w-math','+'+saved.points+' points earned. Replays are for practice and do not change your score.'))}
+    else{if(sv)f.append(h('p','w-math','Today’s score stays '+sv.score+'/'+sv.total+' and +'+sv.points+' points.'));var pb=pracBox(run.missed,null);if(pb)f.append(pb);f.append(h('p','lines',E.lines(P,O,right)));var rv=fold(revise(run.missed,false),run.missed.length);if(rv)f.append(rv)}
     f.append(againBtn(),btn('See my progress','alt','progress',function(){o.progress()}));
     body.textContent='';body.append(f);
     if(!saved){toTop(root);focusEl(hd);say('Practice run: '+right+' out of '+N+'. '+E.head+'. No points.')}
     else redraw()}
-  function replay(){reset();busy=true;setCells(0);status(null);run={mode:'replay',items:items,i:0,picks:[],right:0,missed:[],locked:true};go('launch',900);keyPick=pick;question()}
-  function practise(missed){var base=S.cells;tok++;S.end=null;delete root.dataset.ending;cells.classList.remove('party');cl.forEach(function(c){c.classList.remove('low')});
+  function replay(){reset();busy=true;setRun(true);setCells(0);status(null);run={mode:'replay',items:items,i:0,picks:[],right:0,missed:[],locked:true};go('launch',900);keyPick=pick;question()}
+  function practise(missed){var base=S.cells;tok++;setRun(true);S.end=null;delete root.dataset.ending;cells.classList.remove('party');cl.forEach(function(c){c.classList.remove('low')});
     run={mode:'missed',items:missed.slice(),i:0,picks:[],right:0,missed:[],locked:true,base:base};busy=true;keyPick=pick;question()}
-  function coda(){var f=h('div','w-fin');body.textContent='';
+  function coda(){var f=h('div','w-fin');body.textContent='';setRun(false);
     if(S.cells>=HOME){endScene(S.cells>=N?'full':'last');root.dataset.ending='coda';var c=h('div','coda in'),hd=h('b',null,'Home after practice');hd.tabIndex=-1;var sv=o.saved();
       c.append(hd,h('p',null,P+' refuels on the rings you put right and flies home. '+(sv?'Today’s score stays '+sv.score+'/'+sv.total+' and +'+sv.points+' points: practice adds none.':'Practice adds no points.')));f.append(c);
       stat.textContent='';stat.append(h('b',null,'Home with '+S.cells+' of '+N+' cells. '),'Practice cells count for the story only.');say('Home after practice.');f.append(againBtn());body.append(f);toTop(root);focusEl(hd);
