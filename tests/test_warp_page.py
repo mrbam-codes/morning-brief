@@ -183,6 +183,8 @@ try:
                  ex.submit(run, D, "play=rwrwr&kb=1&shot=1", "streak4", True, str(out / "warp-390-bed-sight-reduced.png")),
                  ex.submit(run, D, "play=wwwww&kb=1&shot=1", "streak4", True, str(out / "warp-390-tow-reduced.png")),
                  ex.submit(run, D, "play=rwrwr&introshot=1", "streak4", False, str(out / "warp-390-intro.png")),
+                 ex.submit(run, D, "topshot=1", "streak4", False, str(out / "page-390-top.png")),
+                 ex.submit(run, D, "scoresshot=1", "streak4", False, str(out / "page-390-my-scores.png")),
                  ex.submit(run, D, "play=rwrwr&qshot=2", "streak4", False, str(out / "warp-390-question.png")),
                  ex.submit(run, D, "play=rwrwr&ashot=1", "streak4", False, str(out / "warp-390-after-answer.png")),
                  ex.submit(run, WEEKEND, "play=rrrrrrw&shot=1", "streak4", False, str(out / "warp-390-weekend-last.png"))]

@@ -140,6 +140,9 @@ async function noquiz(){const R={phase:'noquiz'},q=await until(()=>document.quer
 
 async function run(){window.__t0=Math.round(performance.now());const h=decodeURIComponent(location.hash.slice(1)),o=Object.fromEntries(h.split('&').map(x=>{const i=x.indexOf('=');return i<0?[x,1]:[x.slice(0,i),x.slice(i+1)]}));
   if(o.fail){send(await fail());return}
+  /* screenshots only: the top of the page, or My scores open */
+  if(o.topshot){await sleep(2000);send({phase:'shot'});return}
+  if(o.scoresshot){await sleep(1500);if(window.MBScores)MBScores.panel();await sleep(900);send({phase:'shot'});return}
   await until(()=>document.querySelector('.gcard.quiz'),8000);await sleep(1200);
   try{const d=new URLSearchParams(location.search).get('d'),b=await fetch('briefs/'+d+'.json').then(r=>r.json());window.__wpItems=b.quiz||(b.lesson&&b.lesson.quiz)||[]}catch(e){window.__wpItems=[]}
   /* the test copy marks each question's answer on the body so the audit can pick right or wrong */
