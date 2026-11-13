@@ -189,7 +189,8 @@ if os.environ.get("WARP_DEPOT_SHOTS"):  # for looking at the endings: only their
 results = {}
 try:
     t0 = time.time()
-    with concurrent.futures.ThreadPoolExecutor(int(os.environ.get("WARP_WORKERS", "3"))) as ex:
+    # one Chrome job at a time by default: parallel jobs stall past the time limit on a busy Mac (13 Nov 2026)
+    with concurrent.futures.ThreadPoolExecutor(int(os.environ.get("WARP_WORKERS", "1"))) as ex:
         fut = {ex.submit(run, *v): k for k, v in jobs.items()}
         sfut = [] if ONLY else [ex.submit(run, D, ph, "streak4", False, str(out / f"warp-390-{k}.png")) for k, ph in shots.items()]
         sfut += [] if ONLY else [ex.submit(run, "2026-11-11", ph, "streak4", False, str(out / f"warp-390-{k}.png")) for k, ph in kshots.items()]
