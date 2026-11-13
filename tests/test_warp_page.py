@@ -163,7 +163,10 @@ jobs = {
     "house full": (D, "play=rrrrr&house=1", "streak4", False), "house last": (D, "play=rrrrw&house=1", "streak4", True),
     "house sight": (D, "play=rwrwr&prac=1&house=1", "streak4", False),
     # a notched phone: the badge 47px lower must still clear the scene, gauge and headline; resuming after 1 answer
-    "inset sight": (D, "play=rwrwr&inset=1", "streak4", False), "resume one": (D, "intro", "prog1", True),
+    "inset sight": (D, "play=rwrwr&inset=1", "streak4", False),
+    # the Night Depot endings with Kimchi as the pilot (12 November has Charlee)
+    "kimchi full": ("2026-11-11", "play=rrrrr", "streak4", True), "kimchi last": ("2026-11-11", "play=rrrrw", "streak4", True), "kimchi sight": ("2026-11-11", "play=rrwwr", "streak4", True),
+    "kimchi stop": ("2026-11-11", "play=wwwwr", "streak4", True), "kimchi tow": ("2026-11-11", "play=wwwww", "streak4", True), "resume one": (D, "intro", "prog1", True),
     # the design audit of 13 Nov 2026: targets, small text, sheets, badge chip, footer, older edition, missing edition
     "probe": (D, "probe", "streak4", False), "probe older": ("2026-11-10", "probe", "streak4", True), "missing edition": ("2026-01-01", "fail", "streak4", True),
 }
@@ -172,14 +175,20 @@ if ONLY:
     jobs = {k: v for k, v in jobs.items() if k in ONLY}
 if os.environ.get("WARP_SHOTS"):  # for looking at the art: screenshots only
     jobs = {}
-shots = {"bed-full": "play=rrrrr&shot=1", "bed-last": "play=rrrrw&shot=1", "bed-sight": "play=rwrwr&shot=1", "stop": "play=wrwwr&shot=1", "tow": "play=wwwww&shot=1", "house-full": "play=rrrrr&house=1&shot=1"}
+# the Night Depot endings, caught once the cats are together (wait, in ms)
+shots = {"depot-full": "play=rrrrr&shot=1&wait=1500", "depot-last": "play=rrrrw&shot=1&wait=1500", "depot-sight": "play=rwrwr&shot=1&wait=1800", "depot-stop": "play=wrwwr&shot=1&wait=3000", "depot-tow": "play=wwwww&shot=1&wait=600", "house-full": "play=rrrrr&house=1&shot=1"}
+kshots = {"depot-kimchi-full": "play=rrrrr&shot=1&wait=1500", "depot-kimchi-last": "play=rrrrw&shot=1&wait=1500", "depot-kimchi-sight": "play=rrwwr&shot=1&wait=1800", "depot-kimchi-stop": "play=wwwwr&shot=1&wait=3000", "depot-kimchi-tow": "play=wwwww&shot=1&wait=600"}
+if os.environ.get("WARP_DEPOT_SHOTS"):  # for looking at the endings: only their screenshots
+    jobs = {}
 results = {}
 try:
     t0 = time.time()
     with concurrent.futures.ThreadPoolExecutor(int(os.environ.get("WARP_WORKERS", "3"))) as ex:
         fut = {ex.submit(run, *v): k for k, v in jobs.items()}
         sfut = [] if ONLY else [ex.submit(run, D, ph, "streak4", False, str(out / f"warp-390-{k}.png")) for k, ph in shots.items()]
-        sfut += [] if ONLY else [ex.submit(run, D, "play=rwrwr&prac=1&shot2=1", "streak4", False, str(out / "warp-390-bed-practice-home.png")),
+        sfut += [] if ONLY else [ex.submit(run, "2026-11-11", ph, "streak4", False, str(out / f"warp-390-{k}.png")) for k, ph in kshots.items()]
+        sfut += [ex.submit(run, D, "play=rwrwr&prac=1&shot2=1", "streak4", False, str(out / "warp-390-depot-practice-home.png"))] if os.environ.get("WARP_DEPOT_SHOTS") else []
+        sfut += [] if ONLY or os.environ.get("WARP_DEPOT_SHOTS") else [ex.submit(run, D, "play=rwrwr&prac=1&shot2=1", "streak4", False, str(out / "warp-390-depot-practice-home.png")),
                  ex.submit(run, D, "play=rwrwr&kb=1&shot=1", "streak4", True, str(out / "warp-390-bed-sight-reduced.png")),
                  ex.submit(run, D, "play=wwwww&kb=1&shot=1", "streak4", True, str(out / "warp-390-tow-reduced.png")),
                  ex.submit(run, D, "play=rwrwr&introshot=1", "streak4", False, str(out / "warp-390-intro.png")),
@@ -243,10 +252,20 @@ for name in jobs:
         if want in ("full", "last", "sight"):
             art = "house" if "house=1" in phase else "bed"
             need(E.get("drawn") == art, f"{t}: home is drawn as the {art} ({E.get('drawn')})")
-            words = {("bed", "full"): "the cat bed is warm and waiting", ("bed", "last"): "right beside the cat bed", ("bed", "sight"): "the night light by the cat bed",
+            words = {("bed", "full"): "is waiting for a nose boop, then it is the cat bed for both", ("bed", "last"): "right beside the cat bed", ("bed", "sight"): "waving from the cat bed",
                      ("house", "full"): "the whole sky lights up for the crew", ("house", "last"): "right outside the door", ("house", "sight"): "close enough to see the porch light"}[(art, want)]
             gone = ("porch", "door") if art == "bed" else ("cat bed",)
             need(words in E["lines"] and not any(g in E["lines"] for g in gone), f"{t}: the {art} words ({E['lines']!r})")
+        if "house=1" not in phase:
+            G = E.get("scene") or {}
+            need(G.get("scene") == want, f"{t}: the Night Depot {want} scene is drawn ({G})")
+            if red:
+                ok = {"full": lambda g: g["bed"] > 150 and g["pilotCat"] > 20 and g["homeCat"] > 20, "last": lambda g: g["bed"] > 150 and g["pilotCat"] > 20 and g["homeCat"] > 20,
+                      "sight": lambda g: g["homePlanet"] > 300 and g["homeCat"] > 5, "stop": lambda g: g["queue"] > 300 and g["board"] > 40 and g["homeCat"] > 5,
+                      "tow": lambda g: g["tug"] > 400 and g["homeCat"] > 5}[want]
+                need(ok(G), f"{t}: the still shows the {want} scene with both cats in place ({G})")
+            elif "shot" not in phase and E.get("loop"):
+                need(E["loop"] == {"on": True, "off": True, "covered": True, "back": True}, f"{t}: the ending animates on screen and stops off screen and under My scores ({E['loop']})")
         if red:
             need(not E["endless"], f"{t}: nothing loops under reduced motion ({E['endless']})")
         if "prac" in phase:
@@ -295,7 +314,7 @@ if "older edition" in jobs:
     need((older.get("end") or {}).get("saved", {}).get("score") == 4, "the older edition saves under its own date")
 errors = [c for c in consoles if ERR.search(c[1])]
 need(not errors, f"no console errors in any run ({errors[:4]})")
-for k in ([] if ONLY else list(shots) + ["bed-practice-home", "bed-sight-reduced", "tow-reduced", "weekend-last", "intro", "question", "after-answer"]):
+for k in ([] if ONLY else list(shots) + list(kshots) + ["depot-practice-home"] if os.environ.get("WARP_DEPOT_SHOTS") else list(shots) + list(kshots) + ["depot-practice-home", "bed-sight-reduced", "tow-reduced", "weekend-last", "intro", "question", "after-answer"]):
     f = out / f"warp-390-{k}.png"
     need(f.exists() and f.stat().st_size > 20000, f"screenshot {f.name}")
 for f in ("warp-test.html", "warp-test-house.html", "warp-house.js", "warp-audit.js", "wp-errs.js", "wp-frame.js"):

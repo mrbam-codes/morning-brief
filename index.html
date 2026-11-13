@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-gDhbtqfHQYE8GuveRT7T12ZSkfMucl+5Zgn74uqcyQI='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-tku21uq8ODjitZme4SOAHZwmbZyGClaeeD3y35+MLk4='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.youtube-nocookie.com; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b0620">
 <title>Morning brief</title>
@@ -413,6 +413,7 @@ footer a[aria-current]{color:#fff;font-weight:700;text-decoration:none;border-bo
 .wr .ship .flame{transform-origin:46px 68px;animation:shipflame .16s steps(2) infinite;transition:transform .3s}
 .wr .ship.boost .flame{transform:scaleX(2.2)}
 .wr .ship.off .flame{display:none}
+.wr .ship.out .kpod{visibility:hidden}
 .wr .ship.sput .flame{animation:wsput .35s steps(2) infinite}
 @keyframes wsput{50%{opacity:.15;transform:scaleX(.4)}}
 .wr .dome{position:absolute;left:43%;top:-14%;width:34%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:2px solid #3de6ff;box-shadow:0 0 14px rgba(61,230,255,.7),inset 0 0 12px rgba(255,255,255,.35);background:#86c3ea}
@@ -767,7 +768,7 @@ const el=(t,c,x)=>{const n=document.createElement(t);if(c)n.className=c;if(x!=nu
 const safe=u=>/^https:\/\//.test(u||'')?u:'#';
 const src=s=>{const a=el('a',null,s.name+', '+s.date+' ↗');a.href=safe(s.url);a.target='_blank';a.rel='noopener noreferrer';return a};
 const fit=(n,max)=>{requestAnimationFrame(()=>{let s=max;n.style.fontSize=s+'px';const w=n.parentElement.clientWidth;while(n.scrollWidth>w&&s>30){s-=2;n.style.fontSize=s+'px'}})};
-const BUILD='2026-11-16.9';
+const BUILD='2026-11-16.10';
 /* ---------- saved progress (this phone only) ---------- */
 const KEY='mb-v1',DAY=/^\d{4}-\d{2}-\d{2}$/;
 const fresh=()=>({days:{},tags:{AI:[0,0],Tech:[0,0],Cyber:[0,0]},lessons:{},points:0,badges:{},review:[],prog:{},sound:true});

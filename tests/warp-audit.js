@@ -32,6 +32,19 @@ const rb=e=>{if(!e)return null;const r=e.getBoundingClientRect();return{top:Math
 /* the badge counts only while it can be seen */
 const badgeShown=()=>{const b=document.querySelector('.cc-badge');if(!b)return null;const cs=getComputedStyle(b);return cs.visibility!=='hidden'&&+cs.opacity>.05&&cs.display!=='none'?b:null};
 const overBadge=e=>{const b=badgeShown();return !!(b&&e&&hit(b.getBoundingClientRect(),e.getBoundingClientRect()))};
+/* the Night Depot scenes: count pixels of a colour family in a region of the scene canvas (CSS pixels) */
+const FAM={bed:(r,g,b)=>r>180&&g<130&&b>140,kimchi:(r,g,b)=>Math.abs(r-91)<22&&Math.abs(g-107)<22&&Math.abs(b-142)<22,charlee:(r,g,b)=>Math.abs(r-154)<26&&Math.abs(g-98)<26&&Math.abs(b-54)<26,
+  green:(r,g,b)=>g>r+40&&g>b-10&&g>90,orange:(r,g,b)=>r>200&&g>100&&g<215&&b<120,yellow:(r,g,b)=>r>200&&g>200&&b<120,bright:(r,g,b)=>Math.max(r,g,b)-Math.min(r,g,b)>90&&Math.max(r,g,b)>150};
+function count(cv,fam,x0,y0,x1,y1){const k=cv.width/cv.getBoundingClientRect().width,ctx=cv.getContext('2d');let d;try{d=ctx.getImageData(Math.round(x0*k),Math.round(y0*k),Math.max(1,Math.round((x1-x0)*k)),Math.max(1,Math.round((y1-y0)*k))).data}catch(e){return -1}
+  let n=0;for(let i=0;i<d.length;i+=4)if(FAM[fam](d[i],d[i+1],d[i+2]))n++;return Math.round(n/(k*k))}
+const sceneHash=cv=>{const d=cv.getContext('2d').getImageData(0,0,cv.width,cv.height).data;let h=0;for(let i=0;i<d.length;i+=97)h=(h*31+d[i])|0;return h};
+function regions(root){const cv=root.querySelector('.w-stage canvas'),k=root.dataset.scene,pilot=/Kimchi/.test(root.querySelector('.w-pil').textContent)?'kimchi':'charlee',home=pilot==='kimchi'?'charlee':'kimchi';
+  const R={scene:k,pilot,home};
+  if(k==='full'||k==='last'){R.bed=count(cv,'bed',222,150,300,180);R.pilotCat=count(cv,pilot,190,110,290,180);R.homeCat=count(cv,home,190,110,290,180)}
+  if(k==='sight'){R.homePlanet=count(cv,'green',24,28,92,96);R.homeCat=count(cv,home,30,0,90,40)}
+  if(k==='stop'){R.queue=count(cv,'bright',176,118,358,178);R.board=count(cv,'yellow',12,14,108,60);R.homeCat=count(cv,home,117,91,165,125)}
+  if(k==='tow'){R.tug=count(cv,'orange',184,62,286,128);R.homeCat=count(cv,home,232,70,270,92)}
+  return R}
 const errs=()=>(window.__wpErrs||[]).slice(0,10);
 const store=()=>localStorage.getItem('mb-v1');
 const badgeR=()=>{const b=badgeShown();return b?b.getBoundingClientRect():null};
@@ -77,8 +90,11 @@ async function play(o){const R={phase:'play',pattern:o.play,kb:!!o.kb,steps:[]},
     saved:S.days[key],progGone:!(key in S.prog),badge:document.querySelector('.cc-badge').getAttribute('aria-label'),buttons:[...root.querySelectorAll('.w-fin button')].map(b=>b.textContent),
     drawn:root.dataset.drawn||null,endless:R.reduce?endless(root):null,scrollWidth:document.documentElement.scrollWidth};
   R.end.prac=rb(root.querySelector('[data-act=practise]'));R.end.overScene=overBadge(root.querySelector('.w-stage'))||overBadge(root.querySelector('.fuel'))||overBadge(fin);R.end.math2=rb(root.querySelector('.w-math'));R.end.stageH=Math.round(root.querySelector('.w-stage').getBoundingClientRect().height);
+  R.end.scene=regions(root);
+  if(!R.reduce&&!o.shot){const cv=root.querySelector('.w-stage canvas'),h0=sceneHash(cv);await sleep(400);const lp={on:sceneHash(cv)!==h0};scrollTo(0,0);await sleep(500);const a=sceneHash(cv);await sleep(400);lp.off=sceneHash(cv)===a;
+    root.scrollIntoView({block:'start',behavior:'instant'});await sleep(400);if(window.MBScores){MBScores.panel();await sleep(500);const b=sceneHash(cv);await sleep(400);lp.covered=sceneHash(cv)===b;document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));await sleep(300);const c2=sceneHash(cv);await sleep(400);lp.back=sceneHash(cv)!==c2}R.end.loop=lp}
   R.end.pointsInBadge=new RegExp(Number(S.points).toLocaleString('en-GB')+' points').test(R.end.badge);
-  if(o.shot){await steady(root,R.reduce);return R}
+  if(o.shot){if(o.wait)await sleep(+o.wait);await steady(root,R.reduce);return R}
   if(o.prac){const after=store(),log=[];
     for(let guard=0;guard<6;guard++){const pb=root.querySelector('[data-act=practise]');if(!pb)break;pb.click();log.push('start '+(+root.querySelector('.cells').dataset.cells));
       for(let g=0;g<10;g++){const x=await until(()=>{const y=root.querySelectorAll('.w-opt');return y.length&&!y[0].disabled?y:null},5000);if(!x)break;
