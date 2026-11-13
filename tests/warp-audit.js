@@ -90,7 +90,7 @@ async function play(o){const R={phase:'play',pattern:o.play,kb:!!o.kb,steps:[]},
     saved:S.days[key],progGone:!(key in S.prog),badge:document.querySelector('.cc-badge').getAttribute('aria-label'),buttons:[...root.querySelectorAll('.w-fin button')].map(b=>b.textContent),
     drawn:root.dataset.drawn||null,endless:R.reduce?endless(root):null,scrollWidth:document.documentElement.scrollWidth};
   R.end.prac=rb(root.querySelector('[data-act=practise]'));R.end.overScene=overBadge(root.querySelector('.w-stage'))||overBadge(root.querySelector('.fuel'))||overBadge(fin);R.end.math2=rb(root.querySelector('.w-math'));R.end.stageH=Math.round(root.querySelector('.w-stage').getBoundingClientRect().height);
-  R.end.scene=regions(root);
+  R.end.scene=regions(root);{const sg=root.querySelector('.w-stage').getBoundingClientRect(),sh=root.querySelector('.ship').getBoundingClientRect();R.end.fit=+root.dataset.fit||null;R.end.stageW=Math.round(sg.width);R.end.shipIn=sh.left>=sg.left-1&&sh.right<=sg.right+1}
   if(!R.reduce&&!o.shot){const cv=root.querySelector('.w-stage canvas'),h0=sceneHash(cv);await sleep(400);const lp={on:sceneHash(cv)!==h0};scrollTo(0,0);await sleep(500);const a=sceneHash(cv);await sleep(400);lp.off=sceneHash(cv)===a;
     root.scrollIntoView({block:'start',behavior:'instant'});await sleep(400);if(window.MBScores){MBScores.panel();await sleep(500);const b=sceneHash(cv);await sleep(400);lp.covered=sceneHash(cv)===b;document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));await sleep(300);const c2=sceneHash(cv);await sleep(400);lp.back=sceneHash(cv)!==c2}R.end.loop=lp}
   R.end.pointsInBadge=new RegExp(Number(S.points).toLocaleString('en-GB')+' points').test(R.end.badge);

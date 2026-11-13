@@ -79,7 +79,7 @@ shutil.copy(here / "warp-audit.js", site / "warp-audit.js")
     "if(seed==='review')S.review=[{q:'Which is a test review question?',options:['This one','Not this','Nor this','Nor that'],answer:0,why:'Test reason.',tag:'Tech',kind:'lesson',n:1,id:'2026-11-01-0',box:0,due:ds(new Date())}];"
     "localStorage.setItem('mb-v1',JSON.stringify(S))}"
     "try{localStorage.setItem('mb-tour-v1','1')}catch(e){}"
-    "const f=document.createElement('iframe');f.width=390;f.height=844;f.style.border=0;f.src=page;document.body.style.margin=0;document.body.append(f);")
+    "const f=document.createElement('iframe');f.width=+(Q.get('fw')||390);f.height=844;f.style.border=0;f.src=page;document.body.style.margin=0;document.body.append(f);")
 T0 = time.time()
 GIF = bytes.fromhex("47494638396101000100800000000000ffffff21f90401000000002c00000000010001000002024401003b")
 HOLDS = {}
@@ -121,11 +121,12 @@ def run(date, phase, seed="streak4", reduced=False, shot=None):
     rid = uuid.uuid4().hex[:10]
     (site / f"wp-frame-{rid}.html").write_text(f'<!doctype html><meta charset="utf-8"><body><script src="wp-frame.js"></script><img src="hold?id={rid}" alt=""></body>')
     prof = tempfile.mkdtemp()
-    args = [chrome, "--headless=new", "--no-sandbox", "--disable-gpu", f"--user-data-dir={prof}", "--window-size=390,844", "--hide-scrollbars",
+    fw = int(re.search(r"fw=(\d+)", phase).group(1)) if "fw=" in phase else 390  # a narrower or wider phone or desktop frame
+    args = [chrome, "--headless=new", "--no-sandbox", "--disable-gpu", f"--user-data-dir={prof}", f"--window-size={max(390, fw)},844", "--hide-scrollbars",
             "--host-resolver-rules=MAP * ~NOTFOUND , EXCLUDE 127.0.0.1", "--enable-logging=stderr", "--v=0"]
     if reduced:
         args.append("--force-prefers-reduced-motion")
-    url = f"{base}/wp-frame-{rid}.html?id={rid}&seed={seed}&page=" + urllib.parse.quote(f"{'warp-test-house.html' if 'house=1' in phase else 'warp-test.html'}?d={date}#{phase}", safe="")
+    url = f"{base}/wp-frame-{rid}.html?id={rid}&seed={seed}&fw={fw}&page=" + urllib.parse.quote(f"{'warp-test-house.html' if 'house=1' in phase else 'warp-test.html'}?d={date}#{phase}", safe="")
     p = subprocess.run(args + ([f"--screenshot={shot}"] if shot else ["--dump-dom"]) + [url], capture_output=True, text=True, timeout=900)
     (site / f"wp-frame-{rid}.html").unlink(missing_ok=True)
     for l in p.stderr.splitlines():
@@ -166,7 +167,10 @@ jobs = {
     "inset sight": (D, "play=rwrwr&inset=1", "streak4", False),
     # the Night Depot endings with Kimchi as the pilot (12 November has Charlee)
     "kimchi full": ("2026-11-11", "play=rrrrr", "streak4", True), "kimchi last": ("2026-11-11", "play=rrrrw", "streak4", True), "kimchi sight": ("2026-11-11", "play=rrwwr", "streak4", True),
-    "kimchi stop": ("2026-11-11", "play=wwwwr", "streak4", True), "kimchi tow": ("2026-11-11", "play=wwwww", "streak4", True), "resume one": (D, "intro", "prog1", True),
+    "kimchi stop": ("2026-11-11", "play=wwwwr", "streak4", True), "kimchi tow": ("2026-11-11", "play=wwwww", "streak4", True),
+    # narrower phones and the desktop column: the world fits the stage
+    "narrow 360 stop": (D, "play=wrwwr&fw=360", "streak4", True), "narrow 320 tow": (D, "play=wwwww&fw=320", "streak4", True), "narrow 320 full": (D, "play=rrrrr&fw=320", "streak4", True),
+    "desktop full": (D, "play=rrrrr&fw=1240", "streak4", True), "resume one": (D, "intro", "prog1", True),
     # the design audit of 13 Nov 2026: targets, small text, sheets, badge chip, footer, older edition, missing edition
     "probe": (D, "probe", "streak4", False), "probe older": ("2026-11-10", "probe", "streak4", True), "missing edition": ("2026-01-01", "fail", "streak4", True),
 }
@@ -177,7 +181,9 @@ if os.environ.get("WARP_SHOTS"):  # for looking at the art: screenshots only
     jobs = {}
 # the Night Depot endings, caught once the cats are together (wait, in ms)
 shots = {"depot-full": "play=rrrrr&shot=1&wait=1500", "depot-last": "play=rrrrw&shot=1&wait=1500", "depot-sight": "play=rwrwr&shot=1&wait=1800", "depot-stop": "play=wrwwr&shot=1&wait=3000", "depot-tow": "play=wwwww&shot=1&wait=600", "house-full": "play=rrrrr&house=1&shot=1"}
-kshots = {"depot-kimchi-full": "play=rrrrr&shot=1&wait=1500", "depot-kimchi-last": "play=rrrrw&shot=1&wait=1500", "depot-kimchi-sight": "play=rrwwr&shot=1&wait=1800", "depot-kimchi-stop": "play=wwwwr&shot=1&wait=3000", "depot-kimchi-tow": "play=wwwww&shot=1&wait=600"}
+wshots = {"depot-360-stop": "play=wrwwr&fw=360&shot=1&wait=3000", "depot-320-tow": "play=wwwww&fw=320&shot=1&wait=600", "depot-320-full": "play=rrrrr&fw=320&shot=1&wait=1500",
+          "depot-desktop-full": "play=rrrrr&fw=1240&shot=1&wait=1500", "depot-rest-full": "play=rrrrr&shot=1&wait=7500"}
+kshots = {"depot-kimchi-rest-full": "play=rrrrr&shot=1&wait=7500", "depot-kimchi-full": "play=rrrrr&shot=1&wait=1500", "depot-kimchi-last": "play=rrrrw&shot=1&wait=1500", "depot-kimchi-sight": "play=rrwwr&shot=1&wait=1800", "depot-kimchi-stop": "play=wwwwr&shot=1&wait=3000", "depot-kimchi-tow": "play=wwwww&shot=1&wait=600"}
 if os.environ.get("WARP_DEPOT_SHOTS"):  # for looking at the endings: only their screenshots
     jobs = {}
 results = {}
@@ -187,6 +193,7 @@ try:
         fut = {ex.submit(run, *v): k for k, v in jobs.items()}
         sfut = [] if ONLY else [ex.submit(run, D, ph, "streak4", False, str(out / f"warp-390-{k}.png")) for k, ph in shots.items()]
         sfut += [] if ONLY else [ex.submit(run, "2026-11-11", ph, "streak4", False, str(out / f"warp-390-{k}.png")) for k, ph in kshots.items()]
+        sfut += [] if ONLY else [ex.submit(run, D, ph, "streak4", False, str(out / f"warp-390-{k}.png")) for k, ph in wshots.items()]
         sfut += [ex.submit(run, D, "play=rwrwr&prac=1&shot2=1", "streak4", False, str(out / "warp-390-depot-practice-home.png"))] if os.environ.get("WARP_DEPOT_SHOTS") else []
         sfut += [] if ONLY or os.environ.get("WARP_DEPOT_SHOTS") else [ex.submit(run, D, "play=rwrwr&prac=1&shot2=1", "streak4", False, str(out / "warp-390-depot-practice-home.png")),
                  ex.submit(run, D, "play=rwrwr&kb=1&shot=1", "streak4", True, str(out / "warp-390-bed-sight-reduced.png")),
@@ -223,9 +230,10 @@ for name in jobs:
         need(st["last"], f"{t}: the quiz is still the last section")
         cat = "Kimchi" if date == "2026-11-11" else "Charlee"
         need(st["pilot"] == f"Pilot: {cat}" and st["cat"] > 0 and st["catW"] > 20, f"{t}: {cat} flies today, the real cat art is in the ship ({st['pilot']}, {st['cat']} nodes, {st['catW']}px)")
-        need(st["launch"] and st["launch"]["bottom"] <= st["vh"], f"{t}: Launch is on screen ({st['launch']})")
-        need(all(s["lastOpt"]["bottom"] <= 844 for s in R["steps"]), f"{t}: each question and all its answers fit one screen ({[s['lastOpt']['bottom'] for s in R['steps']]})")
-        need(all(s["next"] and 0 <= s["next"]["top"] and s["next"]["bottom"] <= 844 for s in R["steps"]), f"{t}: the next button is on screen after every answer ({[s['next'] for s in R['steps']]})")
+        narrow = "fw=" in phase  # other widths check the scene fit only
+        need(narrow or st["launch"] and st["launch"]["bottom"] <= st["vh"], f"{t}: Launch is on screen ({st['launch']})")
+        need(narrow or all(s["lastOpt"]["bottom"] <= 844 for s in R["steps"]), f"{t}: each question and all its answers fit one screen ({[s['lastOpt']['bottom'] for s in R['steps']]})")
+        need(narrow or all(s["next"] and 0 <= s["next"]["top"] and s["next"]["bottom"] <= 844 for s in R["steps"]), f"{t}: the next button is on screen after every answer ({[s['next'] for s in R['steps']]})")
         need(all(s["stageH"] == 120 and s["shownOpts"] == (1 if s["ok"] else 2) for s in R["steps"]), f"{t}: compact scene while answering; only the right and picked answers stay ({[(s['stageH'], s['shownOpts']) for s in R['steps']]})")
         need(all(not s["stageOver"] and not s["afterOver"] for s in R["steps"]), f"{t}: the badge never covers the scene or gauge while answering")
         need(not st["issues"] and not st["tiny"] and not st["small"], f"{t}: start: no clipped or overlapping text, nothing under 12px, buttons 44px ({st['issues']}, {st['tiny']}, {st['small']})")
@@ -244,7 +252,7 @@ for name in jobs:
         need(E["saved"] and E["saved"]["score"] == right and E["saved"]["total"] == n and E["progGone"] and E["pts"] == f"+{E['saved']['points']} points" and str(E["saved"]["points"]) == E["points"], f"{t}: saved {E['saved']}, progress cleared, {E['pts']} shown")
         need(re.fullmatch(rf"{right} right × 10( \+ 20 perfect)?(, × [\d.]+ streak)? = \+{E['saved']['points']} points", E["math"] or "") is not None, f"{t}: the points sum line shows ({E['math']!r})")
         need(E["gauge"]["cells"] == right and E["gauge"]["on"] == right and E["pointsInBadge"], f"{t}: ending gauge {E['gauge']['fnum']} and the badge has the new total ({E['badge']})")
-        need(E["stageH"] == 220 and not E["overScene"] and E["math2"]["bottom"] <= 844 and (not E["prac"] or "inset=1" in phase or E["prac"]["bottom"] <= 844), f"{t}: ending: full scene, badge clear of scene, gauge and headline, points line and practise button on screen ({E['math2']}, {E['prac']})")
+        need(E["stageH"] == 220 and not E["overScene"] and E["math2"]["bottom"] <= 844 and (not E["prac"] or "inset=1" in phase or narrow or E["prac"]["bottom"] <= 844), f"{t}: ending: full scene, badge clear of scene, gauge and headline, points line and practise button on screen ({E['math2']}, {E['prac']})")
         need(E["headClear"] and E["gaugeClear"] and E["focusHead"], f"{t}: the badge covers neither the gauge nor the headline; focus on the headline")
         need(not E["issues"] and not E["tiny"] and not E["small"], f"{t}: ending: no clipped or overlapping text, nothing under 12px, buttons 44px ({E['issues']}, {E['tiny']}, {E['small']})")
         need(E["head"] in E["live"] and f"{right} out of {n}" in E["live"], f"{t}: the ending is announced ({E['live']!r})")
@@ -257,9 +265,10 @@ for name in jobs:
             gone = ("porch", "door") if art == "bed" else ("cat bed",)
             need(words in E["lines"] and not any(g in E["lines"] for g in gone), f"{t}: the {art} words ({E['lines']!r})")
         if "house=1" not in phase:
+            need(E.get("fit") and E["fit"] * 358 <= E["stageW"] + 1 and E["shipIn"], f"{t}: the scene fits the {E.get('stageW')}px stage and the ship is inside it (scale {E.get('fit')})")
             G = E.get("scene") or {}
             need(G.get("scene") == want, f"{t}: the Night Depot {want} scene is drawn ({G})")
-            if red:
+            if red and not narrow:
                 ok = {"full": lambda g: g["bed"] > 150 and g["pilotCat"] > 20 and g["homeCat"] > 20, "last": lambda g: g["bed"] > 150 and g["pilotCat"] > 20 and g["homeCat"] > 20,
                       "sight": lambda g: g["homePlanet"] > 300 and g["homeCat"] > 5, "stop": lambda g: g["queue"] > 300 and g["board"] > 40 and g["homeCat"] > 5,
                       "tow": lambda g: g["tug"] > 400 and g["homeCat"] > 5}[want]
@@ -277,7 +286,8 @@ for name in jobs:
                 need(any("practice-short" in x for x in P.get("log", [])) and any("to go" in x for x in P.get("log", [])), f"{t}: a miss in practice shows cells to go and Practise the rest ({P.get('log')})")
             need(P.get("drawn") == ("house" if "house=1" in phase else "bed"), f"{t}: home after practice is drawn as the {'house' if 'house=1' in phase else 'bed'} ({P.get('drawn')})")
             need(not P.get("issues") and not P.get("tiny"), f"{t}: practice coda text fits ({P.get('issues')}, {P.get('tiny')})")
-        need(R["scrollWidth"] <= 390 and E["scrollWidth"] <= 390, f"{t}: no sideways scroll ({R['scrollWidth']})")
+        fwj = int(re.search(r"fw=(\d+)", phase).group(1)) if "fw=" in phase else 390
+        need(R["scrollWidth"] <= fwj and E["scrollWidth"] <= fwj, f"{t}: no sideways scroll ({R['scrollWidth']})")
         need(not R["errs"], f"{t}: no errors in the page ({R['errs']})")
     elif R.get("phase") == "reopen":
         need(R["ending"] == "sight" and R["head"] == "Home is in sight" and "Today’s quiz · finished" in R["text"] and "3/5" in R["text"], f"{t}: a finished 3 of 5 reopens on its ending ({R['ending']}, {R['head']!r})")
@@ -314,7 +324,7 @@ if "older edition" in jobs:
     need((older.get("end") or {}).get("saved", {}).get("score") == 4, "the older edition saves under its own date")
 errors = [c for c in consoles if ERR.search(c[1])]
 need(not errors, f"no console errors in any run ({errors[:4]})")
-for k in ([] if ONLY else list(shots) + list(kshots) + ["depot-practice-home"] if os.environ.get("WARP_DEPOT_SHOTS") else list(shots) + list(kshots) + ["depot-practice-home", "bed-sight-reduced", "tow-reduced", "weekend-last", "intro", "question", "after-answer"]):
+for k in ([] if ONLY else list(shots) + list(kshots) + list(wshots) + ["depot-practice-home"] if os.environ.get("WARP_DEPOT_SHOTS") else list(shots) + list(kshots) + list(wshots) + ["depot-practice-home", "bed-sight-reduced", "tow-reduced", "weekend-last", "intro", "question", "after-answer"]):
     f = out / f"warp-390-{k}.png"
     need(f.exists() and f.stat().st_size > 20000, f"screenshot {f.name}")
 for f in ("warp-test.html", "warp-test-house.html", "warp-house.js", "warp-audit.js", "wp-errs.js", "wp-frame.js"):

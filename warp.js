@@ -18,7 +18,8 @@
      goes in with textContent only. */
 (function(){
 'use strict';
-/* Home is drawn as the cats' bed ('bed'). 'house' brings back the first house, its drawing and its words, exactly. */
+/* Home is drawn as the cats' bed ('bed'). 'house' brings back the first three home endings (full, last, sight), their
+   drawing and their words, exactly; the fuel stop and the tow are the new Night Depot scenes either way. */
 var HOME_ART='bed',BED=HOME_ART!=='house';
 var L='ABCD',TAGC={AI:'#ff2e6e',Tech:'#ffe600',Cyber:'#9a7bff'},NAME={kimchi:'Kimchi',charlee:'Charlee'};
 var MONO="'IBM Plex Mono',ui-monospace,Menlo,monospace",DISP="Anton,Impact,'Arial Narrow',sans-serif";
@@ -58,7 +59,9 @@ function FX(cv){var ctx=cv.getContext('2d'),P=[],on=false,W=0,H=0;
    its dome) should be: {x, y, w, rot, flame, out}. out: the pilot has hopped out, so the dome is empty.
    The cats out of the ship are small canvas cats: Kimchi a blue/lilac point Birman, Charlee a Maine Coon.
    Pure drawing: no layout reads, no timers, no storage. ---------- */
-var DW=358,DH=220,DPI=Math.PI,DTAU=DPI*2,OX=0,FW=DW;
+/* OX: how far the world extends left and right of the 358px strip on a wider stage; TOP: the band opened above it when
+   a narrower stage shrinks the world to fit (both in world units); FW: the full width in world units */
+var DW=358,DH=220,DPI=Math.PI,DTAU=DPI*2,OX=0,TOP=0,FW=DW;
 var DC={cyan:'#3de6ff',mag:'#ff3df2',green:'#3ddc97',amber:'#ffb347',yellow:'#ffe600',lilac:'#c9b8ff',ink:'#0b0620'};
 var DDISP="Anton,Impact,'Arial Narrow',sans-serif",DMONO="'IBM Plex Mono',ui-monospace,Menlo,monospace",DSANS="'Space Grotesk',system-ui,sans-serif";
 function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
@@ -70,7 +73,7 @@ function eio(x){x=cl(x,0,1);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}
 function dsurf(cx,cy,r,x){return cy-Math.sqrt(Math.max(0,r*r-(x-cx)*(x-cx)))}
 function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
 /* the sky fills the whole stage, even when it is wider than the 358px world */
-function dsky(c,a,b){var g=c.createLinearGradient(0,0,0,DH);g.addColorStop(0,a);g.addColorStop(1,b);c.fillStyle=g;c.fillRect(-OX,0,FW,DH)}
+function dsky(c,a,b){var g=c.createLinearGradient(0,0,0,DH);g.addColorStop(0,a);g.addColorStop(1,b);c.fillStyle=g;c.fillRect(-OX,-TOP,FW,DH+TOP)}
 function glow(c,col,b){c.shadowColor=col;c.shadowBlur=b}
 function ng(c){c.shadowBlur=0}
 function circ(c,x,y,r,col){c.fillStyle=col;c.beginPath();c.arc(x,y,r,0,DTAU);c.fill()}
@@ -78,11 +81,16 @@ function ell(c,x,y,rx,ry,col){c.fillStyle=col;c.beginPath();c.ellipse(x,y,rx,ry,
 function txt(c,s,x,y,font,col,al,g){c.font=font;c.textAlign=al||'center';c.textBaseline='alphabetic';c.fillStyle=col;if(g)glow(c,col,g);c.fillText(s,x,y);ng(c)}
 function radial(c,x,y,r,col,a){var g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,col.replace('A',a));g.addColorStop(1,col.replace('A',0));c.fillStyle=g;c.fillRect(x-r,y-r,r*2,r*2)}
 var SCACHE={};function starsOf(seed,n){if(!SCACHE[seed]){var r=rng(seed),a=[];for(var i=0;i<n;i++)a.push({x:r()*DW,y:r()*DH,z:.3+r()*.7,p:r()*6.3});SCACHE[seed]=a}return SCACHE[seed]}
-function dstars(c,seed,n,t,dx,rm,ymax){starsOf(seed,n).forEach(function(s){if(ymax&&s.y>ymax)return;var x=((s.x-dx*s.z)%DW+DW)%DW,tw=rm?1:.55+.45*Math.sin(t*1.7+s.p*3);c.globalAlpha=(.25+.6*s.z)*tw;c.fillStyle='#dce6ff';var z=s.z*1.8;c.fillRect(x,s.y,z,z)});c.globalAlpha=1}
+/* on a wide stage the stars and the skyline repeat across the full width */
+function tiles(){var k=Math.ceil(OX/DW),a=[];for(var i=-k;i<=k;i++)a.push(i*DW);return a}
+function dstars(c,seed,n,t,dx,rm,ymax){tiles().forEach(function(T){dstars1(c,seed,n,t,dx,rm,ymax,T)})}
+function dstars1(c,seed,n,t,dx,rm,ymax,T){starsOf(seed,n).forEach(function(s){if(ymax&&s.y>ymax)return;var x=T+((s.x-dx*s.z)%DW+DW)%DW,tw=rm?1:.55+.45*Math.sin(t*1.7+s.p*3);c.globalAlpha=(.25+.6*s.z)*tw;c.fillStyle='#dce6ff';var z=s.z*1.8;c.fillRect(x,s.y,z,z)});c.globalAlpha=1}
 function heart(c,x,y,s,col,a){c.save();c.globalAlpha=a==null?1:a;c.translate(x,y);c.scale(s,s);c.fillStyle=col;glow(c,col,10);c.beginPath();c.moveTo(0,4);c.bezierCurveTo(-7,-1,-6,-8,0,-4);c.bezierCurveTo(6,-8,7,-1,0,4);c.fill();ng(c);c.restore()}
 function zzz(c,x,y,t,rm){for(var i=0;i<3;i++){var p=rm?.2+i*.28:(t*.45+i/3)%1,a=rm?1-i*.22:Math.sin(DPI*p);c.globalAlpha=a;txt(c,'z',x+p*14+Math.sin(p*6)*2,y-p*28,'700 '+Math.round(12+p*5)+'px '+DMONO,DC.lilac,'left')}c.globalAlpha=1}
 function puff(c,x,y,p,col){c.globalAlpha=(1-p)*.55;circ(c,x-p*10,y-p*16,4+p*8,col||'#c8c0e0');c.globalAlpha=1}
-function firework(c,x,y,p,col,n){n=n||16;if(p<=0||p>=1)return;var r=8+44*eo(p);c.globalAlpha=1-p;glow(c,col,10);for(var i=0;i<n;i++){var a=i/n*DTAU;circ(c,x+Math.cos(a)*r,y+Math.sin(a)*r+p*p*18,2.2,col);c.globalAlpha=(1-p)*.4;circ(c,x+Math.cos(a)*r*.7,y+Math.sin(a)*r*.7+p*p*12,1.4,'#fff');c.globalAlpha=1-p}ng(c);c.globalAlpha=1}
+/* a firework: a bright flash, then a ring of big dots with a soft halo under each (no blur per dot) */
+function firework(c,x,y,p,col,n){n=n||14;if(p<=0||p>=1)return;var r=8+48*eo(p),a0=1-p,d=2.2+1.2*(1-p);if(p<.2)radial(c,x,y,26,'rgba(255,255,255,A)',(1-p/.2)*.9);
+  for(var i=0;i<n;i++){var a=i/n*DTAU,xx=x+Math.cos(a)*r,yy=y+Math.sin(a)*r+p*p*18;c.globalAlpha=a0*.28;circ(c,xx,yy,d*2.6,col);c.globalAlpha=a0;circ(c,xx,yy,d,col);c.globalAlpha=a0*.7;circ(c,x+Math.cos(a)*r*.7,y+Math.sin(a)*r*.7+p*p*12,1.6,'#fff')}c.globalAlpha=1}
 
 /* ---------- the two cats, out of the ship ---------- */
 var CP={charlee:{f:'#9a6236',d:'#4f2c16',w:'#f6efe4',tail:'#8a5530',eye:'#b9dc4c',ear:'#e9a19c',head:'#9a6236'},
@@ -125,8 +133,8 @@ function bedFront(c,x,y,s){c.fillStyle='#e05cc4';c.beginPath();c.ellipse(x,y-6*s
   c.strokeStyle='#ffffff44';c.lineWidth=1;c.beginPath();c.ellipse(x,y-4*s,32*s,10*s,0,.25*DPI,.75*DPI);c.stroke()}
 
 /* the greeting: the pilot hops out, the home cat comes to meet them, nose boop under a heart, then both curl up in the bed */
-var GA={bx:262,by:172,s:.82,bs:.82,t0:2.6,hx:106,hy:120,gx:150};
-function greet(c,t,rm,G,pilot,home){var u=G.s,tau=t-G.t0,bx=G.bx,by=G.by,C1=bx-46*u,K1=bx-18*u,iC=bx-9*u,iK=bx+9*u,inb=[],out=[];
+var GA={bx:262,by:172,s:.92,bs:.9,t0:2.6,hx:106,hy:120,gx:150};
+function greet(c,t,rm,G,pilot,home){var u=G.s,tau=t-G.t0,bx=G.bx,by=G.by,C1=bx-46*u,K1=bx-18*u,iC=bx-17*u,iK=bx+17*u,inb=[],out=[];
   function at(x,y,k,pose,dir,ex,inBed){var o={t:t,rm:rm,dir:dir};for(var e in ex)o[e]=ex[e];(inBed?inb:out).push([x,y,k,pose,o])}
   var lean=tau>1.8&&tau<3?Math.sin(DPI*seg(tau,1.85,2.9))*3*u:0;
   if(tau<.3)at(bx+4*u,by-4*u,home,'sit',-1,{wave:tau>-1.6},1);
@@ -189,32 +197,33 @@ function tug(c,x,y,s,t,o){var rm=o.rm;c.save();c.translate(x,y);c.scale(s,s);
 
 /* a far neighbourhood on the horizon */
 var SKYA=(function(){var r=rng(7),a=[],x=0;while(x<DW){var w=14+r()*22,h=12+r()*40,wins=[];for(var j=0;j<6;j++)wins.push([x+3+r()*(w-6),176-h+4+r()*(h-8),r()<.5?DC.amber:DC.cyan,r()*6]);a.push({x:x,w:w,h:h,wins:wins});x+=w+2}return a})();
-function skyline(c,t,rm,gy){SKYA.forEach(function(b){c.fillStyle='#170d40';c.fillRect(b.x,gy-b.h,b.w,b.h);c.fillStyle='#2a1a5e';c.fillRect(b.x,gy-b.h,b.w,1.5);b.wins.forEach(function(w){c.globalAlpha=rm?.5:.25+.35*(Math.sin(t*.7+w[3])>0?1:.3);c.fillStyle=w[2];c.fillRect(w[0],w[1]-(176-gy),2,2)})});c.globalAlpha=1}
+function skyline(c,t,rm,gy){tiles().forEach(function(T){c.save();c.translate(T,0);skyline1(c,t,rm,gy);c.restore()})}
+function skyline1(c,t,rm,gy){SKYA.forEach(function(b){c.fillStyle='#170d40';c.fillRect(b.x,gy-b.h,b.w,b.h);c.fillStyle='#2a1a5e';c.fillRect(b.x,gy-b.h,b.w,1.5);b.wins.forEach(function(w){c.globalAlpha=rm?.5:.25+.35*(Math.sin(t*.7+w[3])>0?1:.3);c.fillStyle=w[2];c.fillRect(w[0],w[1]-(176-gy),2,2)})});c.globalAlpha=1}
 
 /* ---------- the five endings. P: {pilot, home} ---------- */
 function garden(c,t,rm,full){dsky(c,full?'#1a0b45':'#1c0a38',full?'#43207f':'#5a2448');dstars(c,11,60,t,0,rm,150);
-  if(full){for(var j=0;j<3;j++){c.save();c.globalAlpha=.2;c.strokeStyle=[DC.green,DC.cyan,DC.mag][j];c.lineWidth=14;c.beginPath();for(var x=0;x<=DW;x+=10){var y=34+j*16+Math.sin(x/40+(rm?0:t*.9)+j)*10;if(x)c.lineTo(x,y);else c.moveTo(x,y)}c.stroke();c.restore()}}
+  if(full){for(var j=0;j<3;j++){c.save();c.globalAlpha=.2;c.strokeStyle=[DC.green,DC.cyan,DC.mag][j];c.lineWidth=14;c.beginPath();for(var x=-OX;x<=DW+OX;x+=10){var y=34+j*16+Math.sin(x/40+(rm?0:t*.9)+j)*10;if(x>-OX)c.lineTo(x,y);else c.moveTo(x,y)}c.stroke();c.restore()}}
   else radial(c,40,150,120,'rgba(255,140,90,A)',.22);
   c.save();c.translate(0,-6);skyline(c,t,rm,168);c.restore();
   var g=c.createLinearGradient(0,160,0,DH);g.addColorStop(0,full?'#1e7a68':'#5a2a5e');g.addColorStop(1,'#0c1f30');c.fillStyle=g;c.beginPath();c.moveTo(-OX,DH);c.lineTo(-OX,172);c.lineTo(0,172);c.quadraticCurveTo(179,150,DW,172);c.lineTo(FW-OX,172);c.lineTo(FW-OX,DH);c.closePath();c.fill();
   c.strokeStyle=full?DC.green:'#ff9ae0';c.lineWidth=2;glow(c,c.strokeStyle,10);c.beginPath();c.moveTo(0,172);c.quadraticCurveTo(179,150,DW,172);c.stroke();ng(c);
   /* bunting over the bed */
-  c.strokeStyle='#4a3a7e';c.lineWidth=3;c.beginPath();c.moveTo(204,166);c.lineTo(204,108);c.moveTo(322,170);c.lineTo(322,104);c.stroke();
-  c.strokeStyle='#ffffff55';c.lineWidth=1;c.beginPath();c.moveTo(204,110);c.quadraticCurveTo(263,140,322,106);c.stroke();
-  for(var i=0;i<9;i++){var p=(i+.5)/9,bx=lerp(204,322,p),by=(1-p)*(1-p)*110+2*(1-p)*p*140+p*p*106;var col=full?[DC.mag,DC.yellow,DC.cyan,DC.green][(i+((rm?0:t*3)|0))%4]:'#ffcf7a';var on=full||rm||Math.sin(t*1.3+i)>-.7;c.globalAlpha=on?1:.35;
+  c.strokeStyle='#4a3a7e';c.lineWidth=3;c.beginPath();c.moveTo(204,166);c.lineTo(204,100);c.moveTo(322,170);c.lineTo(322,96);c.stroke();
+  c.strokeStyle='#ffffff55';c.lineWidth=1;c.beginPath();c.moveTo(204,102);c.quadraticCurveTo(263,132,322,98);c.stroke();
+  for(var i=0;i<9;i++){var p=(i+.5)/9,bx=lerp(204,322,p),by=(1-p)*(1-p)*102+2*(1-p)*p*132+p*p*98;var col=full?[DC.mag,DC.yellow,DC.cyan,DC.green][(i+((rm?0:t*3)|0))%4]:'#ffcf7a';var on=full||rm||Math.sin(t*1.3+i)>-.7;c.globalAlpha=on?1:.35;
     c.fillStyle=col;glow(c,col,10);c.beginPath();c.moveTo(bx-4,by+1);c.lineTo(bx+4,by+1);c.lineTo(bx,by+9);c.closePath();c.fill();ng(c)}c.globalAlpha=1}
 function dFull(c,t,rm,P){garden(c,t,rm,1);
   /* neighbours cheer from their porches, clear of the score badge's corner */
   var ch=rm?0:Math.abs(Math.sin(t*4))*4;teapot(c,342,124-ch,.6,t,{rm:rm});robot(c,30,62-(rm?0:Math.abs(Math.sin(t*4+1))*4),.75,t,{rm:rm,flip:1});
   if(!rm){for(var i=0;i<4;i++){var T=t-1.2-i*.9,ph=((T%3.6)+3.6)%3.6/1.4;if(T>0&&ph<1)firework(c,[90,236,166,40][i],[40,34,58,100][i],ph,[DC.mag,DC.cyan,DC.yellow,DC.green][i],18)}}
   else{firework(c,90,40,.45,DC.mag,18);firework(c,236,36,.55,DC.cyan,18)}
-  var p=eo(seg(t,0,2.3)),sx=lerp(-60,96,p),sy=lerp(36,150,p)+(rm?0:Math.sin(t*2)*1.5*(1-p));
+  var p=eo(seg(t,0,2.3)),sx=lerp(-60-OX,96,p),sy=lerp(36,150,p)+(rm?0:Math.sin(t*2)*1.5*(1-p));
   greet(c,t,rm,GA,P.pilot,P.home);
   if(!rm){for(var k=0;k<14;k++){var q=((t*.25+k/14)%1),xx=(k*53)%DW+Math.sin(q*10+k)*6;c.globalAlpha=Math.sin(DPI*q)*.9;c.fillStyle=[DC.mag,DC.yellow,DC.cyan,DC.green][k%4];c.fillRect(xx,q*170,3,5)}c.globalAlpha=1}
   return{x:sx,y:sy,w:100,rot:lerp(.25,0,p),flame:1-seg(t,1.8,2.4),out:t>=GA.t0}}
 function dLast(c,t,rm,P){garden(c,t,rm,0);
   radial(c,GA.bx,150,70,'rgba(255,200,120,A)',.25);c.fillStyle='#4a3a7e';c.fillRect(330,128,3,42);glow(c,'#ffcf7a',16);circ(c,331,126,5,'#ffcf7a');ng(c);
-  var p=eio(seg(t,0,2.4)),jx=rm?0:(t<2.4?Math.sin(t*23)*2:0),sx=lerp(-60,96,p)+jx,sy=lerp(70,150,p)-(rm?0:Math.max(0,Math.sin(seg(t,2.3,2.8)*DPI))*6);
+  var p=eio(seg(t,0,2.4)),jx=rm?0:(t<2.4?Math.sin(t*23)*2:0),sx=lerp(-60-OX,96,p)+jx,sy=lerp(70,150,p)-(rm?0:Math.max(0,Math.sin(seg(t,2.3,2.8)*DPI))*6);
   for(var i=0;i<5;i++){var pt=t-i*.45;if(pt>0&&pt<2.6&&!rm){var q=((t-pt)%2.2)/2.2;puff(c,lerp(-60,96,eio(seg(pt,0,2.4)))-50,lerp(70,150,eio(seg(pt,0,2.4)))+4,q)}}
   if(t>2.4&&t<4.2&&!rm){puff(c,40,154,seg(t,2.4,4.2),'#b0a8c8');puff(c,52,150,seg(t,2.7,4.2),'#b0a8c8')}
   greet(c,t,rm,GA,P.pilot,P.home);
@@ -227,7 +236,7 @@ function dSight(c,t,rm,P){c.save();c.translate(DW,0);c.scale(-1,1);dsky(c,'#0b0a
   var mx=118,my=330,mr=170;var mg=c.createRadialGradient(80,200,10,mx,my,mr);mg.addColorStop(0,'#b8b0dc');mg.addColorStop(1,'#3a3260');c.fillStyle=mg;c.beginPath();c.arc(mx,my,mr,0,DTAU);c.fill();
   [[-80,8],[-30,12],[40,6],[70,10]].forEach(function(z){ell(c,mx+z[0],dsurf(mx,my,mr,mx+z[0])+z[1]+5,z[1]*1.4,z[1]*.6,'#5a5288')});
   c.fillStyle='#c9b8ff';c.fillRect(24,128,3,34);var bb=rm||Math.sin(t*3)>0;glow(c,DC.yellow,bb?12:0);circ(c,25.5,126,4,bb?DC.yellow:'#6b5a00');ng(c);
-  var p=eo(seg(t,0,2)),sx=lerp(-60,78,p),sy=lerp(60,dsurf(mx,my,mr,78)-20,p);
+  var p=eo(seg(t,0,2)),sx=lerp(-60-OX,78,p),sy=lerp(60,dsurf(mx,my,mr,78)-20,p);
   var cx=192,cy=dsurf(mx,my,mr,192)+2;
   if(t>=2.2||rm){var h=rm?1:seg(t,2.2,3.4),wx=lerp(118,cx,eio(h)),pose=h<1?'walk':'sit';catV(c,wx,(h<1?dsurf(mx,my,mr,wx)+2:cy),.8,P.pilot,pose,{t:t,rm:rm,dir:1,tilt:-.25})}
   if(t>3.4||rm){c.save();c.setLineDash([4,6]);c.strokeStyle='#ffe60099';c.lineWidth=2;c.beginPath();c.moveTo(cx+12,cy-44);c.quadraticCurveTo(250,64,284,30);c.stroke();c.restore();
@@ -251,7 +260,7 @@ function dStop(c,t,rm,P){dsky(c,'#0a0524','#211052');dstars(c,17,60,t,0,rm,120);
     vt(c,vx,vy,1,t,{rm:rm})}
   if(u>.62&&!rm){var dp=seg(u,.62,1),dv=VEH[(cyc%4+4)%4],dx=200-30*dp,dy=150-175*dp*dp;c.fillStyle='rgba(61,230,255,.6)';c.beginPath();c.moveTo(dx-6,dy+16);c.lineTo(dx+6,dy+16);c.lineTo(dx,dy+30+10*dp);c.closePath();c.fill();dv(c,dx,dy,1,t,{rm:rm})}
   c.fillStyle='#2a1a5e';c.fillRect(136,58,162,20);c.fillStyle=DC.mag;glow(c,DC.mag,10);c.fillRect(136,57,162,2);ng(c);txt(c,'OPEN ALL NIGHT',217,72,'600 12px '+DMONO,DC.cyan);
-  var fl=rm||!((t*5|0)%23===0);txt(c,'FUEL',217,50,'400 34px '+DDISP,fl?DC.mag:'#5a2050',null,fl?20:0);
+  var fl=rm||!((t*5|0)%23===0);fuelSign(c,fl);
   /* the noodle stall, below the badge's corner */
   c.fillStyle='#2a0d2a';c.strokeStyle=DC.amber;c.lineWidth=1.5;glow(c,DC.amber,10);rr(c,306,84,46,38,12);c.fill();c.stroke();ng(c);
   c.fillStyle=DC.amber;c.beginPath();c.arc(329,106,10,0,DPI);c.closePath();c.fill();c.strokeStyle='#fff3d0';c.lineWidth=1.5;c.beginPath();c.moveTo(335,91);c.lineTo(327,104);c.moveTo(340,93);c.lineTo(331,104);c.stroke();
@@ -263,7 +272,7 @@ function dStop(c,t,rm,P){dsky(c,'#0a0524','#211052');dstars(c,17,60,t,0,rm,120);
   /* the cats' bay: a lamp, a pool of light, and a goodnight call home */
   c.fillStyle='#3a2a6e';c.fillRect(14,70,4,gy-70);c.fillRect(14,70,58,3);c.fillStyle='#5a4a9e';rr(c,58,72,18,6,3);c.fill();
   var bl=rm?1:seg(t,2.2,3.2);c.globalAlpha=bl;var lg=c.createLinearGradient(0,80,0,gy);lg.addColorStop(0,'rgba(255,200,120,.32)');lg.addColorStop(1,'rgba(255,200,120,.06)');c.fillStyle=lg;c.beginPath();c.moveTo(60,78);c.lineTo(74,78);c.lineTo(124,gy);c.lineTo(22,gy);c.closePath();c.fill();c.globalAlpha=1;
-  var p=eo(seg(t,0,2.4)),sx=lerp(-70,72,p),sy=lerp(70,150,p)+(rm?0:Math.sin(t*1.6));
+  var p=eo(seg(t,0,2.4)),sx=lerp(-70-OX,72,p),sy=lerp(70,150,p)+(rm?0:Math.sin(t*1.6));
   if(t>2.8||rm){var hs=rm?1:eo(seg(t,2.8,3.3)),asleep=t>5.4||rm;
     for(var a=0;a<3;a++){var ap=rm?.6:(t*.8+a/3)%1;c.globalAlpha=(1-ap)*hs;c.strokeStyle=DC.cyan;c.lineWidth=1.5;c.beginPath();c.arc(104,128,8+ap*14,-.9,.1);c.stroke()}c.globalAlpha=1;
     c.save();c.translate(141,108);c.scale(hs,hs);c.fillStyle='#0b1a3a';c.strokeStyle=DC.cyan;c.lineWidth=1.5;glow(c,DC.cyan,10);rr(c,-24,-17,48,34,6);c.fill();c.stroke();ng(c);
@@ -277,7 +286,7 @@ function dTow(c,t,rm,P){dsky(c,'#0a0524','#1a0f40');var d=t<2.6?8*t:t<3.6?20.8+8
   /* the depot ahead, lit by the tug's headlight */
   c.fillStyle='#24164f';c.fillRect(306,118,44,16);c.fillRect(316,110,24,8);for(var w=0;w<5;w++){c.fillStyle=(rm||Math.sin(t*1.3+w)>-.4)?DC.amber:'#5a3a10';c.fillRect(310+w*8,123,4,4)}glow(c,DC.cyan,8);c.fillStyle=DC.cyan;c.fillRect(306,134,44,2);ng(c);txt(c,'DEPOT',328,150,'600 12px '+DMONO,DC.cyan);
   for(var b=0;b<6;b++){var bx=((b*96-d*.9)%(96*4)+96*4)%(96*4)-20,on=rm||Math.sin(t*4+b)>0;c.fillStyle='#3a2a6e';c.fillRect(bx,166,3,14);glow(c,DC.cyan,on?10:0);circ(c,bx+1.5,165,3,on?DC.cyan:'#1a4a5a');ng(c)}
-  var tp=rm?1:eo(seg(t,.8,2.2)),tx=lerp(430,236,tp),ty=lerp(30,104,tp)+(rm?0:Math.sin(t*1.4)*2);
+  var tp=rm?1:eo(seg(t,.8,2.2)),tx=lerp(430+OX,236,tp),ty=lerp(30,104,tp)+(rm?0:Math.sin(t*1.4)*2);
   var sx=104+(rm?0:Math.sin(t*1.1)*2),sy=136+(rm?0:Math.sin(t*1.4+.6)*3),rot=t<2.2&&!rm?-.1+Math.sin(t*1.5)*.08:-.08;
   if(t<1&&!rm){for(var i=0;i<3;i++)puff(c,sx-46,sy,((t+i*.33)%1),'#9a92b8')}
   if(tp>=1&&(t>2.2||rm)){c.save();var bg=c.createLinearGradient(tx-50,0,sx+30,0);bg.addColorStop(0,'rgba(255,230,0,.32)');bg.addColorStop(1,'rgba(255,230,0,.08)');c.fillStyle=bg;c.beginPath();c.moveTo(tx-50,ty-4);c.lineTo(sx+52,sy-40);c.lineTo(sx+52,sy+30);c.lineTo(tx-50,ty+12);c.closePath();c.fill();
@@ -290,11 +299,20 @@ function dTow(c,t,rm,P){dsky(c,'#0a0524','#1a0f40');var d=t<2.6?8*t:t<3.6?20.8+8
     txt(c,P.home==='charlee'?'CHARLEE':'KIMCHI',bx2-tw+4,28,'600 12px '+DMONO,DC.lilac,'left');c.globalAlpha=1}
   for(var k=0;k<9;k++){var dx=DW-(((k*53+d*2.4)%(DW+60))+60)+60,dy=(k*37)%150+12,ln=4+(t<2.6?2:40*seg(t,2.6,3.6));c.globalAlpha=.35;c.fillStyle='#dce6ff';c.fillRect(dx,dy,ln,1.3)}c.globalAlpha=1;
   return{x:sx,y:sy,w:104,rot:rot,flame:0,out:false}}
+/* the FUEL lettering's glow is blurred once into a small offscreen canvas, not every frame */
+var FUELC=null;
+function fuelSign(c,lit){var ok=typeof document!=='undefined'&&(!document.fonts||document.fonts.check('34px Anton'));
+  if(!ok){txt(c,'FUEL',217,50,'400 34px '+DDISP,lit?DC.mag:'#5a2050',null,lit?20:0);return}
+  if(!FUELC){FUELC=[1,0].map(function(on){var k=document.createElement('canvas'),x;k.width=240;k.height=120;x=k.getContext('2d');x.scale(2,2);txt(x,'FUEL',60,46,'400 34px '+DDISP,on?DC.mag:'#5a2050',null,on?20:0);return k})}
+  c.drawImage(FUELC[lit?0:1],217-60,50-46,120,60)}
 var DEPOT={full:dFull,last:dLast,sight:dSight,stop:dStop,tow:dTow};
 /* the still frame for reduced motion: the end state of each scene (cats together, queue in place) */
 var STILL={full:GA.t0+2.4,last:GA.t0+2.4,sight:6,stop:7,tow:7};
 /* draw ending k at time t on a stage w wide; returns the ship state */
-function depot(c,k,t,rm,P,w){OX=Math.max(0,(w-DW)/2);FW=Math.max(DW,w);c.save();c.translate(OX,0);var st;try{st=DEPOT[k](c,t,rm,P)}finally{c.restore();c.shadowBlur=0;c.globalAlpha=1}st.x+=OX;return st}
+/* a stage narrower than 358px scales the world down to fit, anchored to the ground, and the sky fills the band above;
+   a wider one centres it and the world reaches out to both edges. The ship placement comes back in stage pixels. */
+function depot(c,k,t,rm,P,w){var z=Math.min(1,w/DW);OX=Math.max(0,(w/z-DW)/2);TOP=DH*(1-z)/z;FW=w/z;c.save();c.translate(OX*z,DH*(1-z));c.scale(z,z);var st;try{st=DEPOT[k](c,t,rm,P)}finally{c.restore();c.shadowBlur=0;c.globalAlpha=1}
+  return{x:(st.x+OX)*z,y:DH*(1-z)+st.y*z,w:st.w*z,rot:st.rot,flame:st.flame,out:st.out,flip:st.flip,z:z}}
 
 /* host: the page's quiz section (its class stays exactly "gcard quiz", which check.py looks for); the run is drawn
    in a .wr box inside it. o: items, titles {n: title}, cat, saved(), resume(), each(picks),
@@ -398,18 +416,19 @@ function mount(host,o){
       ctx.font='600 12px '+MONO;ctx.fillStyle='#ffe600';ctx.textAlign='center';ctx.fillText('TOW',tx,ty+40);
       if(!rm){ctx.font='700 14px '+MONO;ctx.fillStyle='#c9b8ff';var zz=(now/800)%1;ctx.globalAlpha=1-zz;ctx.fillText('z',E.x+4,E.y-38-zz*16);ctx.globalAlpha=1}}}
   function draw(now){var dt=Math.min(3,(now-last)/16.7);last=now;ctx.clearRect(0,0,W,H);
-    if(S.end&&S.end.depot){var rm=reduce(),k=S.end.k;placeD(depot(ctx,k,rm?STILL[k]:Math.max(0,(now-S.end.t0)/1000),rm,PAIR,W));return}
+    if(S.end&&S.end.depot){var rm=reduce(),k=S.end.k;if(!S.end.broken){try{var st=depot(ctx,k,rm?STILL[k]:Math.max(0,(now-S.end.t0)/1000),rm,PAIR,W);root.dataset.fit=st.z;placeD(st);return}catch(e){S.end.broken=true;console.error(e)}}
+      ctx.clearRect(0,0,W,H);sky('#070418','#1a0b45');drawStars(0,0,true);return}
     var sp=shipPos(now);
     if(S.end)scene(now);else{sky('#070418','#1a0b45');drawStars(sp.warp,dt,false);if(S.ring)drawRing(now);drawShield(sp)}
     place(sp)}
   /* the loop runs only while the quiz is on screen, the page is visible and motion is allowed; otherwise one still */
   var looping=false;
   function running(){return onScreen&&!covered&&!document.hidden&&!reduce()&&root.isConnected}
-  function loop(now){if(!running()){looping=false;return}draw(now);requestAnimationFrame(loop)}
+  function loop(now){if(!running()){looping=false;return}try{draw(now)}catch(e){console.error(e)}requestAnimationFrame(loop)}
   function sync(){root.classList.toggle('live',running());if(running()){if(!looping){looping=true;last=performance.now();requestAnimationFrame(loop)}}else if(root.isConnected)draw(performance.now())}
-  function redraw(){if(!looping)draw(performance.now())}
+  function redraw(){if(!looping)try{draw(performance.now())}catch(e){console.error(e)}}
   fit();
-  if('IntersectionObserver' in window)new IntersectionObserver(function(es){es.forEach(function(e){onScreen=e.isIntersecting});if(onScreen&&stale)pilotIn();sync()},{threshold:0}).observe(stage);else{onScreen=true;sync()}
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){es.forEach(function(e){onScreen=e.isIntersecting});if(onScreen&&stale)pilotIn();if(onScreen&&S.end&&S.end.depot&&!S.end.seen){S.end.seen=true;S.end.t0=performance.now()}sync()},{threshold:0}).observe(stage);else{onScreen=true;sync()}
   document.addEventListener('visibilitychange',sync);try{var mq=matchMedia('(prefers-reduced-motion: reduce)');if(mq.addEventListener)mq.addEventListener('change',sync)}catch(e){}
   if('ResizeObserver' in window){var ro=new ResizeObserver(function(){if(!root.isConnected){ro.disconnect();return}fit();redraw()});ro.observe(stage)}
   function pilotIn(){stale=false;try{if(window.MBScores&&MBScores.mountPilot)MBScores.mountPilot(ship,cat)}catch(e){}}
@@ -478,11 +497,11 @@ function mount(host,o){
     if(run.mode==='missed')coda();else if(run.mode==='replay')ending(null);else finish()}
   function endScene(k){var now=performance.now();
     /* the Night Depot scenes: every ending with the cat bed as home; the fuel stop and tow in either case */
-    if(BED||k==='stop'||k==='tow'){S.end={k:k,t0:now,depot:true,p:1};root.dataset.scene=k;if(BED&&k!=='stop'&&k!=='tow')root.dataset.drawn='bed';redraw();return}
+    if(BED||k==='stop'||k==='tow'){S.end={k:k,t0:now,depot:true,p:1,seen:onScreen};root.dataset.scene=k;if(BED&&k!=='stop'&&k!=='tow')root.dataset.drawn='bed';redraw();return}
     var F={full:{x:W-(BED?140:104),y:0,s:.8,rot:-4},last:{x:W-(BED?140:104),y:0,s:.8,rot:6,jit:1},sight:{x:W*.68,y:0,s:.72,rot:0,flip:1},stop:{x:W*.3,y:H-44-30,s:.78,rot:0},tow:{x:W*.36,y:H*.58,s:.8,rot:-12}}[k];
     if(k==='full'||k==='last')F.y=surf(W-80,H*.74,70,F.x)-24;if(k==='sight')F.y=surf(W*.62,H+112,170,W*.68)-22;
     S.end=Object.assign({k:k,t0:now,dur:k==='tow'?2600:1900,x0:k==='tow'?40:k==='sight'?W+70:-70,y0:k==='tow'?H*.6:H*.4,s0:1,p:reduce()?1:0},F);redraw()}
-  function streakRow(sk,mult){var r=h('div','streak'+(sk>0?' flame-on':'')),f=h('span');f.innerHTML=FLAME;r.append(f,h('b',null,sk>0?sk+'-day streak':'No streak yet'));r.append(mult>1?h('span','chip','×'+mult+' multiplier on'):h('span','chip off','×1.5 from day 5'));return r}
+  function streakRow(sk,mult){var r=h('div','streak'+(sk>0?' flame-on':'')),f=h('span');f.innerHTML=FLAME;r.append(f);if(sk>0||mult<=1)r.append(h('b',null,sk>0?sk+'-day streak':'No streak yet'));r.append(mult>1?h('span','chip','×'+mult+' multiplier on'):h('span','chip off','×1.5 from day 5'));return r}
   function revise(list,scored){if(!list.length)return null;var d=h('div','rvbox');d.append(h('span','rk','To revise'));list.forEach(function(m){var r=h('div','rv');r.append(h('b',null,m.q),h('p',null,'Answer: '+m.options[m.answer]+'. '+m.why));d.append(r)});if(scored)d.append(h('p','rn','Missed questions come back in Review over the next days.'));return d}
   function pracBox(missed,score){if(!missed.length||S.cells>=HOME)return null;var pb=h('div','prac');pb.append(h('span','lab','Practice refuel · no points'),h('p',null,'Each missed one you put right charges a cell. Reach '+HOME+' and '+P+' flies home tonight.'));
     pb.append(btn('Practise the missed ones','cy','practise',function(){practise(missed,score)}));return pb}
@@ -524,9 +543,9 @@ function mount(host,o){
     run={mode:'missed',items:missed.slice(),i:0,picks:[],right:0,missed:[],locked:true,base:base};busy=true;keyPick=pick;question()}
   function coda(){var f=h('div','w-fin');body.textContent='';setRun(false);
     if(S.cells>=HOME){endScene(S.cells>=N?'full':'last');root.dataset.ending='coda';var c=h('div','coda in'),hd=h('b',null,'Home after practice');hd.tabIndex=-1;var sv=o.saved();
-      c.append(hd,h('p',null,P+' refuels on the rings you put right and flies home. '+(sv?'Today’s score stays '+sv.score+'/'+sv.total+' and +'+sv.points+' points: practice adds none.':'Practice adds no points.')));f.append(c);
+      c.append(hd,h('p',null,P+' refuels on the rings you put right and flies home'+(BED?', where '+O+' is waiting by the cat bed. ':'. ')+(sv?'Today’s score stays '+sv.score+'/'+sv.total+' and +'+sv.points+' points: practice adds none.':'Practice adds no points.')));f.append(c);
       stat.textContent='';stat.append(h('b',null,'Home with '+S.cells+' of '+N+' cells. '),'Practice cells count for the story only.');say('Home after practice.');f.append(againBtn());body.append(f);toTop(root);focusEl(hd);
-      later(function(){for(var j=0;j<5;j++)later(function(){fx.burst(30+Math.random()*(W-60),30+Math.random()*80,36,{speed:5,g:.06})},j*300)},T(1500))}
+      if(!BED)later(function(){for(var j=0;j<5;j++)later(function(){fx.burst(30+Math.random()*(W-60),30+Math.random()*80,36,{speed:5,g:.06})},j*300)},T(1500))}
     else{root.dataset.ending='practice-short';var need=HOME-S.cells,hd2=h('h2',null,plural(need,'cell','cells')+' to go');hd2.tabIndex=-1;f.append(h('span','kick','Practice · no points'),hd2,h('p','lines','Nice work: '+S.cells+' of '+N+' cells now. Try the ones still missed to get '+P+' home tonight.'));
       if(run.missed.length){var still=run.missed.slice();f.append(btn('Practise the rest','cy','practise',function(){practise(still)}))}f.append(againBtn());body.append(f);toTop(root);focusEl(hd2);say(plural(need,'cell','cells')+' to go.');redraw()}}
   /* keys A to D or 1 to 4 answer, only while a question is waiting, the quiz is on screen and nothing sits on top */
