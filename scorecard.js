@@ -18,7 +18,9 @@
   function ring(rk) { return rk.next ? Math.max(0, Math.min(100, Math.round(100 * (rk.ceil - rk.floor - rk.toNext) / (rk.ceil - rk.floor)))) : 100; }
   var badge = null;
   function paint(bump) {
-    if (!badge) { badge = el('<button class="cc-badge" type="button"><span class="rg"><span></span></span><span class="pill"></span></button>'); badge.addEventListener('click', panel); document.body.appendChild(badge); }
+    if (!badge) { badge = el('<button class="cc-badge" type="button"><span class="rg"><span></span></span><span class="pill"></span></button>'); badge.addEventListener('click', panel); document.body.appendChild(badge);
+      /* past the top buttons the points chip fades out and only the ring stays, so the chip never sits on text or takes taps */
+      var slim = function () { badge.classList.toggle('slim', (window.scrollY || 0) > 120); }; addEventListener('scroll', slim, { passive: true }); slim(); }
     var m = stats();
     badge.querySelector('.rg').style.setProperty('--p', ring(m.rk) + '%');
     badge.querySelector('.rg span').textContent = '🔥' + m.run;
@@ -30,7 +32,10 @@
   function overlay(inner, onOpen) {
     lastFocus = document.activeElement;
     var o = el('<div class="cc-over" role="dialog" aria-modal="true"></div>'); o.appendChild(inner);
-    function close() { o.remove(); document.removeEventListener('keydown', key); document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
+    /* named after its heading; the page behind is inert while it is open */
+    var lb = inner.getAttribute('aria-labelledby'); if (lb) o.setAttribute('aria-labelledby', lb); else o.setAttribute('aria-label', 'My scores');
+    var app = document.getElementById('app'); if (app) app.inert = true;
+    function close() { o.remove(); document.removeEventListener('keydown', key); document.body.style.overflow = ''; if (app) app.inert = !!document.querySelector('.sheet'); if (lastFocus) lastFocus.focus(); }
     function key(e) { if (e.key === 'Escape') close(); }
     o.addEventListener('click', function (e) { if (e.target === o) close(); });
     inner.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', close); });

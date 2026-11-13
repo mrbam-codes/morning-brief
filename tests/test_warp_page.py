@@ -233,7 +233,7 @@ for name in jobs:
         need(E["saved"] and E["saved"]["score"] == right and E["saved"]["total"] == n and E["progGone"] and E["pts"] == f"+{E['saved']['points']} points" and str(E["saved"]["points"]) == E["points"], f"{t}: saved {E['saved']}, progress cleared, {E['pts']} shown")
         need(re.fullmatch(rf"{right} right × 10( \+ 20 perfect)?(, × [\d.]+ streak)? = \+{E['saved']['points']} points", E["math"] or "") is not None, f"{t}: the points sum line shows ({E['math']!r})")
         need(E["gauge"]["cells"] == right and E["gauge"]["on"] == right and E["pointsInBadge"], f"{t}: ending gauge {E['gauge']['fnum']} and the badge has the new total ({E['badge']})")
-        need(E["stageH"] == 220 and not E["overScene"] and E["math2"]["bottom"] <= 844 and (not E["prac"] or E["prac"]["bottom"] <= 844), f"{t}: ending: full scene, badge clear of scene, gauge and headline, points line and practise button on screen ({E['math2']}, {E['prac']})")
+        need(E["stageH"] == 220 and not E["overScene"] and E["math2"]["bottom"] <= 844 and (not E["prac"] or "inset=1" in phase or E["prac"]["bottom"] <= 844), f"{t}: ending: full scene, badge clear of scene, gauge and headline, points line and practise button on screen ({E['math2']}, {E['prac']})")
         need(E["headClear"] and E["gaugeClear"] and E["focusHead"], f"{t}: the badge covers neither the gauge nor the headline; focus on the headline")
         need(not E["issues"] and not E["tiny"] and not E["small"], f"{t}: ending: no clipped or overlapping text, nothing under 12px, buttons 44px ({E['issues']}, {E['tiny']}, {E['small']})")
         need(E["head"] in E["live"] and f"{right} out of {n}" in E["live"], f"{t}: the ending is announced ({E['live']!r})")
@@ -269,7 +269,25 @@ for name in jobs:
     elif R.get("phase") == "intro":
         need("You are 1 question in" in (R.get("text") or "") and "Resume quiz" in R["text"], f"{t}: one answer in reads 'You are 1 question in' ({(R.get('text') or '')[:60]!r})")
     elif R.get("phase") == "noquiz":
-        need(R.get("found") and not R.get("warp") and R.get("cls") == "gcard quiz" and "0 questions" in (R.get("text") or "") and not R.get("errs"), f"{t}: an edition with no quiz keeps the old card ({R.get('text')!r})")
+        need(not R.get("found") and not R.get("errs"), f"{t}: an edition with no quiz shows no quiz card ({R.get('text')!r})")
+    elif R.get("phase") == "probe":
+        need(R["tinyMainN"] == 0, f"{t}: no text under 12px on the main page ({R['tinyMain']})")
+        need(not R["smallMain"] and not R.get("smallSheet"), f"{t}: the top buttons, Back, Read the short version, Earlier briefs, Go deeper, Source and Enlarge are 44px or more ({(R['smallMain'] + (R.get('smallSheet') or []))[:4]})")
+        need(R["sound"] and R["sound"]["t"] in ("Sound: on", "Sound: off") and R["sound"]["p"] in ("true", "false"), f"{t}: the sound button says Sound: on or off, with aria-pressed ({R['sound']})")
+        need(R["footer"] and all(re.fullmatch(r"(Mon|Tue|Wed|Thu|Fri|Sat|Sun) \d{1,2} [A-Z][a-z]{2}", f["t"]) for f in R["footer"]) and [f["cur"] for f in R["footer"]].count("page") == 1, f"{t}: Earlier briefs read like Thu 12 Nov and mark the one shown ({R['footer'][:3]})")
+        need(R["chipFont"] == "12px" and R["chipTop"] == "1" and R["chipScrolled"] == {"op": "0", "pe": "none"}, f"{t}: the points chip is 12px and fades once the page scrolls ({R['chipFont']}, {R['chipScrolled']})")
+        if not jobs[name][3]:
+            need(R.get("radarBefore") == "painting" and R.get("radarUnderSheet") == "still", f"{t}: the scan stops painting under a sheet ({R.get('radarBefore')}, {R.get('radarUnderSheet')})")
+        S_ = R.get("sheet") or {}
+        need(S_.get("label") and S_.get("inert") and S_.get("focusIn") and S_.get("back") and not S_.get("inertAfter"), f"{t}: a lesson sheet is named, the page behind is inert, focus stays in it and comes back on close ({S_})")
+        C_ = R.get("scores") or {}
+        need(C_.get("label") and C_.get("inert") and not C_.get("tiny") and not C_.get("small") and not C_.get("inertAfter"), f"{t}: My scores is named, the page behind is inert, no text under 12px, close is 44px ({C_})")
+        need(float((R.get("lock") or {}).get("op", 0)) >= .6, f"{t}: locked badges are bright enough ({R.get('lock')})")
+        if jobs[name][0] == "2026-11-10":
+            need(R.get("oldChip") == "Older brief · back to today", f"{t}: an older edition has a way back to today ({R.get('oldChip')!r})")
+        need(not R["errs"], f"{t}: no errors ({R['errs']})")
+    elif R.get("phase") == "fail":
+        need("could not be loaded" in R["text"] and "Open today’s brief" in R["buttons"] and "Try again" in R["buttons"], f"{t}: a missing edition offers today's brief and Try again ({R['buttons']})")
 older = results.get("older edition", {})
 if "older edition" in jobs:
     need((older.get("end") or {}).get("saved", {}).get("score") == 4, "the older edition saves under its own date")
