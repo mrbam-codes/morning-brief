@@ -1,0 +1,511 @@
+{
+ "date": "2026-11-13",
+ "dayLabel": "Friday 13 November 2026",
+ "type": "daily",
+ "verdict": "Microsoft 365 falls over, Nvidia loses its founder, and a court is asked to halt AI",
+ "posters": [
+  {
+   "tag": "Tech",
+   "headline": "Microsoft 365 went dark for hours",
+   "big": "11 hrs",
+   "summary": "Outlook, Teams, Copilot and more failed worldwide from Thursday evening UK time. Microsoft reverted a network change and denied any attack.",
+   "soWhat": "Work: test what your team does when email and Teams vanish for a day",
+   "figure": {
+    "value": "11,000",
+    "label": "reports a minute at the peak"
+   },
+   "source": {
+    "name": "ABC News (Australia)",
+    "date": "13 Nov",
+    "url": "https://www.abc.net.au/news/2026-11-13/microsoft-outage-affects-users-worldwide/107381050"
+   },
+   "read": {
+    "what": "Microsoft says problems began around 5:15am Australian Eastern Daylight Time on 13 November, which is 6:15pm UK time on 12 November. Outlook and Exchange Online, Teams calendars, SharePoint, Microsoft 365 Copilot, Defender, Intune, Planner, Power BI and others were hit. Downdetector logged more than 11,000 reports a minute at one point, and Outlook reports peaked at more than 2,000 times normal. ABC7 in the US counted nearly 130,000 Outlook reports. At ABC's latest update, about 11 hours in, there was no lasting fix.",
+    "how": "Microsoft first said a large number of servers became unexpectedly unavailable, pushing extra load onto the rest. Later it said a process that sets up secure connections (the TLS handshake step) was being overwhelmed on the affected servers. It reverted a recent network configuration change that lined up with the start of the problem. Restarted servers recovered for a while, then became unresponsive again under load.",
+    "why": "Most organisations run email, meetings, files and some security tools on one supplier. When that supplier fails, work and parts of security monitoring stop together. Copilot connectors used by OpenAI and Anthropic tools were also affected, so AI helpers went down too. Microsoft said there was no sign of malicious activity, and Australia's Home Affairs Minister said it was not believed to be a cyber event.",
+    "take": "Opinion: the root cause is not yet confirmed, so treat 'configuration change' as Microsoft's working theory. The lesson is old but sharp: a single cloud supplier is a single point of failure. Watch for Microsoft's post-incident review, which usually follows within weeks, and check whether your continuity plan assumes Teams works during an outage."
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "US moves to seize $1.2bn of loot",
+   "big": "$1.2bn",
+   "summary": "US prosecutors won court approval to seize over $1.2bn stolen from Binance by North Korean hackers, and shut down a fake video-call scam called FaceStealer.",
+   "soWhat": "Work: fake meeting invites are now a top attack route. Brief your teams",
+   "figure": {
+    "value": "900+",
+    "label": "victim webcam videos seized"
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 170\" font-family=\"Arial,sans-serif\"><text x=\"10\" y=\"22\" font-size=\"13\" fill=\"#222\">Binance theft, US dollars</text><rect x=\"10\" y=\"34\" width=\"300\" height=\"26\" fill=\"#c2185b\"/><text x=\"16\" y=\"52\" font-size=\"13\" fill=\"#fff\">Stolen: over $6bn</text><rect x=\"10\" y=\"72\" width=\"135\" height=\"26\" fill=\"#7b1fa2\"/><text x=\"152\" y=\"90\" font-size=\"13\" fill=\"#222\">Frozen: over $2.7bn</text><rect x=\"10\" y=\"110\" width=\"60\" height=\"26\" fill=\"#1565c0\"/><text x=\"78\" y=\"128\" font-size=\"13\" fill=\"#222\">Court seizure: over $1.2bn</text><text x=\"10\" y=\"160\" font-size=\"11\" fill=\"#555\">Source: US Justice Department, 12 Nov 2026</text></svg>",
+   "drawingAlt": "Bar chart: over $6bn stolen from Binance, over $2.7bn frozen, over $1.2bn approved for seizure by a US court.",
+   "source": {
+    "name": "The Record",
+    "date": "12 Nov",
+    "url": "https://therecord.media/stolen-binance-crypto-recovered-doj-facestealer-disrupted"
+   },
+   "read": {
+    "what": "The US Justice Department says North Korean military hackers known as TraderTraitor stole more than $6bn in crypto from the exchange Binance on or about 29 October. More than $2.7bn has been frozen, and a court has authorised seizure of over $1.2bn. Separately, the FBI took down cloud servers behind FaceStealer, a scheme that has stolen over $400m in 18 months, and seized more than 900 webcam videos of victims.",
+    "how": "FaceStealer starts with a hijacked contact sending a calendar invite to a Zoom or Teams call. The link goes to a look-alike site (typosquatted domain). A fake 'technical error' prompts the victim to install a fix, which is malware that steals passwords and browser cookies. The attackers replay recorded videos of earlier victims to make the meeting look busy, record the new victim's webcam, and sometimes use deepfakes.",
+    "why": "Crypto theft funds North Korea's weapons programme, the FBI says. The same trick has been used against open-source developers, including maintainers of code libraries that many companies depend on, so one fooled developer can poison software used everywhere.",
+    "take": "Opinion: freezing half of a $6bn theft is a real win, but seizure is not recovery and the laundering continues. The numbers come from the Justice Department and were matched by CyberScoop's reporting. The lasting point is the method: a meeting invite from someone you know is no longer proof of who sent it."
+   }
+  },
+  {
+   "tag": "AI",
+   "headline": "Lawsuit asks a court to halt AI",
+   "big": "",
+   "summary": "Four nonprofits sued Anthropic, Google, Meta, OpenAI and SpaceX's AI arm in San Francisco, asking a judge to freeze training of next-generation models.",
+   "soWhat": "Work: legal risk to AI suppliers is rising. Ask what your contracts say if one pauses",
+   "figure": {
+    "value": "5",
+    "label": "AI developers named in suit"
+   },
+   "source": {
+    "name": "CBS News",
+    "date": "12 Nov",
+    "url": "https://cbsnews.com/news/advocacy-groups-sue-ai-companies"
+   },
+   "read": {
+    "what": "The Alliance for Secure AI, Irreplaceable Education Fund, Public Citizen and the Heat Initiative filed suit on 12 November in San Francisco Superior Court. They want a freeze on training and deploying advanced models until the companies can show the technology is under human control. The suit quotes executives' own warnings, including Dario Amodei's 2025 estimate of a 25% chance of disastrous outcomes.",
+    "how": "The case uses California's unfair competition law (a broad consumer protection statute), Al Jazeera reports. The groups argue the firms endanger public health and interfere with property such as computer systems. They also say AI may soon help build the next AI with little human involvement (recursive self-improvement), which they say makes control harder.",
+    "why": "Even if it fails, the case puts executives' public risk statements in front of a judge and adds pressure as a new Congress arrives. Any business that builds on these models depends on them staying available.",
+    "take": "Opinion: a court ordering a halt to all frontier AI would be extraordinary, and no independent legal expert in the reporting I read rated its chances. The companies had not replied when CBS published. Watch for a hearing on the emergency injunction: that will show quickly whether the judge takes it seriously."
+   }
+  }
+ ],
+ "stories": [
+  {
+   "tag": "Tech",
+   "headline": "Nvidia's Huang resigns; finance chief Kress becomes interim CEO",
+   "summary": "New since yesterday: Jensen Huang quit as Nvidia's chief executive and left the board after 33 years. Shares fell more than 14% at one point.",
+   "soWhat": "Curious: the world's key AI chip maker is now led by its finance chief",
+   "figure": {
+    "value": "33 yrs",
+    "label": "Huang's time as CEO"
+   },
+   "source": {
+    "name": "Nvidia investor relations",
+    "date": "12 Nov",
+    "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-CEO-Transition/"
+   },
+   "read": {
+    "what": "Nvidia said on 12 November that Jensen Huang resigned as president, CEO and board member with immediate effect. Colette Kress, finance chief since September 2013, is interim CEO and stays CFO. Harvey C. Jones becomes Nvidia's first Chair of the Board. The board is looking at inside and outside candidates. Al Jazeera reports shares fell more than 14% at one point on Thursday.",
+    "how": "Nvidia gave no reason. AP and Al Jazeera report it followed news of extramarital affairs, including one with a woman alleged to work for Chinese intelligence. The board had opened an independent inquiry into whether Huang was targeted by a foreign intelligence effort, and says it has no reason to believe national security was compromised.",
+    "why": "Nvidia supplies most of the chips that train AI. Kress helped arrange its financing deals with customers including Anthropic. Results are due on 17 November, the first big test for the new leaders.",
+    "take": "Opinion: the company's supply deals and product plans do not change overnight, but founder-led firms often lose speed of decision after a sudden exit. The spying claims are unproven: there is no evidence that Huang knowingly helped Beijing, and China dismisses the allegation. Watch the 17 November results call and who is named permanent CEO."
+   }
+  },
+  {
+   "tag": "Cyber",
+   "headline": "Public 'SignDrop' Windows exploit gives full control, no patch yet",
+   "summary": "A researcher released working code that turns an ordinary Windows user into SYSTEM, the highest level. Microsoft has issued no fix or official ID for the flaw.",
+   "soWhat": "Work: ask your security team if they can spot it, since there is no patch",
+   "figure": {
+    "value": "0",
+    "label": "patches available"
+   },
+   "source": {
+    "name": "Cyderes Howler Cell",
+    "date": "12 Nov",
+    "url": "https://www.cyderes.com/howler-cell/signdrop-zero-day"
+   },
+   "read": {
+    "what": "A researcher known as MSNightmare posted SignDrop on 10 November, the same day as Microsoft's monthly patches. It lets a standard user gain full control of the machine (privilege escalation to SYSTEM). It was tested on Windows 11 26H2 and Windows Server 2025 test builds. There is no CVE (the official vulnerability ID) and no patch. Cyderes, a security firm, reproduced it and got a SYSTEM shell.",
+    "how": "It abuses a protection Microsoft added in October 2025 to Windows' logging driver (the Common Log File System, CLFS). Using shortcuts in the file system (symbolic links) and a Microsoft Defender update call, it tricks Windows into creating a file the attacker can then overwrite with their own code, which runs when a permission prompt (UAC) loads. No memory bugs are involved.",
+    "why": "An attacker who already has a foothold, for example through a phishing email, can use this to take over the whole computer and turn off defences. The researcher behind it has released sixteen zero-days since April, and three earlier Defender flaws from the same source were later used in real attacks.",
+    "take": "Opinion: the researcher claims about 80% of Windows machines are exposed. Cyderes says no data supports that, and an independent tester told The Cyber Express it works but not reliably. No attacks are reported yet. Do not switch off the CLFS protection as a fix: that reopens older attacks. Watch Microsoft's update guide."
+   }
+  },
+  {
+   "tag": "AI",
+   "headline": "Google's Gemini 4 Hydrogen: a faster model for everyday agents",
+   "summary": "Google released Gemini 4 Hydrogen, a cheaper, faster model for coding and agents, at $1.50 per million input tokens. Benchmarks are Google's own.",
+   "soWhat": "Build: a low-cost model for agent experiments, free in the Gemini app for some uses",
+   "figure": {
+    "value": "$1.50",
+    "label": "per million input tokens"
+   },
+   "drawing": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 150\" font-family=\"Arial,sans-serif\"><text x=\"10\" y=\"22\" font-size=\"13\" fill=\"#222\">Terminal-Bench 4.1 score (Google figures)</text><rect x=\"10\" y=\"36\" width=\"171\" height=\"28\" fill=\"#1565c0\"/><text x=\"190\" y=\"55\" font-size=\"13\" fill=\"#222\">Hydrogen: 57%</text><rect x=\"10\" y=\"78\" width=\"55\" height=\"28\" fill=\"#90a4ae\"/><text x=\"74\" y=\"97\" font-size=\"13\" fill=\"#222\">Gemini 3.8 Flash: 18.2%</text><text x=\"10\" y=\"134\" font-size=\"11\" fill=\"#555\">A vendor claim, not yet independently tested</text></svg>",
+   "drawingAlt": "Bar chart from Google: Gemini 4 Hydrogen scores 57% on Terminal-Bench 4.1 against 18.2% for Gemini 3.8 Flash.",
+   "source": {
+    "name": "Google blog",
+    "date": "12 Nov",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+   },
+   "read": {
+    "what": "Google says Hydrogen scores 51 on the Artificial Analysis Intelligence Index at its default setting, against 50 for its bigger Gemini 4 Argon, and finishes tasks 2.5x faster than Gemini 3.8 Flash. It scores 57% on Terminal-Bench 4.1 (a test of agents working in a command line) against 18.2% for 3.8 Flash. Price: $1.50 per million input tokens and $7.50 per million output.",
+    "how": "It has four thinking levels, from low to a new 'xhigh', which trade speed for more careful reasoning. In Google's Antigravity coding tool, an orchestrator switches between Hydrogen and the larger Carbon model in one session, which Google says used 24% less quota.",
+    "why": "Fast, cheap models are what most agents actually run on day to day. It is rolling out in Google Search for everyone, the Gemini app, Sheets for paying subscribers, and the developer API.",
+    "take": "Opinion: these are all Google's own figures, not yet independently checked. One independent developer, Simon Willison, noted on X that Hydrogen is only 25% cheaper than Carbon and Argon today, though those double in price on 1 December. Test it on your own tasks before switching."
+   }
+  },
+  {
+   "tag": "Tech",
+   "headline": "EU adviser says Google's €1.49bn AdSense fine was wrongly scrapped",
+   "summary": "An adviser to the EU's top court says judges were wrong to cancel Google's 2019 advertising fine and wants the case heard again.",
+   "soWhat": "Curious: EU fines on Big Tech tend to stick on appeal",
+   "figure": {
+    "value": "€1.49bn",
+    "label": "AdSense fine from 2019"
+   },
+   "source": {
+    "name": "The Next Web",
+    "date": "12 Nov",
+    "url": "https://thenextweb.com/news/googles-e1-49b-adsense-fine-was-wrongly-scrapped"
+   },
+   "read": {
+    "what": "Advocate General Juliane Kokott said on 12 November that the EU General Court erred in 2024 when it annulled the €1.49bn fine. She proposed sending the case back for a fresh ruling. It was the only one of six EU antitrust fines on Google, worth €10.38bn in total, that a court has overturned.",
+    "how": "The fine, imposed in March 2019, covered clauses in contracts for AdSense for Search that limited rival adverts on partner websites. The lower court said the Commission had not properly assessed how long the contracts ran. Kokott says the Commission's overall assessment was enough.",
+    "why": "Her opinion is not binding, but the court followed her in the Shopping and Android cases, where fines of €2.4bn and €4.1bn were upheld. It signals that EU competition rules still bite.",
+    "take": "Opinion: likely but not certain to go against Google. Even then, the case returns to the lower court, with a new judgment expected next year. Google is also contesting a near-€3bn adtech fine. I read The Next Web's report, not the court's own opinion."
+   }
+  }
+ ],
+ "lessons": [
+  {
+   "n": 7,
+   "tag": "Tech",
+   "title": "The Dartmouth dream and the first winter",
+   "idea": "Early AI bet that thinking is rules for moving symbols. When those rules failed to scale, the 1973 Lighthill report led Britain to cut funding.",
+   "steps": [
+    "1955: McCarthy, Minsky, Rochester and Shannon propose a 2-month, 10-person study at Dartmouth for 1956.",
+    "Their bet: every feature of intelligence can be described so precisely that a machine can simulate it.",
+    "Symbolic AI follows: people write rules that move symbols, such as 'if A and B, then C'.",
+    "Rules work on toy problems but blow up on real ones, as options multiply (combinatorial explosion).",
+    "1969: Minsky and Papert's book Perceptrons shows the limits of single-layer neural networks.",
+    "1973: Lighthill's report for the Science Research Council finds results short of promises. UK cuts funding."
+   ],
+   "analogy": "A recipe book for thinking. The 1956 team hoped that if you wrote down enough recipes, a machine could cook anything. It worked for a few simple dishes, such as puzzles and small proofs. But a real kitchen has endless ingredients, and the book needed a new page for every combination.",
+   "breaks": "A recipe book grows steadily; the options a symbolic program must search grow explosively. And the story is not only about failure. The historian Jon Agar argues Lighthill was less attacking AI than demanding research tied to practical problems. He split the field into automation (A), brain science (C) and a 'bridge' (B), and B lost its funding. Edinburgh was hit hardest.",
+   "why": "Hype cycles repeat. The Dartmouth proposal promised 'a significant advance' in one summer; funders pulled back when results lagged. When you run an AI programme, set claims you can test, tie spending to real outcomes, and expect a demo that works on a toy problem to behave differently at full scale.",
+   "diagram": {
+    "alt": "Timeline: 1956 Dartmouth, 1969 Perceptrons, 1973 Lighthill. A solid hype curve peaks early then falls; a dashed funding curve rises later then drops into a shaded winter after 1973.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 250\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"16\" y=\"24\" font-size=\"14\">Hype</text><line x1=\"60\" y1=\"19\" x2=\"90\" y2=\"19\" stroke=\"#fff\" stroke-width=\"4\"/><text x=\"150\" y=\"24\" font-size=\"14\">Funding</text><line x1=\"214\" y1=\"19\" x2=\"244\" y2=\"19\" stroke=\"#fff\" stroke-width=\"2\" stroke-dasharray=\"5 4\"/><rect x=\"250\" y=\"40\" width=\"62\" height=\"150\" fill=\"#fff\" opacity=\"0.18\"/><text x=\"281\" y=\"62\" font-size=\"14\" text-anchor=\"middle\">Winter</text><path d=\"M40 170 C70 60 100 45 130 50 S220 120 300 160\" fill=\"none\" stroke=\"#fff\" stroke-width=\"4\"/><path d=\"M40 176 C90 140 150 90 200 95 S235 120 250 160 L300 178\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-dasharray=\"5 4\"/><line x1=\"20\" y1=\"190\" x2=\"310\" y2=\"190\" stroke=\"#fff\" stroke-width=\"2\"/><circle cx=\"40\" cy=\"190\" r=\"5\"/><circle cx=\"150\" cy=\"190\" r=\"5\"/><circle cx=\"235\" cy=\"190\" r=\"5\"/><text x=\"40\" y=\"212\" font-size=\"14\" text-anchor=\"middle\">1956</text><text x=\"150\" y=\"212\" font-size=\"14\" text-anchor=\"middle\">1969</text><text x=\"235\" y=\"212\" font-size=\"14\" text-anchor=\"middle\">1973</text><text x=\"40\" y=\"234\" font-size=\"14\" text-anchor=\"middle\">Dartmouth</text><text x=\"140\" y=\"234\" font-size=\"14\" text-anchor=\"middle\">Perceptrons</text><text x=\"240\" y=\"234\" font-size=\"14\" text-anchor=\"middle\">Lighthill</text></svg>"
+   }
+  },
+  {
+   "n": 8,
+   "tag": "Tech",
+   "title": "Counting in binary",
+   "idea": "Binary uses only 0 and 1. Each column is worth double the one to its right, so add the columns holding a 1 to get the decimal number.",
+   "steps": [
+    "A bit is a 0 or a 1: off or on. Computers group 8 bits into a byte.",
+    "From the right, columns are worth 1, 2, 4, 8, 16, 32, 64, 128: each is 2 times the last (powers of 2).",
+    "Binary to decimal: add the columns holding a 1. 00101101 = 32 + 8 + 4 + 1 = 45.",
+    "Decimal to binary: take the biggest column that fits and subtract. 45 - 32 = 13, then 8, 4 and 1.",
+    "Eight bits give 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 = 256 patterns, so a byte holds 0 to 255.",
+    "Example: the letter A is stored as 65, which is 01000001 (64 + 1)."
+   ],
+   "analogy": "Picture 8 light switches, each with a price tag: £128, £64, £32 and so on down to £1. To make any amount from £0 to £255, switch on the ones whose tags add up to it. Every amount has exactly one pattern of switches.",
+   "breaks": "With coins you can use the same value twice; a binary column is used once or not at all. And computers do not 'see' numbers. The same 8 bits can mean 65, the letter A or part of a colour, depending on how a program reads them.",
+   "why": "Sizes you meet at work, such as a 256-bit key, a 32-bit system or a gigabyte limit, count in powers of 2. Each extra bit doubles the options. So a 128-bit key is not twice as hard to guess as a 64-bit one: it has 2 to the power 64 times more possibilities.",
+   "diagram": {
+    "alt": "Eight place-value columns labelled 128, 64, 32, 16, 8, 4, 2, 1 holding 00101101. The lit columns 32, 8, 4 and 1 add up to 45.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 190\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"20\" y=\"30\" font-size=\"14\" text-anchor=\"middle\">128</text><rect x=\"4\" y=\"42\" width=\"32\" height=\"40\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><text x=\"20\" y=\"68\" font-size=\"18\" text-anchor=\"middle\" opacity=\"0.6\">0</text><text x=\"60\" y=\"30\" font-size=\"14\" text-anchor=\"middle\">64</text><rect x=\"44\" y=\"42\" width=\"32\" height=\"40\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><text x=\"60\" y=\"68\" font-size=\"18\" text-anchor=\"middle\" opacity=\"0.6\">0</text><text x=\"100\" y=\"30\" font-size=\"14\" text-anchor=\"middle\">32</text><rect x=\"84\" y=\"42\" width=\"32\" height=\"40\" rx=\"6\" fill=\"#fff\" opacity=\"0.9\"/><text x=\"100\" y=\"68\" font-size=\"18\" text-anchor=\"middle\" fill=\"#c2185b\">1</text><text x=\"140\" y=\"30\" font-size=\"14\" text-anchor=\"middle\">16</text><rect x=\"124\" y=\"42\" width=\"32\" height=\"40\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><text x=\"140\" y=\"68\" font-size=\"18\" text-anchor=\"middle\" opacity=\"0.6\">0</text><text x=\"180\" y=\"30\" font-size=\"14\" text-anchor=\"middle\">8</text><rect x=\"164\" y=\"42\" width=\"32\" height=\"40\" rx=\"6\" fill=\"#fff\" opacity=\"0.9\"/><text x=\"180\" y=\"68\" font-size=\"18\" text-anchor=\"middle\" fill=\"#c2185b\">1</text><text x=\"220\" y=\"30\" font-size=\"14\" text-anchor=\"middle\">4</text><rect x=\"204\" y=\"42\" width=\"32\" height=\"40\" rx=\"6\" fill=\"#fff\" opacity=\"0.9\"/><text x=\"220\" y=\"68\" font-size=\"18\" text-anchor=\"middle\" fill=\"#c2185b\">1</text><text x=\"260\" y=\"30\" font-size=\"14\" text-anchor=\"middle\">2</text><rect x=\"244\" y=\"42\" width=\"32\" height=\"40\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.6\"/><text x=\"260\" y=\"68\" font-size=\"18\" text-anchor=\"middle\" opacity=\"0.6\">0</text><text x=\"300\" y=\"30\" font-size=\"14\" text-anchor=\"middle\">1</text><rect x=\"284\" y=\"42\" width=\"32\" height=\"40\" rx=\"6\" fill=\"#fff\" opacity=\"0.9\"/><text x=\"300\" y=\"68\" font-size=\"18\" text-anchor=\"middle\" fill=\"#c2185b\">1</text><line x1=\"100\" y1=\"86\" x2=\"160\" y2=\"120\" stroke=\"#fff\" stroke-width=\"2\"/><line x1=\"180\" y1=\"86\" x2=\"160\" y2=\"120\" stroke=\"#fff\" stroke-width=\"2\"/><line x1=\"220\" y1=\"86\" x2=\"160\" y2=\"120\" stroke=\"#fff\" stroke-width=\"2\"/><line x1=\"300\" y1=\"86\" x2=\"160\" y2=\"120\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"160\" y=\"146\" font-size=\"18\" text-anchor=\"middle\">32 + 8 + 4 + 1 = 45</text><text x=\"160\" y=\"176\" font-size=\"14\" text-anchor=\"middle\">Each column is double the next</text></svg>"
+   }
+  },
+  {
+   "n": 9,
+   "tag": "AI",
+   "title": "The three ways machines learn",
+   "idea": "Supervised learning copies given answers, unsupervised finds groups with no answers, and reinforcement learns by trial and reward.",
+   "steps": [
+    "Supervised: each example comes with its answer (a label), such as a house's size and its price.",
+    "The model learns to map inputs to answers, then predicts answers for new cases.",
+    "Unsupervised: examples have no answers. The model looks for structure, such as groups of similar items.",
+    "A common method (k-means clustering) puts items into a set number of groups, then keeps refining them.",
+    "Reinforcement: no right answers at all, only a reward signal saying when it does well or badly.",
+    "The agent tries actions, collects rewards and learns what pays off, like a robot learning to walk."
+   ],
+   "analogy": "Three ways to learn a new job. Supervised: a manager marks your work against an answer sheet. Unsupervised: you get a pile of customer files and sort them into groups that seem alike, with nobody naming the categories. Reinforcement: you try things, and the only feedback is whether this month's sales went up or down.",
+   "breaks": "Real systems often mix the three, so the lines blur. Unsupervised groups also come without names: a person still has to decide whether a cluster means 'loyal customers' or nothing useful. And unlike a new starter, a reinforcement learner may need huge numbers of attempts, which is why it is often trained in simulation first.",
+   "why": "Matching the method to the data saves projects. Labelled history, such as past fraud cases? Supervised. Only raw records? Unsupervised grouping (segmentation). A goal with feedback but no single right answer, such as warehouse robots? Reinforcement. Ask any vendor which one they use and where their labels or rewards come from.",
+   "diagram": {
+    "alt": "Three panels. Supervised: a photo arrow to the label cat. Unsupervised: unlabelled dots forming two clusters. Reinforcement: a robot in a grid, +1 at the exit and -1 at a trap.",
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 330\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><text x=\"10\" y=\"22\" font-size=\"14\">Supervised: answer given</text><rect x=\"20\" y=\"34\" width=\"70\" height=\"52\" rx=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\"/><text x=\"55\" y=\"66\" font-size=\"14\" text-anchor=\"middle\">photo</text><line x1=\"100\" y1=\"60\" x2=\"160\" y2=\"60\" stroke=\"#fff\" stroke-width=\"3\"/><path d=\"M160 52 L172 60 L160 68 Z\"/><rect x=\"182\" y=\"44\" width=\"70\" height=\"32\" rx=\"16\" fill=\"#fff\" opacity=\"0.9\"/><text x=\"217\" y=\"66\" font-size=\"16\" text-anchor=\"middle\" fill=\"#c2185b\">cat</text><text x=\"10\" y=\"122\" font-size=\"14\">Unsupervised: find groups</text><circle cx=\"40\" cy=\"150\" r=\"5\"/><circle cx=\"55\" cy=\"160\" r=\"5\"/><circle cx=\"35\" cy=\"170\" r=\"5\"/><circle cx=\"60\" cy=\"145\" r=\"5\"/><circle cx=\"48\" cy=\"178\" r=\"5\"/><circle cx=\"70\" cy=\"165\" r=\"5\"/><circle cx=\"200\" cy=\"150\" r=\"5\" opacity=\"0.7\"/><circle cx=\"215\" cy=\"165\" r=\"5\" opacity=\"0.7\"/><circle cx=\"230\" cy=\"148\" r=\"5\" opacity=\"0.7\"/><circle cx=\"222\" cy=\"178\" r=\"5\" opacity=\"0.7\"/><circle cx=\"240\" cy=\"162\" r=\"5\" opacity=\"0.7\"/><circle cx=\"205\" cy=\"175\" r=\"5\" opacity=\"0.7\"/><ellipse cx=\"52\" cy=\"162\" rx=\"36\" ry=\"28\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" stroke-dasharray=\"4 3\"/><ellipse cx=\"220\" cy=\"163\" rx=\"36\" ry=\"28\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" stroke-dasharray=\"4 3\"/><text x=\"136\" y=\"168\" font-size=\"14\" text-anchor=\"middle\">no labels</text><text x=\"10\" y=\"222\" font-size=\"14\">Reinforcement: reward</text><rect x=\"20\" y=\"236\" width=\"44\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.7\"/><rect x=\"64\" y=\"236\" width=\"44\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.7\"/><rect x=\"108\" y=\"236\" width=\"44\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.7\"/><rect x=\"152\" y=\"236\" width=\"44\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.7\"/><rect x=\"196\" y=\"236\" width=\"44\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.7\"/><rect x=\"20\" y=\"276\" width=\"44\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.7\"/><rect x=\"64\" y=\"276\" width=\"44\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.7\"/><rect x=\"108\" y=\"276\" width=\"44\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.7\"/><rect x=\"152\" y=\"276\" width=\"44\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.7\"/><rect x=\"196\" y=\"276\" width=\"44\" height=\"40\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1\" opacity=\"0.7\"/><circle cx=\"42\" cy=\"256\" r=\"11\"/><text x=\"42\" y=\"300\" font-size=\"14\" text-anchor=\"middle\">robot</text><rect x=\"196\" y=\"236\" width=\"44\" height=\"40\" fill=\"#fff\" opacity=\"0.35\"/><text x=\"218\" y=\"262\" font-size=\"16\" text-anchor=\"middle\">+1</text><text x=\"130\" y=\"302\" font-size=\"16\" text-anchor=\"middle\">-1</text><text x=\"250\" y=\"262\" font-size=\"14\">exit</text><text x=\"250\" y=\"302\" font-size=\"14\">trap</text><rect x=\"108\" y=\"276\" width=\"44\" height=\"40\" fill=\"#000\" opacity=\"0.2\"/></svg>"
+   }
+  }
+ ],
+ "fact": {
+  "text": "Cerebras's Wafer Scale Engine 2, announced in April 2021, packs 2.6 trillion transistors and 850,000 cores onto one chip of over 46,225 square millimetres. The largest GPU then had 54 billion.",
+  "source": {
+   "name": "Cerebras press release",
+   "url": "https://www.cerebras.ai/press-release/cerebras-systems-smashes-the-2-5-trillion-transistor-mark-with-new-second-generation-wafer-scale-engine"
+  }
+ },
+ "quiz": [
+  {
+   "kind": "lesson",
+   "tag": "Tech",
+   "n": 7,
+   "q": "Why did the Lighthill report lead to cuts in UK AI funding?",
+   "options": [
+    "It found results short of promises, as rule-based methods failed to scale",
+    "It proved neural networks could never learn anything useful",
+    "It showed computers of the time were too costly for universities",
+    "It found AI researchers were sharing secrets with rival nations"
+   ],
+   "answer": 0,
+   "why": "Lighthill judged that AI had not met inflated predictions. Methods that worked on small problems blew up on real ones, so funders pulled back."
+  },
+  {
+   "kind": "lesson",
+   "tag": "Tech",
+   "n": 8,
+   "q": "What is the binary number 00101101 in decimal?",
+   "options": [
+    "43",
+    "45",
+    "53",
+    "29"
+   ],
+   "answer": 1,
+   "why": "Add the columns holding a 1: 32 + 8 + 4 + 1 = 45. Each column is worth double the one to its right."
+  },
+  {
+   "kind": "lesson",
+   "tag": "AI",
+   "n": 9,
+   "q": "A bank has 10 years of transactions, each marked fraud or not fraud. Which method fits best?",
+   "options": [
+    "Unsupervised learning, because it can find the groups by itself",
+    "Supervised learning, because every example has a known answer",
+    "Reinforcement learning, because catching fraud is a reward",
+    "None: banks cannot use past data to train a model"
+   ],
+   "answer": 1,
+   "why": "Each example comes with its answer (a label), so a model can learn to copy those answers and predict them for new transactions."
+  },
+  {
+   "kind": "review",
+   "tag": "AI",
+   "n": 1,
+   "title": "What \"learning from data\" means",
+   "q": "How does a machine learning spam filter get its rules?",
+   "options": [
+    "A programmer writes each rule, such as 'prize means spam'",
+    "It finds patterns in example emails already marked spam or not",
+    "It copies the rules from other email providers' filters",
+    "It asks each user to approve every incoming email"
+   ],
+   "answer": 1,
+   "why": "You supply examples with answers; the program finds the patterns that separate them, and those patterns become its rules (the model)."
+  },
+  {
+   "kind": "review",
+   "tag": "Cyber",
+   "n": 2,
+   "title": "The CIA triad: confidentiality, integrity, availability",
+   "q": "Ransomware locks a hospital's records so staff cannot open them. Which property broke first?",
+   "options": [
+    "Confidentiality",
+    "Integrity",
+    "Availability",
+    "Authentication"
+   ],
+   "answer": 2,
+   "why": "Availability means people can reach what they need when they need it. Ransomware locks or wipes access, which is why backups and recovery plans matter."
+  }
+ ],
+ "terms": [
+  {
+   "term": "Symbolic AI",
+   "plain": "AI built from rules people write for moving symbols, such as 'if A and B, then C'."
+  },
+  {
+   "term": "Combinatorial explosion",
+   "plain": "When the number of options to check grows so fast with each step that searching them all becomes impossible."
+  },
+  {
+   "term": "AI winter",
+   "plain": "A period when hopes for AI collapse and funding dries up, as after the 1973 Lighthill report."
+  },
+  {
+   "term": "Byte",
+   "plain": "A group of 8 bits (0s and 1s), able to hold 256 different values, 0 to 255."
+  },
+  {
+   "term": "Supervised learning",
+   "plain": "Learning from examples that come with the right answers (labels)."
+  },
+  {
+   "term": "Unsupervised learning",
+   "plain": "Finding groups or patterns in examples that have no answers attached."
+  },
+  {
+   "term": "Reinforcement learning",
+   "plain": "Learning by trial and error from a reward signal, with no right answers given."
+  },
+  {
+   "term": "Privilege escalation",
+   "plain": "An attacker turning limited access on a computer into full control of it."
+  }
+ ],
+ "build": {
+  "title": "Binary switch trainer",
+  "idea": "A one-page web app that shows a random number from 0 to 255 and asks you to flip 8 switches, labelled 128 down to 1, to match it. Ties to today's binary lesson.",
+  "first": "Ask Claude: 'Build me a single HTML page with 8 toggle switches labelled 128 to 1 that checks my answer against a random number from 0 to 255.'"
+ },
+ "chatter": [
+  {
+   "via": "X",
+   "group": "Independent",
+   "handle": "@simonw",
+   "tag": "AI",
+   "headline": "Gemini 4 pricing is confusing, a developer says",
+   "summary": "Simon Willison says Hydrogen is only 25% cheaper than Google's bigger Gemini 4 models today, and did worse on his pelican drawing test.",
+   "insight": "The bigger Carbon and Argon models are due to double in price on 1 December, so the real gap opens then. Personal tests like his pelican drawing catch quality changes that official benchmarks miss.",
+   "dissent": "A drawing test says little about coding or agent work, which is what Hydrogen is built for.",
+   "trust": "Confirmed",
+   "trustNote": "Google's post lists $1.50 per million input tokens; his 10 Nov post lists $2 for Carbon, doubling on 1 December. The pelican result is his own opinion.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "13 Nov",
+    "url": "https://x.com/simonw/status/2121039423441981444"
+   },
+   "original": {
+    "name": "Google blog: Gemini 4 Hydrogen",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+   }
+  },
+  {
+   "via": "X",
+   "group": "Independent",
+   "handle": "@fiigii",
+   "tag": "Tech",
+   "headline": "An Nvidia software engineer: the moat was people, not code",
+   "summary": "A long-time Nvidia compiler engineer argues its real advantage was never the CUDA software but the whole customer experience its leader built.",
+   "insight": "CUDA, he says, is everything Nvidia does: easier tools, engineers who help, and supply secured years ahead. Nvidia kept investing for about a decade before deep learning paid off.",
+   "dissent": "Software lock-in is real: millions of lines of code run only on Nvidia chips, and that does not vanish with one leader.",
+   "trust": "Plausible",
+   "trustNote": "Nvidia's own release confirms Huang resigned. The rest is one insider's opinion, which I could not check.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "13 Nov",
+    "url": "https://x.com/fiigii/status/2121055679259840982"
+   },
+   "original": {
+    "name": "Nvidia: CEO transition",
+    "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-CEO-Transition/"
+   }
+  },
+  {
+   "via": "X",
+   "group": "Independent",
+   "handle": "@emollick",
+   "tag": "AI",
+   "headline": "Wharton releases Primer, free AI lesson simulations for teachers",
+   "summary": "Wharton's Generative AI Labs released Primer: a teacher talks through a lesson and AI agents build a playable simulation for students.",
+   "insight": "The teacher stays in charge: a design agent writes a plan, and nothing is built until the teacher approves it. It works with any AI model, including local ones.",
+   "dissent": "The lab itself calls it an experimental prototype, not tested in classrooms or reviewed for student privacy law.",
+   "trust": "Confirmed",
+   "trustNote": "Checked on the lab's Primer page: the agent steps, the open release and the prototype warning.",
+   "thread": {
+    "name": "X, via Grok",
+    "date": "12 Nov",
+    "url": "https://x.com/emollick/status/2121001056637431873"
+   },
+   "original": {
+    "name": "Wharton Generative AI Labs: Primer",
+    "url": "https://gail.wharton.upenn.edu/primer/"
+   }
+  }
+ ],
+ "builds": [
+  {
+   "what": "Claude Code asks a Gemini-powered agent to review its work",
+   "who": "@kulaone",
+   "label": "CODE REVIEW",
+   "steps": [
+    "Claude Code writes code, then calls a small connector (an MCP server) to start a reviewer agent.",
+    "The reviewer runs in Google Antigravity on Gemini 4 Argon and critiques the work without editing it.",
+    "Before each turn the bridge backs up unsaved work and reports any change the reviewer made.",
+    "Claude may push back once; if the two agents still disagree, a human decides."
+   ],
+   "tools": [
+    "Claude Code",
+    "Google Antigravity",
+    "Gemini 4 Argon",
+    "Python"
+   ],
+   "proof": "Code published",
+   "proof_note": "Opened the public MIT-licensed code on GitHub: README, setup steps and three reviewer agents. New, with 0 stars at the time of writing.",
+   "level": "A weekend",
+   "level_note": "Needs Claude Code, Google's Antigravity command-line tool and Python 3.11 or later. macOS or Linux only.",
+   "first_step": "Open the README and ask Claude Code to explain what each of the bridge's tools does before you install anything.",
+   "links": {
+    "post": "https://dev.to/gde/take-claude-code-above-average-let-antigravity-review-it-1f3g",
+    "code": "https://github.com/kulaone/agy-bridge"
+   },
+   "source": {
+    "name": "DEV Community: Take Claude Code Above Average",
+    "date": "9 Nov",
+    "url": "https://dev.to/gde/take-claude-code-above-average-let-antigravity-review-it-1f3g"
+   },
+   "diagram": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 220\" font-family=\"Arial,sans-serif\" fill=\"#fff\"><rect x=\"10\" y=\"30\" width=\"110\" height=\"50\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"65\" y=\"60\" font-size=\"14\" text-anchor=\"middle\">Claude Code</text><rect x=\"200\" y=\"30\" width=\"110\" height=\"50\" rx=\"8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"255\" y=\"60\" font-size=\"14\" text-anchor=\"middle\">AGY reviewer</text><line x1=\"122\" y1=\"45\" x2=\"192\" y2=\"45\" stroke=\"#fff\" stroke-width=\"3\"/><path d=\"M192 39 L200 45 L192 51 Z\"/><line x1=\"198\" y1=\"68\" x2=\"128\" y2=\"68\" stroke=\"#fff\" stroke-width=\"1\"/><path d=\"M128 62 L120 68 L128 74 Z\"/><text x=\"160\" y=\"22\" font-size=\"14\" text-anchor=\"middle\">work</text><text x=\"160\" y=\"98\" font-size=\"14\" text-anchor=\"middle\">critique</text><rect x=\"90\" y=\"130\" width=\"140\" height=\"40\" rx=\"8\" fill=\"#fff\" opacity=\"0.25\"/><text x=\"160\" y=\"155\" font-size=\"14\" text-anchor=\"middle\">Backup each turn</text><text x=\"160\" y=\"200\" font-size=\"14\" text-anchor=\"middle\">Still disagree? A human decides</text></svg>"
+  }
+ ],
+ "launched": [
+  {
+   "company": "Anthropic",
+   "what": "Claude Meetings beta: Claude joins Google Meet calls, takes notes and builds docs live",
+   "claim": true,
+   "tag": "AI",
+   "source": {
+    "name": "Claude: Introducing Claude Meetings, now in beta",
+    "url": "https://claude.com/resources/articles/claude-meetings"
+   }
+  }
+ ],
+ "evidence": {
+  "searches": 26,
+  "kept": 7,
+  "build_searches": 13,
+  "builds_kept": 1,
+  "photo_searches": 8,
+  "photos_kept": 0,
+  "unopened": [
+   "bleepingcomputer.com",
+   "rappler.com",
+   "nbcnews.com",
+   "courthousenews.com",
+   "ojs.aaai.org",
+   "aima.cs.berkeley.edu"
+  ],
+  "rejected": [
+   {
+    "what": "Anthropic study: AI agent teams do worse than one shared agent",
+    "why": "Published 11 Nov, outside the 36-hour window"
+   },
+   {
+    "what": "UK cyber centre launches attack-simulation testing scheme",
+    "why": "Announced 11 Nov, outside the 36-hour window"
+   },
+   {
+    "what": "OpenAI adds business profiles and agents to ChatGPT",
+    "why": "Announced 11 Nov, outside the 36-hour window"
+   },
+   {
+    "what": "TSMC to invest up to $1bn in Anthropic and OpenAI",
+    "why": "Reported 11 Nov, outside the 36-hour window"
+   },
+   {
+    "what": "UK school estate hit by suspected AI-assisted ransomware",
+    "why": "The report would not open, so its date and facts could not be checked"
+   },
+   {
+    "what": "DeepMind AlphaGenome 2",
+    "why": "Already covered in yesterday's brief, no new development"
+   },
+   {
+    "what": "Build: Claude Code running a Home Assistant smart home",
+    "why": "Posted 3 Nov, more than 7 days ago"
+   },
+   {
+    "what": "Build: event marketing app made in 2 hours",
+    "why": "Only proof was an X post; my searches found nothing to open"
+   }
+  ],
+  "note": "No free-licence photos today: my Commons searches returned no usable file pages. Drawings and key figures used instead."
+ }
+}
