@@ -335,7 +335,9 @@ function mount(host,o){
   var hm=h('i','hm');hm.style.left='calc((100% - '+((N-1)*G)+'px) * '+(HOME/N)+' + '+((HOME-1)*G+G/2-1)+'px)';hm.append(h('span',null,'HOME'));cells.append(hm);
   cells.setAttribute('role','img');fuel.append(ftop,cells,stat);
   var body=h('div','w-body'),live=h('p','w-sr');live.setAttribute('aria-live','polite');
-  root.append(stage,fuel,body,live);
+  /* a header at the top of the start screen, so the card reads as the quiz at a glance (13 Nov 2026); it steps aside once a run starts */
+  var whd=h('div','w-hd'),whs=h('span','w-hds');whd.append(h('span','w-hdt','Today’s quiz'),whs);
+  root.append(whd,stage,fuel,body,live);
   var fx=FX(fxc),ctx=cv.getContext('2d'),W=330,H=220;
   function fit(){var r=stage.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);W=Math.max(200,r.width);H=r.height||220;cv.width=W*d;cv.height=H*d;ctx.setTransform(d,0,0,d,0,0)}
   var stars=[];for(var s0=0;s0<110;s0++)stars.push({x:Math.random(),y:Math.random(),z:.2+Math.random()*.8});
@@ -441,7 +443,7 @@ function mount(host,o){
       if(gone&&!document.querySelector('.sheet,.cc-over,.tr')){stale=true;if(onScreen)pilotIn()}}
     if(was!==covered)sync()}).observe(document.body,{childList:true});
   /* during a run the scene is compact and the badge steps aside, so a question and its answers fit one screen */
-  function setRun(on){root.classList.toggle('compact',on);document.body.classList.toggle('wr-run',on);fit()}
+  function setRun(on){root.classList.remove('at-intro');root.classList.toggle('compact',on);document.body.classList.toggle('wr-run',on);fit()}
   pilotIn();
   function ovShow(a,b,cls){ov.className='w-ov';ov.textContent='';ov.append(h('b','slam'+(cls?' '+cls:''),a));if(b){var y=h('span','slam',b);y.style.animationDelay='.12s';ov.append(y)}}
   function ovHide(ms){later(function(){ov.classList.add('fade');later(function(){ov.textContent='';ov.className='w-ov'},T(500))},T(ms))}
@@ -454,15 +456,15 @@ function mount(host,o){
 
   /* one run: the quiz itself, a practice replay of the whole quiz, or practice on the missed ones */
   var run=null;
-  function reset(){tok++;keyPick=null;S.ring=null;S.anim=null;S.end=null;ov.textContent='';ov.className='w-ov';body.textContent='';delete root.dataset.ending;cells.classList.remove('party');cl.forEach(function(c){c.classList.remove('low','charge')})}
-  function intro(){reset();setRun(false);busy=false;var resume=o.resume().slice(0,N),done=resume.length;
+  function reset(){root.classList.remove('at-intro');tok++;keyPick=null;S.ring=null;S.anim=null;S.end=null;ov.textContent='';ov.className='w-ov';body.textContent='';delete root.dataset.ending;cells.classList.remove('party');cl.forEach(function(c){c.classList.remove('low','charge')})}
+  function intro(){reset();setRun(false);busy=false;root.classList.add('at-intro');whs.textContent=plural(N,'question','questions')+' · up to '+o.maxPoints()+' points';var resume=o.resume().slice(0,N),done=resume.length;
     var right=resume.filter(function(k,j){return k===items[j].answer}).length;setCells(right);status(done?N-done:null);
     var ul=h('ul','w-les'),rv=[];items.forEach(function(it){if(it.kind==='review'||it.kind==='recap'){if(it.n&&rv.indexOf(it.n)<0)rv.push(it.n);return}
       var li=h('li',null,it.tag+' · '+(it.kind==='news'?'news':it.n?'lesson '+it.n+(o.titles&&o.titles[it.n]?': '+o.titles[it.n]:''):'question'));li.style.setProperty('--c',TAGC[it.tag]||'#c9b8ff');ul.append(li)});
     if(rv.length){var r=h('li',null,'Revision: '+(rv.length===1?'lesson '+rv[0]:'lessons '+rv.slice(0,-1).join(', ')+' and '+rv[rv.length-1]));r.style.setProperty('--c','#c9b8ff');ul.append(r)}
     var b=btn(done?'Resume quiz':'Launch','','start',function(){launch(resume)});
-    body.append(h('span','kick','Today’s quiz'),h('h2','w-q',done?'You are '+plural(done,'question','questions')+' in':N+' charge rings between the cats and home'),
-      h('p','w-sub',done?'Pick up where you left off. '+plural(right,'cell is','cells are')+' already charged.':'Each right answer flies the ship through a ring and charges a fuel cell. '+HOME+' cells get '+P+' home. Up to '+o.maxPoints()+' points today.'),b,ul);
+    ul.setAttribute('aria-label','What the questions cover');body.append(h('h2','w-q',done?'You are '+plural(done,'question','questions')+' in':N+' charge rings between the cats and home'),
+      h('p','w-sub',done?'Pick up where you left off. '+plural(right,'cell is','cells are')+' already charged.':'Each right answer flies the ship through a ring and charges a fuel cell. '+HOME+' cells get '+P+' home. Up to '+o.maxPoints()+' points today.'),b,h('span','w-lesh','What the questions cover'),ul);
     redraw()}
   function launch(resume){var b=body.querySelector('[data-act=start]');if(b)b.disabled=true;busy=true;setRun(true);toTop(root,true);
     var picks=resume.slice(),right=0,missed=[];picks.forEach(function(k,j){if(k===items[j].answer)right++;else missed.push(items[j])});

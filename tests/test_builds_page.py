@@ -144,7 +144,7 @@ try:
             need(R["section"] and R["carts"] == len(bl), f"{tag}: {len(bl)} builds render {R.get('carts')} cartridges")
             o = R["order"]
             need(o["afterNews"] and o["afterLearn"] and o["afterChat"] in (True, None) and o["beforeQuiz"], f"{tag}: section after the news, Learn and X, before the quiz ({o})")
-            need(R["keyboard"]["focused"] and R["keyboard"]["pressed"] == "true", f"{tag}: the right arrow moves to and loads the next cartridge")
+            need(R["keyboard"]["focused"] and R["keyboard"]["pressed"] == "true" and not R["keyboard"]["sheet"], f"{tag}: the right arrow moves to and loads the next cartridge, without opening the details screen")
             need(R["scrollWidthEnd"] <= 391, f"{tag}: still no sideways scroll after every cartridge was loaded ({R['scrollWidthEnd']})")
             B = R["builds"]
             need(all(not x["small"] for x in B), f"{tag}: every button and link is at least 44px ({[x['small'] for x in B if x['small']]})")
@@ -153,6 +153,9 @@ try:
             rels = [r for x in B for r in x["rels"]]
             need(rels and all(t == "_blank" and set((r or "").split()) >= {"noopener", "noreferrer"} for t, r in rels), f"{tag}: every build link opens a new tab with rel noopener noreferrer ({len(rels)} links; {[r for r in rels if not set((r[1] or '').split()) >= {'noopener', 'noreferrer'}]})")
             need(all(x["pressed"].split(",")[x["i"]] == "true" and x["pressed"].count("true") == 1 for x in B), f"{tag}: tapping a cartridge marks it, and only it, as loaded")
+            need(all(x["sheet"] and x.get("sheetLabel") == "Built in the wild" and x.get("inert") for x in B), f"{tag}: tapping a cartridge opens its details screen, with the page behind made inert ({[(x['sheet'], x.get('sheetLabel'), x.get('inert')) for x in B]})")
+            need(all(x.get("closed") and x.get("focusBack") and not x.get("inertAfter") for x in B), f"{tag}: Back closes the details screen and puts focus back on the cartridge ({[(x.get('closed'), x.get('focusBack'), x.get('inertAfter')) for x in B]})")
+            need(all(x["openBtn"] and x["teaser"] == x.get("title") and x.get("reopen") == x.get("title") for x in B), f"{tag}: under the cartridges, the title and a button that opens the same details screen")
             if bl is THREE:
                 v, dg, tx = B
                 need(v["tile4"] == ["Video", "Yes"] and dg["tile4"] == ["Visual", "Diagram"] and tx["tile4"] == ["Visual", "None"], f"{tag}: fourth tile reads Video: Yes, Visual: Diagram, Visual: None ({v['tile4']}, {dg['tile4']}, {tx['tile4']})")
@@ -160,7 +163,7 @@ try:
                 need(v.get("framesAfterTap") == [f"https://www.youtube-nocookie.com/embed/{GOOD}?autoplay=1&rel=0&playsinline=1"], f"{tag}: tapping play makes one youtube-nocookie frame for that code ({v.get('framesAfterTap')})")
                 need(v.get("sandbox") and "allow-top-navigation" not in v["sandbox"], f"{tag}: the frame is sandboxed and cannot move the page ({v.get('sandbox')})")
                 need(v.get("stop") and v.get("framesAfterStop") == 0 and v.get("focusAfterStop") == "bw-play", f"{tag}: Stop removes the frame and puts focus back on play")
-                need(v.get("framesReplay") == 1 and v.get("framesAfterSwitch") == 0, f"{tag}: switching cartridge removes the frame ({v.get('framesReplay')}, {v.get('framesAfterSwitch')})")
+                need(v.get("framesReplay") == 1 and v.get("framesAfterSwitch") == 0, f"{tag}: closing the details screen removes the frame ({v.get('framesReplay')}, {v.get('framesAfterSwitch')})")
                 need(v["links"] == ["https://example.org/post", "https://www.youtube.com/watch?v=" + GOOD, "https://example.org/code"], f"{tag}: post, video and code links all shown when https ({v['links']})")
                 need(dg["diagram"] and dg["diagram"]["src"].startswith("data:image/svg+xml;charset=utf-8,") and dg["diagram"]["loaded"], f"{tag}: the diagram is an img with a data: address and it loads ({dg['diagram']})")
                 need(not dg["markerAsText"], f"{tag}: the diagram's markup is never part of the page")
